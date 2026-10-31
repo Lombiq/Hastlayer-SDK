@@ -2755,6 +2755,48 @@ architecture Imp of Hast_IP is
     -- System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).5 declarations end
 
 
+    -- System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).6 declarations start
+    -- State machine states:
+    type \Posit32::GetTwosComplement(UInt32).6._States\ is (
+        \Posit32::GetTwosComplement(UInt32).6._State_0\, 
+        \Posit32::GetTwosComplement(UInt32).6._State_1\, 
+        \Posit32::GetTwosComplement(UInt32).6._State_2\);
+    -- Signals:
+    Signal \Posit32::GetTwosComplement(UInt32).6._Finished\: boolean := false;
+    Signal \Posit32::GetTwosComplement(UInt32).6.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \Posit32::GetTwosComplement(UInt32).6._Started\: boolean := false;
+    Signal \Posit32::GetTwosComplement(UInt32).6.bits.parameter.In\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    -- System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).6 declarations end
+
+
+    -- System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).7 declarations start
+    -- State machine states:
+    type \Posit32::GetTwosComplement(UInt32).7._States\ is (
+        \Posit32::GetTwosComplement(UInt32).7._State_0\, 
+        \Posit32::GetTwosComplement(UInt32).7._State_1\, 
+        \Posit32::GetTwosComplement(UInt32).7._State_2\);
+    -- Signals:
+    Signal \Posit32::GetTwosComplement(UInt32).7._Finished\: boolean := false;
+    Signal \Posit32::GetTwosComplement(UInt32).7.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \Posit32::GetTwosComplement(UInt32).7._Started\: boolean := false;
+    Signal \Posit32::GetTwosComplement(UInt32).7.bits.parameter.In\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    -- System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).7 declarations end
+
+
+    -- System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).8 declarations start
+    -- State machine states:
+    type \Posit32::GetTwosComplement(UInt32).8._States\ is (
+        \Posit32::GetTwosComplement(UInt32).8._State_0\, 
+        \Posit32::GetTwosComplement(UInt32).8._State_1\, 
+        \Posit32::GetTwosComplement(UInt32).8._State_2\);
+    -- Signals:
+    Signal \Posit32::GetTwosComplement(UInt32).8._Finished\: boolean := false;
+    Signal \Posit32::GetTwosComplement(UInt32).8.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \Posit32::GetTwosComplement(UInt32).8._Started\: boolean := false;
+    Signal \Posit32::GetTwosComplement(UInt32).8.bits.parameter.In\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    -- System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).8 declarations end
+
+
     -- Lombiq.Arithmetics.Posit32 Lombiq.Arithmetics.Posit32::op_Addition(Lombiq.Arithmetics.Posit32,Lombiq.Arithmetics.Posit32).0 declarations start
     -- State machine states:
     type \Posit32 Posit32::op_Addition(Posit32,Posit32).0._States\ is (
@@ -3361,10 +3403,9 @@ architecture Imp of Hast_IP is
     -- Signals:
     Signal \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._Finished\: boolean := false;
     Signal \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.return\: \Lombiq.Arithmetics.Posit32\;
-    Signal \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).leftBits.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    Signal \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).rightBits.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    Signal \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).size.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyE2Bits(UInt32,UInt32,Int32)._Started.0\: boolean := false;
+    Signal \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyBits(UInt32,UInt32).leftBits.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyBits(UInt32,UInt32).rightBits.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyBits(UInt32,UInt32)._Started.0\: boolean := false;
     Signal \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\: \Lombiq.Arithmetics.Posit32\;
     Signal \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean).bits.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\: boolean := false;
@@ -3372,11 +3413,90 @@ architecture Imp of Hast_IP is
     Signal \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._Started\: boolean := false;
     Signal \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.left.parameter.In\: \Lombiq.Arithmetics.Posit32\;
     Signal \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.right.parameter.In\: \Lombiq.Arithmetics.Posit32\;
-    Signal \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyE2Bits(UInt32,UInt32,Int32)._Finished.0\: boolean := false;
-    Signal \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyBits(UInt32,UInt32)._Finished.0\: boolean := false;
+    Signal \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyBits(UInt32,UInt32).return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     Signal \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\: \Lombiq.Arithmetics.Posit32\;
     Signal \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean)._Finished.0\: boolean := false;
     -- Lombiq.Arithmetics.Posit32 Lombiq.Arithmetics.Posit32::op_Multiply(Lombiq.Arithmetics.Posit32,Lombiq.Arithmetics.Posit32).0 declarations end
+
+
+    -- System.UInt32 Lombiq.Arithmetics.Posit32::MultiplyBits(System.UInt32,System.UInt32).0 declarations start
+    -- State machine states:
+    type \Posit32::MultiplyBits(UInt32,UInt32).0._States\ is (
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_0\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_1\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_2\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_3\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_4\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_5\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_6\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_7\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_8\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_9\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_10\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_11\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_12\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_13\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_14\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_15\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_16\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_17\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_18\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_19\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_20\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_21\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_22\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_23\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_24\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_25\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_26\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_27\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_28\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_29\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_30\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_31\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_32\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_33\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_34\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_35\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_36\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_37\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_38\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_39\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_40\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_41\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_42\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_43\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_44\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_45\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_46\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_47\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_48\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_49\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_50\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_51\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_52\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_53\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_54\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_55\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_56\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_57\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_58\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_59\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_60\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_61\, 
+        \Posit32::MultiplyBits(UInt32,UInt32).0._State_62\);
+    -- Signals:
+    Signal \Posit32::MultiplyBits(UInt32,UInt32).0._Finished\: boolean := false;
+    Signal \Posit32::MultiplyBits(UInt32,UInt32).0.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Started.0\: boolean := false;
+    Signal \Posit32::MultiplyBits(UInt32,UInt32).0._Started\: boolean := false;
+    Signal \Posit32::MultiplyBits(UInt32,UInt32).0.leftBits.parameter.In\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \Posit32::MultiplyBits(UInt32,UInt32).0.rightBits.parameter.In\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Finished.0\: boolean := false;
+    Signal \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    -- System.UInt32 Lombiq.Arithmetics.Posit32::MultiplyBits(System.UInt32,System.UInt32).0 declarations end
 
 
     -- System.Int32 Lombiq.Arithmetics.Posit32::op_Explicit(Lombiq.Arithmetics.Posit32).0 declarations start
@@ -3617,98 +3737,6 @@ architecture Imp of Hast_IP is
     Signal \Int32 Posit32::op_Explicit(Posit32).3.Posit32::IsPositive()._Finished.0\: boolean := false;
     Signal \Int32 Posit32::op_Explicit(Posit32).3.Posit32::IsPositive().return.0\: boolean := false;
     -- System.Int32 Lombiq.Arithmetics.Posit32::op_Explicit(Lombiq.Arithmetics.Posit32).3 declarations end
-
-
-    -- System.UInt32 Lombiq.Arithmetics.Posit32::MultiplyE2Bits(System.UInt32,System.UInt32,System.Int32).0 declarations start
-    -- State machine states:
-    type \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._States\ is (
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_0\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_1\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_2\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_3\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_4\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_5\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_6\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_7\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_8\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_9\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_10\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_11\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_12\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_13\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_14\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_15\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_16\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_17\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_18\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_19\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_20\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_21\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_22\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_23\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_24\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_25\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_26\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_27\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_28\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_29\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_30\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_31\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_32\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_33\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_34\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_35\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_36\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_37\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_38\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_39\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_40\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_41\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_42\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_43\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_44\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_45\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_46\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_47\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_48\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_49\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_50\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_51\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_52\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_53\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_54\, 
-        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_55\);
-    -- Signals:
-    Signal \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._Finished\: boolean := false;
-    Signal \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    Signal \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.PositHelper::LengthOfRunOfBits(UInt32,Byte).bits.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    Signal \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.PositHelper::LengthOfRunOfBits(UInt32,Byte).startingPosition.parameter.Out.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
-    Signal \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.PositHelper::LengthOfRunOfBits(UInt32,Byte)._Started.0\: boolean := false;
-    Signal \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._Started\: boolean := false;
-    Signal \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.leftBits.parameter.In\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    Signal \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.rightBits.parameter.In\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    Signal \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.size.parameter.In\: signed(31 downto 0) := to_signed(0, 32);
-    Signal \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.PositHelper::LengthOfRunOfBits(UInt32,Byte)._Finished.0\: boolean := false;
-    Signal \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.PositHelper::LengthOfRunOfBits(UInt32,Byte).return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
-    -- System.UInt32 Lombiq.Arithmetics.Posit32::MultiplyE2Bits(System.UInt32,System.UInt32,System.Int32).0 declarations end
-
-
-    -- System.Byte Lombiq.Arithmetics.PositHelper::LengthOfRunOfBits(System.UInt32,System.Byte).0 declarations start
-    -- State machine states:
-    type \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._States\ is (
-        \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._State_0\, 
-        \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._State_1\, 
-        \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._State_2\, 
-        \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._State_3\, 
-        \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._State_4\, 
-        \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._State_5\);
-    -- Signals:
-    Signal \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._Finished\: boolean := false;
-    Signal \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.return\: unsigned(7 downto 0) := to_unsigned(0, 8);
-    Signal \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._Started\: boolean := false;
-    Signal \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.bits.parameter.In\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    Signal \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.startingPosition.parameter.In\: unsigned(7 downto 0) := to_unsigned(0, 8);
-    -- System.Byte Lombiq.Arithmetics.PositHelper::LengthOfRunOfBits(System.UInt32,System.Byte).0 declarations end
 
 
     -- System.Void Hast::ExternalInvocationProxy() declarations start
@@ -22042,6 +22070,162 @@ begin
     -- System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).5 state machine end
 
 
+    -- System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).6 state machine start
+    \Posit32::GetTwosComplement(UInt32).6._StateMachine\: process (\Clock\) 
+        Variable \Posit32::GetTwosComplement(UInt32).6._State\: \Posit32::GetTwosComplement(UInt32).6._States\ := \Posit32::GetTwosComplement(UInt32).6._State_0\;
+        Variable \Posit32::GetTwosComplement(UInt32).6.bits\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::GetTwosComplement(UInt32).6.unaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::GetTwosComplement(UInt32).6.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \Posit32::GetTwosComplement(UInt32).6._Finished\ <= false;
+                \Posit32::GetTwosComplement(UInt32).6.return\ <= to_unsigned(0, 32);
+                \Posit32::GetTwosComplement(UInt32).6._State\ := \Posit32::GetTwosComplement(UInt32).6._State_0\;
+                \Posit32::GetTwosComplement(UInt32).6.bits\ := to_unsigned(0, 32);
+                \Posit32::GetTwosComplement(UInt32).6.unaryOperationResult.0\ := to_unsigned(0, 32);
+                \Posit32::GetTwosComplement(UInt32).6.binaryOperationResult.0\ := to_unsigned(0, 32);
+            else 
+                case \Posit32::GetTwosComplement(UInt32).6._State\ is 
+                    when \Posit32::GetTwosComplement(UInt32).6._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\Posit32::GetTwosComplement(UInt32).6._Started\ = true) then 
+                            \Posit32::GetTwosComplement(UInt32).6._State\ := \Posit32::GetTwosComplement(UInt32).6._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::GetTwosComplement(UInt32).6._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\Posit32::GetTwosComplement(UInt32).6._Started\ = true) then 
+                            \Posit32::GetTwosComplement(UInt32).6._Finished\ <= true;
+                        else 
+                            \Posit32::GetTwosComplement(UInt32).6._Finished\ <= false;
+                            \Posit32::GetTwosComplement(UInt32).6._State\ := \Posit32::GetTwosComplement(UInt32).6._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::GetTwosComplement(UInt32).6._State_2\ => 
+                        \Posit32::GetTwosComplement(UInt32).6.bits\ := \Posit32::GetTwosComplement(UInt32).6.bits.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return (uint)((long)(~bits) + 1L);
+                        -- 
+                        \Posit32::GetTwosComplement(UInt32).6.unaryOperationResult.0\ := not(\Posit32::GetTwosComplement(UInt32).6.bits\);
+                        \Posit32::GetTwosComplement(UInt32).6.binaryOperationResult.0\ := SmartResize(unsigned(signed(SmartResize((\Posit32::GetTwosComplement(UInt32).6.unaryOperationResult.0\), 64)) + to_signed(1, 64)), 32);
+                        \Posit32::GetTwosComplement(UInt32).6.return\ <= (\Posit32::GetTwosComplement(UInt32).6.binaryOperationResult.0\);
+                        \Posit32::GetTwosComplement(UInt32).6._State\ := \Posit32::GetTwosComplement(UInt32).6._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0.5346
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).6 state machine end
+
+
+    -- System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).7 state machine start
+    \Posit32::GetTwosComplement(UInt32).7._StateMachine\: process (\Clock\) 
+        Variable \Posit32::GetTwosComplement(UInt32).7._State\: \Posit32::GetTwosComplement(UInt32).7._States\ := \Posit32::GetTwosComplement(UInt32).7._State_0\;
+        Variable \Posit32::GetTwosComplement(UInt32).7.bits\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::GetTwosComplement(UInt32).7.unaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::GetTwosComplement(UInt32).7.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \Posit32::GetTwosComplement(UInt32).7._Finished\ <= false;
+                \Posit32::GetTwosComplement(UInt32).7.return\ <= to_unsigned(0, 32);
+                \Posit32::GetTwosComplement(UInt32).7._State\ := \Posit32::GetTwosComplement(UInt32).7._State_0\;
+                \Posit32::GetTwosComplement(UInt32).7.bits\ := to_unsigned(0, 32);
+                \Posit32::GetTwosComplement(UInt32).7.unaryOperationResult.0\ := to_unsigned(0, 32);
+                \Posit32::GetTwosComplement(UInt32).7.binaryOperationResult.0\ := to_unsigned(0, 32);
+            else 
+                case \Posit32::GetTwosComplement(UInt32).7._State\ is 
+                    when \Posit32::GetTwosComplement(UInt32).7._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\Posit32::GetTwosComplement(UInt32).7._Started\ = true) then 
+                            \Posit32::GetTwosComplement(UInt32).7._State\ := \Posit32::GetTwosComplement(UInt32).7._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::GetTwosComplement(UInt32).7._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\Posit32::GetTwosComplement(UInt32).7._Started\ = true) then 
+                            \Posit32::GetTwosComplement(UInt32).7._Finished\ <= true;
+                        else 
+                            \Posit32::GetTwosComplement(UInt32).7._Finished\ <= false;
+                            \Posit32::GetTwosComplement(UInt32).7._State\ := \Posit32::GetTwosComplement(UInt32).7._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::GetTwosComplement(UInt32).7._State_2\ => 
+                        \Posit32::GetTwosComplement(UInt32).7.bits\ := \Posit32::GetTwosComplement(UInt32).7.bits.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return (uint)((long)(~bits) + 1L);
+                        -- 
+                        \Posit32::GetTwosComplement(UInt32).7.unaryOperationResult.0\ := not(\Posit32::GetTwosComplement(UInt32).7.bits\);
+                        \Posit32::GetTwosComplement(UInt32).7.binaryOperationResult.0\ := SmartResize(unsigned(signed(SmartResize((\Posit32::GetTwosComplement(UInt32).7.unaryOperationResult.0\), 64)) + to_signed(1, 64)), 32);
+                        \Posit32::GetTwosComplement(UInt32).7.return\ <= (\Posit32::GetTwosComplement(UInt32).7.binaryOperationResult.0\);
+                        \Posit32::GetTwosComplement(UInt32).7._State\ := \Posit32::GetTwosComplement(UInt32).7._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0.5346
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).7 state machine end
+
+
+    -- System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).8 state machine start
+    \Posit32::GetTwosComplement(UInt32).8._StateMachine\: process (\Clock\) 
+        Variable \Posit32::GetTwosComplement(UInt32).8._State\: \Posit32::GetTwosComplement(UInt32).8._States\ := \Posit32::GetTwosComplement(UInt32).8._State_0\;
+        Variable \Posit32::GetTwosComplement(UInt32).8.bits\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::GetTwosComplement(UInt32).8.unaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::GetTwosComplement(UInt32).8.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \Posit32::GetTwosComplement(UInt32).8._Finished\ <= false;
+                \Posit32::GetTwosComplement(UInt32).8.return\ <= to_unsigned(0, 32);
+                \Posit32::GetTwosComplement(UInt32).8._State\ := \Posit32::GetTwosComplement(UInt32).8._State_0\;
+                \Posit32::GetTwosComplement(UInt32).8.bits\ := to_unsigned(0, 32);
+                \Posit32::GetTwosComplement(UInt32).8.unaryOperationResult.0\ := to_unsigned(0, 32);
+                \Posit32::GetTwosComplement(UInt32).8.binaryOperationResult.0\ := to_unsigned(0, 32);
+            else 
+                case \Posit32::GetTwosComplement(UInt32).8._State\ is 
+                    when \Posit32::GetTwosComplement(UInt32).8._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\Posit32::GetTwosComplement(UInt32).8._Started\ = true) then 
+                            \Posit32::GetTwosComplement(UInt32).8._State\ := \Posit32::GetTwosComplement(UInt32).8._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::GetTwosComplement(UInt32).8._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\Posit32::GetTwosComplement(UInt32).8._Started\ = true) then 
+                            \Posit32::GetTwosComplement(UInt32).8._Finished\ <= true;
+                        else 
+                            \Posit32::GetTwosComplement(UInt32).8._Finished\ <= false;
+                            \Posit32::GetTwosComplement(UInt32).8._State\ := \Posit32::GetTwosComplement(UInt32).8._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::GetTwosComplement(UInt32).8._State_2\ => 
+                        \Posit32::GetTwosComplement(UInt32).8.bits\ := \Posit32::GetTwosComplement(UInt32).8.bits.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return (uint)((long)(~bits) + 1L);
+                        -- 
+                        \Posit32::GetTwosComplement(UInt32).8.unaryOperationResult.0\ := not(\Posit32::GetTwosComplement(UInt32).8.bits\);
+                        \Posit32::GetTwosComplement(UInt32).8.binaryOperationResult.0\ := SmartResize(unsigned(signed(SmartResize((\Posit32::GetTwosComplement(UInt32).8.unaryOperationResult.0\), 64)) + to_signed(1, 64)), 32);
+                        \Posit32::GetTwosComplement(UInt32).8.return\ <= (\Posit32::GetTwosComplement(UInt32).8.binaryOperationResult.0\);
+                        \Posit32::GetTwosComplement(UInt32).8._State\ := \Posit32::GetTwosComplement(UInt32).8._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0.5346
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).8 state machine end
+
+
     -- Lombiq.Arithmetics.Posit32 Lombiq.Arithmetics.Posit32::op_Addition(Lombiq.Arithmetics.Posit32,Lombiq.Arithmetics.Posit32).0 state machine start
     \Posit32 Posit32::op_Addition(Posit32,Posit32).0._StateMachine\: process (\Clock\) 
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State\: \Posit32 Posit32::op_Addition(Posit32,Posit32).0._States\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_0\;
@@ -31459,10 +31643,9 @@ begin
             if (\Reset\ = '1') then 
                 -- Synchronous reset
                 \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._Finished\ <= false;
-                \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).leftBits.parameter.Out.0\ <= to_unsigned(0, 32);
-                \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).rightBits.parameter.Out.0\ <= to_unsigned(0, 32);
-                \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).size.parameter.Out.0\ <= to_signed(0, 32);
-                \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyE2Bits(UInt32,UInt32,Int32)._Started.0\ <= false;
+                \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyBits(UInt32,UInt32).leftBits.parameter.Out.0\ <= to_unsigned(0, 32);
+                \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyBits(UInt32,UInt32).rightBits.parameter.Out.0\ <= to_unsigned(0, 32);
+                \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyBits(UInt32,UInt32)._Started.0\ <= false;
                 \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean).bits.parameter.Out.0\ <= to_unsigned(0, 32);
                 \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= false;
                 \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= false;
@@ -31494,24 +31677,23 @@ begin
                         -- Posit32 object49;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object49 = new Posit32 (Posit32.MultiplyE2Bits (left.PositBits, right.PositBits, 32), true);
+                        -- object49 = new Posit32 (Posit32.MultiplyBits (left.PositBits, right.PositBits), true);
                         -- 
                         -- Initializing record fields to their defaults.
                         \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.object49\.\IsNull\ := false;
                         \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.object49\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
-                        -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::MultiplyE2Bits(System.UInt32,System.UInt32,System.Int32)
-                        \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).leftBits.parameter.Out.0\ <= \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.left\.\PositBits\;
-                        \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).rightBits.parameter.Out.0\ <= \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.right\.\PositBits\;
-                        \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).size.parameter.Out.0\ <= to_signed(32, 32);
-                        \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyE2Bits(UInt32,UInt32,Int32)._Started.0\ <= true;
+                        -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::MultiplyBits(System.UInt32,System.UInt32)
+                        \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyBits(UInt32,UInt32).leftBits.parameter.Out.0\ <= \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.left\.\PositBits\;
+                        \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyBits(UInt32,UInt32).rightBits.parameter.Out.0\ <= \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.right\.\PositBits\;
+                        \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyBits(UInt32,UInt32)._Started.0\ <= true;
                         \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State\ := \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_3\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Lombiq.Arithmetics.Posit32::MultiplyE2Bits(System.UInt32,System.UInt32,System.Int32)
-                        if (\Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyE2Bits(UInt32,UInt32,Int32)._Started.0\ = \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyE2Bits(UInt32,UInt32,Int32)._Finished.0\) then 
-                            \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyE2Bits(UInt32,UInt32,Int32)._Started.0\ <= false;
-                            \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.return.0\ := \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).return.0\;
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Lombiq.Arithmetics.Posit32::MultiplyBits(System.UInt32,System.UInt32)
+                        if (\Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyBits(UInt32,UInt32)._Started.0\ = \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyBits(UInt32,UInt32)._Finished.0\) then 
+                            \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyBits(UInt32,UInt32)._Started.0\ <= false;
+                            \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.return.0\ := \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyBits(UInt32,UInt32).return.0\;
                             -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
                             \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.object49\;
                             \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean).bits.parameter.Out.0\ <= \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.return.0\;
@@ -31539,6 +31721,1517 @@ begin
     -- Lombiq.Arithmetics.Posit32 Lombiq.Arithmetics.Posit32::op_Multiply(Lombiq.Arithmetics.Posit32,Lombiq.Arithmetics.Posit32).0 state machine end
 
 
+    -- System.UInt32 Lombiq.Arithmetics.Posit32::MultiplyBits(System.UInt32,System.UInt32).0 state machine start
+    \Posit32::MultiplyBits(UInt32,UInt32).0._StateMachine\: process (\Clock\) 
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0._State\: \Posit32::MultiplyBits(UInt32,UInt32).0._States\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_0\;
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.leftBits\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.rightBits\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.0\: boolean := false;
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.1\: boolean := false;
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.2\: boolean := false;
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.3\: boolean := false;
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.4\: boolean := false;
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.5\: boolean := false;
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.flag\: boolean := false;
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.6\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.7\: boolean := false;
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.flag2\: boolean := false;
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.8\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.9\: boolean := false;
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.num\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.conditional32\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.num2\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.conditional33\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.num3\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.10\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.flag3\: boolean := false;
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.11\: boolean := false;
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.num4\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.conditional34\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.unaryOperationResult.0\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.num5\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.12\: boolean := false;
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.13\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.14\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.num6\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.15\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.16\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.num7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.conditional35\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.17\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.unaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.18\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.19\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.20\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.num8\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.21\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.22\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.23\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.num9\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.24\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.flag4\: boolean := false;
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.25\: boolean := false;
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.num10\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.conditional36\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.unaryOperationResult.2\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.num11\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.26\: boolean := false;
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.27\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.28\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.num12\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.29\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.30\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.num13\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.conditional37\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.31\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.unaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.32\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.33\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.34\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.num14\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.35\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.36\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.37\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.num15\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.38\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.num16\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.39\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.num17\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.40\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.41\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.num18\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.42\: boolean := false;
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.43\: boolean := false;
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.num19\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.44\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.num20\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.conditional38\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.45\: boolean := false;
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.46\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.47\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.unaryOperationResult.4\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.unaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.48\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.num21\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.conditional39\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.49\: boolean := false;
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.50\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.51\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.num22\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.52\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.53\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.54\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.55\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.56\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.57\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.58\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.num23\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.59\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.60\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.61\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.62\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.63\: boolean := false;
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.64\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.65\: boolean := false;
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.66\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.67\: boolean := false;
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.68\: boolean := false;
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.69\: boolean := false;
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.70\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.num24\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.conditional40\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.71\: boolean := false;
+        Variable \Posit32::MultiplyBits(UInt32,UInt32).0.return.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \Posit32::MultiplyBits(UInt32,UInt32).0._Finished\ <= false;
+                \Posit32::MultiplyBits(UInt32,UInt32).0.return\ <= to_unsigned(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\ <= to_unsigned(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Started.0\ <= false;
+                \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_0\;
+                \Posit32::MultiplyBits(UInt32,UInt32).0.leftBits\ := to_unsigned(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.rightBits\ := to_unsigned(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.0\ := false;
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.1\ := false;
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.2\ := false;
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.3\ := false;
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.4\ := false;
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.5\ := false;
+                \Posit32::MultiplyBits(UInt32,UInt32).0.flag\ := false;
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.6\ := to_signed(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.7\ := false;
+                \Posit32::MultiplyBits(UInt32,UInt32).0.flag2\ := false;
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.8\ := to_signed(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.9\ := false;
+                \Posit32::MultiplyBits(UInt32,UInt32).0.num\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.conditional32\ := to_unsigned(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.return.0\ := to_unsigned(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.num2\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.conditional33\ := to_unsigned(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.return.1\ := to_unsigned(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.num3\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.10\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.flag3\ := false;
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.11\ := false;
+                \Posit32::MultiplyBits(UInt32,UInt32).0.num4\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.conditional34\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.unaryOperationResult.0\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.num5\ := to_signed(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.12\ := false;
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.13\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.14\ := to_signed(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.num6\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.15\ := to_signed(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.16\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.num7\ := to_signed(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.conditional35\ := to_signed(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.17\ := to_signed(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.unaryOperationResult.1\ := to_signed(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.18\ := to_signed(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.19\ := to_signed(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.20\ := to_signed(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.num8\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.21\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.22\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.23\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.num9\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.24\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.flag4\ := false;
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.25\ := false;
+                \Posit32::MultiplyBits(UInt32,UInt32).0.num10\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.conditional36\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.unaryOperationResult.2\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.num11\ := to_signed(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.26\ := false;
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.27\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.28\ := to_signed(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.num12\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.29\ := to_signed(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.30\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.num13\ := to_signed(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.conditional37\ := to_signed(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.31\ := to_signed(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.unaryOperationResult.3\ := to_signed(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.32\ := to_signed(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.33\ := to_signed(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.34\ := to_signed(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.num14\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.35\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.36\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.37\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.num15\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.38\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.num16\ := to_signed(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.39\ := to_signed(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.num17\ := to_signed(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.40\ := to_signed(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.41\ := to_signed(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.num18\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.42\ := false;
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.43\ := false;
+                \Posit32::MultiplyBits(UInt32,UInt32).0.num19\ := to_signed(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.44\ := to_signed(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.num20\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.conditional38\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.45\ := false;
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.46\ := to_signed(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.47\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.unaryOperationResult.4\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.unaryOperationResult.5\ := to_signed(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.48\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.num21\ := to_signed(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.conditional39\ := to_signed(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.49\ := false;
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.50\ := to_signed(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.51\ := to_signed(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.num22\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.52\ := to_signed(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.53\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.54\ := to_signed(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.55\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.56\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.57\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.58\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.num23\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.59\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.60\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.61\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.62\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.63\ := false;
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.64\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.65\ := false;
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.66\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.67\ := false;
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.68\ := false;
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.69\ := false;
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.70\ := to_unsigned(0, 64);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.num24\ := to_unsigned(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.conditional40\ := to_unsigned(0, 32);
+                \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.71\ := false;
+                \Posit32::MultiplyBits(UInt32,UInt32).0.return.2\ := to_unsigned(0, 32);
+            else 
+                case \Posit32::MultiplyBits(UInt32,UInt32).0._State\ is 
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\Posit32::MultiplyBits(UInt32,UInt32).0._Started\ = true) then 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\Posit32::MultiplyBits(UInt32,UInt32).0._Started\ = true) then 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._Finished\ <= true;
+                        else 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._Finished\ <= false;
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_2\ => 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.leftBits\ := \Posit32::MultiplyBits(UInt32,UInt32).0.leftBits.parameter.In\;
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.rightBits\ := \Posit32::MultiplyBits(UInt32,UInt32).0.rightBits.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (leftBits == 2147483648u || rightBits == 2147483648u) {
+                        -- 	return 2147483648u;
+                        -- }
+                        -- 
+                        -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.0\ := \Posit32::MultiplyBits(UInt32,UInt32).0.leftBits\ = "10000000000000000000000000000000";
+                        -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.1\ := \Posit32::MultiplyBits(UInt32,UInt32).0.rightBits\ = "10000000000000000000000000000000";
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.2\ := \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.0\ or \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.1\;
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_4\ and ends in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_4\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::MultiplyBits(UInt32,UInt32).0._State_3\.
+
+                        if (\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.2\) then 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_4\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_3\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.6518
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_3\ => 
+                        -- State after the if-else which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- if ((long)(leftBits) == 0L || (long)(rightBits) == 0L) {
+                        -- 	return 0u;
+                        -- }
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.3\ := signed(SmartResize((\Posit32::MultiplyBits(UInt32,UInt32).0.leftBits\), 64)) = to_signed(0, 64);
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.4\ := signed(SmartResize((\Posit32::MultiplyBits(UInt32,UInt32).0.rightBits\), 64)) = to_signed(0, 64);
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.5\ := \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.3\ or \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.4\;
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_6\ and ends in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_6\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::MultiplyBits(UInt32,UInt32).0._State_5\.
+
+                        if (\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.5\) then 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_6\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.6872
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_4\ => 
+                        -- True branch of the if-else started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	return 2147483648u;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- return 2147483648u;
+                        -- 
+                        -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.return\ <= unsigned("10000000000000000000000000000000");
+                        \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_1\;
+                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_2\.
+                        if (\Posit32::MultiplyBits(UInt32,UInt32).0._State\ = \Posit32::MultiplyBits(UInt32,UInt32).0._State_4\) then 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_3\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_5\ => 
+                        -- State after the if-else which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- flag = (long)((leftBits & 0x80000000u)) != 0L;
+                        -- 
+                        -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.6\ := signed(SmartResize(\Posit32::MultiplyBits(UInt32,UInt32).0.leftBits\ and "10000000000000000000000000000000", 64));
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.7\ := signed(SmartResize(((\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.6\)), 64)) /= to_signed(0, 64);
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.flag\ := \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.7\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- flag2 = (long)((rightBits & 0x80000000u)) != 0L;
+                        -- 
+                        -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.8\ := signed(SmartResize(\Posit32::MultiplyBits(UInt32,UInt32).0.rightBits\ and "10000000000000000000000000000000", 64));
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.9\ := signed(SmartResize(((\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.8\)), 64)) /= to_signed(0, 64);
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.flag2\ := \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.9\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- ulong num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint conditional32;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag) {
+                        -- 	conditional32 = Posit32.GetTwosComplement (leftBits);
+                        -- } else {
+                        -- 	conditional32 = leftBits;
+                        -- }
+                        -- 
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_8\ and ends in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_9\.
+                        --     * The false branch starts in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_10\ and ends in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_10\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::MultiplyBits(UInt32,UInt32).0._State_7\.
+
+                        if (\Posit32::MultiplyBits(UInt32,UInt32).0.flag\) then 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_8\;
+                        else 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_10\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.8406
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_6\ => 
+                        -- True branch of the if-else started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	return 0u;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- return 0u;
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.return\ <= to_unsigned(0, 32);
+                        \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_1\;
+                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_3\.
+                        if (\Posit32::MultiplyBits(UInt32,UInt32).0._State\ = \Posit32::MultiplyBits(UInt32,UInt32).0._State_6\) then 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_7\ => 
+                        -- State after the if-else which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_5\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = (conditional32);
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.num\ := SmartResize((\Posit32::MultiplyBits(UInt32,UInt32).0.conditional32\), 64);
+                        -- The following section was transformed from the .NET statement below:
+                        -- ulong num2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint conditional33;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag2) {
+                        -- 	conditional33 = Posit32.GetTwosComplement (rightBits);
+                        -- } else {
+                        -- 	conditional33 = rightBits;
+                        -- }
+                        -- 
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_12\ and ends in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_13\.
+                        --     * The false branch starts in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_14\ and ends in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_14\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::MultiplyBits(UInt32,UInt32).0._State_11\.
+
+                        if (\Posit32::MultiplyBits(UInt32,UInt32).0.flag2\) then 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_12\;
+                        else 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_14\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_8\ => 
+                        -- True branch of the if-else started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_5\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional32 = Posit32.GetTwosComplement (leftBits);
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional32 = Posit32.GetTwosComplement (leftBits);
+                        -- 
+                        -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32)
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\ <= \Posit32::MultiplyBits(UInt32,UInt32).0.leftBits\;
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Started.0\ <= true;
+                        \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_9\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_9\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32)
+                        if (\Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Started.0\ = \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Finished.0\) then 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Started.0\ <= false;
+                            \Posit32::MultiplyBits(UInt32,UInt32).0.return.0\ := \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).return.0\;
+                            \Posit32::MultiplyBits(UInt32,UInt32).0.conditional32\ := \Posit32::MultiplyBits(UInt32,UInt32).0.return.0\;
+                            -- Going to the state after the if-else which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_5\.
+                            if (\Posit32::MultiplyBits(UInt32,UInt32).0._State\ = \Posit32::MultiplyBits(UInt32,UInt32).0._State_9\) then 
+                                \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_7\;
+                            end if;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_10\ => 
+                        -- False branch of the if-else started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_5\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional32 = leftBits;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional32 = leftBits;
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.conditional32\ := \Posit32::MultiplyBits(UInt32,UInt32).0.leftBits\;
+                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_5\.
+                        if (\Posit32::MultiplyBits(UInt32,UInt32).0._State\ = \Posit32::MultiplyBits(UInt32,UInt32).0._State_10\) then 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_7\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_11\ => 
+                        -- State after the if-else which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_7\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2 = (conditional33);
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.num2\ := SmartResize((\Posit32::MultiplyBits(UInt32,UInt32).0.conditional33\), 64);
+                        -- The following section was transformed from the .NET statement below:
+                        -- ulong num3;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num3 = num << 33;
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.10\ := SmartResize(shift_left(\Posit32::MultiplyBits(UInt32,UInt32).0.num\, to_integer(unsigned(SmartResize(to_signed(33, 32), 6)))), 64);
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.num3\ := \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.10\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag3;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- flag3 = num3 >= 9223372036854775808uL;
+                        -- 
+                        -- Since the integer literal 9223372036854775808 was out of the VHDL integer range it was substituted with a binary literal (1000000000000000000000000000000000000000000000000000000000000000).
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.11\ := \Posit32::MultiplyBits(UInt32,UInt32).0.num3\ >= "1000000000000000000000000000000000000000000000000000000000000000";
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.flag3\ := \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.11\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- ulong num4;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- ulong conditional34;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag3) {
+                        -- 	conditional34 = (~num3);
+                        -- } else {
+                        -- 	conditional34 = num3;
+                        -- }
+                        -- 
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_16\ and ends in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_16\.
+                        --     * The false branch starts in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_17\ and ends in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_17\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::MultiplyBits(UInt32,UInt32).0._State_15\.
+
+                        if (\Posit32::MultiplyBits(UInt32,UInt32).0.flag3\) then 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_16\;
+                        else 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_17\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.422
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_12\ => 
+                        -- True branch of the if-else started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_7\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional33 = Posit32.GetTwosComplement (rightBits);
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional33 = Posit32.GetTwosComplement (rightBits);
+                        -- 
+                        -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32)
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\ <= \Posit32::MultiplyBits(UInt32,UInt32).0.rightBits\;
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Started.0\ <= true;
+                        \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_13\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_13\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32)
+                        if (\Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Started.0\ = \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Finished.0\) then 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Started.0\ <= false;
+                            \Posit32::MultiplyBits(UInt32,UInt32).0.return.1\ := \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).return.0\;
+                            \Posit32::MultiplyBits(UInt32,UInt32).0.conditional33\ := \Posit32::MultiplyBits(UInt32,UInt32).0.return.1\;
+                            -- Going to the state after the if-else which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_7\.
+                            if (\Posit32::MultiplyBits(UInt32,UInt32).0._State\ = \Posit32::MultiplyBits(UInt32,UInt32).0._State_13\) then 
+                                \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_11\;
+                            end if;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_14\ => 
+                        -- False branch of the if-else started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_7\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional33 = rightBits;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional33 = rightBits;
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.conditional33\ := \Posit32::MultiplyBits(UInt32,UInt32).0.rightBits\;
+                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_7\.
+                        if (\Posit32::MultiplyBits(UInt32,UInt32).0._State\ = \Posit32::MultiplyBits(UInt32,UInt32).0._State_14\) then 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_11\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_15\ => 
+                        -- State after the if-else which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_11\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- num4 = (conditional34);
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.num4\ := (\Posit32::MultiplyBits(UInt32,UInt32).0.conditional34\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num5;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num5 = 0;
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.num5\ := to_signed(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while (num4 < 9223372036854775808uL) {
+                        -- 	num4 = num4 << 1;
+                        -- 	num5 = num5 + 1;
+                        -- }
+                        -- 
+                        -- Starting a while loop.
+                        \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_18\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_16\ => 
+                        -- True branch of the if-else started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_11\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional34 = (~num3);
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional34 = (~num3);
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.unaryOperationResult.0\ := not(\Posit32::MultiplyBits(UInt32,UInt32).0.num3\);
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.conditional34\ := (\Posit32::MultiplyBits(UInt32,UInt32).0.unaryOperationResult.0\);
+                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_11\.
+                        if (\Posit32::MultiplyBits(UInt32,UInt32).0._State\ = \Posit32::MultiplyBits(UInt32,UInt32).0._State_16\) then 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_15\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.1441
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_17\ => 
+                        -- False branch of the if-else started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_11\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional34 = num3;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional34 = num3;
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.conditional34\ := \Posit32::MultiplyBits(UInt32,UInt32).0.num3\;
+                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_11\.
+                        if (\Posit32::MultiplyBits(UInt32,UInt32).0._State\ = \Posit32::MultiplyBits(UInt32,UInt32).0._State_17\) then 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_15\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_18\ => 
+                        -- Repeated state of the while loop which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_15\.
+                        -- The while loop's condition:
+                        -- Since the integer literal 9223372036854775808 was out of the VHDL integer range it was substituted with a binary literal (1000000000000000000000000000000000000000000000000000000000000000).
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.12\ := \Posit32::MultiplyBits(UInt32,UInt32).0.num4\ < "1000000000000000000000000000000000000000000000000000000000000000";
+                        if (\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.12\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	num4 = num4 << 1;
+                            -- 	num5 = num5 + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- num4 = num4 << 1;
+                            -- 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.13\ := SmartResize(shift_left(\Posit32::MultiplyBits(UInt32,UInt32).0.num4\, to_integer(unsigned(SmartResize(to_signed(1, 32), 6)))), 64);
+                            \Posit32::MultiplyBits(UInt32,UInt32).0.num4\ := \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.13\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num5 = num5 + 1;
+                            -- 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.14\ := \Posit32::MultiplyBits(UInt32,UInt32).0.num5\ + to_signed(1, 32);
+                            \Posit32::MultiplyBits(UInt32,UInt32).0.num5\ := \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.14\;
+                        else 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_19\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.7207
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_19\ => 
+                        -- State after the while loop which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_15\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- ulong num6;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num6 = num3 << num5 + 1;
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.15\ := \Posit32::MultiplyBits(UInt32,UInt32).0.num5\ + to_signed(1, 32);
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.16\ := SmartResize(shift_left(\Posit32::MultiplyBits(UInt32,UInt32).0.num3\, to_integer(unsigned(SmartResize(\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.15\, 6)))), 64);
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.num6\ := \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.16\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num7;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int conditional35;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag3) {
+                        -- 	conditional35 = (num5 - 1);
+                        -- } else {
+                        -- 	conditional35 = (-num5);
+                        -- }
+                        -- 
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_21\ and ends in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_21\.
+                        --     * The false branch starts in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_22\ and ends in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_22\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::MultiplyBits(UInt32,UInt32).0._State_20\.
+
+                        if (\Posit32::MultiplyBits(UInt32,UInt32).0.flag3\) then 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_21\;
+                        else 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_22\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.8863
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_20\ => 
+                        -- State after the if-else which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_19\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- num7 = ((conditional35) << 2) + (int)(num6 >> 62);
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.18\ := shift_left((\Posit32::MultiplyBits(UInt32,UInt32).0.conditional35\), to_integer(unsigned(SmartResize(to_signed(2, 32), 5))));
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.19\ := signed(SmartResize(shift_right(\Posit32::MultiplyBits(UInt32,UInt32).0.num6\, to_integer(unsigned(SmartResize(to_signed(62, 32), 6) and "111111"))), 32));
+                        \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_23\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7662
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_21\ => 
+                        -- True branch of the if-else started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_19\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional35 = (num5 - 1);
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional35 = (num5 - 1);
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.17\ := \Posit32::MultiplyBits(UInt32,UInt32).0.num5\ - to_signed(1, 32);
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.conditional35\ := (\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.17\);
+                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_19\.
+                        if (\Posit32::MultiplyBits(UInt32,UInt32).0._State\ = \Posit32::MultiplyBits(UInt32,UInt32).0._State_21\) then 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_20\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_22\ => 
+                        -- False branch of the if-else started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_19\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional35 = (-num5);
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional35 = (-num5);
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.unaryOperationResult.1\ := -\Posit32::MultiplyBits(UInt32,UInt32).0.num5\;
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.conditional35\ := (\Posit32::MultiplyBits(UInt32,UInt32).0.unaryOperationResult.1\);
+                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_19\.
+                        if (\Posit32::MultiplyBits(UInt32,UInt32).0._State\ = \Posit32::MultiplyBits(UInt32,UInt32).0._State_22\) then 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_20\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.3119
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_23\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.20\ := (\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.18\) + (\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.19\);
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.num7\ := \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.20\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- ulong num8;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num8 = (ulong)(1073741824uL | (num6 << 2 >> 34));
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.21\ := SmartResize(shift_left(\Posit32::MultiplyBits(UInt32,UInt32).0.num6\, to_integer(unsigned(SmartResize(to_signed(2, 32), 6)))), 64);
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.22\ := SmartResize(shift_right(\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.21\, to_integer(unsigned(SmartResize(to_signed(34, 32), 6) and "111111"))), 64);
+                        \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_24\;
+                        -- Clock cycles needed to complete this state (approximation): 0.9123
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_24\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.23\ := to_unsigned(1073741824, 64) or (\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.22\);
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.num8\ := (\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.23\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- ulong num9;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num9 = num2 << 33;
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.24\ := SmartResize(shift_left(\Posit32::MultiplyBits(UInt32,UInt32).0.num2\, to_integer(unsigned(SmartResize(to_signed(33, 32), 6)))), 64);
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.num9\ := \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.24\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool flag4;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- flag4 = num9 >= 9223372036854775808uL;
+                        -- 
+                        -- Since the integer literal 9223372036854775808 was out of the VHDL integer range it was substituted with a binary literal (1000000000000000000000000000000000000000000000000000000000000000).
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.25\ := \Posit32::MultiplyBits(UInt32,UInt32).0.num9\ >= "1000000000000000000000000000000000000000000000000000000000000000";
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.flag4\ := \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.25\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- ulong num10;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- ulong conditional36;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag4) {
+                        -- 	conditional36 = (~num9);
+                        -- } else {
+                        -- 	conditional36 = num9;
+                        -- }
+                        -- 
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_26\ and ends in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_26\.
+                        --     * The false branch starts in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_27\ and ends in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_27\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::MultiplyBits(UInt32,UInt32).0._State_25\.
+
+                        if (\Posit32::MultiplyBits(UInt32,UInt32).0.flag4\) then 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_26\;
+                        else 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_27\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.5954
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_25\ => 
+                        -- State after the if-else which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_24\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- num10 = (conditional36);
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.num10\ := (\Posit32::MultiplyBits(UInt32,UInt32).0.conditional36\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num11;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num11 = 0;
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.num11\ := to_signed(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while (num10 < 9223372036854775808uL) {
+                        -- 	num10 = num10 << 1;
+                        -- 	num11 = num11 + 1;
+                        -- }
+                        -- 
+                        -- Starting a while loop.
+                        \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_28\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_26\ => 
+                        -- True branch of the if-else started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_24\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional36 = (~num9);
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional36 = (~num9);
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.unaryOperationResult.2\ := not(\Posit32::MultiplyBits(UInt32,UInt32).0.num9\);
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.conditional36\ := (\Posit32::MultiplyBits(UInt32,UInt32).0.unaryOperationResult.2\);
+                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_24\.
+                        if (\Posit32::MultiplyBits(UInt32,UInt32).0._State\ = \Posit32::MultiplyBits(UInt32,UInt32).0._State_26\) then 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_25\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.1441
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_27\ => 
+                        -- False branch of the if-else started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_24\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional36 = num9;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional36 = num9;
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.conditional36\ := \Posit32::MultiplyBits(UInt32,UInt32).0.num9\;
+                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_24\.
+                        if (\Posit32::MultiplyBits(UInt32,UInt32).0._State\ = \Posit32::MultiplyBits(UInt32,UInt32).0._State_27\) then 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_25\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_28\ => 
+                        -- Repeated state of the while loop which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_25\.
+                        -- The while loop's condition:
+                        -- Since the integer literal 9223372036854775808 was out of the VHDL integer range it was substituted with a binary literal (1000000000000000000000000000000000000000000000000000000000000000).
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.26\ := \Posit32::MultiplyBits(UInt32,UInt32).0.num10\ < "1000000000000000000000000000000000000000000000000000000000000000";
+                        if (\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.26\) then 
+                            -- The following section was transformed from the .NET statement below:
+                            -- {
+                            -- 	num10 = num10 << 1;
+                            -- 	num11 = num11 + 1;
+                            -- }
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- num10 = num10 << 1;
+                            -- 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.27\ := SmartResize(shift_left(\Posit32::MultiplyBits(UInt32,UInt32).0.num10\, to_integer(unsigned(SmartResize(to_signed(1, 32), 6)))), 64);
+                            \Posit32::MultiplyBits(UInt32,UInt32).0.num10\ := \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.27\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num11 = num11 + 1;
+                            -- 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.28\ := \Posit32::MultiplyBits(UInt32,UInt32).0.num11\ + to_signed(1, 32);
+                            \Posit32::MultiplyBits(UInt32,UInt32).0.num11\ := \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.28\;
+                        else 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_29\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.7207
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_29\ => 
+                        -- State after the while loop which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_25\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- ulong num12;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num12 = num9 << num11 + 1;
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.29\ := \Posit32::MultiplyBits(UInt32,UInt32).0.num11\ + to_signed(1, 32);
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.30\ := SmartResize(shift_left(\Posit32::MultiplyBits(UInt32,UInt32).0.num9\, to_integer(unsigned(SmartResize(\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.29\, 6)))), 64);
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.num12\ := \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.30\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num13;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int conditional37;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (flag4) {
+                        -- 	conditional37 = (num11 - 1);
+                        -- } else {
+                        -- 	conditional37 = (-num11);
+                        -- }
+                        -- 
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_31\ and ends in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_31\.
+                        --     * The false branch starts in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_32\ and ends in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_32\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::MultiplyBits(UInt32,UInt32).0._State_30\.
+
+                        if (\Posit32::MultiplyBits(UInt32,UInt32).0.flag4\) then 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_31\;
+                        else 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_32\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.8863
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_30\ => 
+                        -- State after the if-else which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_29\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- num13 = ((conditional37) << 2) + (int)(num12 >> 62);
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.32\ := shift_left((\Posit32::MultiplyBits(UInt32,UInt32).0.conditional37\), to_integer(unsigned(SmartResize(to_signed(2, 32), 5))));
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.33\ := signed(SmartResize(shift_right(\Posit32::MultiplyBits(UInt32,UInt32).0.num12\, to_integer(unsigned(SmartResize(to_signed(62, 32), 6) and "111111"))), 32));
+                        \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_33\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7662
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_31\ => 
+                        -- True branch of the if-else started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_29\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional37 = (num11 - 1);
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional37 = (num11 - 1);
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.31\ := \Posit32::MultiplyBits(UInt32,UInt32).0.num11\ - to_signed(1, 32);
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.conditional37\ := (\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.31\);
+                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_29\.
+                        if (\Posit32::MultiplyBits(UInt32,UInt32).0._State\ = \Posit32::MultiplyBits(UInt32,UInt32).0._State_31\) then 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_30\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_32\ => 
+                        -- False branch of the if-else started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_29\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional37 = (-num11);
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional37 = (-num11);
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.unaryOperationResult.3\ := -\Posit32::MultiplyBits(UInt32,UInt32).0.num11\;
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.conditional37\ := (\Posit32::MultiplyBits(UInt32,UInt32).0.unaryOperationResult.3\);
+                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_29\.
+                        if (\Posit32::MultiplyBits(UInt32,UInt32).0._State\ = \Posit32::MultiplyBits(UInt32,UInt32).0._State_32\) then 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_30\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.3119
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_33\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.34\ := (\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.32\) + (\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.33\);
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.num13\ := \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.34\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- ulong num14;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num14 = (ulong)(1073741824uL | (num12 << 2 >> 34));
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.35\ := SmartResize(shift_left(\Posit32::MultiplyBits(UInt32,UInt32).0.num12\, to_integer(unsigned(SmartResize(to_signed(2, 32), 6)))), 64);
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.36\ := SmartResize(shift_right(\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.35\, to_integer(unsigned(SmartResize(to_signed(34, 32), 6) and "111111"))), 64);
+                        \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_34\;
+                        -- Clock cycles needed to complete this state (approximation): 0.9123
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_34\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.37\ := to_unsigned(1073741824, 64) or (\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.36\);
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.num14\ := (\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.37\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- ulong num15;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num15 = num8 * num14;
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.38\ := SmartResize(\Posit32::MultiplyBits(UInt32,UInt32).0.num8\ * \Posit32::MultiplyBits(UInt32,UInt32).0.num14\, 64);
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.num15\ := \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.38\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num16;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num16 = (int)(num15 >> 61);
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_35\;
+                        -- Clock cycles needed to complete this state (approximation): 0.9372
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_35\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.39\ := signed(SmartResize(shift_right(\Posit32::MultiplyBits(UInt32,UInt32).0.num15\, to_integer(unsigned(SmartResize(to_signed(61, 32), 6) and "111111"))), 32));
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.num16\ := (\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.39\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num17;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num17 = num7 + num13 + num16;
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_36\;
+                        -- Clock cycles needed to complete this state (approximation): 0.6902
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_36\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.40\ := \Posit32::MultiplyBits(UInt32,UInt32).0.num7\ + \Posit32::MultiplyBits(UInt32,UInt32).0.num13\;
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.41\ := \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.40\ + \Posit32::MultiplyBits(UInt32,UInt32).0.num16\;
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.num17\ := \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.41\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- ulong num18;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (num17 >= 120) {
+                        -- 	num18 = 2147483647uL;
+                        -- } else if (num17 < -120) {
+                        -- 	num18 = 1uL;
+                        -- } else {
+                        -- 	int num19;
+                        -- 	num19 = num17 >> 2;
+                        -- 	ulong num20;
+                        -- 	ulong conditional38;
+                        -- 	if ((num19 >= 0)) {
+                        -- 		conditional38 = (~(18446744073709551615uL >> num19 + 1));
+                        -- 	} else {
+                        -- 		conditional38 = (9223372036854775808uL >> -num19);
+                        -- 	}
+                        -- 	num20 = (conditional38);
+                        -- 	int num21;
+                        -- 	int conditional39;
+                        -- 	if ((num19 >= 0)) {
+                        -- 		conditional39 = (num19 + 2);
+                        -- 	} else {
+                        -- 		conditional39 = (1 - num19);
+                        -- 	}
+                        -- 	num21 = (conditional39);
+                        -- 	ulong num22;
+                        -- 	num22 = (ulong)((long)(num17 & 3) << 62) | (((num15 << 3 - num16) & 9223372036854775807uL) >> 1);
+                        -- 	ulong num23;
+                        -- 	num23 = num20 | (num22 >> num21);
+                        -- 	num18 = num23 >> 33;
+                        -- 	if ((num23 & 4294967296uL) != 0uL && ((num23 & 4294967295uL) != 0uL || (num18 & 1uL) != 0uL)) {
+                        -- 		num18 = (ulong)(num18 + 1uL);
+                        -- 	}
+                        -- }
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.42\ := \Posit32::MultiplyBits(UInt32,UInt32).0.num17\ >= to_signed(120, 32);
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_38\ and ends in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_38\.
+                        --     * The false branch starts in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_39\ and ends in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_40\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::MultiplyBits(UInt32,UInt32).0._State_37\.
+
+                        if (\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.42\) then 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_38\;
+                        else 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_39\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.9279
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_37\ => 
+                        -- State after the if-else which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_36\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num24;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num24 = (uint)num18;
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.num24\ := SmartResize(\Posit32::MultiplyBits(UInt32,UInt32).0.num18\, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint conditional40;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- if ((flag != flag2)) {
+                        -- 	conditional40 = Posit32.GetTwosComplement (num24);
+                        -- } else {
+                        -- 	conditional40 = num24;
+                        -- }
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.71\ := \Posit32::MultiplyBits(UInt32,UInt32).0.flag\ /= \Posit32::MultiplyBits(UInt32,UInt32).0.flag2\;
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_60\ and ends in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_61\.
+                        --     * The false branch starts in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_62\ and ends in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_62\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::MultiplyBits(UInt32,UInt32).0._State_59\.
+
+                        if ((\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.71\)) then 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_60\;
+                        else 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_62\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.1238
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_38\ => 
+                        -- True branch of the if-else started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_36\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num18 = 2147483647uL;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num18 = 2147483647uL;
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.num18\ := to_unsigned(2147483647, 64);
+                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_36\.
+                        if (\Posit32::MultiplyBits(UInt32,UInt32).0._State\ = \Posit32::MultiplyBits(UInt32,UInt32).0._State_38\) then 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_37\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_39\ => 
+                        -- False branch of the if-else started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_36\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (num17 < -120) {
+                        -- 	num18 = 1uL;
+                        -- } else {
+                        -- 	int num19;
+                        -- 	num19 = num17 >> 2;
+                        -- 	ulong num20;
+                        -- 	ulong conditional38;
+                        -- 	if ((num19 >= 0)) {
+                        -- 		conditional38 = (~(18446744073709551615uL >> num19 + 1));
+                        -- 	} else {
+                        -- 		conditional38 = (9223372036854775808uL >> -num19);
+                        -- 	}
+                        -- 	num20 = (conditional38);
+                        -- 	int num21;
+                        -- 	int conditional39;
+                        -- 	if ((num19 >= 0)) {
+                        -- 		conditional39 = (num19 + 2);
+                        -- 	} else {
+                        -- 		conditional39 = (1 - num19);
+                        -- 	}
+                        -- 	num21 = (conditional39);
+                        -- 	ulong num22;
+                        -- 	num22 = (ulong)((long)(num17 & 3) << 62) | (((num15 << 3 - num16) & 9223372036854775807uL) >> 1);
+                        -- 	ulong num23;
+                        -- 	num23 = num20 | (num22 >> num21);
+                        -- 	num18 = num23 >> 33;
+                        -- 	if ((num23 & 4294967296uL) != 0uL && ((num23 & 4294967295uL) != 0uL || (num18 & 1uL) != 0uL)) {
+                        -- 		num18 = (ulong)(num18 + 1uL);
+                        -- 	}
+                        -- }
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.43\ := \Posit32::MultiplyBits(UInt32,UInt32).0.num17\ < to_signed(-120, 32);
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_41\ and ends in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_41\.
+                        --     * The false branch starts in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_42\ and ends in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_57\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::MultiplyBits(UInt32,UInt32).0._State_40\.
+
+                        if (\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.43\) then 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_41\;
+                        else 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_42\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.2753
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_40\ => 
+                        -- State after the if-else which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_39\.
+                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_36\.
+                        if (\Posit32::MultiplyBits(UInt32,UInt32).0._State\ = \Posit32::MultiplyBits(UInt32,UInt32).0._State_40\) then 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_37\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_41\ => 
+                        -- True branch of the if-else started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_39\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num18 = 1uL;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num18 = 1uL;
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.num18\ := to_unsigned(1, 64);
+                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_39\.
+                        if (\Posit32::MultiplyBits(UInt32,UInt32).0._State\ = \Posit32::MultiplyBits(UInt32,UInt32).0._State_41\) then 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_40\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_42\ => 
+                        -- False branch of the if-else started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_39\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	int num19;
+                        -- 	num19 = num17 >> 2;
+                        -- 	ulong num20;
+                        -- 	ulong conditional38;
+                        -- 	if ((num19 >= 0)) {
+                        -- 		conditional38 = (~(18446744073709551615uL >> num19 + 1));
+                        -- 	} else {
+                        -- 		conditional38 = (9223372036854775808uL >> -num19);
+                        -- 	}
+                        -- 	num20 = (conditional38);
+                        -- 	int num21;
+                        -- 	int conditional39;
+                        -- 	if ((num19 >= 0)) {
+                        -- 		conditional39 = (num19 + 2);
+                        -- 	} else {
+                        -- 		conditional39 = (1 - num19);
+                        -- 	}
+                        -- 	num21 = (conditional39);
+                        -- 	ulong num22;
+                        -- 	num22 = (ulong)((long)(num17 & 3) << 62) | (((num15 << 3 - num16) & 9223372036854775807uL) >> 1);
+                        -- 	ulong num23;
+                        -- 	num23 = num20 | (num22 >> num21);
+                        -- 	num18 = num23 >> 33;
+                        -- 	if ((num23 & 4294967296uL) != 0uL && ((num23 & 4294967295uL) != 0uL || (num18 & 1uL) != 0uL)) {
+                        -- 		num18 = (ulong)(num18 + 1uL);
+                        -- 	}
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num19;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num19 = num17 >> 2;
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.44\ := shift_right(\Posit32::MultiplyBits(UInt32,UInt32).0.num17\, to_integer(unsigned(SmartResize(to_signed(2, 32), 5) and "11111")));
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.num19\ := \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.44\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- ulong num20;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- ulong conditional38;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- if ((num19 >= 0)) {
+                        -- 	conditional38 = (~(18446744073709551615uL >> num19 + 1));
+                        -- } else {
+                        -- 	conditional38 = (9223372036854775808uL >> -num19);
+                        -- }
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.45\ := \Posit32::MultiplyBits(UInt32,UInt32).0.num19\ >= to_signed(0, 32);
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_44\ and ends in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_45\.
+                        --     * The false branch starts in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_46\ and ends in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_47\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::MultiplyBits(UInt32,UInt32).0._State_43\.
+
+                        if ((\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.45\)) then 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_44\;
+                        else 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_46\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.5368
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_43\ => 
+                        -- State after the if-else which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_42\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- num20 = (conditional38);
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.num20\ := (\Posit32::MultiplyBits(UInt32,UInt32).0.conditional38\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num21;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int conditional39;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- if ((num19 >= 0)) {
+                        -- 	conditional39 = (num19 + 2);
+                        -- } else {
+                        -- 	conditional39 = (1 - num19);
+                        -- }
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.49\ := \Posit32::MultiplyBits(UInt32,UInt32).0.num19\ >= to_signed(0, 32);
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_49\ and ends in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_49\.
+                        --     * The false branch starts in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_50\ and ends in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_50\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::MultiplyBits(UInt32,UInt32).0._State_48\.
+
+                        if ((\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.49\)) then 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_49\;
+                        else 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_50\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.2753
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_44\ => 
+                        -- True branch of the if-else started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_42\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional38 = (~(18446744073709551615uL >> num19 + 1));
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional38 = (~(18446744073709551615uL >> num19 + 1));
+                        -- 
+                        -- Since the integer literal 18446744073709551615 was out of the VHDL integer range it was substituted with a binary literal (1111111111111111111111111111111111111111111111111111111111111111).
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.46\ := \Posit32::MultiplyBits(UInt32,UInt32).0.num19\ + to_signed(1, 32);
+                        \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_45\;
+                        -- Clock cycles needed to complete this state (approximation): 0.4704
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_45\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.47\ := SmartResize(shift_right("1111111111111111111111111111111111111111111111111111111111111111", to_integer(unsigned(SmartResize(\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.46\, 6) and "111111"))), 64);
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.unaryOperationResult.4\ := not((\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.47\));
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.conditional38\ := (\Posit32::MultiplyBits(UInt32,UInt32).0.unaryOperationResult.4\);
+                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_42\.
+                        if (\Posit32::MultiplyBits(UInt32,UInt32).0._State\ = \Posit32::MultiplyBits(UInt32,UInt32).0._State_45\) then 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_43\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.7411
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_46\ => 
+                        -- False branch of the if-else started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_42\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional38 = (9223372036854775808uL >> -num19);
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional38 = (9223372036854775808uL >> -num19);
+                        -- 
+                        -- Since the integer literal 9223372036854775808 was out of the VHDL integer range it was substituted with a binary literal (1000000000000000000000000000000000000000000000000000000000000000).
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.unaryOperationResult.5\ := -\Posit32::MultiplyBits(UInt32,UInt32).0.num19\;
+                        \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_47\;
+                        -- Clock cycles needed to complete this state (approximation): 0.3119
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_47\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.48\ := SmartResize(shift_right("1000000000000000000000000000000000000000000000000000000000000000", to_integer(unsigned(SmartResize(\Posit32::MultiplyBits(UInt32,UInt32).0.unaryOperationResult.5\, 6) and "111111"))), 64);
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.conditional38\ := (\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.48\);
+                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_42\.
+                        if (\Posit32::MultiplyBits(UInt32,UInt32).0._State\ = \Posit32::MultiplyBits(UInt32,UInt32).0._State_47\) then 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_43\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.7411
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_48\ => 
+                        -- State after the if-else which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_43\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- num21 = (conditional39);
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.num21\ := (\Posit32::MultiplyBits(UInt32,UInt32).0.conditional39\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- ulong num22;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num22 = (ulong)((long)(num17 & 3) << 62) | (((num15 << 3 - num16) & 9223372036854775807uL) >> 1);
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.52\ := SmartResize(\Posit32::MultiplyBits(UInt32,UInt32).0.num17\ and to_signed(3, 32), 64);
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.53\ := SmartResize(unsigned(shift_left((\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.52\), to_integer(unsigned(SmartResize(to_signed(62, 32), 6))))), 64);
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.54\ := to_signed(3, 32) - \Posit32::MultiplyBits(UInt32,UInt32).0.num16\;
+                        \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_51\;
+                        -- Clock cycles needed to complete this state (approximation): 0.6062
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_49\ => 
+                        -- True branch of the if-else started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_43\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional39 = (num19 + 2);
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional39 = (num19 + 2);
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.50\ := \Posit32::MultiplyBits(UInt32,UInt32).0.num19\ + to_signed(2, 32);
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.conditional39\ := (\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.50\);
+                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_43\.
+                        if (\Posit32::MultiplyBits(UInt32,UInt32).0._State\ = \Posit32::MultiplyBits(UInt32,UInt32).0._State_49\) then 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_48\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_50\ => 
+                        -- False branch of the if-else started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_43\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional39 = (1 - num19);
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional39 = (1 - num19);
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.51\ := to_signed(1, 32) - \Posit32::MultiplyBits(UInt32,UInt32).0.num19\;
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.conditional39\ := (\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.51\);
+                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_43\.
+                        if (\Posit32::MultiplyBits(UInt32,UInt32).0._State\ = \Posit32::MultiplyBits(UInt32,UInt32).0._State_50\) then 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_48\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.3263
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_51\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.55\ := SmartResize(shift_left(\Posit32::MultiplyBits(UInt32,UInt32).0.num15\, to_integer(unsigned(SmartResize(\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.54\, 6)))), 64);
+                        -- Since the integer literal 9223372036854775807 was out of the VHDL integer range it was substituted with a binary literal (111111111111111111111111111111111111111111111111111111111111111).
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.56\ := (\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.55\) and "0111111111111111111111111111111111111111111111111111111111111111";
+                        \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_52\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7334
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_52\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.57\ := SmartResize(shift_right((\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.56\), to_integer(unsigned(SmartResize(to_signed(1, 32), 6) and "111111"))), 64);
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.58\ := (\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.53\) or (\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.57\);
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.num22\ := \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.58\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- ulong num23;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num23 = num20 | (num22 >> num21);
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_53\;
+                        -- Clock cycles needed to complete this state (approximation): 0.4505
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_53\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.59\ := SmartResize(shift_right(\Posit32::MultiplyBits(UInt32,UInt32).0.num22\, to_integer(unsigned(SmartResize(ToUnsignedAndExpand(\Posit32::MultiplyBits(UInt32,UInt32).0.num21\, 64), 6) and "111111"))), 64);
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.60\ := \Posit32::MultiplyBits(UInt32,UInt32).0.num20\ or (\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.59\);
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.num23\ := \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.60\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num18 = num23 >> 33;
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_54\;
+                        -- Clock cycles needed to complete this state (approximation): 0.9145
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_54\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.61\ := SmartResize(shift_right(\Posit32::MultiplyBits(UInt32,UInt32).0.num23\, to_integer(unsigned(SmartResize(to_signed(33, 32), 6) and "111111"))), 64);
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.num18\ := \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.61\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if ((num23 & 4294967296uL) != 0uL && ((num23 & 4294967295uL) != 0uL || (num18 & 1uL) != 0uL)) {
+                        -- 	num18 = (ulong)(num18 + 1uL);
+                        -- }
+                        -- 
+                        -- Since the integer literal 4294967296 was out of the VHDL integer range it was substituted with a binary literal (100000000000000000000000000000000).
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.62\ := \Posit32::MultiplyBits(UInt32,UInt32).0.num23\ and "0000000000000000000000000000000100000000000000000000000000000000";
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.63\ := (\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.62\) /= to_unsigned(0, 64);
+                        -- Since the integer literal 4294967295 was out of the VHDL integer range it was substituted with a binary literal (11111111111111111111111111111111).
+                        \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_55\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8298
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_55\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.64\ := \Posit32::MultiplyBits(UInt32,UInt32).0.num23\ and "0000000000000000000000000000000011111111111111111111111111111111";
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.65\ := (\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.64\) /= to_unsigned(0, 64);
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.66\ := \Posit32::MultiplyBits(UInt32,UInt32).0.num18\ and to_unsigned(1, 64);
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.67\ := (\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.66\) /= to_unsigned(0, 64);
+                        \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_56\;
+                        -- Clock cycles needed to complete this state (approximation): 0.9102
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_56\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.68\ := \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.65\ or \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.67\;
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.69\ := \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.63\ and (\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.68\);
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_58\ and ends in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_58\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::MultiplyBits(UInt32,UInt32).0._State_57\.
+
+                        if (\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.69\) then 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_58\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_57\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.2476
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_57\ => 
+                        -- State after the if-else which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_56\.
+                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_39\.
+                        if (\Posit32::MultiplyBits(UInt32,UInt32).0._State\ = \Posit32::MultiplyBits(UInt32,UInt32).0._State_57\) then 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_40\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_58\ => 
+                        -- True branch of the if-else started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_56\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	num18 = (ulong)(num18 + 1uL);
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num18 = (ulong)(num18 + 1uL);
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.70\ := \Posit32::MultiplyBits(UInt32,UInt32).0.num18\ + to_unsigned(1, 64);
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.num18\ := (\Posit32::MultiplyBits(UInt32,UInt32).0.binaryOperationResult.70\);
+                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_56\.
+                        if (\Posit32::MultiplyBits(UInt32,UInt32).0._State\ = \Posit32::MultiplyBits(UInt32,UInt32).0._State_58\) then 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_57\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.3898
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_59\ => 
+                        -- State after the if-else which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_37\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return conditional40;
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.return\ <= \Posit32::MultiplyBits(UInt32,UInt32).0.conditional40\;
+                        \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_60\ => 
+                        -- True branch of the if-else started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_37\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional40 = Posit32.GetTwosComplement (num24);
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional40 = Posit32.GetTwosComplement (num24);
+                        -- 
+                        -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32)
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\ <= \Posit32::MultiplyBits(UInt32,UInt32).0.num24\;
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Started.0\ <= true;
+                        \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_61\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_61\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32)
+                        if (\Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Started.0\ = \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Finished.0\) then 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Started.0\ <= false;
+                            \Posit32::MultiplyBits(UInt32,UInt32).0.return.2\ := \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).return.0\;
+                            \Posit32::MultiplyBits(UInt32,UInt32).0.conditional40\ := \Posit32::MultiplyBits(UInt32,UInt32).0.return.2\;
+                            -- Going to the state after the if-else which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_37\.
+                            if (\Posit32::MultiplyBits(UInt32,UInt32).0._State\ = \Posit32::MultiplyBits(UInt32,UInt32).0._State_61\) then 
+                                \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_59\;
+                            end if;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::MultiplyBits(UInt32,UInt32).0._State_62\ => 
+                        -- False branch of the if-else started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_37\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional40 = num24;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional40 = num24;
+                        -- 
+                        \Posit32::MultiplyBits(UInt32,UInt32).0.conditional40\ := \Posit32::MultiplyBits(UInt32,UInt32).0.num24\;
+                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyBits(UInt32,UInt32).0._State_37\.
+                        if (\Posit32::MultiplyBits(UInt32,UInt32).0._State\ = \Posit32::MultiplyBits(UInt32,UInt32).0._State_62\) then 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0._State\ := \Posit32::MultiplyBits(UInt32,UInt32).0._State_59\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.UInt32 Lombiq.Arithmetics.Posit32::MultiplyBits(System.UInt32,System.UInt32).0 state machine end
+
+
     -- System.Int32 Lombiq.Arithmetics.Posit32::op_Explicit(Lombiq.Arithmetics.Posit32).0 state machine start
     \Int32 Posit32::op_Explicit(Posit32).0._StateMachine\: process (\Clock\) 
         Variable \Int32 Posit32::op_Explicit(Posit32).0._State\: \Int32 Posit32::op_Explicit(Posit32).0._States\ := \Int32 Posit32::op_Explicit(Posit32).0._State_0\;
@@ -31555,7 +33248,7 @@ begin
         Variable \Int32 Posit32::op_Explicit(Posit32).0.return.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Int32 Posit32::op_Explicit(Posit32).0.return.3\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Int32 Posit32::op_Explicit(Posit32).0.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Int32 Posit32::op_Explicit(Posit32).0.conditional32\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Int32 Posit32::op_Explicit(Posit32).0.conditional41\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.5\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.6\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.7\: boolean := false;
@@ -31568,10 +33261,10 @@ begin
         Variable \Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.12\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Int32 Posit32::op_Explicit(Posit32).0.unaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.13\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Int32 Posit32::op_Explicit(Posit32).0.conditional33\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Int32 Posit32::op_Explicit(Posit32).0.conditional42\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Int32 Posit32::op_Explicit(Posit32).0.return.6\: boolean := false;
         Variable \Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.14\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \Int32 Posit32::op_Explicit(Posit32).0.conditional34\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Int32 Posit32::op_Explicit(Posit32).0.conditional43\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Int32 Posit32::op_Explicit(Posit32).0.return.7\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
@@ -31598,7 +33291,7 @@ begin
                 \Int32 Posit32::op_Explicit(Posit32).0.return.2\ := to_unsigned(0, 32);
                 \Int32 Posit32::op_Explicit(Posit32).0.return.3\ := to_unsigned(0, 8);
                 \Int32 Posit32::op_Explicit(Posit32).0.num2\ := to_unsigned(0, 32);
-                \Int32 Posit32::op_Explicit(Posit32).0.conditional32\ := to_unsigned(0, 32);
+                \Int32 Posit32::op_Explicit(Posit32).0.conditional41\ := to_unsigned(0, 32);
                 \Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.5\ := to_signed(0, 64);
                 \Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.6\ := to_signed(0, 64);
                 \Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.7\ := false;
@@ -31611,10 +33304,10 @@ begin
                 \Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.12\ := to_signed(0, 32);
                 \Int32 Posit32::op_Explicit(Posit32).0.unaryOperationResult.0\ := to_signed(0, 32);
                 \Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.13\ := to_unsigned(0, 32);
-                \Int32 Posit32::op_Explicit(Posit32).0.conditional33\ := to_signed(0, 64);
+                \Int32 Posit32::op_Explicit(Posit32).0.conditional42\ := to_signed(0, 64);
                 \Int32 Posit32::op_Explicit(Posit32).0.return.6\ := false;
                 \Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.14\ := to_signed(0, 64);
-                \Int32 Posit32::op_Explicit(Posit32).0.conditional34\ := to_signed(0, 32);
+                \Int32 Posit32::op_Explicit(Posit32).0.conditional43\ := to_signed(0, 32);
                 \Int32 Posit32::op_Explicit(Posit32).0.return.7\ := false;
             else 
                 case \Int32 Posit32::op_Explicit(Posit32).0._State\ is 
@@ -31709,20 +33402,20 @@ begin
                             -- 	byte mostSignificantOnePosition;
                             -- 	mostSignificantOnePosition = Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x));
                             -- 	uint num2;
-                            -- 	uint conditional32;
+                            -- 	uint conditional41;
                             -- 	if ((num - (long)(mostSignificantOnePosition) + 1L >= 0L)) {
-                            -- 		conditional32 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
+                            -- 		conditional41 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
                             -- 	} else {
-                            -- 		conditional32 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
+                            -- 		conditional41 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
                             -- 	}
-                            -- 	num2 = (conditional32);
-                            -- 	long conditional33;
+                            -- 	num2 = (conditional41);
+                            -- 	long conditional42;
                             -- 	if (Lombiq.Arithmetics.Posit32.IsPositive (x)) {
-                            -- 		conditional33 = num2;
+                            -- 		conditional42 = num2;
                             -- 	} else {
-                            -- 		conditional33 = (0L - (long)num2);
+                            -- 		conditional42 = (0L - (long)num2);
                             -- 	}
-                            -- 	return (int)(conditional33);
+                            -- 	return (int)(conditional42);
                             -- }
                             -- 
                             \Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.3\ := \Int32 Posit32::op_Explicit(Posit32).0.num\ + to_signed(1, 64);
@@ -31747,13 +33440,13 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).0._State_8\ => 
                         -- State after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).0._State_7\.
                         -- The following section was transformed from the .NET statement below:
-                        -- int conditional34;
+                        -- int conditional43;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if (Lombiq.Arithmetics.Posit32.IsPositive (x)) {
-                        -- 	conditional34 = 2147483647;
+                        -- 	conditional43 = 2147483647;
                         -- } else {
-                        -- 	conditional34 = -2147483648;
+                        -- 	conditional43 = -2147483648;
                         -- }
                         -- 
                         -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
@@ -31768,20 +33461,20 @@ begin
                         -- 	byte mostSignificantOnePosition;
                         -- 	mostSignificantOnePosition = Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x));
                         -- 	uint num2;
-                        -- 	uint conditional32;
+                        -- 	uint conditional41;
                         -- 	if ((num - (long)(mostSignificantOnePosition) + 1L >= 0L)) {
-                        -- 		conditional32 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- 		conditional41 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- 	} else {
-                        -- 		conditional32 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- 		conditional41 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- 	}
-                        -- 	num2 = (conditional32);
-                        -- 	long conditional33;
+                        -- 	num2 = (conditional41);
+                        -- 	long conditional42;
                         -- 	if (Lombiq.Arithmetics.Posit32.IsPositive (x)) {
-                        -- 		conditional33 = num2;
+                        -- 		conditional42 = num2;
                         -- 	} else {
-                        -- 		conditional33 = (0L - (long)num2);
+                        -- 		conditional42 = (0L - (long)num2);
                         -- 	}
-                        -- 	return (int)(conditional33);
+                        -- 	return (int)(conditional42);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -31816,13 +33509,13 @@ begin
                             -- uint num2;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- uint conditional32;
+                            -- uint conditional41;
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- if ((num - (long)(mostSignificantOnePosition) + 1L >= 0L)) {
-                            -- 	conditional32 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
+                            -- 	conditional41 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
                             -- } else {
-                            -- 	conditional32 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
+                            -- 	conditional41 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
                             -- }
                             -- 
                             \Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.5\ := \Int32 Posit32::op_Explicit(Posit32).0.num\ - signed(SmartResize((\Int32 Posit32::op_Explicit(Posit32).0.mostSignificantOnePosition\), 64));
@@ -31848,17 +33541,17 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).0._State_13\ => 
                         -- State after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).0._State_12\.
                         -- The following section was transformed from the .NET statement below:
-                        -- num2 = (conditional32);
+                        -- num2 = (conditional41);
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).0.num2\ := (\Int32 Posit32::op_Explicit(Posit32).0.conditional32\);
+                        \Int32 Posit32::op_Explicit(Posit32).0.num2\ := (\Int32 Posit32::op_Explicit(Posit32).0.conditional41\);
                         -- The following section was transformed from the .NET statement below:
-                        -- long conditional33;
+                        -- long conditional42;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if (Lombiq.Arithmetics.Posit32.IsPositive (x)) {
-                        -- 	conditional33 = num2;
+                        -- 	conditional42 = num2;
                         -- } else {
-                        -- 	conditional33 = (0L - (long)num2);
+                        -- 	conditional42 = (0L - (long)num2);
                         -- }
                         -- 
                         -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
@@ -31870,11 +33563,11 @@ begin
                         -- True branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).0._State_12\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional32 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- 	conditional41 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional32 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- conditional41 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::FractionWithHiddenBit()
                         \Int32 Posit32::op_Explicit(Posit32).0.Posit32::FractionWithHiddenBit().this.parameter.Out.0\ <= \Int32 Posit32::op_Explicit(Posit32).0.x\;
@@ -31894,7 +33587,7 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).0._State_16\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.10\ := shift_left(\Int32 Posit32::op_Explicit(Posit32).0.return.4\, to_integer(unsigned(SmartResize((\Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.9\), 5))));
-                        \Int32 Posit32::op_Explicit(Posit32).0.conditional32\ := (\Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.10\);
+                        \Int32 Posit32::op_Explicit(Posit32).0.conditional41\ := (\Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.10\);
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).0._State_12\.
                         if (\Int32 Posit32::op_Explicit(Posit32).0._State\ = \Int32 Posit32::op_Explicit(Posit32).0._State_16\) then 
                             \Int32 Posit32::op_Explicit(Posit32).0._State\ := \Int32 Posit32::op_Explicit(Posit32).0._State_13\;
@@ -31904,11 +33597,11 @@ begin
                         -- False branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).0._State_12\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional32 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- 	conditional41 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional32 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- conditional41 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::FractionWithHiddenBit()
                         \Int32 Posit32::op_Explicit(Posit32).0.Posit32::FractionWithHiddenBit().this.parameter.Out.0\ <= \Int32 Posit32::op_Explicit(Posit32).0.x\;
@@ -31933,7 +33626,7 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).0._State_20\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.13\ := shift_right(\Int32 Posit32::op_Explicit(Posit32).0.return.5\, to_integer(unsigned(SmartResize(\Int32 Posit32::op_Explicit(Posit32).0.unaryOperationResult.0\, 5) and "11111")));
-                        \Int32 Posit32::op_Explicit(Posit32).0.conditional32\ := (\Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.13\);
+                        \Int32 Posit32::op_Explicit(Posit32).0.conditional41\ := (\Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.13\);
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).0._State_12\.
                         if (\Int32 Posit32::op_Explicit(Posit32).0._State\ = \Int32 Posit32::op_Explicit(Posit32).0._State_20\) then 
                             \Int32 Posit32::op_Explicit(Posit32).0._State\ := \Int32 Posit32::op_Explicit(Posit32).0._State_13\;
@@ -31960,9 +33653,9 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).0._State_22\ => 
                         -- State after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).0._State_21\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return (int)(conditional33);
+                        -- return (int)(conditional42);
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).0.return\ <= SmartResize((\Int32 Posit32::op_Explicit(Posit32).0.conditional33\), 32);
+                        \Int32 Posit32::op_Explicit(Posit32).0.return\ <= SmartResize((\Int32 Posit32::op_Explicit(Posit32).0.conditional42\), 32);
                         \Int32 Posit32::op_Explicit(Posit32).0._State\ := \Int32 Posit32::op_Explicit(Posit32).0._State_1\;
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).0._State_7\.
                         if (\Int32 Posit32::op_Explicit(Posit32).0._State\ = \Int32 Posit32::op_Explicit(Posit32).0._State_22\) then 
@@ -31973,13 +33666,13 @@ begin
                         -- True branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).0._State_21\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional33 = num2;
+                        -- 	conditional42 = num2;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional33 = num2;
+                        -- conditional42 = num2;
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).0.conditional33\ := signed(SmartResize(\Int32 Posit32::op_Explicit(Posit32).0.num2\, 64));
+                        \Int32 Posit32::op_Explicit(Posit32).0.conditional42\ := signed(SmartResize(\Int32 Posit32::op_Explicit(Posit32).0.num2\, 64));
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).0._State_21\.
                         if (\Int32 Posit32::op_Explicit(Posit32).0._State\ = \Int32 Posit32::op_Explicit(Posit32).0._State_23\) then 
                             \Int32 Posit32::op_Explicit(Posit32).0._State\ := \Int32 Posit32::op_Explicit(Posit32).0._State_22\;
@@ -31989,14 +33682,14 @@ begin
                         -- False branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).0._State_21\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional33 = (0L - (long)num2);
+                        -- 	conditional42 = (0L - (long)num2);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional33 = (0L - (long)num2);
+                        -- conditional42 = (0L - (long)num2);
                         -- 
                         \Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.14\ := to_signed(0, 64) - signed(SmartResize(\Int32 Posit32::op_Explicit(Posit32).0.num2\, 64));
-                        \Int32 Posit32::op_Explicit(Posit32).0.conditional33\ := (\Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.14\);
+                        \Int32 Posit32::op_Explicit(Posit32).0.conditional42\ := (\Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.14\);
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).0._State_21\.
                         if (\Int32 Posit32::op_Explicit(Posit32).0._State\ = \Int32 Posit32::op_Explicit(Posit32).0._State_24\) then 
                             \Int32 Posit32::op_Explicit(Posit32).0._State\ := \Int32 Posit32::op_Explicit(Posit32).0._State_22\;
@@ -32023,22 +33716,22 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).0._State_26\ => 
                         -- State after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).0._State_25\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return conditional34;
+                        -- return conditional43;
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).0.return\ <= \Int32 Posit32::op_Explicit(Posit32).0.conditional34\;
+                        \Int32 Posit32::op_Explicit(Posit32).0.return\ <= \Int32 Posit32::op_Explicit(Posit32).0.conditional43\;
                         \Int32 Posit32::op_Explicit(Posit32).0._State\ := \Int32 Posit32::op_Explicit(Posit32).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Int32 Posit32::op_Explicit(Posit32).0._State_27\ => 
                         -- True branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).0._State_25\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional34 = 2147483647;
+                        -- 	conditional43 = 2147483647;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional34 = 2147483647;
+                        -- conditional43 = 2147483647;
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).0.conditional34\ := to_signed(2147483647, 32);
+                        \Int32 Posit32::op_Explicit(Posit32).0.conditional43\ := to_signed(2147483647, 32);
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).0._State_25\.
                         if (\Int32 Posit32::op_Explicit(Posit32).0._State\ = \Int32 Posit32::op_Explicit(Posit32).0._State_27\) then 
                             \Int32 Posit32::op_Explicit(Posit32).0._State\ := \Int32 Posit32::op_Explicit(Posit32).0._State_26\;
@@ -32048,13 +33741,13 @@ begin
                         -- False branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).0._State_25\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional34 = -2147483648;
+                        -- 	conditional43 = -2147483648;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional34 = -2147483648;
+                        -- conditional43 = -2147483648;
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).0.conditional34\ := to_signed(-2147483648, 32);
+                        \Int32 Posit32::op_Explicit(Posit32).0.conditional43\ := to_signed(-2147483648, 32);
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).0._State_25\.
                         if (\Int32 Posit32::op_Explicit(Posit32).0._State\ = \Int32 Posit32::op_Explicit(Posit32).0._State_28\) then 
                             \Int32 Posit32::op_Explicit(Posit32).0._State\ := \Int32 Posit32::op_Explicit(Posit32).0._State_26\;
@@ -32083,7 +33776,7 @@ begin
         Variable \Int32 Posit32::op_Explicit(Posit32).1.return.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Int32 Posit32::op_Explicit(Posit32).1.return.3\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Int32 Posit32::op_Explicit(Posit32).1.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Int32 Posit32::op_Explicit(Posit32).1.conditional32\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Int32 Posit32::op_Explicit(Posit32).1.conditional41\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.5\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.6\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.7\: boolean := false;
@@ -32096,10 +33789,10 @@ begin
         Variable \Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.12\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Int32 Posit32::op_Explicit(Posit32).1.unaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.13\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Int32 Posit32::op_Explicit(Posit32).1.conditional33\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Int32 Posit32::op_Explicit(Posit32).1.conditional42\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Int32 Posit32::op_Explicit(Posit32).1.return.6\: boolean := false;
         Variable \Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.14\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \Int32 Posit32::op_Explicit(Posit32).1.conditional34\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Int32 Posit32::op_Explicit(Posit32).1.conditional43\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Int32 Posit32::op_Explicit(Posit32).1.return.7\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
@@ -32126,7 +33819,7 @@ begin
                 \Int32 Posit32::op_Explicit(Posit32).1.return.2\ := to_unsigned(0, 32);
                 \Int32 Posit32::op_Explicit(Posit32).1.return.3\ := to_unsigned(0, 8);
                 \Int32 Posit32::op_Explicit(Posit32).1.num2\ := to_unsigned(0, 32);
-                \Int32 Posit32::op_Explicit(Posit32).1.conditional32\ := to_unsigned(0, 32);
+                \Int32 Posit32::op_Explicit(Posit32).1.conditional41\ := to_unsigned(0, 32);
                 \Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.5\ := to_signed(0, 64);
                 \Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.6\ := to_signed(0, 64);
                 \Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.7\ := false;
@@ -32139,10 +33832,10 @@ begin
                 \Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.12\ := to_signed(0, 32);
                 \Int32 Posit32::op_Explicit(Posit32).1.unaryOperationResult.0\ := to_signed(0, 32);
                 \Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.13\ := to_unsigned(0, 32);
-                \Int32 Posit32::op_Explicit(Posit32).1.conditional33\ := to_signed(0, 64);
+                \Int32 Posit32::op_Explicit(Posit32).1.conditional42\ := to_signed(0, 64);
                 \Int32 Posit32::op_Explicit(Posit32).1.return.6\ := false;
                 \Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.14\ := to_signed(0, 64);
-                \Int32 Posit32::op_Explicit(Posit32).1.conditional34\ := to_signed(0, 32);
+                \Int32 Posit32::op_Explicit(Posit32).1.conditional43\ := to_signed(0, 32);
                 \Int32 Posit32::op_Explicit(Posit32).1.return.7\ := false;
             else 
                 case \Int32 Posit32::op_Explicit(Posit32).1._State\ is 
@@ -32237,20 +33930,20 @@ begin
                             -- 	byte mostSignificantOnePosition;
                             -- 	mostSignificantOnePosition = Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x));
                             -- 	uint num2;
-                            -- 	uint conditional32;
+                            -- 	uint conditional41;
                             -- 	if ((num - (long)(mostSignificantOnePosition) + 1L >= 0L)) {
-                            -- 		conditional32 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
+                            -- 		conditional41 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
                             -- 	} else {
-                            -- 		conditional32 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
+                            -- 		conditional41 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
                             -- 	}
-                            -- 	num2 = (conditional32);
-                            -- 	long conditional33;
+                            -- 	num2 = (conditional41);
+                            -- 	long conditional42;
                             -- 	if (Lombiq.Arithmetics.Posit32.IsPositive (x)) {
-                            -- 		conditional33 = num2;
+                            -- 		conditional42 = num2;
                             -- 	} else {
-                            -- 		conditional33 = (0L - (long)num2);
+                            -- 		conditional42 = (0L - (long)num2);
                             -- 	}
-                            -- 	return (int)(conditional33);
+                            -- 	return (int)(conditional42);
                             -- }
                             -- 
                             \Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.3\ := \Int32 Posit32::op_Explicit(Posit32).1.num\ + to_signed(1, 64);
@@ -32275,13 +33968,13 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).1._State_8\ => 
                         -- State after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).1._State_7\.
                         -- The following section was transformed from the .NET statement below:
-                        -- int conditional34;
+                        -- int conditional43;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if (Lombiq.Arithmetics.Posit32.IsPositive (x)) {
-                        -- 	conditional34 = 2147483647;
+                        -- 	conditional43 = 2147483647;
                         -- } else {
-                        -- 	conditional34 = -2147483648;
+                        -- 	conditional43 = -2147483648;
                         -- }
                         -- 
                         -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
@@ -32296,20 +33989,20 @@ begin
                         -- 	byte mostSignificantOnePosition;
                         -- 	mostSignificantOnePosition = Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x));
                         -- 	uint num2;
-                        -- 	uint conditional32;
+                        -- 	uint conditional41;
                         -- 	if ((num - (long)(mostSignificantOnePosition) + 1L >= 0L)) {
-                        -- 		conditional32 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- 		conditional41 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- 	} else {
-                        -- 		conditional32 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- 		conditional41 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- 	}
-                        -- 	num2 = (conditional32);
-                        -- 	long conditional33;
+                        -- 	num2 = (conditional41);
+                        -- 	long conditional42;
                         -- 	if (Lombiq.Arithmetics.Posit32.IsPositive (x)) {
-                        -- 		conditional33 = num2;
+                        -- 		conditional42 = num2;
                         -- 	} else {
-                        -- 		conditional33 = (0L - (long)num2);
+                        -- 		conditional42 = (0L - (long)num2);
                         -- 	}
-                        -- 	return (int)(conditional33);
+                        -- 	return (int)(conditional42);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -32344,13 +34037,13 @@ begin
                             -- uint num2;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- uint conditional32;
+                            -- uint conditional41;
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- if ((num - (long)(mostSignificantOnePosition) + 1L >= 0L)) {
-                            -- 	conditional32 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
+                            -- 	conditional41 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
                             -- } else {
-                            -- 	conditional32 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
+                            -- 	conditional41 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
                             -- }
                             -- 
                             \Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.5\ := \Int32 Posit32::op_Explicit(Posit32).1.num\ - signed(SmartResize((\Int32 Posit32::op_Explicit(Posit32).1.mostSignificantOnePosition\), 64));
@@ -32376,17 +34069,17 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).1._State_13\ => 
                         -- State after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).1._State_12\.
                         -- The following section was transformed from the .NET statement below:
-                        -- num2 = (conditional32);
+                        -- num2 = (conditional41);
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).1.num2\ := (\Int32 Posit32::op_Explicit(Posit32).1.conditional32\);
+                        \Int32 Posit32::op_Explicit(Posit32).1.num2\ := (\Int32 Posit32::op_Explicit(Posit32).1.conditional41\);
                         -- The following section was transformed from the .NET statement below:
-                        -- long conditional33;
+                        -- long conditional42;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if (Lombiq.Arithmetics.Posit32.IsPositive (x)) {
-                        -- 	conditional33 = num2;
+                        -- 	conditional42 = num2;
                         -- } else {
-                        -- 	conditional33 = (0L - (long)num2);
+                        -- 	conditional42 = (0L - (long)num2);
                         -- }
                         -- 
                         -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
@@ -32398,11 +34091,11 @@ begin
                         -- True branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).1._State_12\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional32 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- 	conditional41 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional32 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- conditional41 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::FractionWithHiddenBit()
                         \Int32 Posit32::op_Explicit(Posit32).1.Posit32::FractionWithHiddenBit().this.parameter.Out.0\ <= \Int32 Posit32::op_Explicit(Posit32).1.x\;
@@ -32422,7 +34115,7 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).1._State_16\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.10\ := shift_left(\Int32 Posit32::op_Explicit(Posit32).1.return.4\, to_integer(unsigned(SmartResize((\Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.9\), 5))));
-                        \Int32 Posit32::op_Explicit(Posit32).1.conditional32\ := (\Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.10\);
+                        \Int32 Posit32::op_Explicit(Posit32).1.conditional41\ := (\Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.10\);
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).1._State_12\.
                         if (\Int32 Posit32::op_Explicit(Posit32).1._State\ = \Int32 Posit32::op_Explicit(Posit32).1._State_16\) then 
                             \Int32 Posit32::op_Explicit(Posit32).1._State\ := \Int32 Posit32::op_Explicit(Posit32).1._State_13\;
@@ -32432,11 +34125,11 @@ begin
                         -- False branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).1._State_12\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional32 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- 	conditional41 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional32 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- conditional41 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::FractionWithHiddenBit()
                         \Int32 Posit32::op_Explicit(Posit32).1.Posit32::FractionWithHiddenBit().this.parameter.Out.0\ <= \Int32 Posit32::op_Explicit(Posit32).1.x\;
@@ -32461,7 +34154,7 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).1._State_20\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.13\ := shift_right(\Int32 Posit32::op_Explicit(Posit32).1.return.5\, to_integer(unsigned(SmartResize(\Int32 Posit32::op_Explicit(Posit32).1.unaryOperationResult.0\, 5) and "11111")));
-                        \Int32 Posit32::op_Explicit(Posit32).1.conditional32\ := (\Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.13\);
+                        \Int32 Posit32::op_Explicit(Posit32).1.conditional41\ := (\Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.13\);
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).1._State_12\.
                         if (\Int32 Posit32::op_Explicit(Posit32).1._State\ = \Int32 Posit32::op_Explicit(Posit32).1._State_20\) then 
                             \Int32 Posit32::op_Explicit(Posit32).1._State\ := \Int32 Posit32::op_Explicit(Posit32).1._State_13\;
@@ -32488,9 +34181,9 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).1._State_22\ => 
                         -- State after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).1._State_21\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return (int)(conditional33);
+                        -- return (int)(conditional42);
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).1.return\ <= SmartResize((\Int32 Posit32::op_Explicit(Posit32).1.conditional33\), 32);
+                        \Int32 Posit32::op_Explicit(Posit32).1.return\ <= SmartResize((\Int32 Posit32::op_Explicit(Posit32).1.conditional42\), 32);
                         \Int32 Posit32::op_Explicit(Posit32).1._State\ := \Int32 Posit32::op_Explicit(Posit32).1._State_1\;
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).1._State_7\.
                         if (\Int32 Posit32::op_Explicit(Posit32).1._State\ = \Int32 Posit32::op_Explicit(Posit32).1._State_22\) then 
@@ -32501,13 +34194,13 @@ begin
                         -- True branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).1._State_21\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional33 = num2;
+                        -- 	conditional42 = num2;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional33 = num2;
+                        -- conditional42 = num2;
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).1.conditional33\ := signed(SmartResize(\Int32 Posit32::op_Explicit(Posit32).1.num2\, 64));
+                        \Int32 Posit32::op_Explicit(Posit32).1.conditional42\ := signed(SmartResize(\Int32 Posit32::op_Explicit(Posit32).1.num2\, 64));
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).1._State_21\.
                         if (\Int32 Posit32::op_Explicit(Posit32).1._State\ = \Int32 Posit32::op_Explicit(Posit32).1._State_23\) then 
                             \Int32 Posit32::op_Explicit(Posit32).1._State\ := \Int32 Posit32::op_Explicit(Posit32).1._State_22\;
@@ -32517,14 +34210,14 @@ begin
                         -- False branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).1._State_21\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional33 = (0L - (long)num2);
+                        -- 	conditional42 = (0L - (long)num2);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional33 = (0L - (long)num2);
+                        -- conditional42 = (0L - (long)num2);
                         -- 
                         \Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.14\ := to_signed(0, 64) - signed(SmartResize(\Int32 Posit32::op_Explicit(Posit32).1.num2\, 64));
-                        \Int32 Posit32::op_Explicit(Posit32).1.conditional33\ := (\Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.14\);
+                        \Int32 Posit32::op_Explicit(Posit32).1.conditional42\ := (\Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.14\);
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).1._State_21\.
                         if (\Int32 Posit32::op_Explicit(Posit32).1._State\ = \Int32 Posit32::op_Explicit(Posit32).1._State_24\) then 
                             \Int32 Posit32::op_Explicit(Posit32).1._State\ := \Int32 Posit32::op_Explicit(Posit32).1._State_22\;
@@ -32551,22 +34244,22 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).1._State_26\ => 
                         -- State after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).1._State_25\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return conditional34;
+                        -- return conditional43;
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).1.return\ <= \Int32 Posit32::op_Explicit(Posit32).1.conditional34\;
+                        \Int32 Posit32::op_Explicit(Posit32).1.return\ <= \Int32 Posit32::op_Explicit(Posit32).1.conditional43\;
                         \Int32 Posit32::op_Explicit(Posit32).1._State\ := \Int32 Posit32::op_Explicit(Posit32).1._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Int32 Posit32::op_Explicit(Posit32).1._State_27\ => 
                         -- True branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).1._State_25\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional34 = 2147483647;
+                        -- 	conditional43 = 2147483647;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional34 = 2147483647;
+                        -- conditional43 = 2147483647;
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).1.conditional34\ := to_signed(2147483647, 32);
+                        \Int32 Posit32::op_Explicit(Posit32).1.conditional43\ := to_signed(2147483647, 32);
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).1._State_25\.
                         if (\Int32 Posit32::op_Explicit(Posit32).1._State\ = \Int32 Posit32::op_Explicit(Posit32).1._State_27\) then 
                             \Int32 Posit32::op_Explicit(Posit32).1._State\ := \Int32 Posit32::op_Explicit(Posit32).1._State_26\;
@@ -32576,13 +34269,13 @@ begin
                         -- False branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).1._State_25\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional34 = -2147483648;
+                        -- 	conditional43 = -2147483648;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional34 = -2147483648;
+                        -- conditional43 = -2147483648;
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).1.conditional34\ := to_signed(-2147483648, 32);
+                        \Int32 Posit32::op_Explicit(Posit32).1.conditional43\ := to_signed(-2147483648, 32);
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).1._State_25\.
                         if (\Int32 Posit32::op_Explicit(Posit32).1._State\ = \Int32 Posit32::op_Explicit(Posit32).1._State_28\) then 
                             \Int32 Posit32::op_Explicit(Posit32).1._State\ := \Int32 Posit32::op_Explicit(Posit32).1._State_26\;
@@ -32611,7 +34304,7 @@ begin
         Variable \Int32 Posit32::op_Explicit(Posit32).2.return.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Int32 Posit32::op_Explicit(Posit32).2.return.3\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Int32 Posit32::op_Explicit(Posit32).2.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Int32 Posit32::op_Explicit(Posit32).2.conditional32\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Int32 Posit32::op_Explicit(Posit32).2.conditional41\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.5\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.6\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.7\: boolean := false;
@@ -32624,10 +34317,10 @@ begin
         Variable \Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.12\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Int32 Posit32::op_Explicit(Posit32).2.unaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.13\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Int32 Posit32::op_Explicit(Posit32).2.conditional33\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Int32 Posit32::op_Explicit(Posit32).2.conditional42\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Int32 Posit32::op_Explicit(Posit32).2.return.6\: boolean := false;
         Variable \Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.14\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \Int32 Posit32::op_Explicit(Posit32).2.conditional34\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Int32 Posit32::op_Explicit(Posit32).2.conditional43\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Int32 Posit32::op_Explicit(Posit32).2.return.7\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
@@ -32654,7 +34347,7 @@ begin
                 \Int32 Posit32::op_Explicit(Posit32).2.return.2\ := to_unsigned(0, 32);
                 \Int32 Posit32::op_Explicit(Posit32).2.return.3\ := to_unsigned(0, 8);
                 \Int32 Posit32::op_Explicit(Posit32).2.num2\ := to_unsigned(0, 32);
-                \Int32 Posit32::op_Explicit(Posit32).2.conditional32\ := to_unsigned(0, 32);
+                \Int32 Posit32::op_Explicit(Posit32).2.conditional41\ := to_unsigned(0, 32);
                 \Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.5\ := to_signed(0, 64);
                 \Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.6\ := to_signed(0, 64);
                 \Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.7\ := false;
@@ -32667,10 +34360,10 @@ begin
                 \Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.12\ := to_signed(0, 32);
                 \Int32 Posit32::op_Explicit(Posit32).2.unaryOperationResult.0\ := to_signed(0, 32);
                 \Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.13\ := to_unsigned(0, 32);
-                \Int32 Posit32::op_Explicit(Posit32).2.conditional33\ := to_signed(0, 64);
+                \Int32 Posit32::op_Explicit(Posit32).2.conditional42\ := to_signed(0, 64);
                 \Int32 Posit32::op_Explicit(Posit32).2.return.6\ := false;
                 \Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.14\ := to_signed(0, 64);
-                \Int32 Posit32::op_Explicit(Posit32).2.conditional34\ := to_signed(0, 32);
+                \Int32 Posit32::op_Explicit(Posit32).2.conditional43\ := to_signed(0, 32);
                 \Int32 Posit32::op_Explicit(Posit32).2.return.7\ := false;
             else 
                 case \Int32 Posit32::op_Explicit(Posit32).2._State\ is 
@@ -32765,20 +34458,20 @@ begin
                             -- 	byte mostSignificantOnePosition;
                             -- 	mostSignificantOnePosition = Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x));
                             -- 	uint num2;
-                            -- 	uint conditional32;
+                            -- 	uint conditional41;
                             -- 	if ((num - (long)(mostSignificantOnePosition) + 1L >= 0L)) {
-                            -- 		conditional32 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
+                            -- 		conditional41 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
                             -- 	} else {
-                            -- 		conditional32 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
+                            -- 		conditional41 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
                             -- 	}
-                            -- 	num2 = (conditional32);
-                            -- 	long conditional33;
+                            -- 	num2 = (conditional41);
+                            -- 	long conditional42;
                             -- 	if (Lombiq.Arithmetics.Posit32.IsPositive (x)) {
-                            -- 		conditional33 = num2;
+                            -- 		conditional42 = num2;
                             -- 	} else {
-                            -- 		conditional33 = (0L - (long)num2);
+                            -- 		conditional42 = (0L - (long)num2);
                             -- 	}
-                            -- 	return (int)(conditional33);
+                            -- 	return (int)(conditional42);
                             -- }
                             -- 
                             \Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.3\ := \Int32 Posit32::op_Explicit(Posit32).2.num\ + to_signed(1, 64);
@@ -32803,13 +34496,13 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).2._State_8\ => 
                         -- State after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).2._State_7\.
                         -- The following section was transformed from the .NET statement below:
-                        -- int conditional34;
+                        -- int conditional43;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if (Lombiq.Arithmetics.Posit32.IsPositive (x)) {
-                        -- 	conditional34 = 2147483647;
+                        -- 	conditional43 = 2147483647;
                         -- } else {
-                        -- 	conditional34 = -2147483648;
+                        -- 	conditional43 = -2147483648;
                         -- }
                         -- 
                         -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
@@ -32824,20 +34517,20 @@ begin
                         -- 	byte mostSignificantOnePosition;
                         -- 	mostSignificantOnePosition = Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x));
                         -- 	uint num2;
-                        -- 	uint conditional32;
+                        -- 	uint conditional41;
                         -- 	if ((num - (long)(mostSignificantOnePosition) + 1L >= 0L)) {
-                        -- 		conditional32 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- 		conditional41 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- 	} else {
-                        -- 		conditional32 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- 		conditional41 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- 	}
-                        -- 	num2 = (conditional32);
-                        -- 	long conditional33;
+                        -- 	num2 = (conditional41);
+                        -- 	long conditional42;
                         -- 	if (Lombiq.Arithmetics.Posit32.IsPositive (x)) {
-                        -- 		conditional33 = num2;
+                        -- 		conditional42 = num2;
                         -- 	} else {
-                        -- 		conditional33 = (0L - (long)num2);
+                        -- 		conditional42 = (0L - (long)num2);
                         -- 	}
-                        -- 	return (int)(conditional33);
+                        -- 	return (int)(conditional42);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -32872,13 +34565,13 @@ begin
                             -- uint num2;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- uint conditional32;
+                            -- uint conditional41;
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- if ((num - (long)(mostSignificantOnePosition) + 1L >= 0L)) {
-                            -- 	conditional32 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
+                            -- 	conditional41 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
                             -- } else {
-                            -- 	conditional32 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
+                            -- 	conditional41 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
                             -- }
                             -- 
                             \Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.5\ := \Int32 Posit32::op_Explicit(Posit32).2.num\ - signed(SmartResize((\Int32 Posit32::op_Explicit(Posit32).2.mostSignificantOnePosition\), 64));
@@ -32904,17 +34597,17 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).2._State_13\ => 
                         -- State after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).2._State_12\.
                         -- The following section was transformed from the .NET statement below:
-                        -- num2 = (conditional32);
+                        -- num2 = (conditional41);
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).2.num2\ := (\Int32 Posit32::op_Explicit(Posit32).2.conditional32\);
+                        \Int32 Posit32::op_Explicit(Posit32).2.num2\ := (\Int32 Posit32::op_Explicit(Posit32).2.conditional41\);
                         -- The following section was transformed from the .NET statement below:
-                        -- long conditional33;
+                        -- long conditional42;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if (Lombiq.Arithmetics.Posit32.IsPositive (x)) {
-                        -- 	conditional33 = num2;
+                        -- 	conditional42 = num2;
                         -- } else {
-                        -- 	conditional33 = (0L - (long)num2);
+                        -- 	conditional42 = (0L - (long)num2);
                         -- }
                         -- 
                         -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
@@ -32926,11 +34619,11 @@ begin
                         -- True branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).2._State_12\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional32 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- 	conditional41 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional32 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- conditional41 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::FractionWithHiddenBit()
                         \Int32 Posit32::op_Explicit(Posit32).2.Posit32::FractionWithHiddenBit().this.parameter.Out.0\ <= \Int32 Posit32::op_Explicit(Posit32).2.x\;
@@ -32950,7 +34643,7 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).2._State_16\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.10\ := shift_left(\Int32 Posit32::op_Explicit(Posit32).2.return.4\, to_integer(unsigned(SmartResize((\Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.9\), 5))));
-                        \Int32 Posit32::op_Explicit(Posit32).2.conditional32\ := (\Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.10\);
+                        \Int32 Posit32::op_Explicit(Posit32).2.conditional41\ := (\Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.10\);
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).2._State_12\.
                         if (\Int32 Posit32::op_Explicit(Posit32).2._State\ = \Int32 Posit32::op_Explicit(Posit32).2._State_16\) then 
                             \Int32 Posit32::op_Explicit(Posit32).2._State\ := \Int32 Posit32::op_Explicit(Posit32).2._State_13\;
@@ -32960,11 +34653,11 @@ begin
                         -- False branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).2._State_12\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional32 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- 	conditional41 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional32 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- conditional41 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::FractionWithHiddenBit()
                         \Int32 Posit32::op_Explicit(Posit32).2.Posit32::FractionWithHiddenBit().this.parameter.Out.0\ <= \Int32 Posit32::op_Explicit(Posit32).2.x\;
@@ -32989,7 +34682,7 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).2._State_20\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.13\ := shift_right(\Int32 Posit32::op_Explicit(Posit32).2.return.5\, to_integer(unsigned(SmartResize(\Int32 Posit32::op_Explicit(Posit32).2.unaryOperationResult.0\, 5) and "11111")));
-                        \Int32 Posit32::op_Explicit(Posit32).2.conditional32\ := (\Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.13\);
+                        \Int32 Posit32::op_Explicit(Posit32).2.conditional41\ := (\Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.13\);
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).2._State_12\.
                         if (\Int32 Posit32::op_Explicit(Posit32).2._State\ = \Int32 Posit32::op_Explicit(Posit32).2._State_20\) then 
                             \Int32 Posit32::op_Explicit(Posit32).2._State\ := \Int32 Posit32::op_Explicit(Posit32).2._State_13\;
@@ -33016,9 +34709,9 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).2._State_22\ => 
                         -- State after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).2._State_21\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return (int)(conditional33);
+                        -- return (int)(conditional42);
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).2.return\ <= SmartResize((\Int32 Posit32::op_Explicit(Posit32).2.conditional33\), 32);
+                        \Int32 Posit32::op_Explicit(Posit32).2.return\ <= SmartResize((\Int32 Posit32::op_Explicit(Posit32).2.conditional42\), 32);
                         \Int32 Posit32::op_Explicit(Posit32).2._State\ := \Int32 Posit32::op_Explicit(Posit32).2._State_1\;
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).2._State_7\.
                         if (\Int32 Posit32::op_Explicit(Posit32).2._State\ = \Int32 Posit32::op_Explicit(Posit32).2._State_22\) then 
@@ -33029,13 +34722,13 @@ begin
                         -- True branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).2._State_21\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional33 = num2;
+                        -- 	conditional42 = num2;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional33 = num2;
+                        -- conditional42 = num2;
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).2.conditional33\ := signed(SmartResize(\Int32 Posit32::op_Explicit(Posit32).2.num2\, 64));
+                        \Int32 Posit32::op_Explicit(Posit32).2.conditional42\ := signed(SmartResize(\Int32 Posit32::op_Explicit(Posit32).2.num2\, 64));
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).2._State_21\.
                         if (\Int32 Posit32::op_Explicit(Posit32).2._State\ = \Int32 Posit32::op_Explicit(Posit32).2._State_23\) then 
                             \Int32 Posit32::op_Explicit(Posit32).2._State\ := \Int32 Posit32::op_Explicit(Posit32).2._State_22\;
@@ -33045,14 +34738,14 @@ begin
                         -- False branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).2._State_21\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional33 = (0L - (long)num2);
+                        -- 	conditional42 = (0L - (long)num2);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional33 = (0L - (long)num2);
+                        -- conditional42 = (0L - (long)num2);
                         -- 
                         \Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.14\ := to_signed(0, 64) - signed(SmartResize(\Int32 Posit32::op_Explicit(Posit32).2.num2\, 64));
-                        \Int32 Posit32::op_Explicit(Posit32).2.conditional33\ := (\Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.14\);
+                        \Int32 Posit32::op_Explicit(Posit32).2.conditional42\ := (\Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.14\);
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).2._State_21\.
                         if (\Int32 Posit32::op_Explicit(Posit32).2._State\ = \Int32 Posit32::op_Explicit(Posit32).2._State_24\) then 
                             \Int32 Posit32::op_Explicit(Posit32).2._State\ := \Int32 Posit32::op_Explicit(Posit32).2._State_22\;
@@ -33079,22 +34772,22 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).2._State_26\ => 
                         -- State after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).2._State_25\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return conditional34;
+                        -- return conditional43;
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).2.return\ <= \Int32 Posit32::op_Explicit(Posit32).2.conditional34\;
+                        \Int32 Posit32::op_Explicit(Posit32).2.return\ <= \Int32 Posit32::op_Explicit(Posit32).2.conditional43\;
                         \Int32 Posit32::op_Explicit(Posit32).2._State\ := \Int32 Posit32::op_Explicit(Posit32).2._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Int32 Posit32::op_Explicit(Posit32).2._State_27\ => 
                         -- True branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).2._State_25\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional34 = 2147483647;
+                        -- 	conditional43 = 2147483647;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional34 = 2147483647;
+                        -- conditional43 = 2147483647;
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).2.conditional34\ := to_signed(2147483647, 32);
+                        \Int32 Posit32::op_Explicit(Posit32).2.conditional43\ := to_signed(2147483647, 32);
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).2._State_25\.
                         if (\Int32 Posit32::op_Explicit(Posit32).2._State\ = \Int32 Posit32::op_Explicit(Posit32).2._State_27\) then 
                             \Int32 Posit32::op_Explicit(Posit32).2._State\ := \Int32 Posit32::op_Explicit(Posit32).2._State_26\;
@@ -33104,13 +34797,13 @@ begin
                         -- False branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).2._State_25\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional34 = -2147483648;
+                        -- 	conditional43 = -2147483648;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional34 = -2147483648;
+                        -- conditional43 = -2147483648;
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).2.conditional34\ := to_signed(-2147483648, 32);
+                        \Int32 Posit32::op_Explicit(Posit32).2.conditional43\ := to_signed(-2147483648, 32);
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).2._State_25\.
                         if (\Int32 Posit32::op_Explicit(Posit32).2._State\ = \Int32 Posit32::op_Explicit(Posit32).2._State_28\) then 
                             \Int32 Posit32::op_Explicit(Posit32).2._State\ := \Int32 Posit32::op_Explicit(Posit32).2._State_26\;
@@ -33139,7 +34832,7 @@ begin
         Variable \Int32 Posit32::op_Explicit(Posit32).3.return.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Int32 Posit32::op_Explicit(Posit32).3.return.3\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Int32 Posit32::op_Explicit(Posit32).3.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Int32 Posit32::op_Explicit(Posit32).3.conditional32\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Int32 Posit32::op_Explicit(Posit32).3.conditional41\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.5\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.6\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.7\: boolean := false;
@@ -33152,10 +34845,10 @@ begin
         Variable \Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.12\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Int32 Posit32::op_Explicit(Posit32).3.unaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.13\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Int32 Posit32::op_Explicit(Posit32).3.conditional33\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Int32 Posit32::op_Explicit(Posit32).3.conditional42\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Int32 Posit32::op_Explicit(Posit32).3.return.6\: boolean := false;
         Variable \Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.14\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \Int32 Posit32::op_Explicit(Posit32).3.conditional34\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Int32 Posit32::op_Explicit(Posit32).3.conditional43\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Int32 Posit32::op_Explicit(Posit32).3.return.7\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
@@ -33182,7 +34875,7 @@ begin
                 \Int32 Posit32::op_Explicit(Posit32).3.return.2\ := to_unsigned(0, 32);
                 \Int32 Posit32::op_Explicit(Posit32).3.return.3\ := to_unsigned(0, 8);
                 \Int32 Posit32::op_Explicit(Posit32).3.num2\ := to_unsigned(0, 32);
-                \Int32 Posit32::op_Explicit(Posit32).3.conditional32\ := to_unsigned(0, 32);
+                \Int32 Posit32::op_Explicit(Posit32).3.conditional41\ := to_unsigned(0, 32);
                 \Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.5\ := to_signed(0, 64);
                 \Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.6\ := to_signed(0, 64);
                 \Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.7\ := false;
@@ -33195,10 +34888,10 @@ begin
                 \Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.12\ := to_signed(0, 32);
                 \Int32 Posit32::op_Explicit(Posit32).3.unaryOperationResult.0\ := to_signed(0, 32);
                 \Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.13\ := to_unsigned(0, 32);
-                \Int32 Posit32::op_Explicit(Posit32).3.conditional33\ := to_signed(0, 64);
+                \Int32 Posit32::op_Explicit(Posit32).3.conditional42\ := to_signed(0, 64);
                 \Int32 Posit32::op_Explicit(Posit32).3.return.6\ := false;
                 \Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.14\ := to_signed(0, 64);
-                \Int32 Posit32::op_Explicit(Posit32).3.conditional34\ := to_signed(0, 32);
+                \Int32 Posit32::op_Explicit(Posit32).3.conditional43\ := to_signed(0, 32);
                 \Int32 Posit32::op_Explicit(Posit32).3.return.7\ := false;
             else 
                 case \Int32 Posit32::op_Explicit(Posit32).3._State\ is 
@@ -33293,20 +34986,20 @@ begin
                             -- 	byte mostSignificantOnePosition;
                             -- 	mostSignificantOnePosition = Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x));
                             -- 	uint num2;
-                            -- 	uint conditional32;
+                            -- 	uint conditional41;
                             -- 	if ((num - (long)(mostSignificantOnePosition) + 1L >= 0L)) {
-                            -- 		conditional32 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
+                            -- 		conditional41 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
                             -- 	} else {
-                            -- 		conditional32 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
+                            -- 		conditional41 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
                             -- 	}
-                            -- 	num2 = (conditional32);
-                            -- 	long conditional33;
+                            -- 	num2 = (conditional41);
+                            -- 	long conditional42;
                             -- 	if (Lombiq.Arithmetics.Posit32.IsPositive (x)) {
-                            -- 		conditional33 = num2;
+                            -- 		conditional42 = num2;
                             -- 	} else {
-                            -- 		conditional33 = (0L - (long)num2);
+                            -- 		conditional42 = (0L - (long)num2);
                             -- 	}
-                            -- 	return (int)(conditional33);
+                            -- 	return (int)(conditional42);
                             -- }
                             -- 
                             \Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.3\ := \Int32 Posit32::op_Explicit(Posit32).3.num\ + to_signed(1, 64);
@@ -33331,13 +35024,13 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).3._State_8\ => 
                         -- State after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).3._State_7\.
                         -- The following section was transformed from the .NET statement below:
-                        -- int conditional34;
+                        -- int conditional43;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if (Lombiq.Arithmetics.Posit32.IsPositive (x)) {
-                        -- 	conditional34 = 2147483647;
+                        -- 	conditional43 = 2147483647;
                         -- } else {
-                        -- 	conditional34 = -2147483648;
+                        -- 	conditional43 = -2147483648;
                         -- }
                         -- 
                         -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
@@ -33352,20 +35045,20 @@ begin
                         -- 	byte mostSignificantOnePosition;
                         -- 	mostSignificantOnePosition = Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x));
                         -- 	uint num2;
-                        -- 	uint conditional32;
+                        -- 	uint conditional41;
                         -- 	if ((num - (long)(mostSignificantOnePosition) + 1L >= 0L)) {
-                        -- 		conditional32 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- 		conditional41 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- 	} else {
-                        -- 		conditional32 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- 		conditional41 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- 	}
-                        -- 	num2 = (conditional32);
-                        -- 	long conditional33;
+                        -- 	num2 = (conditional41);
+                        -- 	long conditional42;
                         -- 	if (Lombiq.Arithmetics.Posit32.IsPositive (x)) {
-                        -- 		conditional33 = num2;
+                        -- 		conditional42 = num2;
                         -- 	} else {
-                        -- 		conditional33 = (0L - (long)num2);
+                        -- 		conditional42 = (0L - (long)num2);
                         -- 	}
-                        -- 	return (int)(conditional33);
+                        -- 	return (int)(conditional42);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -33400,13 +35093,13 @@ begin
                             -- uint num2;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- uint conditional32;
+                            -- uint conditional41;
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- if ((num - (long)(mostSignificantOnePosition) + 1L >= 0L)) {
-                            -- 	conditional32 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
+                            -- 	conditional41 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
                             -- } else {
-                            -- 	conditional32 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
+                            -- 	conditional41 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
                             -- }
                             -- 
                             \Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.5\ := \Int32 Posit32::op_Explicit(Posit32).3.num\ - signed(SmartResize((\Int32 Posit32::op_Explicit(Posit32).3.mostSignificantOnePosition\), 64));
@@ -33432,17 +35125,17 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).3._State_13\ => 
                         -- State after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).3._State_12\.
                         -- The following section was transformed from the .NET statement below:
-                        -- num2 = (conditional32);
+                        -- num2 = (conditional41);
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).3.num2\ := (\Int32 Posit32::op_Explicit(Posit32).3.conditional32\);
+                        \Int32 Posit32::op_Explicit(Posit32).3.num2\ := (\Int32 Posit32::op_Explicit(Posit32).3.conditional41\);
                         -- The following section was transformed from the .NET statement below:
-                        -- long conditional33;
+                        -- long conditional42;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if (Lombiq.Arithmetics.Posit32.IsPositive (x)) {
-                        -- 	conditional33 = num2;
+                        -- 	conditional42 = num2;
                         -- } else {
-                        -- 	conditional33 = (0L - (long)num2);
+                        -- 	conditional42 = (0L - (long)num2);
                         -- }
                         -- 
                         -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
@@ -33454,11 +35147,11 @@ begin
                         -- True branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).3._State_12\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional32 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- 	conditional41 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional32 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- conditional41 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::FractionWithHiddenBit()
                         \Int32 Posit32::op_Explicit(Posit32).3.Posit32::FractionWithHiddenBit().this.parameter.Out.0\ <= \Int32 Posit32::op_Explicit(Posit32).3.x\;
@@ -33478,7 +35171,7 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).3._State_16\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.10\ := shift_left(\Int32 Posit32::op_Explicit(Posit32).3.return.4\, to_integer(unsigned(SmartResize((\Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.9\), 5))));
-                        \Int32 Posit32::op_Explicit(Posit32).3.conditional32\ := (\Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.10\);
+                        \Int32 Posit32::op_Explicit(Posit32).3.conditional41\ := (\Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.10\);
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).3._State_12\.
                         if (\Int32 Posit32::op_Explicit(Posit32).3._State\ = \Int32 Posit32::op_Explicit(Posit32).3._State_16\) then 
                             \Int32 Posit32::op_Explicit(Posit32).3._State\ := \Int32 Posit32::op_Explicit(Posit32).3._State_13\;
@@ -33488,11 +35181,11 @@ begin
                         -- False branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).3._State_12\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional32 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- 	conditional41 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional32 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- conditional41 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::FractionWithHiddenBit()
                         \Int32 Posit32::op_Explicit(Posit32).3.Posit32::FractionWithHiddenBit().this.parameter.Out.0\ <= \Int32 Posit32::op_Explicit(Posit32).3.x\;
@@ -33517,7 +35210,7 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).3._State_20\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.13\ := shift_right(\Int32 Posit32::op_Explicit(Posit32).3.return.5\, to_integer(unsigned(SmartResize(\Int32 Posit32::op_Explicit(Posit32).3.unaryOperationResult.0\, 5) and "11111")));
-                        \Int32 Posit32::op_Explicit(Posit32).3.conditional32\ := (\Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.13\);
+                        \Int32 Posit32::op_Explicit(Posit32).3.conditional41\ := (\Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.13\);
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).3._State_12\.
                         if (\Int32 Posit32::op_Explicit(Posit32).3._State\ = \Int32 Posit32::op_Explicit(Posit32).3._State_20\) then 
                             \Int32 Posit32::op_Explicit(Posit32).3._State\ := \Int32 Posit32::op_Explicit(Posit32).3._State_13\;
@@ -33544,9 +35237,9 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).3._State_22\ => 
                         -- State after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).3._State_21\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return (int)(conditional33);
+                        -- return (int)(conditional42);
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).3.return\ <= SmartResize((\Int32 Posit32::op_Explicit(Posit32).3.conditional33\), 32);
+                        \Int32 Posit32::op_Explicit(Posit32).3.return\ <= SmartResize((\Int32 Posit32::op_Explicit(Posit32).3.conditional42\), 32);
                         \Int32 Posit32::op_Explicit(Posit32).3._State\ := \Int32 Posit32::op_Explicit(Posit32).3._State_1\;
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).3._State_7\.
                         if (\Int32 Posit32::op_Explicit(Posit32).3._State\ = \Int32 Posit32::op_Explicit(Posit32).3._State_22\) then 
@@ -33557,13 +35250,13 @@ begin
                         -- True branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).3._State_21\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional33 = num2;
+                        -- 	conditional42 = num2;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional33 = num2;
+                        -- conditional42 = num2;
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).3.conditional33\ := signed(SmartResize(\Int32 Posit32::op_Explicit(Posit32).3.num2\, 64));
+                        \Int32 Posit32::op_Explicit(Posit32).3.conditional42\ := signed(SmartResize(\Int32 Posit32::op_Explicit(Posit32).3.num2\, 64));
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).3._State_21\.
                         if (\Int32 Posit32::op_Explicit(Posit32).3._State\ = \Int32 Posit32::op_Explicit(Posit32).3._State_23\) then 
                             \Int32 Posit32::op_Explicit(Posit32).3._State\ := \Int32 Posit32::op_Explicit(Posit32).3._State_22\;
@@ -33573,14 +35266,14 @@ begin
                         -- False branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).3._State_21\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional33 = (0L - (long)num2);
+                        -- 	conditional42 = (0L - (long)num2);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional33 = (0L - (long)num2);
+                        -- conditional42 = (0L - (long)num2);
                         -- 
                         \Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.14\ := to_signed(0, 64) - signed(SmartResize(\Int32 Posit32::op_Explicit(Posit32).3.num2\, 64));
-                        \Int32 Posit32::op_Explicit(Posit32).3.conditional33\ := (\Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.14\);
+                        \Int32 Posit32::op_Explicit(Posit32).3.conditional42\ := (\Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.14\);
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).3._State_21\.
                         if (\Int32 Posit32::op_Explicit(Posit32).3._State\ = \Int32 Posit32::op_Explicit(Posit32).3._State_24\) then 
                             \Int32 Posit32::op_Explicit(Posit32).3._State\ := \Int32 Posit32::op_Explicit(Posit32).3._State_22\;
@@ -33607,22 +35300,22 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).3._State_26\ => 
                         -- State after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).3._State_25\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return conditional34;
+                        -- return conditional43;
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).3.return\ <= \Int32 Posit32::op_Explicit(Posit32).3.conditional34\;
+                        \Int32 Posit32::op_Explicit(Posit32).3.return\ <= \Int32 Posit32::op_Explicit(Posit32).3.conditional43\;
                         \Int32 Posit32::op_Explicit(Posit32).3._State\ := \Int32 Posit32::op_Explicit(Posit32).3._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Int32 Posit32::op_Explicit(Posit32).3._State_27\ => 
                         -- True branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).3._State_25\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional34 = 2147483647;
+                        -- 	conditional43 = 2147483647;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional34 = 2147483647;
+                        -- conditional43 = 2147483647;
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).3.conditional34\ := to_signed(2147483647, 32);
+                        \Int32 Posit32::op_Explicit(Posit32).3.conditional43\ := to_signed(2147483647, 32);
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).3._State_25\.
                         if (\Int32 Posit32::op_Explicit(Posit32).3._State\ = \Int32 Posit32::op_Explicit(Posit32).3._State_27\) then 
                             \Int32 Posit32::op_Explicit(Posit32).3._State\ := \Int32 Posit32::op_Explicit(Posit32).3._State_26\;
@@ -33632,13 +35325,13 @@ begin
                         -- False branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).3._State_25\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional34 = -2147483648;
+                        -- 	conditional43 = -2147483648;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional34 = -2147483648;
+                        -- conditional43 = -2147483648;
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).3.conditional34\ := to_signed(-2147483648, 32);
+                        \Int32 Posit32::op_Explicit(Posit32).3.conditional43\ := to_signed(-2147483648, 32);
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).3._State_25\.
                         if (\Int32 Posit32::op_Explicit(Posit32).3._State\ = \Int32 Posit32::op_Explicit(Posit32).3._State_28\) then 
                             \Int32 Posit32::op_Explicit(Posit32).3._State\ := \Int32 Posit32::op_Explicit(Posit32).3._State_26\;
@@ -33649,1556 +35342,6 @@ begin
         end if;
     end process;
     -- System.Int32 Lombiq.Arithmetics.Posit32::op_Explicit(Lombiq.Arithmetics.Posit32).3 state machine end
-
-
-    -- System.UInt32 Lombiq.Arithmetics.Posit32::MultiplyE2Bits(System.UInt32,System.UInt32,System.Int32).0 state machine start
-    \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._StateMachine\: process (\Clock\) 
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\: \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._States\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_0\;
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.leftBits\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.rightBits\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.size\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.0\: boolean := false;
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.1\: boolean := false;
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.2\: boolean := false;
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.3\: boolean := false;
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.4\: boolean := false;
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.5\: boolean := false;
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num3\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional35\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.6\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.7\: boolean := false;
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.8\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.9\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num4\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional36\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.10\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.11\: boolean := false;
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.12\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.13\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.b\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num5\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.14\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.15\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.16\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num6\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional37\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.17\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.18\: boolean := false;
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.unaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.19\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.20\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.21\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.22\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num7\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.23\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.24\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.25\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.b2\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num8\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.26\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.27\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.28\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num9\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional38\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.29\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.30\: boolean := false;
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.unaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.31\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.32\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.33\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.34\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num10\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.35\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.36\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.37\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num11\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.38\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num12\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.39\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num13\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.40\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.41\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num14\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.42\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.43\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num15\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num16\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.44\: boolean := false;
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.45\: boolean := false;
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num17\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.46\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num18\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional39\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.47\: boolean := false;
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.48\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.49\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num19\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional40\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.50\: boolean := false;
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.51\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.52\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.53\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.54\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num20\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.55\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num21\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.56\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.57\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.58\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.59\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.60\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num22\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.61\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.62\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.63\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.64\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.flag\: boolean := false;
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.65\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.66\: boolean := false;
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.67\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.68\: boolean := false;
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.69\: boolean := false;
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional41\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional42\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.70\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.71\: boolean := false;
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.72\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.73\: boolean := false;
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.74\: boolean := false;
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.75\: boolean := false;
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.76\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.77\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional43\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.78\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.79\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.80\: boolean := false;
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.81\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.82\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    begin 
-        if (rising_edge(\Clock\)) then 
-            if (\Reset\ = '1') then 
-                -- Synchronous reset
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._Finished\ <= false;
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.return\ <= to_unsigned(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.PositHelper::LengthOfRunOfBits(UInt32,Byte).bits.parameter.Out.0\ <= to_unsigned(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.PositHelper::LengthOfRunOfBits(UInt32,Byte).startingPosition.parameter.Out.0\ <= to_unsigned(0, 8);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.PositHelper::LengthOfRunOfBits(UInt32,Byte)._Started.0\ <= false;
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_0\;
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.leftBits\ := to_unsigned(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.rightBits\ := to_unsigned(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.size\ := to_signed(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num\ := to_unsigned(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.0\ := false;
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.1\ := false;
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.2\ := false;
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.3\ := false;
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.4\ := false;
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.5\ := false;
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num2\ := to_unsigned(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num3\ := to_unsigned(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional35\ := to_unsigned(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.6\ := to_signed(0, 64);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.7\ := false;
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.8\ := to_signed(0, 64);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.9\ := to_unsigned(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num4\ := to_unsigned(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional36\ := to_unsigned(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.10\ := to_signed(0, 64);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.11\ := false;
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.12\ := to_signed(0, 64);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.13\ := to_unsigned(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.b\ := to_unsigned(0, 8);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.return.0\ := to_unsigned(0, 8);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num5\ := to_unsigned(0, 64);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.14\ := to_unsigned(0, 64);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.15\ := to_signed(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.16\ := to_unsigned(0, 64);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num6\ := to_signed(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional37\ := to_signed(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.17\ := to_signed(0, 64);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.18\ := false;
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.unaryOperationResult.0\ := to_signed(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.19\ := to_signed(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.20\ := to_signed(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.21\ := to_signed(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.22\ := to_signed(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num7\ := to_unsigned(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.23\ := to_unsigned(0, 64);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.24\ := to_signed(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.25\ := to_unsigned(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.b2\ := to_unsigned(0, 8);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.return.1\ := to_unsigned(0, 8);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num8\ := to_unsigned(0, 64);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.26\ := to_unsigned(0, 64);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.27\ := to_signed(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.28\ := to_unsigned(0, 64);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num9\ := to_signed(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional38\ := to_signed(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.29\ := to_signed(0, 64);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.30\ := false;
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.unaryOperationResult.1\ := to_signed(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.31\ := to_signed(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.32\ := to_signed(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.33\ := to_signed(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.34\ := to_signed(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num10\ := to_unsigned(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.35\ := to_unsigned(0, 64);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.36\ := to_signed(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.37\ := to_unsigned(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num11\ := to_unsigned(0, 64);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.38\ := to_unsigned(0, 64);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num12\ := to_signed(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.39\ := to_signed(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num13\ := to_unsigned(0, 64);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.40\ := to_signed(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.41\ := to_unsigned(0, 64);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num14\ := to_signed(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.42\ := to_signed(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.43\ := to_signed(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num15\ := to_signed(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num16\ := to_unsigned(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.44\ := false;
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.45\ := false;
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num17\ := to_signed(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.46\ := to_signed(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num18\ := to_signed(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional39\ := to_signed(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.47\ := false;
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.48\ := to_signed(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.49\ := to_signed(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num19\ := to_unsigned(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional40\ := to_unsigned(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.50\ := false;
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.51\ := to_signed(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.52\ := to_signed(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.53\ := to_signed(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.54\ := to_unsigned(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num20\ := to_signed(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.55\ := to_signed(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num21\ := to_unsigned(0, 64);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.56\ := to_signed(0, 64);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.57\ := to_unsigned(0, 64);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.58\ := to_unsigned(0, 64);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.59\ := to_unsigned(0, 64);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.60\ := to_unsigned(0, 64);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num22\ := to_unsigned(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.61\ := to_unsigned(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.62\ := to_signed(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.63\ := to_signed(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.64\ := to_unsigned(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.flag\ := false;
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.65\ := to_unsigned(0, 64);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.66\ := false;
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.67\ := to_unsigned(0, 64);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.68\ := false;
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.69\ := false;
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional41\ := to_unsigned(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional42\ := to_signed(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.70\ := to_signed(0, 64);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.71\ := false;
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.72\ := to_signed(0, 64);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.73\ := false;
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.74\ := false;
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.75\ := false;
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.76\ := to_unsigned(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.77\ := to_unsigned(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional43\ := to_unsigned(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.78\ := to_unsigned(0, 32);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.79\ := to_signed(0, 64);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.80\ := false;
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.81\ := to_signed(0, 64);
-                \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.82\ := to_unsigned(0, 32);
-            else 
-                case \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ is 
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_0\ => 
-                        -- Start state
-                        -- Waiting for the start signal.
-                        if (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._Started\ = true) then 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_2\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_1\ => 
-                        -- Final state
-                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
-                        if (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._Started\ = true) then 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._Finished\ <= true;
-                        else 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._Finished\ <= false;
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_0\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_2\ => 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.leftBits\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.leftBits.parameter.In\;
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.rightBits\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.rightBits.parameter.In\;
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.size\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.size.parameter.In\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = 2147483648u;
-                        -- 
-                        -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num\ := "10000000000000000000000000000000";
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (leftBits == 2147483648u || rightBits == 2147483648u) {
-                        -- 	return 2147483648u;
-                        -- }
-                        -- 
-                        -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.0\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.leftBits\ = "10000000000000000000000000000000";
-                        -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.1\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.rightBits\ = "10000000000000000000000000000000";
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.2\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.0\ or \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.1\;
-
-                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_4\ and ends in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_4\.
-                        --     * Execution after either branch will continue in the following state: \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_3\.
-
-                        if (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.2\) then 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_4\;
-                        else 
-                            -- There was no false branch, so going directly to the state after the if-else.
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_3\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6518
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_3\ => 
-                        -- State after the if-else which was started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_2\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- if ((long)(leftBits) == 0L || (long)(rightBits) == 0L) {
-                        -- 	return 0u;
-                        -- }
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.3\ := signed(SmartResize((\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.leftBits\), 64)) = to_signed(0, 64);
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.4\ := signed(SmartResize((\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.rightBits\), 64)) = to_signed(0, 64);
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.5\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.3\ or \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.4\;
-
-                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_6\ and ends in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_6\.
-                        --     * Execution after either branch will continue in the following state: \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_5\.
-
-                        if (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.5\) then 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_6\;
-                        else 
-                            -- There was no false branch, so going directly to the state after the if-else.
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_5\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6872
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_4\ => 
-                        -- True branch of the if-else started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_2\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	return 2147483648u;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- return 2147483648u;
-                        -- 
-                        -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.return\ <= unsigned("10000000000000000000000000000000");
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_1\;
-                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_2\.
-                        if (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ = \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_4\) then 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_3\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_5\ => 
-                        -- State after the if-else which was started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_3\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num2;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num2 = 4294967295u;
-                        -- 
-                        -- Since the integer literal 4294967295 was out of the VHDL integer range it was substituted with a binary literal (11111111111111111111111111111111).
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num2\ := "11111111111111111111111111111111";
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num3;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint conditional35;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (((long)((leftBits & 2147483648u)) == 0L)) {
-                        -- 	conditional35 = leftBits;
-                        -- } else {
-                        -- 	conditional35 = ((uint)((0L - (long)(leftBits)) & 4294967295L));
-                        -- }
-                        -- 
-                        -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.6\ := signed(SmartResize(\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.leftBits\ and "10000000000000000000000000000000", 64));
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.7\ := signed(SmartResize(((\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.6\)), 64)) = to_signed(0, 64);
-
-                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_8\ and ends in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_8\.
-                        --     * The false branch starts in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_9\ and ends in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_9\.
-                        --     * Execution after either branch will continue in the following state: \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_7\.
-
-                        if ((\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.7\)) then 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_8\;
-                        else 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_9\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.4203
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_6\ => 
-                        -- True branch of the if-else started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_3\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	return 0u;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- return 0u;
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.return\ <= to_unsigned(0, 32);
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_1\;
-                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_3\.
-                        if (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ = \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_6\) then 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_5\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_7\ => 
-                        -- State after the if-else which was started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_5\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- num3 = (conditional35);
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num3\ := (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional35\);
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num4;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint conditional36;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (((long)((rightBits & 2147483648u)) == 0L)) {
-                        -- 	conditional36 = rightBits;
-                        -- } else {
-                        -- 	conditional36 = ((uint)((0L - (long)(rightBits)) & 4294967295L));
-                        -- }
-                        -- 
-                        -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.10\ := signed(SmartResize(\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.rightBits\ and "10000000000000000000000000000000", 64));
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.11\ := signed(SmartResize(((\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.10\)), 64)) = to_signed(0, 64);
-
-                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_11\ and ends in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_11\.
-                        --     * The false branch starts in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_12\ and ends in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_12\.
-                        --     * Execution after either branch will continue in the following state: \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_10\.
-
-                        if ((\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.11\)) then 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_11\;
-                        else 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_12\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.4203
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_8\ => 
-                        -- True branch of the if-else started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_5\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional35 = leftBits;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional35 = leftBits;
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional35\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.leftBits\;
-                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_5\.
-                        if (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ = \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_8\) then 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_7\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_9\ => 
-                        -- False branch of the if-else started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_5\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional35 = ((uint)((0L - (long)(leftBits)) & 4294967295L));
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional35 = ((uint)((0L - (long)(leftBits)) & 4294967295L));
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.8\ := to_signed(0, 64) - signed(SmartResize((\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.leftBits\), 64));
-                        -- Since the integer literal 4294967295 was out of the VHDL integer range it was substituted with a binary literal (11111111111111111111111111111111).
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.9\ := SmartResize(unsigned((\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.8\) and "0000000000000000000000000000000011111111111111111111111111111111"), 32);
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional35\ := ((\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.9\));
-                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_5\.
-                        if (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ = \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_9\) then 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_7\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.5632
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_10\ => 
-                        -- State after the if-else which was started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_7\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- num4 = (conditional36);
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num4\ := (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional36\);
-                        -- The following section was transformed from the .NET statement below:
-                        -- byte b;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- b = PositHelper.LengthOfRunOfBits (num3, 31);
-                        -- 
-                        -- Starting state machine invocation for the following method: System.Byte Lombiq.Arithmetics.PositHelper::LengthOfRunOfBits(System.UInt32,System.Byte)
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.PositHelper::LengthOfRunOfBits(UInt32,Byte).bits.parameter.Out.0\ <= \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num3\;
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.PositHelper::LengthOfRunOfBits(UInt32,Byte).startingPosition.parameter.Out.0\ <= to_unsigned(31, 8);
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.PositHelper::LengthOfRunOfBits(UInt32,Byte)._Started.0\ <= true;
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_13\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_11\ => 
-                        -- True branch of the if-else started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_7\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional36 = rightBits;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional36 = rightBits;
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional36\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.rightBits\;
-                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_7\.
-                        if (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ = \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_11\) then 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_10\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_12\ => 
-                        -- False branch of the if-else started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_7\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional36 = ((uint)((0L - (long)(rightBits)) & 4294967295L));
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional36 = ((uint)((0L - (long)(rightBits)) & 4294967295L));
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.12\ := to_signed(0, 64) - signed(SmartResize((\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.rightBits\), 64));
-                        -- Since the integer literal 4294967295 was out of the VHDL integer range it was substituted with a binary literal (11111111111111111111111111111111).
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.13\ := SmartResize(unsigned((\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.12\) and "0000000000000000000000000000000011111111111111111111111111111111"), 32);
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional36\ := ((\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.13\));
-                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_7\.
-                        if (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ = \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_12\) then 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_10\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.5632
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_13\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Byte Lombiq.Arithmetics.PositHelper::LengthOfRunOfBits(System.UInt32,System.Byte)
-                        if (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.PositHelper::LengthOfRunOfBits(UInt32,Byte)._Started.0\ = \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.PositHelper::LengthOfRunOfBits(UInt32,Byte)._Finished.0\) then 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.PositHelper::LengthOfRunOfBits(UInt32,Byte)._Started.0\ <= false;
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.return.0\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.PositHelper::LengthOfRunOfBits(UInt32,Byte).return.0\;
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.b\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.return.0\;
-                            -- The following section was transformed from the .NET statement below:
-                            -- ulong num5;
-                            -- 
-                            -- The following section was transformed from the .NET statement below:
-                            -- num5 = (ulong)num3 << 33 << (int)(b) + 1;
-                            -- 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.14\ := SmartResize(shift_left(SmartResize(\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num3\, 64), to_integer(unsigned(SmartResize(to_signed(33, 32), 6)))), 64);
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.15\ := signed(SmartResize((\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.b\), 32)) + to_signed(1, 32);
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_14\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.4484
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_14\ => 
-                        -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.16\ := SmartResize(shift_left(\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.14\, to_integer(unsigned(SmartResize(\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.15\, 6)))), 64);
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num5\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.16\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- int num6;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- int conditional37;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (((long)(num3 >> 30) == 0L)) {
-                        -- 	conditional37 = (-(int)(b));
-                        -- } else {
-                        -- 	conditional37 = ((int)((int)(b) - 1));
-                        -- }
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.17\ := signed(SmartResize(shift_right(\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num3\, to_integer(unsigned(SmartResize(to_signed(30, 32), 5) and "11111"))), 64));
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_15\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9878
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_15\ => 
-                        -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.18\ := (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.17\) = to_signed(0, 64);
-
-                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_17\ and ends in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_17\.
-                        --     * The false branch starts in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_18\ and ends in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_18\.
-                        --     * Execution after either branch will continue in the following state: \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_16\.
-
-                        if ((\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.18\)) then 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_17\;
-                        else 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_18\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2817
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_16\ => 
-                        -- State after the if-else which was started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_15\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- num6 = (conditional37) * 4 + (int)(num5 >> 62);
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.20\ := SmartResize((\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional37\) * to_signed(4, 32), 32);
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.21\ := signed(SmartResize(shift_right(\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num5\, to_integer(unsigned(SmartResize(to_signed(62, 32), 6) and "111111"))), 32));
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_19\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7662
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_17\ => 
-                        -- True branch of the if-else started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_15\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional37 = (-(int)(b));
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional37 = (-(int)(b));
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.unaryOperationResult.0\ := -signed(SmartResize((\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.b\), 32));
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional37\ := (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.unaryOperationResult.0\);
-                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_15\.
-                        if (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ = \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_17\) then 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_16\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3119
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_18\ => 
-                        -- False branch of the if-else started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_15\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional37 = ((int)((int)(b) - 1));
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional37 = ((int)((int)(b) - 1));
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.19\ := signed(SmartResize((\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.b\), 32)) - to_signed(1, 32);
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional37\ := ((\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.19\));
-                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_15\.
-                        if (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ = \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_18\) then 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_16\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_19\ => 
-                        -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.22\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.20\ + (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.21\);
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num6\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.22\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num7;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num7 = 0x80000000u | (uint)(int)(num5 << 2 >> 33);
-                        -- 
-                        -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.23\ := SmartResize(shift_left(\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num5\, to_integer(unsigned(SmartResize(to_signed(2, 32), 6)))), 64);
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.24\ := signed(SmartResize(shift_right(\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.23\, to_integer(unsigned(SmartResize(to_signed(33, 32), 6) and "111111"))), 32));
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.25\ := "10000000000000000000000000000000" or unsigned((\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.24\));
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num7\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.25\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- byte b2;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- b2 = PositHelper.LengthOfRunOfBits (num4, 31);
-                        -- 
-                        -- Starting state machine invocation for the following method: System.Byte Lombiq.Arithmetics.PositHelper::LengthOfRunOfBits(System.UInt32,System.Byte)
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.PositHelper::LengthOfRunOfBits(UInt32,Byte).bits.parameter.Out.0\ <= \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num4\;
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.PositHelper::LengthOfRunOfBits(UInt32,Byte).startingPosition.parameter.Out.0\ <= to_unsigned(31, 8);
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.PositHelper::LengthOfRunOfBits(UInt32,Byte)._Started.0\ <= true;
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_20\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9503
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_20\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Byte Lombiq.Arithmetics.PositHelper::LengthOfRunOfBits(System.UInt32,System.Byte)
-                        if (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.PositHelper::LengthOfRunOfBits(UInt32,Byte)._Started.0\ = \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.PositHelper::LengthOfRunOfBits(UInt32,Byte)._Finished.0\) then 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.PositHelper::LengthOfRunOfBits(UInt32,Byte)._Started.0\ <= false;
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.return.1\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.PositHelper::LengthOfRunOfBits(UInt32,Byte).return.0\;
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.b2\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.return.1\;
-                            -- The following section was transformed from the .NET statement below:
-                            -- ulong num8;
-                            -- 
-                            -- The following section was transformed from the .NET statement below:
-                            -- num8 = (ulong)num4 << 33 << (int)(b2) + 1;
-                            -- 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.26\ := SmartResize(shift_left(SmartResize(\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num4\, 64), to_integer(unsigned(SmartResize(to_signed(33, 32), 6)))), 64);
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.27\ := signed(SmartResize((\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.b2\), 32)) + to_signed(1, 32);
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_21\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.4484
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_21\ => 
-                        -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.28\ := SmartResize(shift_left(\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.26\, to_integer(unsigned(SmartResize(\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.27\, 6)))), 64);
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num8\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.28\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- int num9;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- int conditional38;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (((long)(num4 >> 30) == 0L)) {
-                        -- 	conditional38 = (-(int)(b2));
-                        -- } else {
-                        -- 	conditional38 = ((int)((int)(b2) - 1));
-                        -- }
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.29\ := signed(SmartResize(shift_right(\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num4\, to_integer(unsigned(SmartResize(to_signed(30, 32), 5) and "11111"))), 64));
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_22\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9878
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_22\ => 
-                        -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.30\ := (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.29\) = to_signed(0, 64);
-
-                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_24\ and ends in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_24\.
-                        --     * The false branch starts in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_25\ and ends in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_25\.
-                        --     * Execution after either branch will continue in the following state: \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_23\.
-
-                        if ((\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.30\)) then 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_24\;
-                        else 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_25\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2817
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_23\ => 
-                        -- State after the if-else which was started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_22\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- num9 = (conditional38) * 4 + (int)(num8 >> 62);
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.32\ := SmartResize((\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional38\) * to_signed(4, 32), 32);
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.33\ := signed(SmartResize(shift_right(\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num8\, to_integer(unsigned(SmartResize(to_signed(62, 32), 6) and "111111"))), 32));
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_26\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7662
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_24\ => 
-                        -- True branch of the if-else started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_22\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional38 = (-(int)(b2));
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional38 = (-(int)(b2));
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.unaryOperationResult.1\ := -signed(SmartResize((\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.b2\), 32));
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional38\ := (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.unaryOperationResult.1\);
-                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_22\.
-                        if (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ = \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_24\) then 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_23\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3119
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_25\ => 
-                        -- False branch of the if-else started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_22\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional38 = ((int)((int)(b2) - 1));
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional38 = ((int)((int)(b2) - 1));
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.31\ := signed(SmartResize((\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.b2\), 32)) - to_signed(1, 32);
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional38\ := ((\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.31\));
-                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_22\.
-                        if (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ = \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_25\) then 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_23\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_26\ => 
-                        -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.34\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.32\ + (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.33\);
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num9\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.34\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num10;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num10 = 0x80000000u | (uint)(int)(num8 << 2 >> 33);
-                        -- 
-                        -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.35\ := SmartResize(shift_left(\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num8\, to_integer(unsigned(SmartResize(to_signed(2, 32), 6)))), 64);
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.36\ := signed(SmartResize(shift_right(\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.35\, to_integer(unsigned(SmartResize(to_signed(33, 32), 6) and "111111"))), 32));
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.37\ := "10000000000000000000000000000000" or unsigned((\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.36\));
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num10\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.37\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- ulong num11;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num11 = (ulong)num7 * (ulong)num10;
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_27\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9503
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_27\ => 
-                        -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.38\ := SmartResize(SmartResize(\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num7\, 64) * SmartResize(\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num10\, 64), 64);
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num11\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.38\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- int num12;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num12 = (int)(num11 >> 63);
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_28\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7638
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_28\ => 
-                        -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.39\ := signed(SmartResize(shift_right(\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num11\, to_integer(unsigned(SmartResize(to_signed(63, 32), 6) and "111111"))), 32));
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num12\ := (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.39\);
-                        -- The following section was transformed from the .NET statement below:
-                        -- ulong num13;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num13 = num11 << 1 - num12;
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.40\ := to_signed(1, 32) - \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num12\;
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_29\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9893
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_29\ => 
-                        -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.41\ := SmartResize(shift_left(\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num11\, to_integer(unsigned(SmartResize(\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.40\, 6)))), 64);
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num13\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.41\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- int num14;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num14 = num6 + num9 + num12;
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.42\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num6\ + \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num9\;
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_30\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8863
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_30\ => 
-                        -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.43\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.42\ + \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num12\;
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num14\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.43\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- int num15;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num15 = 120;
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num15\ := to_signed(120, 32);
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num16;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (num14 >= 120) {
-                        -- 	num16 = 2147483647u;
-                        -- } else if (num14 < -120) {
-                        -- 	num16 = 1u;
-                        -- } else {
-                        -- 	int num17;
-                        -- 	num17 = num14 >> 2;
-                        -- 	int num18;
-                        -- 	int conditional39;
-                        -- 	if ((num17 >= 0)) {
-                        -- 		conditional39 = (num17 + 2);
-                        -- 	} else {
-                        -- 		conditional39 = (1 - num17);
-                        -- 	}
-                        -- 	num18 = (conditional39);
-                        -- 	uint num19;
-                        -- 	uint conditional40;
-                        -- 	if ((num17 < 0)) {
-                        -- 		conditional40 = 1u;
-                        -- 	} else {
-                        -- 		conditional40 = ((uint)((1 << num17 + 1) - 1 << 1));
-                        -- 	}
-                        -- 	num19 = (conditional40);
-                        -- 	int num20;
-                        -- 	num20 = 32 - num18;
-                        -- 	ulong num21;
-                        -- 	num21 = (ulong)((long)(num14 & 3) << 62) | (num13 << 1 >> 2);
-                        -- 	uint num22;
-                        -- 	num22 = (num19 << num20) | (uint)(int)(num21 >> 64 - num20);
-                        -- 	bool flag;
-                        -- 	flag = num21 << num20 != 0uL || (num13 & 1uL) != 0uL;
-                        -- 	uint conditional41;
-                        -- 	conditional41 = 1u;
-                        -- 	int conditional42;
-                        -- 	if (((long)((num22 & 1u)) != 0L && (flag || (long)((num22 & 2u)) != 0L))) {
-                        -- 		conditional42 = 1;
-                        -- 	} else {
-                        -- 		conditional42 = 0;
-                        -- 	}
-                        -- 	num16 = (num22 >> 1) + (uint)(conditional42);
-                        -- }
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.44\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num14\ >= to_signed(120, 32);
-
-                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_32\ and ends in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_32\.
-                        --     * The false branch starts in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_33\ and ends in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_34\.
-                        --     * Execution after either branch will continue in the following state: \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_31\.
-
-                        if (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.44\) then 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_32\;
-                        else 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_33\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6016
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_31\ => 
-                        -- State after the if-else which was started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_30\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint conditional43;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (((long)(((leftBits ^ rightBits) & 2147483648u)) == 0L)) {
-                        -- 	conditional43 = num16;
-                        -- } else {
-                        -- 	conditional43 = ((uint)((0L - (long)(num16)) & 4294967295L));
-                        -- }
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.78\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.leftBits\ xor \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.rightBits\;
-                        -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.79\ := signed(SmartResize((\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.78\) and "10000000000000000000000000000000", 64));
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.80\ := signed(SmartResize(((\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.79\)), 64)) = to_signed(0, 64);
-
-                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_54\ and ends in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_54\.
-                        --     * The false branch starts in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_55\ and ends in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_55\.
-                        --     * Execution after either branch will continue in the following state: \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_53\.
-
-                        if ((\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.80\)) then 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_54\;
-                        else 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_55\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.5589
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_32\ => 
-                        -- True branch of the if-else started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_30\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	num16 = 2147483647u;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num16 = 2147483647u;
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num16\ := to_unsigned(2147483647, 32);
-                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_30\.
-                        if (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ = \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_32\) then 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_31\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_33\ => 
-                        -- False branch of the if-else started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_30\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (num14 < -120) {
-                        -- 	num16 = 1u;
-                        -- } else {
-                        -- 	int num17;
-                        -- 	num17 = num14 >> 2;
-                        -- 	int num18;
-                        -- 	int conditional39;
-                        -- 	if ((num17 >= 0)) {
-                        -- 		conditional39 = (num17 + 2);
-                        -- 	} else {
-                        -- 		conditional39 = (1 - num17);
-                        -- 	}
-                        -- 	num18 = (conditional39);
-                        -- 	uint num19;
-                        -- 	uint conditional40;
-                        -- 	if ((num17 < 0)) {
-                        -- 		conditional40 = 1u;
-                        -- 	} else {
-                        -- 		conditional40 = ((uint)((1 << num17 + 1) - 1 << 1));
-                        -- 	}
-                        -- 	num19 = (conditional40);
-                        -- 	int num20;
-                        -- 	num20 = 32 - num18;
-                        -- 	ulong num21;
-                        -- 	num21 = (ulong)((long)(num14 & 3) << 62) | (num13 << 1 >> 2);
-                        -- 	uint num22;
-                        -- 	num22 = (num19 << num20) | (uint)(int)(num21 >> 64 - num20);
-                        -- 	bool flag;
-                        -- 	flag = num21 << num20 != 0uL || (num13 & 1uL) != 0uL;
-                        -- 	uint conditional41;
-                        -- 	conditional41 = 1u;
-                        -- 	int conditional42;
-                        -- 	if (((long)((num22 & 1u)) != 0L && (flag || (long)((num22 & 2u)) != 0L))) {
-                        -- 		conditional42 = 1;
-                        -- 	} else {
-                        -- 		conditional42 = 0;
-                        -- 	}
-                        -- 	num16 = (num22 >> 1) + (uint)(conditional42);
-                        -- }
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.45\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num14\ < to_signed(-120, 32);
-
-                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_35\ and ends in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_35\.
-                        --     * The false branch starts in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_36\ and ends in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_50\.
-                        --     * Execution after either branch will continue in the following state: \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_34\.
-
-                        if (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.45\) then 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_35\;
-                        else 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_36\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2753
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_34\ => 
-                        -- State after the if-else which was started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_33\.
-                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_30\.
-                        if (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ = \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_34\) then 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_31\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_35\ => 
-                        -- True branch of the if-else started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_33\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	num16 = 1u;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num16 = 1u;
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num16\ := to_unsigned(1, 32);
-                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_33\.
-                        if (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ = \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_35\) then 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_34\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_36\ => 
-                        -- False branch of the if-else started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_33\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	int num17;
-                        -- 	num17 = num14 >> 2;
-                        -- 	int num18;
-                        -- 	int conditional39;
-                        -- 	if ((num17 >= 0)) {
-                        -- 		conditional39 = (num17 + 2);
-                        -- 	} else {
-                        -- 		conditional39 = (1 - num17);
-                        -- 	}
-                        -- 	num18 = (conditional39);
-                        -- 	uint num19;
-                        -- 	uint conditional40;
-                        -- 	if ((num17 < 0)) {
-                        -- 		conditional40 = 1u;
-                        -- 	} else {
-                        -- 		conditional40 = ((uint)((1 << num17 + 1) - 1 << 1));
-                        -- 	}
-                        -- 	num19 = (conditional40);
-                        -- 	int num20;
-                        -- 	num20 = 32 - num18;
-                        -- 	ulong num21;
-                        -- 	num21 = (ulong)((long)(num14 & 3) << 62) | (num13 << 1 >> 2);
-                        -- 	uint num22;
-                        -- 	num22 = (num19 << num20) | (uint)(int)(num21 >> 64 - num20);
-                        -- 	bool flag;
-                        -- 	flag = num21 << num20 != 0uL || (num13 & 1uL) != 0uL;
-                        -- 	uint conditional41;
-                        -- 	conditional41 = 1u;
-                        -- 	int conditional42;
-                        -- 	if (((long)((num22 & 1u)) != 0L && (flag || (long)((num22 & 2u)) != 0L))) {
-                        -- 		conditional42 = 1;
-                        -- 	} else {
-                        -- 		conditional42 = 0;
-                        -- 	}
-                        -- 	num16 = (num22 >> 1) + (uint)(conditional42);
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- int num17;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num17 = num14 >> 2;
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.46\ := shift_right(\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num14\, to_integer(unsigned(SmartResize(to_signed(2, 32), 5) and "11111")));
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num17\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.46\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- int num18;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- int conditional39;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- if ((num17 >= 0)) {
-                        -- 	conditional39 = (num17 + 2);
-                        -- } else {
-                        -- 	conditional39 = (1 - num17);
-                        -- }
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.47\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num17\ >= to_signed(0, 32);
-
-                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_38\ and ends in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_38\.
-                        --     * The false branch starts in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_39\ and ends in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_39\.
-                        --     * Execution after either branch will continue in the following state: \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_37\.
-
-                        if ((\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.47\)) then 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_38\;
-                        else 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_39\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.5368
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_37\ => 
-                        -- State after the if-else which was started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_36\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- num18 = (conditional39);
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num18\ := (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional39\);
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num19;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint conditional40;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- if ((num17 < 0)) {
-                        -- 	conditional40 = 1u;
-                        -- } else {
-                        -- 	conditional40 = ((uint)((1 << num17 + 1) - 1 << 1));
-                        -- }
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.50\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num17\ < to_signed(0, 32);
-
-                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_41\ and ends in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_41\.
-                        --     * The false branch starts in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_42\ and ends in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_43\.
-                        --     * Execution after either branch will continue in the following state: \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_40\.
-
-                        if ((\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.50\)) then 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_41\;
-                        else 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_42\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2753
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_38\ => 
-                        -- True branch of the if-else started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_36\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional39 = (num17 + 2);
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional39 = (num17 + 2);
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.48\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num17\ + to_signed(2, 32);
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional39\ := (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.48\);
-                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_36\.
-                        if (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ = \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_38\) then 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_37\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_39\ => 
-                        -- False branch of the if-else started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_36\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional39 = (1 - num17);
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional39 = (1 - num17);
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.49\ := to_signed(1, 32) - \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num17\;
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional39\ := (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.49\);
-                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_36\.
-                        if (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ = \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_39\) then 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_37\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_40\ => 
-                        -- State after the if-else which was started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_37\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- num19 = (conditional40);
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num19\ := (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional40\);
-                        -- The following section was transformed from the .NET statement below:
-                        -- int num20;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num20 = 32 - num18;
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.55\ := to_signed(32, 32) - \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num18\;
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num20\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.55\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- ulong num21;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num21 = (ulong)((long)(num14 & 3) << 62) | (num13 << 1 >> 2);
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.56\ := SmartResize(\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num14\ and to_signed(3, 32), 64);
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.57\ := SmartResize(unsigned(shift_left((\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.56\), to_integer(unsigned(SmartResize(to_signed(62, 32), 6))))), 64);
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.58\ := SmartResize(shift_left(\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num13\, to_integer(unsigned(SmartResize(to_signed(1, 32), 6)))), 64);
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.59\ := SmartResize(shift_right(\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.58\, to_integer(unsigned(SmartResize(to_signed(2, 32), 6) and "111111"))), 64);
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_44\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9996
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_41\ => 
-                        -- True branch of the if-else started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_37\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional40 = 1u;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional40 = 1u;
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional40\ := to_unsigned(1, 32);
-                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_37\.
-                        if (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ = \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_41\) then 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_40\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_42\ => 
-                        -- False branch of the if-else started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_37\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional40 = ((uint)((1 << num17 + 1) - 1 << 1));
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional40 = ((uint)((1 << num17 + 1) - 1 << 1));
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.51\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num17\ + to_signed(1, 32);
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.52\ := shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.51\, 5))));
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_43\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8507
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_43\ => 
-                        -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.53\ := (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.52\) - to_signed(1, 32);
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.54\ := unsigned(shift_left(\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.53\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5)))));
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional40\ := ((\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.54\));
-                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_37\.
-                        if (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ = \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_43\) then 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_40\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.4484
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_44\ => 
-                        -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.60\ := (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.57\) or (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.59\);
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num21\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.60\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num22;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num22 = (num19 << num20) | (uint)(int)(num21 >> 64 - num20);
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.61\ := shift_left(\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num19\, to_integer(unsigned(SmartResize(unsigned(\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num20\), 5))));
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_45\;
-                        -- Clock cycles needed to complete this state (approximation): 0.6978
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_45\ => 
-                        -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.62\ := to_signed(64, 32) - \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num20\;
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_46\;
-                        -- Clock cycles needed to complete this state (approximation): 0.3263
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_46\ => 
-                        -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.63\ := signed(SmartResize(shift_right(\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num21\, to_integer(unsigned(SmartResize(\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.62\, 6) and "111111"))), 32));
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.64\ := (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.61\) or unsigned((\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.63\));
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num22\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.64\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool flag;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- flag = num21 << num20 != 0uL || (num13 & 1uL) != 0uL;
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_47\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8797
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_47\ => 
-                        -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.65\ := SmartResize(shift_left(\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num21\, to_integer(unsigned(SmartResize(ToUnsignedAndExpand(\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num20\, 64), 6)))), 64);
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.66\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.65\ /= to_unsigned(0, 64);
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_48\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8417
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_48\ => 
-                        -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.67\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num13\ and to_unsigned(1, 64);
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.68\ := (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.67\) /= to_unsigned(0, 64);
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.69\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.66\ or \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.68\;
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.flag\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.69\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint conditional41;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional41 = 1u;
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional41\ := to_unsigned(1, 32);
-                        -- The following section was transformed from the .NET statement below:
-                        -- int conditional42;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (((long)((num22 & 1u)) != 0L && (flag || (long)((num22 & 2u)) != 0L))) {
-                        -- 	conditional42 = 1;
-                        -- } else {
-                        -- 	conditional42 = 0;
-                        -- }
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.70\ := signed(SmartResize(\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num22\ and to_unsigned(1, 32), 64));
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.71\ := signed(SmartResize(((\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.70\)), 64)) /= to_signed(0, 64);
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_49\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9992
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_49\ => 
-                        -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.72\ := signed(SmartResize(\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num22\ and to_unsigned(2, 32), 64));
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.73\ := signed(SmartResize(((\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.72\)), 64)) /= to_signed(0, 64);
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.74\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.flag\ or \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.73\;
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.75\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.71\ and (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.74\);
-
-                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_51\ and ends in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_51\.
-                        --     * The false branch starts in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_52\ and ends in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_52\.
-                        --     * Execution after either branch will continue in the following state: \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_50\.
-
-                        if ((\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.75\)) then 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_51\;
-                        else 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_52\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6679
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_50\ => 
-                        -- State after the if-else which was started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_49\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- num16 = (num22 >> 1) + (uint)(conditional42);
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.76\ := shift_right(\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num22\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5) and "11111")));
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.77\ := (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.76\) + unsigned((\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional42\));
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num16\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.77\;
-                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_33\.
-                        if (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ = \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_50\) then 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_34\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.5887
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_51\ => 
-                        -- True branch of the if-else started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_49\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional42 = 1;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional42 = 1;
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional42\ := to_signed(1, 32);
-                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_49\.
-                        if (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ = \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_51\) then 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_50\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_52\ => 
-                        -- False branch of the if-else started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_49\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional42 = 0;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional42 = 0;
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional42\ := to_signed(0, 32);
-                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_49\.
-                        if (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ = \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_52\) then 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_50\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_53\ => 
-                        -- State after the if-else which was started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_31\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- return conditional43;
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.return\ <= \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional43\;
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_54\ => 
-                        -- True branch of the if-else started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_31\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional43 = num16;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional43 = num16;
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional43\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num16\;
-                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_31\.
-                        if (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ = \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_54\) then 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_53\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_55\ => 
-                        -- False branch of the if-else started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_31\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional43 = ((uint)((0L - (long)(num16)) & 4294967295L));
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional43 = ((uint)((0L - (long)(num16)) & 4294967295L));
-                        -- 
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.81\ := to_signed(0, 64) - signed(SmartResize((\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.num16\), 64));
-                        -- Since the integer literal 4294967295 was out of the VHDL integer range it was substituted with a binary literal (11111111111111111111111111111111).
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.82\ := SmartResize(unsigned((\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.81\) and "0000000000000000000000000000000011111111111111111111111111111111"), 32);
-                        \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.conditional43\ := ((\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.binaryOperationResult.82\));
-                        -- Going to the state after the if-else which was started in state \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_31\.
-                        if (\Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ = \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_55\) then 
-                            \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State\ := \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._State_53\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.5632
-                end case;
-            end if;
-        end if;
-    end process;
-    -- System.UInt32 Lombiq.Arithmetics.Posit32::MultiplyE2Bits(System.UInt32,System.UInt32,System.Int32).0 state machine end
-
-
-    -- System.Byte Lombiq.Arithmetics.PositHelper::LengthOfRunOfBits(System.UInt32,System.Byte).0 state machine start
-    \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._StateMachine\: process (\Clock\) 
-        Variable \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._State\: \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._States\ := \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._State_0\;
-        Variable \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.bits\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.startingPosition\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.b\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.num2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.4\: boolean := false;
-        Variable \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.6\: boolean := false;
-        Variable \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.7\: boolean := false;
-        Variable \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.8\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.9\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.10\: signed(31 downto 0) := to_signed(0, 32);
-    begin 
-        if (rising_edge(\Clock\)) then 
-            if (\Reset\ = '1') then 
-                -- Synchronous reset
-                \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._Finished\ <= false;
-                \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.return\ <= to_unsigned(0, 8);
-                \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._State\ := \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._State_0\;
-                \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.bits\ := to_unsigned(0, 32);
-                \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.startingPosition\ := to_unsigned(0, 8);
-                \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.b\ := to_unsigned(0, 8);
-                \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.0\ := to_unsigned(0, 32);
-                \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.num\ := to_unsigned(0, 32);
-                \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.1\ := to_unsigned(0, 32);
-                \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.2\ := to_unsigned(0, 32);
-                \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.3\ := to_unsigned(0, 32);
-                \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.num2\ := to_signed(0, 32);
-                \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.4\ := false;
-                \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.5\ := to_unsigned(0, 32);
-                \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.6\ := false;
-                \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.7\ := false;
-                \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.8\ := to_unsigned(0, 32);
-                \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.9\ := to_unsigned(0, 8);
-                \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.10\ := to_signed(0, 32);
-            else 
-                case \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._State\ is 
-                    when \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._State_0\ => 
-                        -- Start state
-                        -- Waiting for the start signal.
-                        if (\PositHelper::LengthOfRunOfBits(UInt32,Byte).0._Started\ = true) then 
-                            \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._State\ := \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._State_2\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._State_1\ => 
-                        -- Final state
-                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
-                        if (\PositHelper::LengthOfRunOfBits(UInt32,Byte).0._Started\ = true) then 
-                            \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._Finished\ <= true;
-                        else 
-                            \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._Finished\ <= false;
-                            \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._State\ := \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._State_0\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._State_2\ => 
-                        \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.bits\ := \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.bits.parameter.In\;
-                        \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.startingPosition\ := \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.startingPosition.parameter.In\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- byte b;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- b = 1;
-                        -- 
-                        \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.b\ := SmartResize(unsigned(to_signed(1, 32)), 8);
-                        -- The following section was transformed from the .NET statement below:
-                        -- bits = bits << 1;
-                        -- 
-                        \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.0\ := shift_left(\PositHelper::LengthOfRunOfBits(UInt32,Byte).0.bits\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5))));
-                        \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.bits\ := \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = (bits >> 31) & 1u;
-                        -- 
-                        \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.1\ := shift_right(\PositHelper::LengthOfRunOfBits(UInt32,Byte).0.bits\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111")));
-                        \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.2\ := (\PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.1\) and to_unsigned(1, 32);
-                        \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.num\ := \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.2\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- bits = bits << 1;
-                        -- 
-                        \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.3\ := shift_left(\PositHelper::LengthOfRunOfBits(UInt32,Byte).0.bits\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5))));
-                        \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.bits\ := \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.3\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- int num2;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num2 = 0;
-                        -- 
-                        \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.num2\ := to_signed(0, 32);
-                        -- The following section was transformed from the .NET statement below:
-                        -- while ((int)(num2) < (int)(startingPosition) && bits >> 31 == num) {
-                        -- 	bits = bits << 1;
-                        -- 	b = (byte)((int)(b) + 1);
-                        -- 	num2 = num2 + 1;
-                        -- }
-                        -- 
-                        -- Starting a while loop.
-                        \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._State\ := \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8332
-                    when \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._State_3\ => 
-                        -- Repeated state of the while loop which was started in state \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._State_2\.
-                        -- The while loop's condition:
-                        \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.4\ := (\PositHelper::LengthOfRunOfBits(UInt32,Byte).0.num2\) < signed(SmartResize((\PositHelper::LengthOfRunOfBits(UInt32,Byte).0.startingPosition\), 32));
-                        \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.5\ := shift_right(\PositHelper::LengthOfRunOfBits(UInt32,Byte).0.bits\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111")));
-                        \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.6\ := \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.5\ = \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.num\;
-                        \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._State\ := \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._State_5\;
-                        -- Clock cycles needed to complete this state (approximation): 0.9897
-                    when \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._State_4\ => 
-                        -- State after the while loop which was started in state \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._State_2\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- return b;
-                        -- 
-                        \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.return\ <= \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.b\;
-                        \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._State\ := \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._State_5\ => 
-                        -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.7\ := \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.4\ and \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.6\;
-                        if (\PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.7\) then 
-                            -- The following section was transformed from the .NET statement below:
-                            -- {
-                            -- 	bits = bits << 1;
-                            -- 	b = (byte)((int)(b) + 1);
-                            -- 	num2 = num2 + 1;
-                            -- }
-                            -- 
-                            -- The following section was transformed from the .NET statement below:
-                            -- bits = bits << 1;
-                            -- 
-                            \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.8\ := shift_left(\PositHelper::LengthOfRunOfBits(UInt32,Byte).0.bits\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5))));
-                            \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.bits\ := \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.8\;
-                            -- The following section was transformed from the .NET statement below:
-                            -- b = (byte)((int)(b) + 1);
-                            -- 
-                            \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.9\ := SmartResize(unsigned(signed(SmartResize((\PositHelper::LengthOfRunOfBits(UInt32,Byte).0.b\), 32)) + to_signed(1, 32)), 8);
-                            \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.b\ := (\PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.9\);
-                            -- The following section was transformed from the .NET statement below:
-                            -- num2 = num2 + 1;
-                            -- 
-                            \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.10\ := \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.num2\ + to_signed(1, 32);
-                            \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.num2\ := \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.binaryOperationResult.10\;
-                            -- Returning to the repeated state of the while loop which was started in state \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._State_2\ if the loop wasn't exited with a state change.
-                            if (\PositHelper::LengthOfRunOfBits(UInt32,Byte).0._State\ = \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._State_5\) then 
-                                \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._State\ := \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._State_3\;
-                            end if;
-                        else 
-                            \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._State\ := \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._State_4\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.8985
-                end case;
-            end if;
-        end if;
-    end process;
-    -- System.Byte Lombiq.Arithmetics.PositHelper::LengthOfRunOfBits(System.UInt32,System.Byte).0 state machine end
 
 
     -- System.Void Hast::ExternalInvocationProxy() start
@@ -44013,45 +44156,47 @@ begin
 
     -- System.Void Hast::InternalInvocationProxy().System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32) start
     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32)\: process (\Clock\) 
-        Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\: \InternalInvocationProxy_boolean_Array\(5 downto 0) := (others => false);
-        Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().0.runningIndex.0\: integer range 0 to 5 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\: \InternalInvocationProxy_boolean_Array\(8 downto 0) := (others => false);
+        Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().0.runningIndex.0\: integer range 0 to 8 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().1.runningIndex.0\: integer range 0 to 5 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().1.runningIndex.0\: integer range 0 to 8 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().1.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().2.runningIndex.0\: integer range 0 to 5 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().2.runningIndex.0\: integer range 0 to 8 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().2.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().3.runningIndex.0\: integer range 0 to 5 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().3.runningIndex.0\: integer range 0 to 8 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().3.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::ExponentSize().0.runningIndex.0\: integer range 0 to 5 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::ExponentSize().0.runningIndex.0\: integer range 0 to 8 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::ExponentSize().0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().0.runningIndex.0\: integer range 0 to 5 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().0.runningIndex.0\: integer range 0 to 8 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().1.runningIndex.0\: integer range 0 to 5 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().1.runningIndex.0\: integer range 0 to 8 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().1.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().2.runningIndex.0\: integer range 0 to 5 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().2.runningIndex.0\: integer range 0 to 8 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().2.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().3.runningIndex.0\: integer range 0 to 5 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().3.runningIndex.0\: integer range 0 to 8 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().3.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionSize().0.runningIndex.0\: integer range 0 to 5 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionSize().0.runningIndex.0\: integer range 0 to 8 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionSize().0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().0.runningIndex.0\: integer range 0 to 5 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().0.runningIndex.0\: integer range 0 to 8 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().1.runningIndex.0\: integer range 0 to 5 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().1.runningIndex.0\: integer range 0 to 8 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().1.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().2.runningIndex.0\: integer range 0 to 5 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().2.runningIndex.0\: integer range 0 to 8 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().2.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().3.runningIndex.0\: integer range 0 to 5 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().3.runningIndex.0\: integer range 0 to 8 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().3.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).0.runningIndex.0\: integer range 0 to 5 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).0.runningIndex.0\: integer range 0 to 8 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).1.runningIndex.0\: integer range 0 to 5 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).1.runningIndex.0\: integer range 0 to 8 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).1.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).2.runningIndex.0\: integer range 0 to 5 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).2.runningIndex.0\: integer range 0 to 8 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).2.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).3.runningIndex.0\: integer range 0 to 5 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).3.runningIndex.0\: integer range 0 to 8 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).3.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).4.runningIndex.0\: integer range 0 to 5 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).4.runningIndex.0\: integer range 0 to 8 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).4.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
+        Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::MultiplyBits(UInt32,UInt32).0.runningIndex.0\: integer range 0 to 8 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::MultiplyBits(UInt32,UInt32).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -44095,6 +44240,8 @@ begin
                 \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).3.runningState.0\ := WaitingForStarted;
                 \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).4.runningIndex.0\ := 0;
                 \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).4.runningState.0\ := WaitingForStarted;
+                \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::MultiplyBits(UInt32,UInt32).0.runningIndex.0\ := 0;
+                \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::MultiplyBits(UInt32,UInt32).0.runningState.0\ := WaitingForStarted;
                 \Posit32::GetRegimeKValue().0.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= false;
                 \Posit32::GetRegimeKValue().1.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= false;
                 \Posit32::GetRegimeKValue().2.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= false;
@@ -44114,14 +44261,18 @@ begin
                 \Posit32::AddBits(UInt32,UInt32).2.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= false;
                 \Posit32::AddBits(UInt32,UInt32).3.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= false;
                 \Posit32::AddBits(UInt32,UInt32).4.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= false;
+                \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= false;
             else 
                 -- Building a boolean array where each of the elements will indicate whether the component with the given index should be started next.
-                \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(0) := \Posit32::GetTwosComplement(UInt32).1._Started\ = true and \Posit32::GetTwosComplement(UInt32).2._Started\ = true and \Posit32::GetTwosComplement(UInt32).3._Started\ = true and \Posit32::GetTwosComplement(UInt32).4._Started\ = true and \Posit32::GetTwosComplement(UInt32).5._Started\ = true and \Posit32::GetTwosComplement(UInt32).0._Started\ = false;
-                \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(1) := \Posit32::GetTwosComplement(UInt32).2._Started\ = true and \Posit32::GetTwosComplement(UInt32).3._Started\ = true and \Posit32::GetTwosComplement(UInt32).4._Started\ = true and \Posit32::GetTwosComplement(UInt32).5._Started\ = true and \Posit32::GetTwosComplement(UInt32).1._Started\ = false;
-                \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(2) := \Posit32::GetTwosComplement(UInt32).3._Started\ = true and \Posit32::GetTwosComplement(UInt32).4._Started\ = true and \Posit32::GetTwosComplement(UInt32).5._Started\ = true and \Posit32::GetTwosComplement(UInt32).2._Started\ = false;
-                \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(3) := \Posit32::GetTwosComplement(UInt32).4._Started\ = true and \Posit32::GetTwosComplement(UInt32).5._Started\ = true and \Posit32::GetTwosComplement(UInt32).3._Started\ = false;
-                \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(4) := \Posit32::GetTwosComplement(UInt32).5._Started\ = true and \Posit32::GetTwosComplement(UInt32).4._Started\ = false;
-                \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(5) := \Posit32::GetTwosComplement(UInt32).5._Started\ = false;
+                \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(0) := \Posit32::GetTwosComplement(UInt32).1._Started\ = true and \Posit32::GetTwosComplement(UInt32).2._Started\ = true and \Posit32::GetTwosComplement(UInt32).3._Started\ = true and \Posit32::GetTwosComplement(UInt32).4._Started\ = true and \Posit32::GetTwosComplement(UInt32).5._Started\ = true and \Posit32::GetTwosComplement(UInt32).6._Started\ = true and \Posit32::GetTwosComplement(UInt32).7._Started\ = true and \Posit32::GetTwosComplement(UInt32).8._Started\ = true and \Posit32::GetTwosComplement(UInt32).0._Started\ = false;
+                \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(1) := \Posit32::GetTwosComplement(UInt32).2._Started\ = true and \Posit32::GetTwosComplement(UInt32).3._Started\ = true and \Posit32::GetTwosComplement(UInt32).4._Started\ = true and \Posit32::GetTwosComplement(UInt32).5._Started\ = true and \Posit32::GetTwosComplement(UInt32).6._Started\ = true and \Posit32::GetTwosComplement(UInt32).7._Started\ = true and \Posit32::GetTwosComplement(UInt32).8._Started\ = true and \Posit32::GetTwosComplement(UInt32).1._Started\ = false;
+                \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(2) := \Posit32::GetTwosComplement(UInt32).3._Started\ = true and \Posit32::GetTwosComplement(UInt32).4._Started\ = true and \Posit32::GetTwosComplement(UInt32).5._Started\ = true and \Posit32::GetTwosComplement(UInt32).6._Started\ = true and \Posit32::GetTwosComplement(UInt32).7._Started\ = true and \Posit32::GetTwosComplement(UInt32).8._Started\ = true and \Posit32::GetTwosComplement(UInt32).2._Started\ = false;
+                \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(3) := \Posit32::GetTwosComplement(UInt32).4._Started\ = true and \Posit32::GetTwosComplement(UInt32).5._Started\ = true and \Posit32::GetTwosComplement(UInt32).6._Started\ = true and \Posit32::GetTwosComplement(UInt32).7._Started\ = true and \Posit32::GetTwosComplement(UInt32).8._Started\ = true and \Posit32::GetTwosComplement(UInt32).3._Started\ = false;
+                \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(4) := \Posit32::GetTwosComplement(UInt32).5._Started\ = true and \Posit32::GetTwosComplement(UInt32).6._Started\ = true and \Posit32::GetTwosComplement(UInt32).7._Started\ = true and \Posit32::GetTwosComplement(UInt32).8._Started\ = true and \Posit32::GetTwosComplement(UInt32).4._Started\ = false;
+                \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(5) := \Posit32::GetTwosComplement(UInt32).6._Started\ = true and \Posit32::GetTwosComplement(UInt32).7._Started\ = true and \Posit32::GetTwosComplement(UInt32).8._Started\ = true and \Posit32::GetTwosComplement(UInt32).5._Started\ = false;
+                \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(6) := \Posit32::GetTwosComplement(UInt32).7._Started\ = true and \Posit32::GetTwosComplement(UInt32).8._Started\ = true and \Posit32::GetTwosComplement(UInt32).6._Started\ = false;
+                \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(7) := \Posit32::GetTwosComplement(UInt32).8._Started\ = true and \Posit32::GetTwosComplement(UInt32).7._Started\ = false;
+                \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(8) := \Posit32::GetTwosComplement(UInt32).8._Started\ = false;
 
                 -- Invocation handler #0 out of 1 corresponding to System.SByte Lombiq.Arithmetics.Posit32::GetRegimeKValue().0
                 case \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().0.runningState.0\ is 
@@ -44129,42 +44280,60 @@ begin
                         if (\Posit32::GetRegimeKValue().0.Posit32::GetTwosComplement(UInt32)._Started.0\) then 
                             \Posit32::GetRegimeKValue().0.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, true) => 
+                                when (false, false, false, false, false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().0.runningIndex.0\ := 0;
                                     \Posit32::GetTwosComplement(UInt32).0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(0) := false;
                                     \Posit32::GetTwosComplement(UInt32).0.bits.parameter.In\ <= \Posit32::GetRegimeKValue().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, false, false, true, false) => 
+                                when (false, false, false, false, false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().0.runningIndex.0\ := 1;
                                     \Posit32::GetTwosComplement(UInt32).1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(1) := false;
                                     \Posit32::GetTwosComplement(UInt32).1.bits.parameter.In\ <= \Posit32::GetRegimeKValue().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, false, true, false, false) => 
+                                when (false, false, false, false, false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().0.runningIndex.0\ := 2;
                                     \Posit32::GetTwosComplement(UInt32).2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(2) := false;
                                     \Posit32::GetTwosComplement(UInt32).2.bits.parameter.In\ <= \Posit32::GetRegimeKValue().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, true, false, false, false) => 
+                                when (false, false, false, false, false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().0.runningIndex.0\ := 3;
                                     \Posit32::GetTwosComplement(UInt32).3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(3) := false;
                                     \Posit32::GetTwosComplement(UInt32).3.bits.parameter.In\ <= \Posit32::GetRegimeKValue().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, true, false, false, false, false) => 
+                                when (false, false, false, false, true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().0.runningIndex.0\ := 4;
                                     \Posit32::GetTwosComplement(UInt32).4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(4) := false;
                                     \Posit32::GetTwosComplement(UInt32).4.bits.parameter.In\ <= \Posit32::GetRegimeKValue().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (true, false, false, false, false, false) => 
+                                when (false, false, false, true, false, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().0.runningIndex.0\ := 5;
                                     \Posit32::GetTwosComplement(UInt32).5._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(5) := false;
                                     \Posit32::GetTwosComplement(UInt32).5.bits.parameter.In\ <= \Posit32::GetRegimeKValue().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, false, true, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().0.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().0.runningIndex.0\ := 6;
+                                    \Posit32::GetTwosComplement(UInt32).6._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(6) := false;
+                                    \Posit32::GetTwosComplement(UInt32).6.bits.parameter.In\ <= \Posit32::GetRegimeKValue().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, true, false, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().0.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().0.runningIndex.0\ := 7;
+                                    \Posit32::GetTwosComplement(UInt32).7._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(7) := false;
+                                    \Posit32::GetTwosComplement(UInt32).7.bits.parameter.In\ <= \Posit32::GetRegimeKValue().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (true, false, false, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().0.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().0.runningIndex.0\ := 8;
+                                    \Posit32::GetTwosComplement(UInt32).8._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(8) := false;
+                                    \Posit32::GetTwosComplement(UInt32).8.bits.parameter.In\ <= \Posit32::GetRegimeKValue().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -44213,6 +44382,27 @@ begin
                                     \Posit32::GetTwosComplement(UInt32).5._Started\ <= false;
                                     \Posit32::GetRegimeKValue().0.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).5.return\;
                                 end if;
+                            when 6 => 
+                                if (\Posit32::GetTwosComplement(UInt32).6._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().0.runningState.0\ := AfterFinished;
+                                    \Posit32::GetRegimeKValue().0.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).6._Started\ <= false;
+                                    \Posit32::GetRegimeKValue().0.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).6.return\;
+                                end if;
+                            when 7 => 
+                                if (\Posit32::GetTwosComplement(UInt32).7._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().0.runningState.0\ := AfterFinished;
+                                    \Posit32::GetRegimeKValue().0.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).7._Started\ <= false;
+                                    \Posit32::GetRegimeKValue().0.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).7.return\;
+                                end if;
+                            when 8 => 
+                                if (\Posit32::GetTwosComplement(UInt32).8._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().0.runningState.0\ := AfterFinished;
+                                    \Posit32::GetRegimeKValue().0.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).8._Started\ <= false;
+                                    \Posit32::GetRegimeKValue().0.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).8.return\;
+                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -44229,42 +44419,60 @@ begin
                         if (\Posit32::GetRegimeKValue().1.Posit32::GetTwosComplement(UInt32)._Started.0\) then 
                             \Posit32::GetRegimeKValue().1.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, true) => 
+                                when (false, false, false, false, false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().1.runningIndex.0\ := 0;
                                     \Posit32::GetTwosComplement(UInt32).0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(0) := false;
                                     \Posit32::GetTwosComplement(UInt32).0.bits.parameter.In\ <= \Posit32::GetRegimeKValue().1.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, false, false, true, false) => 
+                                when (false, false, false, false, false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().1.runningIndex.0\ := 1;
                                     \Posit32::GetTwosComplement(UInt32).1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(1) := false;
                                     \Posit32::GetTwosComplement(UInt32).1.bits.parameter.In\ <= \Posit32::GetRegimeKValue().1.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, false, true, false, false) => 
+                                when (false, false, false, false, false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().1.runningIndex.0\ := 2;
                                     \Posit32::GetTwosComplement(UInt32).2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(2) := false;
                                     \Posit32::GetTwosComplement(UInt32).2.bits.parameter.In\ <= \Posit32::GetRegimeKValue().1.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, true, false, false, false) => 
+                                when (false, false, false, false, false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().1.runningIndex.0\ := 3;
                                     \Posit32::GetTwosComplement(UInt32).3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(3) := false;
                                     \Posit32::GetTwosComplement(UInt32).3.bits.parameter.In\ <= \Posit32::GetRegimeKValue().1.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, true, false, false, false, false) => 
+                                when (false, false, false, false, true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().1.runningIndex.0\ := 4;
                                     \Posit32::GetTwosComplement(UInt32).4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(4) := false;
                                     \Posit32::GetTwosComplement(UInt32).4.bits.parameter.In\ <= \Posit32::GetRegimeKValue().1.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (true, false, false, false, false, false) => 
+                                when (false, false, false, true, false, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().1.runningIndex.0\ := 5;
                                     \Posit32::GetTwosComplement(UInt32).5._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(5) := false;
                                     \Posit32::GetTwosComplement(UInt32).5.bits.parameter.In\ <= \Posit32::GetRegimeKValue().1.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, false, true, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().1.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().1.runningIndex.0\ := 6;
+                                    \Posit32::GetTwosComplement(UInt32).6._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(6) := false;
+                                    \Posit32::GetTwosComplement(UInt32).6.bits.parameter.In\ <= \Posit32::GetRegimeKValue().1.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, true, false, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().1.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().1.runningIndex.0\ := 7;
+                                    \Posit32::GetTwosComplement(UInt32).7._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(7) := false;
+                                    \Posit32::GetTwosComplement(UInt32).7.bits.parameter.In\ <= \Posit32::GetRegimeKValue().1.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (true, false, false, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().1.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().1.runningIndex.0\ := 8;
+                                    \Posit32::GetTwosComplement(UInt32).8._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(8) := false;
+                                    \Posit32::GetTwosComplement(UInt32).8.bits.parameter.In\ <= \Posit32::GetRegimeKValue().1.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -44313,6 +44521,27 @@ begin
                                     \Posit32::GetTwosComplement(UInt32).5._Started\ <= false;
                                     \Posit32::GetRegimeKValue().1.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).5.return\;
                                 end if;
+                            when 6 => 
+                                if (\Posit32::GetTwosComplement(UInt32).6._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().1.runningState.0\ := AfterFinished;
+                                    \Posit32::GetRegimeKValue().1.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).6._Started\ <= false;
+                                    \Posit32::GetRegimeKValue().1.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).6.return\;
+                                end if;
+                            when 7 => 
+                                if (\Posit32::GetTwosComplement(UInt32).7._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().1.runningState.0\ := AfterFinished;
+                                    \Posit32::GetRegimeKValue().1.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).7._Started\ <= false;
+                                    \Posit32::GetRegimeKValue().1.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).7.return\;
+                                end if;
+                            when 8 => 
+                                if (\Posit32::GetTwosComplement(UInt32).8._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().1.runningState.0\ := AfterFinished;
+                                    \Posit32::GetRegimeKValue().1.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).8._Started\ <= false;
+                                    \Posit32::GetRegimeKValue().1.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).8.return\;
+                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -44329,42 +44558,60 @@ begin
                         if (\Posit32::GetRegimeKValue().2.Posit32::GetTwosComplement(UInt32)._Started.0\) then 
                             \Posit32::GetRegimeKValue().2.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, true) => 
+                                when (false, false, false, false, false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().2.runningIndex.0\ := 0;
                                     \Posit32::GetTwosComplement(UInt32).0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(0) := false;
                                     \Posit32::GetTwosComplement(UInt32).0.bits.parameter.In\ <= \Posit32::GetRegimeKValue().2.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, false, false, true, false) => 
+                                when (false, false, false, false, false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().2.runningIndex.0\ := 1;
                                     \Posit32::GetTwosComplement(UInt32).1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(1) := false;
                                     \Posit32::GetTwosComplement(UInt32).1.bits.parameter.In\ <= \Posit32::GetRegimeKValue().2.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, false, true, false, false) => 
+                                when (false, false, false, false, false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().2.runningIndex.0\ := 2;
                                     \Posit32::GetTwosComplement(UInt32).2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(2) := false;
                                     \Posit32::GetTwosComplement(UInt32).2.bits.parameter.In\ <= \Posit32::GetRegimeKValue().2.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, true, false, false, false) => 
+                                when (false, false, false, false, false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().2.runningIndex.0\ := 3;
                                     \Posit32::GetTwosComplement(UInt32).3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(3) := false;
                                     \Posit32::GetTwosComplement(UInt32).3.bits.parameter.In\ <= \Posit32::GetRegimeKValue().2.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, true, false, false, false, false) => 
+                                when (false, false, false, false, true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().2.runningIndex.0\ := 4;
                                     \Posit32::GetTwosComplement(UInt32).4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(4) := false;
                                     \Posit32::GetTwosComplement(UInt32).4.bits.parameter.In\ <= \Posit32::GetRegimeKValue().2.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (true, false, false, false, false, false) => 
+                                when (false, false, false, true, false, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().2.runningIndex.0\ := 5;
                                     \Posit32::GetTwosComplement(UInt32).5._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(5) := false;
                                     \Posit32::GetTwosComplement(UInt32).5.bits.parameter.In\ <= \Posit32::GetRegimeKValue().2.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, false, true, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().2.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().2.runningIndex.0\ := 6;
+                                    \Posit32::GetTwosComplement(UInt32).6._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(6) := false;
+                                    \Posit32::GetTwosComplement(UInt32).6.bits.parameter.In\ <= \Posit32::GetRegimeKValue().2.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, true, false, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().2.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().2.runningIndex.0\ := 7;
+                                    \Posit32::GetTwosComplement(UInt32).7._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(7) := false;
+                                    \Posit32::GetTwosComplement(UInt32).7.bits.parameter.In\ <= \Posit32::GetRegimeKValue().2.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (true, false, false, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().2.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().2.runningIndex.0\ := 8;
+                                    \Posit32::GetTwosComplement(UInt32).8._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(8) := false;
+                                    \Posit32::GetTwosComplement(UInt32).8.bits.parameter.In\ <= \Posit32::GetRegimeKValue().2.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -44413,6 +44660,27 @@ begin
                                     \Posit32::GetTwosComplement(UInt32).5._Started\ <= false;
                                     \Posit32::GetRegimeKValue().2.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).5.return\;
                                 end if;
+                            when 6 => 
+                                if (\Posit32::GetTwosComplement(UInt32).6._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().2.runningState.0\ := AfterFinished;
+                                    \Posit32::GetRegimeKValue().2.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).6._Started\ <= false;
+                                    \Posit32::GetRegimeKValue().2.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).6.return\;
+                                end if;
+                            when 7 => 
+                                if (\Posit32::GetTwosComplement(UInt32).7._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().2.runningState.0\ := AfterFinished;
+                                    \Posit32::GetRegimeKValue().2.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).7._Started\ <= false;
+                                    \Posit32::GetRegimeKValue().2.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).7.return\;
+                                end if;
+                            when 8 => 
+                                if (\Posit32::GetTwosComplement(UInt32).8._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().2.runningState.0\ := AfterFinished;
+                                    \Posit32::GetRegimeKValue().2.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).8._Started\ <= false;
+                                    \Posit32::GetRegimeKValue().2.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).8.return\;
+                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -44429,42 +44697,60 @@ begin
                         if (\Posit32::GetRegimeKValue().3.Posit32::GetTwosComplement(UInt32)._Started.0\) then 
                             \Posit32::GetRegimeKValue().3.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, true) => 
+                                when (false, false, false, false, false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().3.runningIndex.0\ := 0;
                                     \Posit32::GetTwosComplement(UInt32).0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(0) := false;
                                     \Posit32::GetTwosComplement(UInt32).0.bits.parameter.In\ <= \Posit32::GetRegimeKValue().3.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, false, false, true, false) => 
+                                when (false, false, false, false, false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().3.runningIndex.0\ := 1;
                                     \Posit32::GetTwosComplement(UInt32).1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(1) := false;
                                     \Posit32::GetTwosComplement(UInt32).1.bits.parameter.In\ <= \Posit32::GetRegimeKValue().3.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, false, true, false, false) => 
+                                when (false, false, false, false, false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().3.runningIndex.0\ := 2;
                                     \Posit32::GetTwosComplement(UInt32).2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(2) := false;
                                     \Posit32::GetTwosComplement(UInt32).2.bits.parameter.In\ <= \Posit32::GetRegimeKValue().3.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, true, false, false, false) => 
+                                when (false, false, false, false, false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().3.runningIndex.0\ := 3;
                                     \Posit32::GetTwosComplement(UInt32).3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(3) := false;
                                     \Posit32::GetTwosComplement(UInt32).3.bits.parameter.In\ <= \Posit32::GetRegimeKValue().3.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, true, false, false, false, false) => 
+                                when (false, false, false, false, true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().3.runningIndex.0\ := 4;
                                     \Posit32::GetTwosComplement(UInt32).4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(4) := false;
                                     \Posit32::GetTwosComplement(UInt32).4.bits.parameter.In\ <= \Posit32::GetRegimeKValue().3.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (true, false, false, false, false, false) => 
+                                when (false, false, false, true, false, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().3.runningIndex.0\ := 5;
                                     \Posit32::GetTwosComplement(UInt32).5._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(5) := false;
                                     \Posit32::GetTwosComplement(UInt32).5.bits.parameter.In\ <= \Posit32::GetRegimeKValue().3.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, false, true, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().3.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().3.runningIndex.0\ := 6;
+                                    \Posit32::GetTwosComplement(UInt32).6._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(6) := false;
+                                    \Posit32::GetTwosComplement(UInt32).6.bits.parameter.In\ <= \Posit32::GetRegimeKValue().3.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, true, false, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().3.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().3.runningIndex.0\ := 7;
+                                    \Posit32::GetTwosComplement(UInt32).7._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(7) := false;
+                                    \Posit32::GetTwosComplement(UInt32).7.bits.parameter.In\ <= \Posit32::GetRegimeKValue().3.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (true, false, false, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().3.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().3.runningIndex.0\ := 8;
+                                    \Posit32::GetTwosComplement(UInt32).8._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(8) := false;
+                                    \Posit32::GetTwosComplement(UInt32).8.bits.parameter.In\ <= \Posit32::GetRegimeKValue().3.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -44513,6 +44799,27 @@ begin
                                     \Posit32::GetTwosComplement(UInt32).5._Started\ <= false;
                                     \Posit32::GetRegimeKValue().3.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).5.return\;
                                 end if;
+                            when 6 => 
+                                if (\Posit32::GetTwosComplement(UInt32).6._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().3.runningState.0\ := AfterFinished;
+                                    \Posit32::GetRegimeKValue().3.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).6._Started\ <= false;
+                                    \Posit32::GetRegimeKValue().3.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).6.return\;
+                                end if;
+                            when 7 => 
+                                if (\Posit32::GetTwosComplement(UInt32).7._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().3.runningState.0\ := AfterFinished;
+                                    \Posit32::GetRegimeKValue().3.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).7._Started\ <= false;
+                                    \Posit32::GetRegimeKValue().3.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).7.return\;
+                                end if;
+                            when 8 => 
+                                if (\Posit32::GetTwosComplement(UInt32).8._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetRegimeKValue().3.runningState.0\ := AfterFinished;
+                                    \Posit32::GetRegimeKValue().3.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).8._Started\ <= false;
+                                    \Posit32::GetRegimeKValue().3.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).8.return\;
+                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -44529,42 +44836,60 @@ begin
                         if (\Posit32::ExponentSize().0.Posit32::GetTwosComplement(UInt32)._Started.0\) then 
                             \Posit32::ExponentSize().0.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, true) => 
+                                when (false, false, false, false, false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::ExponentSize().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::ExponentSize().0.runningIndex.0\ := 0;
                                     \Posit32::GetTwosComplement(UInt32).0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(0) := false;
                                     \Posit32::GetTwosComplement(UInt32).0.bits.parameter.In\ <= \Posit32::ExponentSize().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, false, false, true, false) => 
+                                when (false, false, false, false, false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::ExponentSize().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::ExponentSize().0.runningIndex.0\ := 1;
                                     \Posit32::GetTwosComplement(UInt32).1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(1) := false;
                                     \Posit32::GetTwosComplement(UInt32).1.bits.parameter.In\ <= \Posit32::ExponentSize().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, false, true, false, false) => 
+                                when (false, false, false, false, false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::ExponentSize().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::ExponentSize().0.runningIndex.0\ := 2;
                                     \Posit32::GetTwosComplement(UInt32).2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(2) := false;
                                     \Posit32::GetTwosComplement(UInt32).2.bits.parameter.In\ <= \Posit32::ExponentSize().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, true, false, false, false) => 
+                                when (false, false, false, false, false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::ExponentSize().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::ExponentSize().0.runningIndex.0\ := 3;
                                     \Posit32::GetTwosComplement(UInt32).3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(3) := false;
                                     \Posit32::GetTwosComplement(UInt32).3.bits.parameter.In\ <= \Posit32::ExponentSize().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, true, false, false, false, false) => 
+                                when (false, false, false, false, true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::ExponentSize().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::ExponentSize().0.runningIndex.0\ := 4;
                                     \Posit32::GetTwosComplement(UInt32).4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(4) := false;
                                     \Posit32::GetTwosComplement(UInt32).4.bits.parameter.In\ <= \Posit32::ExponentSize().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (true, false, false, false, false, false) => 
+                                when (false, false, false, true, false, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::ExponentSize().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::ExponentSize().0.runningIndex.0\ := 5;
                                     \Posit32::GetTwosComplement(UInt32).5._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(5) := false;
                                     \Posit32::GetTwosComplement(UInt32).5.bits.parameter.In\ <= \Posit32::ExponentSize().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, false, true, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::ExponentSize().0.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::ExponentSize().0.runningIndex.0\ := 6;
+                                    \Posit32::GetTwosComplement(UInt32).6._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(6) := false;
+                                    \Posit32::GetTwosComplement(UInt32).6.bits.parameter.In\ <= \Posit32::ExponentSize().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, true, false, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::ExponentSize().0.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::ExponentSize().0.runningIndex.0\ := 7;
+                                    \Posit32::GetTwosComplement(UInt32).7._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(7) := false;
+                                    \Posit32::GetTwosComplement(UInt32).7.bits.parameter.In\ <= \Posit32::ExponentSize().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (true, false, false, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::ExponentSize().0.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::ExponentSize().0.runningIndex.0\ := 8;
+                                    \Posit32::GetTwosComplement(UInt32).8._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(8) := false;
+                                    \Posit32::GetTwosComplement(UInt32).8.bits.parameter.In\ <= \Posit32::ExponentSize().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -44613,6 +44938,27 @@ begin
                                     \Posit32::GetTwosComplement(UInt32).5._Started\ <= false;
                                     \Posit32::ExponentSize().0.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).5.return\;
                                 end if;
+                            when 6 => 
+                                if (\Posit32::GetTwosComplement(UInt32).6._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::ExponentSize().0.runningState.0\ := AfterFinished;
+                                    \Posit32::ExponentSize().0.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).6._Started\ <= false;
+                                    \Posit32::ExponentSize().0.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).6.return\;
+                                end if;
+                            when 7 => 
+                                if (\Posit32::GetTwosComplement(UInt32).7._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::ExponentSize().0.runningState.0\ := AfterFinished;
+                                    \Posit32::ExponentSize().0.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).7._Started\ <= false;
+                                    \Posit32::ExponentSize().0.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).7.return\;
+                                end if;
+                            when 8 => 
+                                if (\Posit32::GetTwosComplement(UInt32).8._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::ExponentSize().0.runningState.0\ := AfterFinished;
+                                    \Posit32::ExponentSize().0.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).8._Started\ <= false;
+                                    \Posit32::ExponentSize().0.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).8.return\;
+                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -44629,42 +44975,60 @@ begin
                         if (\Posit32::GetExponentValue().0.Posit32::GetTwosComplement(UInt32)._Started.0\) then 
                             \Posit32::GetExponentValue().0.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, true) => 
+                                when (false, false, false, false, false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().0.runningIndex.0\ := 0;
                                     \Posit32::GetTwosComplement(UInt32).0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(0) := false;
                                     \Posit32::GetTwosComplement(UInt32).0.bits.parameter.In\ <= \Posit32::GetExponentValue().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, false, false, true, false) => 
+                                when (false, false, false, false, false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().0.runningIndex.0\ := 1;
                                     \Posit32::GetTwosComplement(UInt32).1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(1) := false;
                                     \Posit32::GetTwosComplement(UInt32).1.bits.parameter.In\ <= \Posit32::GetExponentValue().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, false, true, false, false) => 
+                                when (false, false, false, false, false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().0.runningIndex.0\ := 2;
                                     \Posit32::GetTwosComplement(UInt32).2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(2) := false;
                                     \Posit32::GetTwosComplement(UInt32).2.bits.parameter.In\ <= \Posit32::GetExponentValue().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, true, false, false, false) => 
+                                when (false, false, false, false, false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().0.runningIndex.0\ := 3;
                                     \Posit32::GetTwosComplement(UInt32).3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(3) := false;
                                     \Posit32::GetTwosComplement(UInt32).3.bits.parameter.In\ <= \Posit32::GetExponentValue().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, true, false, false, false, false) => 
+                                when (false, false, false, false, true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().0.runningIndex.0\ := 4;
                                     \Posit32::GetTwosComplement(UInt32).4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(4) := false;
                                     \Posit32::GetTwosComplement(UInt32).4.bits.parameter.In\ <= \Posit32::GetExponentValue().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (true, false, false, false, false, false) => 
+                                when (false, false, false, true, false, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().0.runningIndex.0\ := 5;
                                     \Posit32::GetTwosComplement(UInt32).5._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(5) := false;
                                     \Posit32::GetTwosComplement(UInt32).5.bits.parameter.In\ <= \Posit32::GetExponentValue().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, false, true, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().0.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().0.runningIndex.0\ := 6;
+                                    \Posit32::GetTwosComplement(UInt32).6._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(6) := false;
+                                    \Posit32::GetTwosComplement(UInt32).6.bits.parameter.In\ <= \Posit32::GetExponentValue().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, true, false, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().0.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().0.runningIndex.0\ := 7;
+                                    \Posit32::GetTwosComplement(UInt32).7._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(7) := false;
+                                    \Posit32::GetTwosComplement(UInt32).7.bits.parameter.In\ <= \Posit32::GetExponentValue().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (true, false, false, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().0.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().0.runningIndex.0\ := 8;
+                                    \Posit32::GetTwosComplement(UInt32).8._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(8) := false;
+                                    \Posit32::GetTwosComplement(UInt32).8.bits.parameter.In\ <= \Posit32::GetExponentValue().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -44713,6 +45077,27 @@ begin
                                     \Posit32::GetTwosComplement(UInt32).5._Started\ <= false;
                                     \Posit32::GetExponentValue().0.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).5.return\;
                                 end if;
+                            when 6 => 
+                                if (\Posit32::GetTwosComplement(UInt32).6._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().0.runningState.0\ := AfterFinished;
+                                    \Posit32::GetExponentValue().0.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).6._Started\ <= false;
+                                    \Posit32::GetExponentValue().0.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).6.return\;
+                                end if;
+                            when 7 => 
+                                if (\Posit32::GetTwosComplement(UInt32).7._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().0.runningState.0\ := AfterFinished;
+                                    \Posit32::GetExponentValue().0.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).7._Started\ <= false;
+                                    \Posit32::GetExponentValue().0.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).7.return\;
+                                end if;
+                            when 8 => 
+                                if (\Posit32::GetTwosComplement(UInt32).8._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().0.runningState.0\ := AfterFinished;
+                                    \Posit32::GetExponentValue().0.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).8._Started\ <= false;
+                                    \Posit32::GetExponentValue().0.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).8.return\;
+                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -44729,42 +45114,60 @@ begin
                         if (\Posit32::GetExponentValue().1.Posit32::GetTwosComplement(UInt32)._Started.0\) then 
                             \Posit32::GetExponentValue().1.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, true) => 
+                                when (false, false, false, false, false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().1.runningIndex.0\ := 0;
                                     \Posit32::GetTwosComplement(UInt32).0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(0) := false;
                                     \Posit32::GetTwosComplement(UInt32).0.bits.parameter.In\ <= \Posit32::GetExponentValue().1.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, false, false, true, false) => 
+                                when (false, false, false, false, false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().1.runningIndex.0\ := 1;
                                     \Posit32::GetTwosComplement(UInt32).1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(1) := false;
                                     \Posit32::GetTwosComplement(UInt32).1.bits.parameter.In\ <= \Posit32::GetExponentValue().1.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, false, true, false, false) => 
+                                when (false, false, false, false, false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().1.runningIndex.0\ := 2;
                                     \Posit32::GetTwosComplement(UInt32).2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(2) := false;
                                     \Posit32::GetTwosComplement(UInt32).2.bits.parameter.In\ <= \Posit32::GetExponentValue().1.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, true, false, false, false) => 
+                                when (false, false, false, false, false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().1.runningIndex.0\ := 3;
                                     \Posit32::GetTwosComplement(UInt32).3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(3) := false;
                                     \Posit32::GetTwosComplement(UInt32).3.bits.parameter.In\ <= \Posit32::GetExponentValue().1.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, true, false, false, false, false) => 
+                                when (false, false, false, false, true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().1.runningIndex.0\ := 4;
                                     \Posit32::GetTwosComplement(UInt32).4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(4) := false;
                                     \Posit32::GetTwosComplement(UInt32).4.bits.parameter.In\ <= \Posit32::GetExponentValue().1.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (true, false, false, false, false, false) => 
+                                when (false, false, false, true, false, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().1.runningIndex.0\ := 5;
                                     \Posit32::GetTwosComplement(UInt32).5._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(5) := false;
                                     \Posit32::GetTwosComplement(UInt32).5.bits.parameter.In\ <= \Posit32::GetExponentValue().1.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, false, true, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().1.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().1.runningIndex.0\ := 6;
+                                    \Posit32::GetTwosComplement(UInt32).6._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(6) := false;
+                                    \Posit32::GetTwosComplement(UInt32).6.bits.parameter.In\ <= \Posit32::GetExponentValue().1.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, true, false, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().1.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().1.runningIndex.0\ := 7;
+                                    \Posit32::GetTwosComplement(UInt32).7._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(7) := false;
+                                    \Posit32::GetTwosComplement(UInt32).7.bits.parameter.In\ <= \Posit32::GetExponentValue().1.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (true, false, false, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().1.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().1.runningIndex.0\ := 8;
+                                    \Posit32::GetTwosComplement(UInt32).8._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(8) := false;
+                                    \Posit32::GetTwosComplement(UInt32).8.bits.parameter.In\ <= \Posit32::GetExponentValue().1.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -44813,6 +45216,27 @@ begin
                                     \Posit32::GetTwosComplement(UInt32).5._Started\ <= false;
                                     \Posit32::GetExponentValue().1.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).5.return\;
                                 end if;
+                            when 6 => 
+                                if (\Posit32::GetTwosComplement(UInt32).6._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().1.runningState.0\ := AfterFinished;
+                                    \Posit32::GetExponentValue().1.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).6._Started\ <= false;
+                                    \Posit32::GetExponentValue().1.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).6.return\;
+                                end if;
+                            when 7 => 
+                                if (\Posit32::GetTwosComplement(UInt32).7._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().1.runningState.0\ := AfterFinished;
+                                    \Posit32::GetExponentValue().1.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).7._Started\ <= false;
+                                    \Posit32::GetExponentValue().1.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).7.return\;
+                                end if;
+                            when 8 => 
+                                if (\Posit32::GetTwosComplement(UInt32).8._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().1.runningState.0\ := AfterFinished;
+                                    \Posit32::GetExponentValue().1.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).8._Started\ <= false;
+                                    \Posit32::GetExponentValue().1.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).8.return\;
+                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -44829,42 +45253,60 @@ begin
                         if (\Posit32::GetExponentValue().2.Posit32::GetTwosComplement(UInt32)._Started.0\) then 
                             \Posit32::GetExponentValue().2.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, true) => 
+                                when (false, false, false, false, false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().2.runningIndex.0\ := 0;
                                     \Posit32::GetTwosComplement(UInt32).0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(0) := false;
                                     \Posit32::GetTwosComplement(UInt32).0.bits.parameter.In\ <= \Posit32::GetExponentValue().2.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, false, false, true, false) => 
+                                when (false, false, false, false, false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().2.runningIndex.0\ := 1;
                                     \Posit32::GetTwosComplement(UInt32).1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(1) := false;
                                     \Posit32::GetTwosComplement(UInt32).1.bits.parameter.In\ <= \Posit32::GetExponentValue().2.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, false, true, false, false) => 
+                                when (false, false, false, false, false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().2.runningIndex.0\ := 2;
                                     \Posit32::GetTwosComplement(UInt32).2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(2) := false;
                                     \Posit32::GetTwosComplement(UInt32).2.bits.parameter.In\ <= \Posit32::GetExponentValue().2.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, true, false, false, false) => 
+                                when (false, false, false, false, false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().2.runningIndex.0\ := 3;
                                     \Posit32::GetTwosComplement(UInt32).3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(3) := false;
                                     \Posit32::GetTwosComplement(UInt32).3.bits.parameter.In\ <= \Posit32::GetExponentValue().2.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, true, false, false, false, false) => 
+                                when (false, false, false, false, true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().2.runningIndex.0\ := 4;
                                     \Posit32::GetTwosComplement(UInt32).4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(4) := false;
                                     \Posit32::GetTwosComplement(UInt32).4.bits.parameter.In\ <= \Posit32::GetExponentValue().2.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (true, false, false, false, false, false) => 
+                                when (false, false, false, true, false, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().2.runningIndex.0\ := 5;
                                     \Posit32::GetTwosComplement(UInt32).5._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(5) := false;
                                     \Posit32::GetTwosComplement(UInt32).5.bits.parameter.In\ <= \Posit32::GetExponentValue().2.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, false, true, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().2.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().2.runningIndex.0\ := 6;
+                                    \Posit32::GetTwosComplement(UInt32).6._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(6) := false;
+                                    \Posit32::GetTwosComplement(UInt32).6.bits.parameter.In\ <= \Posit32::GetExponentValue().2.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, true, false, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().2.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().2.runningIndex.0\ := 7;
+                                    \Posit32::GetTwosComplement(UInt32).7._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(7) := false;
+                                    \Posit32::GetTwosComplement(UInt32).7.bits.parameter.In\ <= \Posit32::GetExponentValue().2.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (true, false, false, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().2.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().2.runningIndex.0\ := 8;
+                                    \Posit32::GetTwosComplement(UInt32).8._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(8) := false;
+                                    \Posit32::GetTwosComplement(UInt32).8.bits.parameter.In\ <= \Posit32::GetExponentValue().2.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -44913,6 +45355,27 @@ begin
                                     \Posit32::GetTwosComplement(UInt32).5._Started\ <= false;
                                     \Posit32::GetExponentValue().2.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).5.return\;
                                 end if;
+                            when 6 => 
+                                if (\Posit32::GetTwosComplement(UInt32).6._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().2.runningState.0\ := AfterFinished;
+                                    \Posit32::GetExponentValue().2.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).6._Started\ <= false;
+                                    \Posit32::GetExponentValue().2.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).6.return\;
+                                end if;
+                            when 7 => 
+                                if (\Posit32::GetTwosComplement(UInt32).7._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().2.runningState.0\ := AfterFinished;
+                                    \Posit32::GetExponentValue().2.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).7._Started\ <= false;
+                                    \Posit32::GetExponentValue().2.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).7.return\;
+                                end if;
+                            when 8 => 
+                                if (\Posit32::GetTwosComplement(UInt32).8._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().2.runningState.0\ := AfterFinished;
+                                    \Posit32::GetExponentValue().2.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).8._Started\ <= false;
+                                    \Posit32::GetExponentValue().2.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).8.return\;
+                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -44929,42 +45392,60 @@ begin
                         if (\Posit32::GetExponentValue().3.Posit32::GetTwosComplement(UInt32)._Started.0\) then 
                             \Posit32::GetExponentValue().3.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, true) => 
+                                when (false, false, false, false, false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().3.runningIndex.0\ := 0;
                                     \Posit32::GetTwosComplement(UInt32).0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(0) := false;
                                     \Posit32::GetTwosComplement(UInt32).0.bits.parameter.In\ <= \Posit32::GetExponentValue().3.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, false, false, true, false) => 
+                                when (false, false, false, false, false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().3.runningIndex.0\ := 1;
                                     \Posit32::GetTwosComplement(UInt32).1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(1) := false;
                                     \Posit32::GetTwosComplement(UInt32).1.bits.parameter.In\ <= \Posit32::GetExponentValue().3.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, false, true, false, false) => 
+                                when (false, false, false, false, false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().3.runningIndex.0\ := 2;
                                     \Posit32::GetTwosComplement(UInt32).2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(2) := false;
                                     \Posit32::GetTwosComplement(UInt32).2.bits.parameter.In\ <= \Posit32::GetExponentValue().3.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, true, false, false, false) => 
+                                when (false, false, false, false, false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().3.runningIndex.0\ := 3;
                                     \Posit32::GetTwosComplement(UInt32).3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(3) := false;
                                     \Posit32::GetTwosComplement(UInt32).3.bits.parameter.In\ <= \Posit32::GetExponentValue().3.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, true, false, false, false, false) => 
+                                when (false, false, false, false, true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().3.runningIndex.0\ := 4;
                                     \Posit32::GetTwosComplement(UInt32).4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(4) := false;
                                     \Posit32::GetTwosComplement(UInt32).4.bits.parameter.In\ <= \Posit32::GetExponentValue().3.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (true, false, false, false, false, false) => 
+                                when (false, false, false, true, false, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().3.runningIndex.0\ := 5;
                                     \Posit32::GetTwosComplement(UInt32).5._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(5) := false;
                                     \Posit32::GetTwosComplement(UInt32).5.bits.parameter.In\ <= \Posit32::GetExponentValue().3.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, false, true, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().3.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().3.runningIndex.0\ := 6;
+                                    \Posit32::GetTwosComplement(UInt32).6._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(6) := false;
+                                    \Posit32::GetTwosComplement(UInt32).6.bits.parameter.In\ <= \Posit32::GetExponentValue().3.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, true, false, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().3.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().3.runningIndex.0\ := 7;
+                                    \Posit32::GetTwosComplement(UInt32).7._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(7) := false;
+                                    \Posit32::GetTwosComplement(UInt32).7.bits.parameter.In\ <= \Posit32::GetExponentValue().3.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (true, false, false, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().3.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().3.runningIndex.0\ := 8;
+                                    \Posit32::GetTwosComplement(UInt32).8._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(8) := false;
+                                    \Posit32::GetTwosComplement(UInt32).8.bits.parameter.In\ <= \Posit32::GetExponentValue().3.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -45013,6 +45494,27 @@ begin
                                     \Posit32::GetTwosComplement(UInt32).5._Started\ <= false;
                                     \Posit32::GetExponentValue().3.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).5.return\;
                                 end if;
+                            when 6 => 
+                                if (\Posit32::GetTwosComplement(UInt32).6._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().3.runningState.0\ := AfterFinished;
+                                    \Posit32::GetExponentValue().3.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).6._Started\ <= false;
+                                    \Posit32::GetExponentValue().3.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).6.return\;
+                                end if;
+                            when 7 => 
+                                if (\Posit32::GetTwosComplement(UInt32).7._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().3.runningState.0\ := AfterFinished;
+                                    \Posit32::GetExponentValue().3.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).7._Started\ <= false;
+                                    \Posit32::GetExponentValue().3.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).7.return\;
+                                end if;
+                            when 8 => 
+                                if (\Posit32::GetTwosComplement(UInt32).8._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::GetExponentValue().3.runningState.0\ := AfterFinished;
+                                    \Posit32::GetExponentValue().3.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).8._Started\ <= false;
+                                    \Posit32::GetExponentValue().3.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).8.return\;
+                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -45029,42 +45531,60 @@ begin
                         if (\Posit32::FractionSize().0.Posit32::GetTwosComplement(UInt32)._Started.0\) then 
                             \Posit32::FractionSize().0.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, true) => 
+                                when (false, false, false, false, false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionSize().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionSize().0.runningIndex.0\ := 0;
                                     \Posit32::GetTwosComplement(UInt32).0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(0) := false;
                                     \Posit32::GetTwosComplement(UInt32).0.bits.parameter.In\ <= \Posit32::FractionSize().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, false, false, true, false) => 
+                                when (false, false, false, false, false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionSize().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionSize().0.runningIndex.0\ := 1;
                                     \Posit32::GetTwosComplement(UInt32).1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(1) := false;
                                     \Posit32::GetTwosComplement(UInt32).1.bits.parameter.In\ <= \Posit32::FractionSize().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, false, true, false, false) => 
+                                when (false, false, false, false, false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionSize().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionSize().0.runningIndex.0\ := 2;
                                     \Posit32::GetTwosComplement(UInt32).2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(2) := false;
                                     \Posit32::GetTwosComplement(UInt32).2.bits.parameter.In\ <= \Posit32::FractionSize().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, true, false, false, false) => 
+                                when (false, false, false, false, false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionSize().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionSize().0.runningIndex.0\ := 3;
                                     \Posit32::GetTwosComplement(UInt32).3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(3) := false;
                                     \Posit32::GetTwosComplement(UInt32).3.bits.parameter.In\ <= \Posit32::FractionSize().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, true, false, false, false, false) => 
+                                when (false, false, false, false, true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionSize().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionSize().0.runningIndex.0\ := 4;
                                     \Posit32::GetTwosComplement(UInt32).4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(4) := false;
                                     \Posit32::GetTwosComplement(UInt32).4.bits.parameter.In\ <= \Posit32::FractionSize().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (true, false, false, false, false, false) => 
+                                when (false, false, false, true, false, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionSize().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionSize().0.runningIndex.0\ := 5;
                                     \Posit32::GetTwosComplement(UInt32).5._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(5) := false;
                                     \Posit32::GetTwosComplement(UInt32).5.bits.parameter.In\ <= \Posit32::FractionSize().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, false, true, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionSize().0.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionSize().0.runningIndex.0\ := 6;
+                                    \Posit32::GetTwosComplement(UInt32).6._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(6) := false;
+                                    \Posit32::GetTwosComplement(UInt32).6.bits.parameter.In\ <= \Posit32::FractionSize().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, true, false, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionSize().0.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionSize().0.runningIndex.0\ := 7;
+                                    \Posit32::GetTwosComplement(UInt32).7._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(7) := false;
+                                    \Posit32::GetTwosComplement(UInt32).7.bits.parameter.In\ <= \Posit32::FractionSize().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (true, false, false, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionSize().0.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionSize().0.runningIndex.0\ := 8;
+                                    \Posit32::GetTwosComplement(UInt32).8._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(8) := false;
+                                    \Posit32::GetTwosComplement(UInt32).8.bits.parameter.In\ <= \Posit32::FractionSize().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -45113,6 +45633,27 @@ begin
                                     \Posit32::GetTwosComplement(UInt32).5._Started\ <= false;
                                     \Posit32::FractionSize().0.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).5.return\;
                                 end if;
+                            when 6 => 
+                                if (\Posit32::GetTwosComplement(UInt32).6._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionSize().0.runningState.0\ := AfterFinished;
+                                    \Posit32::FractionSize().0.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).6._Started\ <= false;
+                                    \Posit32::FractionSize().0.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).6.return\;
+                                end if;
+                            when 7 => 
+                                if (\Posit32::GetTwosComplement(UInt32).7._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionSize().0.runningState.0\ := AfterFinished;
+                                    \Posit32::FractionSize().0.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).7._Started\ <= false;
+                                    \Posit32::FractionSize().0.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).7.return\;
+                                end if;
+                            when 8 => 
+                                if (\Posit32::GetTwosComplement(UInt32).8._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionSize().0.runningState.0\ := AfterFinished;
+                                    \Posit32::FractionSize().0.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).8._Started\ <= false;
+                                    \Posit32::FractionSize().0.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).8.return\;
+                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -45129,42 +45670,60 @@ begin
                         if (\Posit32::FractionWithHiddenBit().0.Posit32::GetTwosComplement(UInt32)._Started.0\) then 
                             \Posit32::FractionWithHiddenBit().0.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, true) => 
+                                when (false, false, false, false, false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().0.runningIndex.0\ := 0;
                                     \Posit32::GetTwosComplement(UInt32).0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(0) := false;
                                     \Posit32::GetTwosComplement(UInt32).0.bits.parameter.In\ <= \Posit32::FractionWithHiddenBit().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, false, false, true, false) => 
+                                when (false, false, false, false, false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().0.runningIndex.0\ := 1;
                                     \Posit32::GetTwosComplement(UInt32).1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(1) := false;
                                     \Posit32::GetTwosComplement(UInt32).1.bits.parameter.In\ <= \Posit32::FractionWithHiddenBit().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, false, true, false, false) => 
+                                when (false, false, false, false, false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().0.runningIndex.0\ := 2;
                                     \Posit32::GetTwosComplement(UInt32).2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(2) := false;
                                     \Posit32::GetTwosComplement(UInt32).2.bits.parameter.In\ <= \Posit32::FractionWithHiddenBit().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, true, false, false, false) => 
+                                when (false, false, false, false, false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().0.runningIndex.0\ := 3;
                                     \Posit32::GetTwosComplement(UInt32).3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(3) := false;
                                     \Posit32::GetTwosComplement(UInt32).3.bits.parameter.In\ <= \Posit32::FractionWithHiddenBit().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, true, false, false, false, false) => 
+                                when (false, false, false, false, true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().0.runningIndex.0\ := 4;
                                     \Posit32::GetTwosComplement(UInt32).4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(4) := false;
                                     \Posit32::GetTwosComplement(UInt32).4.bits.parameter.In\ <= \Posit32::FractionWithHiddenBit().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (true, false, false, false, false, false) => 
+                                when (false, false, false, true, false, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().0.runningIndex.0\ := 5;
                                     \Posit32::GetTwosComplement(UInt32).5._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(5) := false;
                                     \Posit32::GetTwosComplement(UInt32).5.bits.parameter.In\ <= \Posit32::FractionWithHiddenBit().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, false, true, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().0.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().0.runningIndex.0\ := 6;
+                                    \Posit32::GetTwosComplement(UInt32).6._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(6) := false;
+                                    \Posit32::GetTwosComplement(UInt32).6.bits.parameter.In\ <= \Posit32::FractionWithHiddenBit().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, true, false, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().0.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().0.runningIndex.0\ := 7;
+                                    \Posit32::GetTwosComplement(UInt32).7._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(7) := false;
+                                    \Posit32::GetTwosComplement(UInt32).7.bits.parameter.In\ <= \Posit32::FractionWithHiddenBit().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (true, false, false, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().0.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().0.runningIndex.0\ := 8;
+                                    \Posit32::GetTwosComplement(UInt32).8._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(8) := false;
+                                    \Posit32::GetTwosComplement(UInt32).8.bits.parameter.In\ <= \Posit32::FractionWithHiddenBit().0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -45213,6 +45772,27 @@ begin
                                     \Posit32::GetTwosComplement(UInt32).5._Started\ <= false;
                                     \Posit32::FractionWithHiddenBit().0.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).5.return\;
                                 end if;
+                            when 6 => 
+                                if (\Posit32::GetTwosComplement(UInt32).6._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().0.runningState.0\ := AfterFinished;
+                                    \Posit32::FractionWithHiddenBit().0.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).6._Started\ <= false;
+                                    \Posit32::FractionWithHiddenBit().0.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).6.return\;
+                                end if;
+                            when 7 => 
+                                if (\Posit32::GetTwosComplement(UInt32).7._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().0.runningState.0\ := AfterFinished;
+                                    \Posit32::FractionWithHiddenBit().0.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).7._Started\ <= false;
+                                    \Posit32::FractionWithHiddenBit().0.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).7.return\;
+                                end if;
+                            when 8 => 
+                                if (\Posit32::GetTwosComplement(UInt32).8._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().0.runningState.0\ := AfterFinished;
+                                    \Posit32::FractionWithHiddenBit().0.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).8._Started\ <= false;
+                                    \Posit32::FractionWithHiddenBit().0.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).8.return\;
+                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -45229,42 +45809,60 @@ begin
                         if (\Posit32::FractionWithHiddenBit().1.Posit32::GetTwosComplement(UInt32)._Started.0\) then 
                             \Posit32::FractionWithHiddenBit().1.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, true) => 
+                                when (false, false, false, false, false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().1.runningIndex.0\ := 0;
                                     \Posit32::GetTwosComplement(UInt32).0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(0) := false;
                                     \Posit32::GetTwosComplement(UInt32).0.bits.parameter.In\ <= \Posit32::FractionWithHiddenBit().1.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, false, false, true, false) => 
+                                when (false, false, false, false, false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().1.runningIndex.0\ := 1;
                                     \Posit32::GetTwosComplement(UInt32).1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(1) := false;
                                     \Posit32::GetTwosComplement(UInt32).1.bits.parameter.In\ <= \Posit32::FractionWithHiddenBit().1.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, false, true, false, false) => 
+                                when (false, false, false, false, false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().1.runningIndex.0\ := 2;
                                     \Posit32::GetTwosComplement(UInt32).2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(2) := false;
                                     \Posit32::GetTwosComplement(UInt32).2.bits.parameter.In\ <= \Posit32::FractionWithHiddenBit().1.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, true, false, false, false) => 
+                                when (false, false, false, false, false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().1.runningIndex.0\ := 3;
                                     \Posit32::GetTwosComplement(UInt32).3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(3) := false;
                                     \Posit32::GetTwosComplement(UInt32).3.bits.parameter.In\ <= \Posit32::FractionWithHiddenBit().1.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, true, false, false, false, false) => 
+                                when (false, false, false, false, true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().1.runningIndex.0\ := 4;
                                     \Posit32::GetTwosComplement(UInt32).4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(4) := false;
                                     \Posit32::GetTwosComplement(UInt32).4.bits.parameter.In\ <= \Posit32::FractionWithHiddenBit().1.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (true, false, false, false, false, false) => 
+                                when (false, false, false, true, false, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().1.runningIndex.0\ := 5;
                                     \Posit32::GetTwosComplement(UInt32).5._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(5) := false;
                                     \Posit32::GetTwosComplement(UInt32).5.bits.parameter.In\ <= \Posit32::FractionWithHiddenBit().1.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, false, true, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().1.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().1.runningIndex.0\ := 6;
+                                    \Posit32::GetTwosComplement(UInt32).6._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(6) := false;
+                                    \Posit32::GetTwosComplement(UInt32).6.bits.parameter.In\ <= \Posit32::FractionWithHiddenBit().1.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, true, false, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().1.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().1.runningIndex.0\ := 7;
+                                    \Posit32::GetTwosComplement(UInt32).7._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(7) := false;
+                                    \Posit32::GetTwosComplement(UInt32).7.bits.parameter.In\ <= \Posit32::FractionWithHiddenBit().1.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (true, false, false, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().1.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().1.runningIndex.0\ := 8;
+                                    \Posit32::GetTwosComplement(UInt32).8._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(8) := false;
+                                    \Posit32::GetTwosComplement(UInt32).8.bits.parameter.In\ <= \Posit32::FractionWithHiddenBit().1.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -45313,6 +45911,27 @@ begin
                                     \Posit32::GetTwosComplement(UInt32).5._Started\ <= false;
                                     \Posit32::FractionWithHiddenBit().1.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).5.return\;
                                 end if;
+                            when 6 => 
+                                if (\Posit32::GetTwosComplement(UInt32).6._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().1.runningState.0\ := AfterFinished;
+                                    \Posit32::FractionWithHiddenBit().1.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).6._Started\ <= false;
+                                    \Posit32::FractionWithHiddenBit().1.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).6.return\;
+                                end if;
+                            when 7 => 
+                                if (\Posit32::GetTwosComplement(UInt32).7._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().1.runningState.0\ := AfterFinished;
+                                    \Posit32::FractionWithHiddenBit().1.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).7._Started\ <= false;
+                                    \Posit32::FractionWithHiddenBit().1.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).7.return\;
+                                end if;
+                            when 8 => 
+                                if (\Posit32::GetTwosComplement(UInt32).8._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().1.runningState.0\ := AfterFinished;
+                                    \Posit32::FractionWithHiddenBit().1.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).8._Started\ <= false;
+                                    \Posit32::FractionWithHiddenBit().1.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).8.return\;
+                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -45329,42 +45948,60 @@ begin
                         if (\Posit32::FractionWithHiddenBit().2.Posit32::GetTwosComplement(UInt32)._Started.0\) then 
                             \Posit32::FractionWithHiddenBit().2.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, true) => 
+                                when (false, false, false, false, false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().2.runningIndex.0\ := 0;
                                     \Posit32::GetTwosComplement(UInt32).0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(0) := false;
                                     \Posit32::GetTwosComplement(UInt32).0.bits.parameter.In\ <= \Posit32::FractionWithHiddenBit().2.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, false, false, true, false) => 
+                                when (false, false, false, false, false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().2.runningIndex.0\ := 1;
                                     \Posit32::GetTwosComplement(UInt32).1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(1) := false;
                                     \Posit32::GetTwosComplement(UInt32).1.bits.parameter.In\ <= \Posit32::FractionWithHiddenBit().2.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, false, true, false, false) => 
+                                when (false, false, false, false, false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().2.runningIndex.0\ := 2;
                                     \Posit32::GetTwosComplement(UInt32).2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(2) := false;
                                     \Posit32::GetTwosComplement(UInt32).2.bits.parameter.In\ <= \Posit32::FractionWithHiddenBit().2.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, true, false, false, false) => 
+                                when (false, false, false, false, false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().2.runningIndex.0\ := 3;
                                     \Posit32::GetTwosComplement(UInt32).3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(3) := false;
                                     \Posit32::GetTwosComplement(UInt32).3.bits.parameter.In\ <= \Posit32::FractionWithHiddenBit().2.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, true, false, false, false, false) => 
+                                when (false, false, false, false, true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().2.runningIndex.0\ := 4;
                                     \Posit32::GetTwosComplement(UInt32).4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(4) := false;
                                     \Posit32::GetTwosComplement(UInt32).4.bits.parameter.In\ <= \Posit32::FractionWithHiddenBit().2.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (true, false, false, false, false, false) => 
+                                when (false, false, false, true, false, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().2.runningIndex.0\ := 5;
                                     \Posit32::GetTwosComplement(UInt32).5._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(5) := false;
                                     \Posit32::GetTwosComplement(UInt32).5.bits.parameter.In\ <= \Posit32::FractionWithHiddenBit().2.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, false, true, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().2.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().2.runningIndex.0\ := 6;
+                                    \Posit32::GetTwosComplement(UInt32).6._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(6) := false;
+                                    \Posit32::GetTwosComplement(UInt32).6.bits.parameter.In\ <= \Posit32::FractionWithHiddenBit().2.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, true, false, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().2.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().2.runningIndex.0\ := 7;
+                                    \Posit32::GetTwosComplement(UInt32).7._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(7) := false;
+                                    \Posit32::GetTwosComplement(UInt32).7.bits.parameter.In\ <= \Posit32::FractionWithHiddenBit().2.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (true, false, false, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().2.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().2.runningIndex.0\ := 8;
+                                    \Posit32::GetTwosComplement(UInt32).8._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(8) := false;
+                                    \Posit32::GetTwosComplement(UInt32).8.bits.parameter.In\ <= \Posit32::FractionWithHiddenBit().2.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -45413,6 +46050,27 @@ begin
                                     \Posit32::GetTwosComplement(UInt32).5._Started\ <= false;
                                     \Posit32::FractionWithHiddenBit().2.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).5.return\;
                                 end if;
+                            when 6 => 
+                                if (\Posit32::GetTwosComplement(UInt32).6._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().2.runningState.0\ := AfterFinished;
+                                    \Posit32::FractionWithHiddenBit().2.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).6._Started\ <= false;
+                                    \Posit32::FractionWithHiddenBit().2.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).6.return\;
+                                end if;
+                            when 7 => 
+                                if (\Posit32::GetTwosComplement(UInt32).7._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().2.runningState.0\ := AfterFinished;
+                                    \Posit32::FractionWithHiddenBit().2.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).7._Started\ <= false;
+                                    \Posit32::FractionWithHiddenBit().2.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).7.return\;
+                                end if;
+                            when 8 => 
+                                if (\Posit32::GetTwosComplement(UInt32).8._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().2.runningState.0\ := AfterFinished;
+                                    \Posit32::FractionWithHiddenBit().2.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).8._Started\ <= false;
+                                    \Posit32::FractionWithHiddenBit().2.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).8.return\;
+                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -45429,42 +46087,60 @@ begin
                         if (\Posit32::FractionWithHiddenBit().3.Posit32::GetTwosComplement(UInt32)._Started.0\) then 
                             \Posit32::FractionWithHiddenBit().3.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, true) => 
+                                when (false, false, false, false, false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().3.runningIndex.0\ := 0;
                                     \Posit32::GetTwosComplement(UInt32).0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(0) := false;
                                     \Posit32::GetTwosComplement(UInt32).0.bits.parameter.In\ <= \Posit32::FractionWithHiddenBit().3.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, false, false, true, false) => 
+                                when (false, false, false, false, false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().3.runningIndex.0\ := 1;
                                     \Posit32::GetTwosComplement(UInt32).1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(1) := false;
                                     \Posit32::GetTwosComplement(UInt32).1.bits.parameter.In\ <= \Posit32::FractionWithHiddenBit().3.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, false, true, false, false) => 
+                                when (false, false, false, false, false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().3.runningIndex.0\ := 2;
                                     \Posit32::GetTwosComplement(UInt32).2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(2) := false;
                                     \Posit32::GetTwosComplement(UInt32).2.bits.parameter.In\ <= \Posit32::FractionWithHiddenBit().3.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, true, false, false, false) => 
+                                when (false, false, false, false, false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().3.runningIndex.0\ := 3;
                                     \Posit32::GetTwosComplement(UInt32).3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(3) := false;
                                     \Posit32::GetTwosComplement(UInt32).3.bits.parameter.In\ <= \Posit32::FractionWithHiddenBit().3.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, true, false, false, false, false) => 
+                                when (false, false, false, false, true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().3.runningIndex.0\ := 4;
                                     \Posit32::GetTwosComplement(UInt32).4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(4) := false;
                                     \Posit32::GetTwosComplement(UInt32).4.bits.parameter.In\ <= \Posit32::FractionWithHiddenBit().3.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (true, false, false, false, false, false) => 
+                                when (false, false, false, true, false, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().3.runningIndex.0\ := 5;
                                     \Posit32::GetTwosComplement(UInt32).5._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(5) := false;
                                     \Posit32::GetTwosComplement(UInt32).5.bits.parameter.In\ <= \Posit32::FractionWithHiddenBit().3.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, false, true, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().3.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().3.runningIndex.0\ := 6;
+                                    \Posit32::GetTwosComplement(UInt32).6._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(6) := false;
+                                    \Posit32::GetTwosComplement(UInt32).6.bits.parameter.In\ <= \Posit32::FractionWithHiddenBit().3.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, true, false, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().3.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().3.runningIndex.0\ := 7;
+                                    \Posit32::GetTwosComplement(UInt32).7._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(7) := false;
+                                    \Posit32::GetTwosComplement(UInt32).7.bits.parameter.In\ <= \Posit32::FractionWithHiddenBit().3.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (true, false, false, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().3.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().3.runningIndex.0\ := 8;
+                                    \Posit32::GetTwosComplement(UInt32).8._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(8) := false;
+                                    \Posit32::GetTwosComplement(UInt32).8.bits.parameter.In\ <= \Posit32::FractionWithHiddenBit().3.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -45513,6 +46189,27 @@ begin
                                     \Posit32::GetTwosComplement(UInt32).5._Started\ <= false;
                                     \Posit32::FractionWithHiddenBit().3.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).5.return\;
                                 end if;
+                            when 6 => 
+                                if (\Posit32::GetTwosComplement(UInt32).6._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().3.runningState.0\ := AfterFinished;
+                                    \Posit32::FractionWithHiddenBit().3.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).6._Started\ <= false;
+                                    \Posit32::FractionWithHiddenBit().3.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).6.return\;
+                                end if;
+                            when 7 => 
+                                if (\Posit32::GetTwosComplement(UInt32).7._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().3.runningState.0\ := AfterFinished;
+                                    \Posit32::FractionWithHiddenBit().3.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).7._Started\ <= false;
+                                    \Posit32::FractionWithHiddenBit().3.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).7.return\;
+                                end if;
+                            when 8 => 
+                                if (\Posit32::GetTwosComplement(UInt32).8._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::FractionWithHiddenBit().3.runningState.0\ := AfterFinished;
+                                    \Posit32::FractionWithHiddenBit().3.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).8._Started\ <= false;
+                                    \Posit32::FractionWithHiddenBit().3.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).8.return\;
+                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -45529,42 +46226,60 @@ begin
                         if (\Posit32::AddBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Started.0\) then 
                             \Posit32::AddBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, true) => 
+                                when (false, false, false, false, false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).0.runningIndex.0\ := 0;
                                     \Posit32::GetTwosComplement(UInt32).0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(0) := false;
                                     \Posit32::GetTwosComplement(UInt32).0.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, false, false, true, false) => 
+                                when (false, false, false, false, false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).0.runningIndex.0\ := 1;
                                     \Posit32::GetTwosComplement(UInt32).1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(1) := false;
                                     \Posit32::GetTwosComplement(UInt32).1.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, false, true, false, false) => 
+                                when (false, false, false, false, false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).0.runningIndex.0\ := 2;
                                     \Posit32::GetTwosComplement(UInt32).2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(2) := false;
                                     \Posit32::GetTwosComplement(UInt32).2.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, true, false, false, false) => 
+                                when (false, false, false, false, false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).0.runningIndex.0\ := 3;
                                     \Posit32::GetTwosComplement(UInt32).3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(3) := false;
                                     \Posit32::GetTwosComplement(UInt32).3.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, true, false, false, false, false) => 
+                                when (false, false, false, false, true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).0.runningIndex.0\ := 4;
                                     \Posit32::GetTwosComplement(UInt32).4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(4) := false;
                                     \Posit32::GetTwosComplement(UInt32).4.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (true, false, false, false, false, false) => 
+                                when (false, false, false, true, false, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).0.runningIndex.0\ := 5;
                                     \Posit32::GetTwosComplement(UInt32).5._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(5) := false;
                                     \Posit32::GetTwosComplement(UInt32).5.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, false, true, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).0.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).0.runningIndex.0\ := 6;
+                                    \Posit32::GetTwosComplement(UInt32).6._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(6) := false;
+                                    \Posit32::GetTwosComplement(UInt32).6.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, true, false, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).0.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).0.runningIndex.0\ := 7;
+                                    \Posit32::GetTwosComplement(UInt32).7._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(7) := false;
+                                    \Posit32::GetTwosComplement(UInt32).7.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (true, false, false, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).0.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).0.runningIndex.0\ := 8;
+                                    \Posit32::GetTwosComplement(UInt32).8._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(8) := false;
+                                    \Posit32::GetTwosComplement(UInt32).8.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -45613,6 +46328,27 @@ begin
                                     \Posit32::GetTwosComplement(UInt32).5._Started\ <= false;
                                     \Posit32::AddBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).5.return\;
                                 end if;
+                            when 6 => 
+                                if (\Posit32::GetTwosComplement(UInt32).6._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).0.runningState.0\ := AfterFinished;
+                                    \Posit32::AddBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).6._Started\ <= false;
+                                    \Posit32::AddBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).6.return\;
+                                end if;
+                            when 7 => 
+                                if (\Posit32::GetTwosComplement(UInt32).7._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).0.runningState.0\ := AfterFinished;
+                                    \Posit32::AddBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).7._Started\ <= false;
+                                    \Posit32::AddBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).7.return\;
+                                end if;
+                            when 8 => 
+                                if (\Posit32::GetTwosComplement(UInt32).8._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).0.runningState.0\ := AfterFinished;
+                                    \Posit32::AddBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).8._Started\ <= false;
+                                    \Posit32::AddBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).8.return\;
+                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -45629,42 +46365,60 @@ begin
                         if (\Posit32::AddBits(UInt32,UInt32).1.Posit32::GetTwosComplement(UInt32)._Started.0\) then 
                             \Posit32::AddBits(UInt32,UInt32).1.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, true) => 
+                                when (false, false, false, false, false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).1.runningIndex.0\ := 0;
                                     \Posit32::GetTwosComplement(UInt32).0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(0) := false;
                                     \Posit32::GetTwosComplement(UInt32).0.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).1.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, false, false, true, false) => 
+                                when (false, false, false, false, false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).1.runningIndex.0\ := 1;
                                     \Posit32::GetTwosComplement(UInt32).1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(1) := false;
                                     \Posit32::GetTwosComplement(UInt32).1.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).1.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, false, true, false, false) => 
+                                when (false, false, false, false, false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).1.runningIndex.0\ := 2;
                                     \Posit32::GetTwosComplement(UInt32).2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(2) := false;
                                     \Posit32::GetTwosComplement(UInt32).2.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).1.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, true, false, false, false) => 
+                                when (false, false, false, false, false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).1.runningIndex.0\ := 3;
                                     \Posit32::GetTwosComplement(UInt32).3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(3) := false;
                                     \Posit32::GetTwosComplement(UInt32).3.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).1.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, true, false, false, false, false) => 
+                                when (false, false, false, false, true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).1.runningIndex.0\ := 4;
                                     \Posit32::GetTwosComplement(UInt32).4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(4) := false;
                                     \Posit32::GetTwosComplement(UInt32).4.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).1.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (true, false, false, false, false, false) => 
+                                when (false, false, false, true, false, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).1.runningIndex.0\ := 5;
                                     \Posit32::GetTwosComplement(UInt32).5._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(5) := false;
                                     \Posit32::GetTwosComplement(UInt32).5.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).1.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, false, true, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).1.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).1.runningIndex.0\ := 6;
+                                    \Posit32::GetTwosComplement(UInt32).6._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(6) := false;
+                                    \Posit32::GetTwosComplement(UInt32).6.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).1.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, true, false, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).1.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).1.runningIndex.0\ := 7;
+                                    \Posit32::GetTwosComplement(UInt32).7._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(7) := false;
+                                    \Posit32::GetTwosComplement(UInt32).7.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).1.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (true, false, false, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).1.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).1.runningIndex.0\ := 8;
+                                    \Posit32::GetTwosComplement(UInt32).8._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(8) := false;
+                                    \Posit32::GetTwosComplement(UInt32).8.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).1.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -45713,6 +46467,27 @@ begin
                                     \Posit32::GetTwosComplement(UInt32).5._Started\ <= false;
                                     \Posit32::AddBits(UInt32,UInt32).1.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).5.return\;
                                 end if;
+                            when 6 => 
+                                if (\Posit32::GetTwosComplement(UInt32).6._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).1.runningState.0\ := AfterFinished;
+                                    \Posit32::AddBits(UInt32,UInt32).1.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).6._Started\ <= false;
+                                    \Posit32::AddBits(UInt32,UInt32).1.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).6.return\;
+                                end if;
+                            when 7 => 
+                                if (\Posit32::GetTwosComplement(UInt32).7._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).1.runningState.0\ := AfterFinished;
+                                    \Posit32::AddBits(UInt32,UInt32).1.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).7._Started\ <= false;
+                                    \Posit32::AddBits(UInt32,UInt32).1.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).7.return\;
+                                end if;
+                            when 8 => 
+                                if (\Posit32::GetTwosComplement(UInt32).8._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).1.runningState.0\ := AfterFinished;
+                                    \Posit32::AddBits(UInt32,UInt32).1.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).8._Started\ <= false;
+                                    \Posit32::AddBits(UInt32,UInt32).1.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).8.return\;
+                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -45729,42 +46504,60 @@ begin
                         if (\Posit32::AddBits(UInt32,UInt32).2.Posit32::GetTwosComplement(UInt32)._Started.0\) then 
                             \Posit32::AddBits(UInt32,UInt32).2.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, true) => 
+                                when (false, false, false, false, false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).2.runningIndex.0\ := 0;
                                     \Posit32::GetTwosComplement(UInt32).0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(0) := false;
                                     \Posit32::GetTwosComplement(UInt32).0.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).2.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, false, false, true, false) => 
+                                when (false, false, false, false, false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).2.runningIndex.0\ := 1;
                                     \Posit32::GetTwosComplement(UInt32).1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(1) := false;
                                     \Posit32::GetTwosComplement(UInt32).1.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).2.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, false, true, false, false) => 
+                                when (false, false, false, false, false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).2.runningIndex.0\ := 2;
                                     \Posit32::GetTwosComplement(UInt32).2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(2) := false;
                                     \Posit32::GetTwosComplement(UInt32).2.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).2.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, true, false, false, false) => 
+                                when (false, false, false, false, false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).2.runningIndex.0\ := 3;
                                     \Posit32::GetTwosComplement(UInt32).3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(3) := false;
                                     \Posit32::GetTwosComplement(UInt32).3.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).2.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, true, false, false, false, false) => 
+                                when (false, false, false, false, true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).2.runningIndex.0\ := 4;
                                     \Posit32::GetTwosComplement(UInt32).4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(4) := false;
                                     \Posit32::GetTwosComplement(UInt32).4.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).2.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (true, false, false, false, false, false) => 
+                                when (false, false, false, true, false, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).2.runningIndex.0\ := 5;
                                     \Posit32::GetTwosComplement(UInt32).5._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(5) := false;
                                     \Posit32::GetTwosComplement(UInt32).5.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).2.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, false, true, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).2.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).2.runningIndex.0\ := 6;
+                                    \Posit32::GetTwosComplement(UInt32).6._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(6) := false;
+                                    \Posit32::GetTwosComplement(UInt32).6.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).2.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, true, false, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).2.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).2.runningIndex.0\ := 7;
+                                    \Posit32::GetTwosComplement(UInt32).7._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(7) := false;
+                                    \Posit32::GetTwosComplement(UInt32).7.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).2.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (true, false, false, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).2.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).2.runningIndex.0\ := 8;
+                                    \Posit32::GetTwosComplement(UInt32).8._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(8) := false;
+                                    \Posit32::GetTwosComplement(UInt32).8.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).2.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -45813,6 +46606,27 @@ begin
                                     \Posit32::GetTwosComplement(UInt32).5._Started\ <= false;
                                     \Posit32::AddBits(UInt32,UInt32).2.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).5.return\;
                                 end if;
+                            when 6 => 
+                                if (\Posit32::GetTwosComplement(UInt32).6._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).2.runningState.0\ := AfterFinished;
+                                    \Posit32::AddBits(UInt32,UInt32).2.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).6._Started\ <= false;
+                                    \Posit32::AddBits(UInt32,UInt32).2.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).6.return\;
+                                end if;
+                            when 7 => 
+                                if (\Posit32::GetTwosComplement(UInt32).7._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).2.runningState.0\ := AfterFinished;
+                                    \Posit32::AddBits(UInt32,UInt32).2.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).7._Started\ <= false;
+                                    \Posit32::AddBits(UInt32,UInt32).2.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).7.return\;
+                                end if;
+                            when 8 => 
+                                if (\Posit32::GetTwosComplement(UInt32).8._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).2.runningState.0\ := AfterFinished;
+                                    \Posit32::AddBits(UInt32,UInt32).2.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).8._Started\ <= false;
+                                    \Posit32::AddBits(UInt32,UInt32).2.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).8.return\;
+                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -45829,42 +46643,60 @@ begin
                         if (\Posit32::AddBits(UInt32,UInt32).3.Posit32::GetTwosComplement(UInt32)._Started.0\) then 
                             \Posit32::AddBits(UInt32,UInt32).3.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, true) => 
+                                when (false, false, false, false, false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).3.runningIndex.0\ := 0;
                                     \Posit32::GetTwosComplement(UInt32).0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(0) := false;
                                     \Posit32::GetTwosComplement(UInt32).0.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).3.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, false, false, true, false) => 
+                                when (false, false, false, false, false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).3.runningIndex.0\ := 1;
                                     \Posit32::GetTwosComplement(UInt32).1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(1) := false;
                                     \Posit32::GetTwosComplement(UInt32).1.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).3.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, false, true, false, false) => 
+                                when (false, false, false, false, false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).3.runningIndex.0\ := 2;
                                     \Posit32::GetTwosComplement(UInt32).2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(2) := false;
                                     \Posit32::GetTwosComplement(UInt32).2.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).3.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, true, false, false, false) => 
+                                when (false, false, false, false, false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).3.runningIndex.0\ := 3;
                                     \Posit32::GetTwosComplement(UInt32).3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(3) := false;
                                     \Posit32::GetTwosComplement(UInt32).3.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).3.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, true, false, false, false, false) => 
+                                when (false, false, false, false, true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).3.runningIndex.0\ := 4;
                                     \Posit32::GetTwosComplement(UInt32).4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(4) := false;
                                     \Posit32::GetTwosComplement(UInt32).4.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).3.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (true, false, false, false, false, false) => 
+                                when (false, false, false, true, false, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).3.runningIndex.0\ := 5;
                                     \Posit32::GetTwosComplement(UInt32).5._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(5) := false;
                                     \Posit32::GetTwosComplement(UInt32).5.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).3.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, false, true, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).3.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).3.runningIndex.0\ := 6;
+                                    \Posit32::GetTwosComplement(UInt32).6._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(6) := false;
+                                    \Posit32::GetTwosComplement(UInt32).6.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).3.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, true, false, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).3.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).3.runningIndex.0\ := 7;
+                                    \Posit32::GetTwosComplement(UInt32).7._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(7) := false;
+                                    \Posit32::GetTwosComplement(UInt32).7.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).3.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (true, false, false, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).3.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).3.runningIndex.0\ := 8;
+                                    \Posit32::GetTwosComplement(UInt32).8._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(8) := false;
+                                    \Posit32::GetTwosComplement(UInt32).8.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).3.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -45913,6 +46745,27 @@ begin
                                     \Posit32::GetTwosComplement(UInt32).5._Started\ <= false;
                                     \Posit32::AddBits(UInt32,UInt32).3.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).5.return\;
                                 end if;
+                            when 6 => 
+                                if (\Posit32::GetTwosComplement(UInt32).6._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).3.runningState.0\ := AfterFinished;
+                                    \Posit32::AddBits(UInt32,UInt32).3.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).6._Started\ <= false;
+                                    \Posit32::AddBits(UInt32,UInt32).3.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).6.return\;
+                                end if;
+                            when 7 => 
+                                if (\Posit32::GetTwosComplement(UInt32).7._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).3.runningState.0\ := AfterFinished;
+                                    \Posit32::AddBits(UInt32,UInt32).3.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).7._Started\ <= false;
+                                    \Posit32::AddBits(UInt32,UInt32).3.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).7.return\;
+                                end if;
+                            when 8 => 
+                                if (\Posit32::GetTwosComplement(UInt32).8._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).3.runningState.0\ := AfterFinished;
+                                    \Posit32::AddBits(UInt32,UInt32).3.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).8._Started\ <= false;
+                                    \Posit32::AddBits(UInt32,UInt32).3.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).8.return\;
+                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -45929,42 +46782,60 @@ begin
                         if (\Posit32::AddBits(UInt32,UInt32).4.Posit32::GetTwosComplement(UInt32)._Started.0\) then 
                             \Posit32::AddBits(UInt32,UInt32).4.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, true) => 
+                                when (false, false, false, false, false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).4.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).4.runningIndex.0\ := 0;
                                     \Posit32::GetTwosComplement(UInt32).0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(0) := false;
                                     \Posit32::GetTwosComplement(UInt32).0.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).4.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, false, false, true, false) => 
+                                when (false, false, false, false, false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).4.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).4.runningIndex.0\ := 1;
                                     \Posit32::GetTwosComplement(UInt32).1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(1) := false;
                                     \Posit32::GetTwosComplement(UInt32).1.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).4.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, false, true, false, false) => 
+                                when (false, false, false, false, false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).4.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).4.runningIndex.0\ := 2;
                                     \Posit32::GetTwosComplement(UInt32).2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(2) := false;
                                     \Posit32::GetTwosComplement(UInt32).2.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).4.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, false, true, false, false, false) => 
+                                when (false, false, false, false, false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).4.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).4.runningIndex.0\ := 3;
                                     \Posit32::GetTwosComplement(UInt32).3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(3) := false;
                                     \Posit32::GetTwosComplement(UInt32).3.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).4.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (false, true, false, false, false, false) => 
+                                when (false, false, false, false, true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).4.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).4.runningIndex.0\ := 4;
                                     \Posit32::GetTwosComplement(UInt32).4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(4) := false;
                                     \Posit32::GetTwosComplement(UInt32).4.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).4.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
-                                when (true, false, false, false, false, false) => 
+                                when (false, false, false, true, false, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).4.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).4.runningIndex.0\ := 5;
                                     \Posit32::GetTwosComplement(UInt32).5._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(5) := false;
                                     \Posit32::GetTwosComplement(UInt32).5.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).4.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, false, true, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).4.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).4.runningIndex.0\ := 6;
+                                    \Posit32::GetTwosComplement(UInt32).6._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(6) := false;
+                                    \Posit32::GetTwosComplement(UInt32).6.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).4.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, true, false, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).4.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).4.runningIndex.0\ := 7;
+                                    \Posit32::GetTwosComplement(UInt32).7._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(7) := false;
+                                    \Posit32::GetTwosComplement(UInt32).7.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).4.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (true, false, false, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).4.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).4.runningIndex.0\ := 8;
+                                    \Posit32::GetTwosComplement(UInt32).8._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(8) := false;
+                                    \Posit32::GetTwosComplement(UInt32).8.bits.parameter.In\ <= \Posit32::AddBits(UInt32,UInt32).4.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -46013,12 +46884,172 @@ begin
                                     \Posit32::GetTwosComplement(UInt32).5._Started\ <= false;
                                     \Posit32::AddBits(UInt32,UInt32).4.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).5.return\;
                                 end if;
+                            when 6 => 
+                                if (\Posit32::GetTwosComplement(UInt32).6._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).4.runningState.0\ := AfterFinished;
+                                    \Posit32::AddBits(UInt32,UInt32).4.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).6._Started\ <= false;
+                                    \Posit32::AddBits(UInt32,UInt32).4.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).6.return\;
+                                end if;
+                            when 7 => 
+                                if (\Posit32::GetTwosComplement(UInt32).7._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).4.runningState.0\ := AfterFinished;
+                                    \Posit32::AddBits(UInt32,UInt32).4.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).7._Started\ <= false;
+                                    \Posit32::AddBits(UInt32,UInt32).4.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).7.return\;
+                                end if;
+                            when 8 => 
+                                if (\Posit32::GetTwosComplement(UInt32).8._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).4.runningState.0\ := AfterFinished;
+                                    \Posit32::AddBits(UInt32,UInt32).4.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).8._Started\ <= false;
+                                    \Posit32::AddBits(UInt32,UInt32).4.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).8.return\;
+                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
                         if (\Posit32::AddBits(UInt32,UInt32).4.Posit32::GetTwosComplement(UInt32)._Started.0\ = false) then 
                             \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::AddBits(UInt32,UInt32).4.runningState.0\ := WaitingForStarted;
                             \Posit32::AddBits(UInt32,UInt32).4.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= false;
+                        end if;
+                end case;
+
+
+                -- Invocation handler #0 out of 1 corresponding to System.UInt32 Lombiq.Arithmetics.Posit32::MultiplyBits(System.UInt32,System.UInt32).0
+                case \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::MultiplyBits(UInt32,UInt32).0.runningState.0\ is 
+                    when WaitingForStarted => 
+                        if (\Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Started.0\) then 
+                            \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= false;
+                            case \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\ is 
+                                when (false, false, false, false, false, false, false, false, true) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::MultiplyBits(UInt32,UInt32).0.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::MultiplyBits(UInt32,UInt32).0.runningIndex.0\ := 0;
+                                    \Posit32::GetTwosComplement(UInt32).0._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(0) := false;
+                                    \Posit32::GetTwosComplement(UInt32).0.bits.parameter.In\ <= \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, false, false, false, false, false, false, true, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::MultiplyBits(UInt32,UInt32).0.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::MultiplyBits(UInt32,UInt32).0.runningIndex.0\ := 1;
+                                    \Posit32::GetTwosComplement(UInt32).1._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(1) := false;
+                                    \Posit32::GetTwosComplement(UInt32).1.bits.parameter.In\ <= \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, false, false, false, false, false, true, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::MultiplyBits(UInt32,UInt32).0.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::MultiplyBits(UInt32,UInt32).0.runningIndex.0\ := 2;
+                                    \Posit32::GetTwosComplement(UInt32).2._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(2) := false;
+                                    \Posit32::GetTwosComplement(UInt32).2.bits.parameter.In\ <= \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, false, false, false, false, true, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::MultiplyBits(UInt32,UInt32).0.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::MultiplyBits(UInt32,UInt32).0.runningIndex.0\ := 3;
+                                    \Posit32::GetTwosComplement(UInt32).3._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(3) := false;
+                                    \Posit32::GetTwosComplement(UInt32).3.bits.parameter.In\ <= \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, false, false, false, true, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::MultiplyBits(UInt32,UInt32).0.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::MultiplyBits(UInt32,UInt32).0.runningIndex.0\ := 4;
+                                    \Posit32::GetTwosComplement(UInt32).4._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(4) := false;
+                                    \Posit32::GetTwosComplement(UInt32).4.bits.parameter.In\ <= \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, false, false, true, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::MultiplyBits(UInt32,UInt32).0.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::MultiplyBits(UInt32,UInt32).0.runningIndex.0\ := 5;
+                                    \Posit32::GetTwosComplement(UInt32).5._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(5) := false;
+                                    \Posit32::GetTwosComplement(UInt32).5.bits.parameter.In\ <= \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, false, true, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::MultiplyBits(UInt32,UInt32).0.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::MultiplyBits(UInt32,UInt32).0.runningIndex.0\ := 6;
+                                    \Posit32::GetTwosComplement(UInt32).6._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(6) := false;
+                                    \Posit32::GetTwosComplement(UInt32).6.bits.parameter.In\ <= \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (false, true, false, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::MultiplyBits(UInt32,UInt32).0.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::MultiplyBits(UInt32,UInt32).0.runningIndex.0\ := 7;
+                                    \Posit32::GetTwosComplement(UInt32).7._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(7) := false;
+                                    \Posit32::GetTwosComplement(UInt32).7.bits.parameter.In\ <= \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when (true, false, false, false, false, false, false, false, false) => 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::MultiplyBits(UInt32,UInt32).0.runningState.0\ := WaitingForFinished;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::MultiplyBits(UInt32,UInt32).0.runningIndex.0\ := 8;
+                                    \Posit32::GetTwosComplement(UInt32).8._Started\ <= true;
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).targetAvailableIndicator\(8) := false;
+                                    \Posit32::GetTwosComplement(UInt32).8.bits.parameter.In\ <= \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\;
+                                when others => 
+                                    null;
+                            end case;
+                        end if;
+                    when WaitingForFinished => 
+                        case \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::MultiplyBits(UInt32,UInt32).0.runningIndex.0\ is 
+                            when 0 => 
+                                if (\Posit32::GetTwosComplement(UInt32).0._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::MultiplyBits(UInt32,UInt32).0.runningState.0\ := AfterFinished;
+                                    \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).0._Started\ <= false;
+                                    \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).0.return\;
+                                end if;
+                            when 1 => 
+                                if (\Posit32::GetTwosComplement(UInt32).1._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::MultiplyBits(UInt32,UInt32).0.runningState.0\ := AfterFinished;
+                                    \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).1._Started\ <= false;
+                                    \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).1.return\;
+                                end if;
+                            when 2 => 
+                                if (\Posit32::GetTwosComplement(UInt32).2._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::MultiplyBits(UInt32,UInt32).0.runningState.0\ := AfterFinished;
+                                    \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).2._Started\ <= false;
+                                    \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).2.return\;
+                                end if;
+                            when 3 => 
+                                if (\Posit32::GetTwosComplement(UInt32).3._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::MultiplyBits(UInt32,UInt32).0.runningState.0\ := AfterFinished;
+                                    \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).3._Started\ <= false;
+                                    \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).3.return\;
+                                end if;
+                            when 4 => 
+                                if (\Posit32::GetTwosComplement(UInt32).4._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::MultiplyBits(UInt32,UInt32).0.runningState.0\ := AfterFinished;
+                                    \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).4._Started\ <= false;
+                                    \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).4.return\;
+                                end if;
+                            when 5 => 
+                                if (\Posit32::GetTwosComplement(UInt32).5._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::MultiplyBits(UInt32,UInt32).0.runningState.0\ := AfterFinished;
+                                    \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).5._Started\ <= false;
+                                    \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).5.return\;
+                                end if;
+                            when 6 => 
+                                if (\Posit32::GetTwosComplement(UInt32).6._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::MultiplyBits(UInt32,UInt32).0.runningState.0\ := AfterFinished;
+                                    \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).6._Started\ <= false;
+                                    \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).6.return\;
+                                end if;
+                            when 7 => 
+                                if (\Posit32::GetTwosComplement(UInt32).7._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::MultiplyBits(UInt32,UInt32).0.runningState.0\ := AfterFinished;
+                                    \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).7._Started\ <= false;
+                                    \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).7.return\;
+                                end if;
+                            when 8 => 
+                                if (\Posit32::GetTwosComplement(UInt32).8._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::MultiplyBits(UInt32,UInt32).0.runningState.0\ := AfterFinished;
+                                    \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= true;
+                                    \Posit32::GetTwosComplement(UInt32).8._Started\ <= false;
+                                    \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32).return.0\ <= \Posit32::GetTwosComplement(UInt32).8.return\;
+                                end if;
+                        end case;
+                    when AfterFinished => 
+                        -- Invoking components need to pull down the Started signal to false.
+                        if (\Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Started.0\ = false) then 
+                            \Hast::InternalInvocationProxy().Posit32::GetTwosComplement(UInt32).Posit32::MultiplyBits(UInt32,UInt32).0.runningState.0\ := WaitingForStarted;
+                            \Posit32::MultiplyBits(UInt32,UInt32).0.Posit32::GetTwosComplement(UInt32)._Finished.0\ <= false;
                         end if;
                 end case;
 
@@ -46649,15 +47680,14 @@ begin
     -- System.Void Hast::InternalInvocationProxy().System.UInt32 Lombiq.Arithmetics.Posit32::AddBits(System.UInt32,System.UInt32) end
 
 
-    -- System.Void Hast::InternalInvocationProxy().System.UInt32 Lombiq.Arithmetics.Posit32::MultiplyE2Bits(System.UInt32,System.UInt32,System.Int32) start
+    -- System.Void Hast::InternalInvocationProxy().System.UInt32 Lombiq.Arithmetics.Posit32::MultiplyBits(System.UInt32,System.UInt32) start
     -- Signal connections for Lombiq.Arithmetics.Posit32 Lombiq.Arithmetics.Posit32::op_Multiply(Lombiq.Arithmetics.Posit32,Lombiq.Arithmetics.Posit32).0 (#0):
-    \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._Started\ <= \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyE2Bits(UInt32,UInt32,Int32)._Started.0\;
-    \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.leftBits.parameter.In\ <= \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).leftBits.parameter.Out.0\;
-    \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.rightBits.parameter.In\ <= \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).rightBits.parameter.Out.0\;
-    \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.size.parameter.In\ <= \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).size.parameter.Out.0\;
-    \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyE2Bits(UInt32,UInt32,Int32)._Finished.0\ <= \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0._Finished\;
-    \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).return.0\ <= \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.return\;
-    -- System.Void Hast::InternalInvocationProxy().System.UInt32 Lombiq.Arithmetics.Posit32::MultiplyE2Bits(System.UInt32,System.UInt32,System.Int32) end
+    \Posit32::MultiplyBits(UInt32,UInt32).0._Started\ <= \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyBits(UInt32,UInt32)._Started.0\;
+    \Posit32::MultiplyBits(UInt32,UInt32).0.leftBits.parameter.In\ <= \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyBits(UInt32,UInt32).leftBits.parameter.Out.0\;
+    \Posit32::MultiplyBits(UInt32,UInt32).0.rightBits.parameter.In\ <= \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyBits(UInt32,UInt32).rightBits.parameter.Out.0\;
+    \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyBits(UInt32,UInt32)._Finished.0\ <= \Posit32::MultiplyBits(UInt32,UInt32).0._Finished\;
+    \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::MultiplyBits(UInt32,UInt32).return.0\ <= \Posit32::MultiplyBits(UInt32,UInt32).0.return\;
+    -- System.Void Hast::InternalInvocationProxy().System.UInt32 Lombiq.Arithmetics.Posit32::MultiplyBits(System.UInt32,System.UInt32) end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.SByte Lombiq.Arithmetics.Posit32::GetRegimeKValue() start
@@ -46730,16 +47760,6 @@ begin
     \Int32 Posit32::op_Explicit(Posit32).3.Posit32::FractionWithHiddenBit()._Finished.0\ <= \Posit32::FractionWithHiddenBit().3._Finished\;
     \Int32 Posit32::op_Explicit(Posit32).3.Posit32::FractionWithHiddenBit().return.0\ <= \Posit32::FractionWithHiddenBit().3.return\;
     -- System.Void Hast::InternalInvocationProxy().System.UInt32 Lombiq.Arithmetics.Posit32::FractionWithHiddenBit() end
-
-
-    -- System.Void Hast::InternalInvocationProxy().System.Byte Lombiq.Arithmetics.PositHelper::LengthOfRunOfBits(System.UInt32,System.Byte) start
-    -- Signal connections for System.UInt32 Lombiq.Arithmetics.Posit32::MultiplyE2Bits(System.UInt32,System.UInt32,System.Int32).0 (#0):
-    \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._Started\ <= \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.PositHelper::LengthOfRunOfBits(UInt32,Byte)._Started.0\;
-    \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.bits.parameter.In\ <= \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.PositHelper::LengthOfRunOfBits(UInt32,Byte).bits.parameter.Out.0\;
-    \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.startingPosition.parameter.In\ <= \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.PositHelper::LengthOfRunOfBits(UInt32,Byte).startingPosition.parameter.Out.0\;
-    \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.PositHelper::LengthOfRunOfBits(UInt32,Byte)._Finished.0\ <= \PositHelper::LengthOfRunOfBits(UInt32,Byte).0._Finished\;
-    \Posit32::MultiplyE2Bits(UInt32,UInt32,Int32).0.PositHelper::LengthOfRunOfBits(UInt32,Byte).return.0\ <= \PositHelper::LengthOfRunOfBits(UInt32,Byte).0.return\;
-    -- System.Void Hast::InternalInvocationProxy().System.Byte Lombiq.Arithmetics.PositHelper::LengthOfRunOfBits(System.UInt32,System.Byte) end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.Posit32Calculator::CalculateIntegerSumUpToNumber(Hast.Transformer.SimpleMemory.SimpleMemory) start
