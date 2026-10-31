@@ -10,6 +10,14 @@ CPU tests check all 8/16-bit encodings and independent exact 32-bit boundary/see
 regression covers transformation. Vendor synthesis, simulation, and device execution remain deferred.
 This source-only sample is excluded from the NuGet test solution until its APIs exist in the published package.
 
+`PositAdditionCalculator` provides bounded raw-memory entry points for `Posit8E2`, `Posit16E2`, `Posit32E2`, and
+`Posit32`. Allocate eight 32-bit cells: cells 0-2 hold the encodings a, b, and c, and cells 3-7 receive a + b, a - b,
+(a + b) - c, a + (b - c), and (a - c) + b, rounding once after every operator in source order. Narrow encodings occupy
+the low 8/16 bits. CPU tests check all 65,536 posit8 pairs and hard/seeded 16/32-bit pairs and triples against an
+independent exact-sum oracle, including triples whose explicitly fused sum differs; the Catapult VHDL regression covers
+transformation. Vendor synthesis, simulation, and device execution remain deferred.
+This source-only sample is excluded from the NuGet test solution until its APIs exist in the published package.
+
 `PositDivisionCalculator` provides bounded raw-memory entry points for `Posit8E2`, `Posit16E2`, `Posit32E2`, and
 `Posit32` division. Allocate three 32-bit cells: cells 0 and 1 hold the dividend and divisor encodings, and cell 2
 receives the correctly rounded quotient. Narrow encodings occupy the low 8/16 bits. NaR operands and division by zero

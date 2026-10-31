@@ -19,6 +19,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="xunit.runner.json" />
+    <Compile Include="..\..\src\Libraries\External\Lombiq.Arithmetics\Lombiq.Arithmetics.Tests\PositTests\PositAdditionReference.cs" Link="Reference\PositAdditionReference.cs" />
     <Compile Include="..\..\src\Libraries\External\Lombiq.Arithmetics\Lombiq.Arithmetics.Tests\PositTests\PositDivisionReference.cs" Link="Reference\PositDivisionReference.cs" />
     <Compile Include="..\..\src\Libraries\External\Lombiq.Arithmetics\Lombiq.Arithmetics.Tests\PositTests\PositEncodingReference.cs" Link="Reference\PositEncodingReference.cs" />
     <Compile Include="..\..\src\Libraries\External\Lombiq.Arithmetics\Lombiq.Arithmetics.Tests\PositTests\PositRoundingReference.cs" Link="Reference\PositRoundingReference.cs" />
