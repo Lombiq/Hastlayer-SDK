@@ -22,7 +22,7 @@ public class XilinxSamplesVerificationTests
 
         // Using a smaller degree because we don't need excess repetition.
         configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
-            new MemberInvocationInstanceCountConfigurationForMethod<ParallelAlgorithm>(p => p.Run(null), 0)
+            new MemberInvocationInstanceCountConfigurationForMethod<ParallelAlgorithm>(p => p.Run(memory: null), lambdaExpressionIndex: 0)
             {
                 MaxDegreeOfParallelism = 3,
             });

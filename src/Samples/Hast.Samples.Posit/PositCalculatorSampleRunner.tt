@@ -1,0 +1,160 @@
+<#@ template  debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ include file="PositCalculatorTemplateFileManager.ttinclude" #>
+<#
+var manager = TemplateFileManager.Create(this);
+var positSizes = new byte[] {8,16,32,64};
+
+for (var i = 0; i<3; i++){
+    for(var MaximumExponentSize = 0; MaximumExponentSize <=4; MaximumExponentSize++){
+        var positName = $"Posit{positSizes[i]}E{MaximumExponentSize}";
+        var calculatorName = $"{positName}Calculator";
+        var className = $"{calculatorName}SampleRunner";
+        var arrayName = $"posit{positSizes[i]}E{MaximumExponentSize}Array";
+        var powerOfRealNumber = i == 0 ? 5 : (int)Math.Pow(10, Math.Log(positSizes[i], 2));
+        var powerOfRealReal = i == 0 ? "0.5F" : "1.015625F";
+        manager.StartNewFile(className + ".cs");
+#>
+using Hast.Layer;
+using Hast.Samples.Posit.Extensions;
+using Lombiq.Arithmetics;
+using Lombiq.HelpfulLibraries.Common.Utilities;
+using System;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Hast.Samples.Posit;
+
+internal static class <#= className #>
+{
+    public static void Configure(HardwareGenerationConfiguration configuration) =>
+        configuration.AddHardwareEntryPointType<<#= calculatorName #>>();
+
+    public static async Task RunAsync(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)
+    {
+        RunSoftwareBenchmarks(hastlayer, hardwareRepresentation);
+
+        var positCalculator = await hastlayer.GenerateProxyAsync(hardwareRepresentation, new <#= calculatorName #>());
+
+        _ = positCalculator.CalculateIntegerSumUpToNumber(
+            100000,
+            hastlayer,
+            hardwareRepresentation.HardwareGenerationConfiguration);
+
+<# if (i == 0) { #>
+        positCalculator.CalculatePowerOfReal(<#= powerOfRealNumber #>, <#= powerOfRealReal #>);
+<# } else { #>
+        positCalculator.CalculatePowerOfReal(
+            <#= powerOfRealNumber #>,
+            <#= powerOfRealReal #>,
+            hastlayer,
+            hardwareRepresentation.HardwareGenerationConfiguration);
+<# } #>
+
+        var numbers = new int[<#= calculatorName #>.MaxDegreeOfParallelism];
+        for (int i = 0; i < <#= calculatorName #>.MaxDegreeOfParallelism; i++)
+        {
+            numbers[i] = 100000 + (i % 2 == 0 ? -1 : 1);
+        }
+
+        _ = positCalculator.ParallelizedCalculateIntegerSumUpToNumbers(
+            numbers,
+            hastlayer,
+            hardwareRepresentation.HardwareGenerationConfiguration);
+
+        var <#= arrayName #> = new uint[100000];
+
+        for (var i = 0; i < 100000; i++)
+        {
+            <#= arrayName #>[i] = i % 2 == 0
+                ? new <#= positName #>(0.25F * 2 * i).PositBits
+                : new <#= positName #>(0.25F * -2 * i).PositBits;
+        }
+
+        _ = positCalculator.AddPositsInArray(<#= arrayName #>);
+    }
+
+    public static void RunSoftwareBenchmarks(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)
+    {
+        var positCalculator = new <#= calculatorName #>();
+
+        // Not to run the benchmark below the first time, because JIT compiling can affect it.
+        positCalculator.CalculateIntegerSumUpToNumber(100000);
+        var sw = Stopwatch.StartNew();
+        var integerSumUpToNumber = positCalculator.CalculateIntegerSumUpToNumber(
+            100000,
+            hastlayer,
+            hardwareRepresentation.HardwareGenerationConfiguration);
+        sw.Stop();
+
+        const string elapsed = "Elapsed: ";
+
+        Console.WriteLine(StringHelper.ConcatenateConvertiblesInvariant("Result of counting up to 100000: ", integerSumUpToNumber));
+        Console.WriteLine(StringHelper.ConcatenateConvertiblesInvariant(elapsed, sw.ElapsedMilliseconds, "ms"));
+
+        Console.WriteLine();
+
+        positCalculator.CalculatePowerOfReal(100000, 1.0001F, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+        sw = Stopwatch.StartNew();
+        var powerOfReal = positCalculator.CalculatePowerOfReal(
+            <#= powerOfRealNumber #>,
+            <#= powerOfRealReal #>,
+            hastlayer,
+            hardwareRepresentation.HardwareGenerationConfiguration);
+        sw.Stop();
+
+        Console.WriteLine(StringHelper.ConcatenateConvertiblesInvariant("Result of power of real number: ", powerOfReal));
+        Console.WriteLine(StringHelper.ConcatenateConvertiblesInvariant(elapsed, sw.ElapsedMilliseconds, "ms"));
+
+        Console.WriteLine();
+
+        var numbers = new int[<#= calculatorName #>.MaxDegreeOfParallelism];
+        for (int i = 0; i < <#= calculatorName #>.MaxDegreeOfParallelism; i++)
+        {
+            numbers[i] = 100000 + (i % 2 == 0 ? -1 : 1);
+        }
+
+        positCalculator.ParallelizedCalculateIntegerSumUpToNumbers(numbers, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+        sw = Stopwatch.StartNew();
+        var integerSumsUpToNumbers = positCalculator.ParallelizedCalculateIntegerSumUpToNumbers(
+            numbers,
+            hastlayer,
+            hardwareRepresentation.HardwareGenerationConfiguration);
+        sw.Stop();
+
+        Console.WriteLine(
+            "Result of counting up to ~100000 parallelized: " +
+            string.Join(", ", integerSumsUpToNumbers.Select(number => number.ToTechnicalString())));
+        Console.WriteLine(StringHelper.ConcatenateConvertiblesInvariant(elapsed, sw.ElapsedMilliseconds, "ms"));
+
+        Console.WriteLine();
+
+        var <#= arrayName #> = new uint[100000];
+
+        for (var i = 0; i < 100000; i++)
+        {
+            <#= arrayName #>[i] = i % 2 == 0
+                ? new <#= positName #>(0.25F * 2 * i).PositBits
+                : new <#= positName #>(0.25F * -2 * i).PositBits;
+        }
+
+        positCalculator.AddPositsInArray(<#= arrayName #>, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+        sw = Stopwatch.StartNew();
+        var positsInArraySum = positCalculator.AddPositsInArray(
+            <#= arrayName #>,
+            hastlayer,
+            hardwareRepresentation.HardwareGenerationConfiguration);
+        sw.Stop();
+
+        Console.WriteLine(StringHelper.ConcatenateConvertiblesInvariant("Result of addition of posits in array: ", positsInArraySum));
+        Console.WriteLine(StringHelper.ConcatenateConvertiblesInvariant(elapsed, sw.ElapsedMilliseconds, "ms"));
+        Console.WriteLine();
+    }
+}
+<#
+    }
+}
+
+manager.Process();
+#>

@@ -46,6 +46,28 @@ internal static class ConstantValueSubstitutionHelper
             passedExpression,
             typeDeclarationLookupTable);
 
+    /// <summary>
+    /// Finds the argument that the given method invocation or object creation passes to the parameter with the given
+    /// full name. Returns <see langword="null"/> if there is no such argument, e.g. because the parameter's default value
+    /// is used.
+    /// </summary>
+    public static Expression FindArgumentPassedToParameter(
+        Expression callExpression,
+        string parameterFullName,
+        ITypeDeclarationLookupTable typeDeclarationLookupTable)
+    {
+        var arguments = callExpression switch
+        {
+            InvocationExpression invocationExpression => invocationExpression.Arguments,
+            ObjectCreateExpression objectCreateExpression => objectCreateExpression.Arguments,
+            _ => null,
+        };
+
+        return arguments?.FirstOrDefault(argument =>
+            FindParameterForExpressionPassedToCall(callExpression, arguments, argument, typeDeclarationLookupTable)?
+                .GetFullName() == parameterFullName);
+    }
+
     // This could be optimized not to look up everything every time when called from VisitObjectCreateExpression() and
     // VisitInvocationExpression().
     private static ParameterDeclaration FindParameterForExpressionPassedToCall(

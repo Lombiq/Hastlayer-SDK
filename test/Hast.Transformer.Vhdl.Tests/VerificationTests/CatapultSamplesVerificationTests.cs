@@ -34,6 +34,30 @@ public class CatapultSamplesVerificationTests : SamplesVerificationTestsBase
         (await CreateVhdlForPosit32SampleAsync()).ShouldMatchApprovedWithVhdlConfiguration();
 
     [Fact]
+    public async Task PositComparisonSampleMatchesApproved() =>
+        (await CreateVhdlForPositComparisonSampleAsync()).ShouldMatchApprovedWithVhdlConfiguration();
+
+    [Fact]
+    public async Task PositDivisionSampleMatchesApproved() =>
+        (await CreateVhdlForPositDivisionSampleAsync()).ShouldMatchApprovedWithVhdlConfiguration();
+
+    [Fact]
+    public async Task PositMultiplicationSampleMatchesApproved() =>
+        (await CreateVhdlForPositMultiplicationSampleAsync()).ShouldMatchApprovedWithVhdlConfiguration();
+
+    [Fact]
+    public async Task PositPrecisionConversionSampleMatchesApproved() =>
+        (await CreateVhdlForPositPrecisionConversionSampleAsync()).ShouldMatchApprovedWithVhdlConfiguration();
+
+    [Fact]
+    public async Task PositUnarySampleMatchesApproved() =>
+        (await CreateVhdlForPositUnarySampleAsync()).ShouldMatchApprovedWithVhdlConfiguration();
+
+    [Fact]
+    public async Task PositAdditionSampleMatchesApproved() =>
+        (await CreateVhdlForPositAdditionSampleAsync()).ShouldMatchApprovedWithVhdlConfiguration();
+
+    [Fact]
     public async Task Posit32AdvancedSampleMatchesApproved() =>
         (await CreateSourceForAdvancedPosit32SampleAsync()).ShouldMatchApprovedWithVhdlConfiguration();
 

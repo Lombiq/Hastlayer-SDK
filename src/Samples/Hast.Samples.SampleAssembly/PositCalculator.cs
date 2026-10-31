@@ -58,6 +58,7 @@ public static class PositCalculatorExtensions
         "Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_BitwiseAnd(Lombiq.Arithmetics.BitMask,Lombiq.Arithmetics.BitMask).array",
         "Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_RightShift(Lombiq.Arithmetics.BitMask,System.Int32).array",
         "Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_LeftShift(Lombiq.Arithmetics.BitMask,System.Int32).array",
+        "Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_OnesComplement(Lombiq.Arithmetics.BitMask).array",
     ];
 
     public static int CalculateIntegerSumUpToNumber(

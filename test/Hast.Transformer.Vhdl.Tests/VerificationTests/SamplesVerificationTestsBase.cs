@@ -170,6 +170,42 @@ public abstract class SamplesVerificationTestsBase : VerificationTestFixtureBase
                     });
             }));
 
+    protected Task<VhdlHardwareDescription> CreateVhdlForPositComparisonSampleAsync() =>
+        Host.RunGetAsync(provider => TransformAssembliesToVhdlAsync(
+            provider.GetService<ITransformer>(),
+            [typeof(PositComparisonCalculator).Assembly, typeof(Posit32).Assembly],
+            configuration => configuration.AddHardwareEntryPointType<PositComparisonCalculator>()));
+
+    protected Task<VhdlHardwareDescription> CreateVhdlForPositDivisionSampleAsync() =>
+        Host.RunGetAsync(provider => TransformAssembliesToVhdlAsync(
+            provider.GetService<ITransformer>(),
+            [typeof(PositDivisionCalculator).Assembly, typeof(Posit32).Assembly],
+            configuration => configuration.AddHardwareEntryPointType<PositDivisionCalculator>()));
+
+    protected Task<VhdlHardwareDescription> CreateVhdlForPositMultiplicationSampleAsync() =>
+        Host.RunGetAsync(provider => TransformAssembliesToVhdlAsync(
+            provider.GetService<ITransformer>(),
+            [typeof(PositMultiplicationCalculator).Assembly, typeof(Posit32).Assembly],
+            configuration => configuration.AddHardwareEntryPointType<PositMultiplicationCalculator>()));
+
+    protected Task<VhdlHardwareDescription> CreateVhdlForPositPrecisionConversionSampleAsync() =>
+        Host.RunGetAsync(provider => TransformAssembliesToVhdlAsync(
+            provider.GetService<ITransformer>(),
+            [typeof(PositPrecisionConversionCalculator).Assembly, typeof(Posit32).Assembly],
+            configuration => configuration.AddHardwareEntryPointType<PositPrecisionConversionCalculator>()));
+
+    protected Task<VhdlHardwareDescription> CreateVhdlForPositUnarySampleAsync() =>
+        Host.RunGetAsync(provider => TransformAssembliesToVhdlAsync(
+            provider.GetService<ITransformer>(),
+            [typeof(PositUnaryCalculator).Assembly, typeof(Posit32).Assembly],
+            configuration => configuration.AddHardwareEntryPointType<PositUnaryCalculator>()));
+
+    protected Task<VhdlHardwareDescription> CreateVhdlForPositAdditionSampleAsync() =>
+        Host.RunGetAsync(provider => TransformAssembliesToVhdlAsync(
+            provider.GetService<ITransformer>(),
+            [typeof(PositAdditionCalculator).Assembly, typeof(Posit32).Assembly],
+            configuration => configuration.AddHardwareEntryPointType<PositAdditionCalculator>()));
+
     protected Task<VhdlHardwareDescription> CreateVhdlForPosit32SampleWithInliningAsync() =>
         Host.RunGetAsync(provider => TransformAssembliesToVhdlAsync(
             provider.GetService<ITransformer>(),

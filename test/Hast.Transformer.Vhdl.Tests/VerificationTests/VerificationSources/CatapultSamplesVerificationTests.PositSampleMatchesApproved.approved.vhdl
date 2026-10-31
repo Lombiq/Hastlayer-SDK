@@ -3174,13 +3174,13 @@ begin
                         \BitMask::.ctor(BitMask).0.this\ := \BitMask::.ctor(BitMask).0.this.parameter.In\;
                         \BitMask::.ctor(BitMask).0.source\ := \BitMask::.ctor(BitMask).0.source.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- @this.Size = 32;
+                        -- @this.Size = source.Size;
                         -- 
-                        \BitMask::.ctor(BitMask).0.this\.\Size\ := SmartResize(unsigned(to_signed(32, 32)), 16);
+                        \BitMask::.ctor(BitMask).0.this\.\Size\ := \BitMask::.ctor(BitMask).0.source\.\Size\;
                         -- The following section was transformed from the .NET statement below:
-                        -- @this.SegmentCount = 1;
+                        -- @this.SegmentCount = source.SegmentCount;
                         -- 
-                        \BitMask::.ctor(BitMask).0.this\.\SegmentCount\ := to_unsigned(1, 16);
+                        \BitMask::.ctor(BitMask).0.this\.\SegmentCount\ := \BitMask::.ctor(BitMask).0.source\.\SegmentCount\;
                         -- The following section was transformed from the .NET statement below:
                         -- @this.Segments = source.Segments;
                         -- 
@@ -3293,24 +3293,25 @@ begin
         Variable \BitMask::SetOne(UInt16).0._State\: \BitMask::SetOne(UInt16).0._States\ := \BitMask::SetOne(UInt16).0._State_0\;
         Variable \BitMask::SetOne(UInt16).0.this\: \Lombiq.Arithmetics.BitMask\;
         Variable \BitMask::SetOne(UInt16).0.index\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \BitMask::SetOne(UInt16).0.binaryOperationResult.0\: boolean := false;
+        Variable \BitMask::SetOne(UInt16).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BitMask::SetOne(UInt16).0.binaryOperationResult.1\: boolean := false;
         Variable \BitMask::SetOne(UInt16).0.object38\: \Lombiq.Arithmetics.BitMask\;
         Variable \BitMask::SetOne(UInt16).0.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BitMask::SetOne(UInt16).0.remainderOperand69\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::SetOne(UInt16).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BitMask::SetOne(UInt16).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BitMask::SetOne(UInt16).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BitMask::SetOne(UInt16).0.index2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BitMask::SetOne(UInt16).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BitMask::SetOne(UInt16).0.index2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BitMask::SetOne(UInt16).0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BitMask::SetOne(UInt16).0.remainderOperand70\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \BitMask::SetOne(UInt16).0.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::SetOne(UInt16).0.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::SetOne(UInt16).0.binaryOperationResult.7\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \BitMask::SetOne(UInt16).0.binaryOperationResult.8\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \BitMask::SetOne(UInt16).0.binaryOperationResult.9\: boolean := false;
+        Variable \BitMask::SetOne(UInt16).0.binaryOperationResult.8\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::SetOne(UInt16).0.binaryOperationResult.9\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \BitMask::SetOne(UInt16).0.binaryOperationResult.10\: boolean := false;
         Variable \BitMask::SetOne(UInt16).0.array1\: \unsigned32_Array\(0 to 0) := (others => to_unsigned(0, 32));
-        Variable \BitMask::SetOne(UInt16).0.binaryOperationResult.10\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::SetOne(UInt16).0.binaryOperationResult.11\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BitMask::SetOne(UInt16).0.binaryOperationResult.12\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BitMask::SetOne(UInt16).0.return.0\: \Lombiq.Arithmetics.BitMask\;
         Variable \BitMask::SetOne(UInt16).0.object39\: \Lombiq.Arithmetics.BitMask\;
     begin 
@@ -3324,23 +3325,24 @@ begin
                 \BitMask::SetOne(UInt16).0.BitMask::FromImmutableArray(UInt32]],UInt16)._Started.0\ <= false;
                 \BitMask::SetOne(UInt16).0._State\ := \BitMask::SetOne(UInt16).0._State_0\;
                 \BitMask::SetOne(UInt16).0.index\ := to_unsigned(0, 16);
-                \BitMask::SetOne(UInt16).0.binaryOperationResult.0\ := false;
+                \BitMask::SetOne(UInt16).0.binaryOperationResult.0\ := to_signed(0, 32);
+                \BitMask::SetOne(UInt16).0.binaryOperationResult.1\ := false;
                 \BitMask::SetOne(UInt16).0.num\ := to_signed(0, 32);
                 \BitMask::SetOne(UInt16).0.remainderOperand69\ := to_signed(0, 32);
-                \BitMask::SetOne(UInt16).0.binaryOperationResult.1\ := to_signed(0, 32);
                 \BitMask::SetOne(UInt16).0.binaryOperationResult.2\ := to_signed(0, 32);
                 \BitMask::SetOne(UInt16).0.binaryOperationResult.3\ := to_signed(0, 32);
-                \BitMask::SetOne(UInt16).0.index2\ := to_signed(0, 32);
                 \BitMask::SetOne(UInt16).0.binaryOperationResult.4\ := to_signed(0, 32);
+                \BitMask::SetOne(UInt16).0.index2\ := to_signed(0, 32);
+                \BitMask::SetOne(UInt16).0.binaryOperationResult.5\ := to_signed(0, 32);
                 \BitMask::SetOne(UInt16).0.remainderOperand70\ := to_unsigned(0, 32);
-                \BitMask::SetOne(UInt16).0.binaryOperationResult.5\ := to_unsigned(0, 32);
                 \BitMask::SetOne(UInt16).0.binaryOperationResult.6\ := to_unsigned(0, 32);
                 \BitMask::SetOne(UInt16).0.binaryOperationResult.7\ := to_unsigned(0, 32);
-                \BitMask::SetOne(UInt16).0.binaryOperationResult.8\ := to_signed(0, 64);
-                \BitMask::SetOne(UInt16).0.binaryOperationResult.9\ := false;
+                \BitMask::SetOne(UInt16).0.binaryOperationResult.8\ := to_unsigned(0, 32);
+                \BitMask::SetOne(UInt16).0.binaryOperationResult.9\ := to_signed(0, 64);
+                \BitMask::SetOne(UInt16).0.binaryOperationResult.10\ := false;
                 \BitMask::SetOne(UInt16).0.array1\ := (others => to_unsigned(0, 32));
-                \BitMask::SetOne(UInt16).0.binaryOperationResult.10\ := to_unsigned(0, 32);
                 \BitMask::SetOne(UInt16).0.binaryOperationResult.11\ := to_unsigned(0, 32);
+                \BitMask::SetOne(UInt16).0.binaryOperationResult.12\ := to_unsigned(0, 32);
             else 
                 case \BitMask::SetOne(UInt16).0._State\ is 
                     when \BitMask::SetOne(UInt16).0._State_0\ => 
@@ -3364,25 +3366,26 @@ begin
                         \BitMask::SetOne(UInt16).0.this\ := \BitMask::SetOne(UInt16).0.this.parameter.In\;
                         \BitMask::SetOne(UInt16).0.index\ := \BitMask::SetOne(UInt16).0.index.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- if ((int)(index) > 32) {
+                        -- if ((int)(index) > (int)((int)(@this.SegmentCount) * 32)) {
                         -- 	BitMask object38;
                         -- 	object38 = new BitMask (@this);
                         -- 	return object38;
                         -- }
                         -- 
-                        \BitMask::SetOne(UInt16).0.binaryOperationResult.0\ := signed(SmartResize((\BitMask::SetOne(UInt16).0.index\), 32)) > to_signed(32, 32);
+                        \BitMask::SetOne(UInt16).0.binaryOperationResult.0\ := SmartResize(signed(SmartResize((\BitMask::SetOne(UInt16).0.this\.\SegmentCount\), 32)) * to_signed(32, 32), 32);
+                        \BitMask::SetOne(UInt16).0.binaryOperationResult.1\ := signed(SmartResize((\BitMask::SetOne(UInt16).0.index\), 32)) > (\BitMask::SetOne(UInt16).0.binaryOperationResult.0\);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \BitMask::SetOne(UInt16).0._State_4\ and ends in state \BitMask::SetOne(UInt16).0._State_5\.
                         --     * Execution after either branch will continue in the following state: \BitMask::SetOne(UInt16).0._State_3\.
 
-                        if (\BitMask::SetOne(UInt16).0.binaryOperationResult.0\) then 
+                        if (\BitMask::SetOne(UInt16).0.binaryOperationResult.1\) then 
                             \BitMask::SetOne(UInt16).0._State\ := \BitMask::SetOne(UInt16).0._State_4\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
                             \BitMask::SetOne(UInt16).0._State\ := \BitMask::SetOne(UInt16).0._State_3\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.50535
+                        -- Clock cycles needed to complete this state (approximation): 0.6501
                     when \BitMask::SetOne(UInt16).0._State_3\ => 
                         -- State after the if-else which was started in state \BitMask::SetOne(UInt16).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
@@ -3398,8 +3401,8 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num = remainderOperand69 - remainderOperand69 / 32 * 32;
                         -- 
-                        \BitMask::SetOne(UInt16).0.binaryOperationResult.1\ := \BitMask::SetOne(UInt16).0.remainderOperand69\ / to_signed(32, 32);
-                        \BitMask::SetOne(UInt16).0.binaryOperationResult.2\ := SmartResize(\BitMask::SetOne(UInt16).0.binaryOperationResult.1\ * to_signed(32, 32), 32);
+                        \BitMask::SetOne(UInt16).0.binaryOperationResult.2\ := \BitMask::SetOne(UInt16).0.remainderOperand69\ / to_signed(32, 32);
+                        \BitMask::SetOne(UInt16).0.binaryOperationResult.3\ := SmartResize(\BitMask::SetOne(UInt16).0.binaryOperationResult.2\ * to_signed(32, 32), 32);
                         \BitMask::SetOne(UInt16).0._State\ := \BitMask::SetOne(UInt16).0._State_6\;
                         -- Clock cycles needed to complete this state (approximation): 0.70365
                     when \BitMask::SetOne(UInt16).0._State_4\ => 
@@ -3448,16 +3451,16 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \BitMask::SetOne(UInt16).0._State_6\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BitMask::SetOne(UInt16).0.binaryOperationResult.3\ := \BitMask::SetOne(UInt16).0.remainderOperand69\ - \BitMask::SetOne(UInt16).0.binaryOperationResult.2\;
-                        \BitMask::SetOne(UInt16).0.num\ := \BitMask::SetOne(UInt16).0.binaryOperationResult.3\;
+                        \BitMask::SetOne(UInt16).0.binaryOperationResult.4\ := \BitMask::SetOne(UInt16).0.remainderOperand69\ - \BitMask::SetOne(UInt16).0.binaryOperationResult.3\;
+                        \BitMask::SetOne(UInt16).0.num\ := \BitMask::SetOne(UInt16).0.binaryOperationResult.4\;
                         -- The following section was transformed from the .NET statement below:
                         -- int index2;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- index2 = (int)((int)(index) >> 5);
                         -- 
-                        \BitMask::SetOne(UInt16).0.binaryOperationResult.4\ := shift_right(signed(SmartResize((\BitMask::SetOne(UInt16).0.index\), 32)), to_integer(unsigned(SmartResize(to_signed(5, 32), 5) and "11111")));
-                        \BitMask::SetOne(UInt16).0.index2\ := (\BitMask::SetOne(UInt16).0.binaryOperationResult.4\);
+                        \BitMask::SetOne(UInt16).0.binaryOperationResult.5\ := shift_right(signed(SmartResize((\BitMask::SetOne(UInt16).0.index\), 32)), to_integer(unsigned(SmartResize(to_signed(5, 32), 5) and "11111")));
+                        \BitMask::SetOne(UInt16).0.index2\ := (\BitMask::SetOne(UInt16).0.binaryOperationResult.5\);
                         -- The following section was transformed from the .NET statement below:
                         -- uint remainderOperand70;
                         -- 
@@ -3468,31 +3471,31 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.6621
                     when \BitMask::SetOne(UInt16).0._State_7\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BitMask::SetOne(UInt16).0.binaryOperationResult.5\ := shift_right(\BitMask::SetOne(UInt16).0.this\.\Segments\(to_integer(\BitMask::SetOne(UInt16).0.index2\)), to_integer(unsigned(SmartResize(unsigned(\BitMask::SetOne(UInt16).0.num\), 5) and "11111")));
-                        \BitMask::SetOne(UInt16).0.remainderOperand70\ := (\BitMask::SetOne(UInt16).0.binaryOperationResult.5\);
+                        \BitMask::SetOne(UInt16).0.binaryOperationResult.6\ := shift_right(\BitMask::SetOne(UInt16).0.this\.\Segments\(to_integer(\BitMask::SetOne(UInt16).0.index2\)), to_integer(unsigned(SmartResize(unsigned(\BitMask::SetOne(UInt16).0.num\), 5) and "11111")));
+                        \BitMask::SetOne(UInt16).0.remainderOperand70\ := (\BitMask::SetOne(UInt16).0.binaryOperationResult.6\);
                         -- The following section was transformed from the .NET statement below:
                         -- if ((long)(remainderOperand70 - remainderOperand70 / 2u * 2u) == 0L) {
                         -- 	uint[] array1;
                         -- 	array1 = new uint[1];
                         -- 	System.Array.Copy (@this.Segments, array1, 1);
                         -- 	array1 [index2] = @this.Segments [index2] | (uint)(1 << num);
-                        -- 	return BitMask.FromImmutableArray (array1, 32);
+                        -- 	return BitMask.FromImmutableArray (array1, @this.Size);
                         -- }
                         -- 
-                        \BitMask::SetOne(UInt16).0.binaryOperationResult.6\ := \BitMask::SetOne(UInt16).0.remainderOperand70\ / to_unsigned(2, 32);
-                        \BitMask::SetOne(UInt16).0.binaryOperationResult.7\ := SmartResize(\BitMask::SetOne(UInt16).0.binaryOperationResult.6\ * to_unsigned(2, 32), 32);
+                        \BitMask::SetOne(UInt16).0.binaryOperationResult.7\ := \BitMask::SetOne(UInt16).0.remainderOperand70\ / to_unsigned(2, 32);
+                        \BitMask::SetOne(UInt16).0.binaryOperationResult.8\ := SmartResize(\BitMask::SetOne(UInt16).0.binaryOperationResult.7\ * to_unsigned(2, 32), 32);
                         \BitMask::SetOne(UInt16).0._State\ := \BitMask::SetOne(UInt16).0._State_8\;
                         -- Clock cycles needed to complete this state (approximation): 0.9321
                     when \BitMask::SetOne(UInt16).0._State_8\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BitMask::SetOne(UInt16).0.binaryOperationResult.8\ := signed(SmartResize(\BitMask::SetOne(UInt16).0.remainderOperand70\ - \BitMask::SetOne(UInt16).0.binaryOperationResult.7\, 64));
-                        \BitMask::SetOne(UInt16).0.binaryOperationResult.9\ := (\BitMask::SetOne(UInt16).0.binaryOperationResult.8\) = to_signed(0, 64);
+                        \BitMask::SetOne(UInt16).0.binaryOperationResult.9\ := signed(SmartResize(\BitMask::SetOne(UInt16).0.remainderOperand70\ - \BitMask::SetOne(UInt16).0.binaryOperationResult.8\, 64));
+                        \BitMask::SetOne(UInt16).0.binaryOperationResult.10\ := (\BitMask::SetOne(UInt16).0.binaryOperationResult.9\) = to_signed(0, 64);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \BitMask::SetOne(UInt16).0._State_10\ and ends in state \BitMask::SetOne(UInt16).0._State_11\.
                         --     * Execution after either branch will continue in the following state: \BitMask::SetOne(UInt16).0._State_9\.
 
-                        if (\BitMask::SetOne(UInt16).0.binaryOperationResult.9\) then 
+                        if (\BitMask::SetOne(UInt16).0.binaryOperationResult.10\) then 
                             \BitMask::SetOne(UInt16).0._State\ := \BitMask::SetOne(UInt16).0._State_10\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
@@ -3527,7 +3530,7 @@ begin
                         -- 	array1 = new uint[1];
                         -- 	System.Array.Copy (@this.Segments, array1, 1);
                         -- 	array1 [index2] = @this.Segments [index2] | (uint)(1 << num);
-                        -- 	return BitMask.FromImmutableArray (array1, 32);
+                        -- 	return BitMask.FromImmutableArray (array1, @this.Size);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -3544,15 +3547,15 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- array1 [index2] = @this.Segments [index2] | (uint)(1 << num);
                         -- 
-                        \BitMask::SetOne(UInt16).0.binaryOperationResult.10\ := unsigned(shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(\BitMask::SetOne(UInt16).0.num\, 5)))));
-                        \BitMask::SetOne(UInt16).0.binaryOperationResult.11\ := \BitMask::SetOne(UInt16).0.this\.\Segments\(to_integer(\BitMask::SetOne(UInt16).0.index2\)) or (\BitMask::SetOne(UInt16).0.binaryOperationResult.10\);
-                        \BitMask::SetOne(UInt16).0.array1\(to_integer(\BitMask::SetOne(UInt16).0.index2\)) := \BitMask::SetOne(UInt16).0.binaryOperationResult.11\;
+                        \BitMask::SetOne(UInt16).0.binaryOperationResult.11\ := unsigned(shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(\BitMask::SetOne(UInt16).0.num\, 5)))));
+                        \BitMask::SetOne(UInt16).0.binaryOperationResult.12\ := \BitMask::SetOne(UInt16).0.this\.\Segments\(to_integer(\BitMask::SetOne(UInt16).0.index2\)) or (\BitMask::SetOne(UInt16).0.binaryOperationResult.11\);
+                        \BitMask::SetOne(UInt16).0.array1\(to_integer(\BitMask::SetOne(UInt16).0.index2\)) := \BitMask::SetOne(UInt16).0.binaryOperationResult.12\;
                         -- The following section was transformed from the .NET statement below:
-                        -- return BitMask.FromImmutableArray (array1, 32);
+                        -- return BitMask.FromImmutableArray (array1, @this.Size);
                         -- 
                         -- Starting state machine invocation for the following method: Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::FromImmutableArray(System.Collections.Immutable.ImmutableArray`1[[System.UInt32]],System.UInt16)
                         \BitMask::SetOne(UInt16).0.BitMask::FromImmutableArray(UInt32]],UInt16).segments.parameter.Out.0\ <= \BitMask::SetOne(UInt16).0.array1\;
-                        \BitMask::SetOne(UInt16).0.BitMask::FromImmutableArray(UInt32]],UInt16).size.parameter.Out.0\ <= SmartResize(unsigned(to_signed(32, 32)), 16);
+                        \BitMask::SetOne(UInt16).0.BitMask::FromImmutableArray(UInt32]],UInt16).size.parameter.Out.0\ <= \BitMask::SetOne(UInt16).0.this\.\Size\;
                         \BitMask::SetOne(UInt16).0.BitMask::FromImmutableArray(UInt32]],UInt16)._Started.0\ <= true;
                         \BitMask::SetOne(UInt16).0._State\ := \BitMask::SetOne(UInt16).0._State_11\;
                         -- Clock cycles needed to complete this state (approximation): 0.5685
@@ -7035,14 +7038,14 @@ begin
                         -- 
                         \BitMask::FindMostSignificantOnePosition().0.num2\ := SmartResize(unsigned(to_signed(1, 32)), 16);
                         -- The following section was transformed from the .NET statement below:
-                        -- while ((int)(num2) <= 1) {
+                        -- while ((int)(num2) <= (int)(@this.SegmentCount)) {
                         -- 	uint num3;
-                        -- 	num3 = @this.Segments [(int)(1 - (int)(num2))];
+                        -- 	num3 = @this.Segments [(int)((int)(@this.SegmentCount) - (int)(num2))];
                         -- 	while ((long)(num3) != 0L) {
                         -- 		num3 = num3 >> 1;
                         -- 		num = (ushort)((int)(num) + 1);
                         -- 		if ((long)(num3) == 0L) {
-                        -- 			return (ushort)((int)((1 - (int)(num2)) * 32) + (int)(num));
+                        -- 			return (ushort)((int)(((int)(@this.SegmentCount) - (int)(num2)) * 32) + (int)(num));
                         -- 		}
                         -- 	}
                         -- 	num2 = (ushort)((int)(num2) + 1);
@@ -7054,17 +7057,17 @@ begin
                     when \BitMask::FindMostSignificantOnePosition().0._State_3\ => 
                         -- Repeated state of the while loop which was started in state \BitMask::FindMostSignificantOnePosition().0._State_2\.
                         -- The while loop's condition:
-                        \BitMask::FindMostSignificantOnePosition().0.binaryOperationResult.0\ := signed(SmartResize((\BitMask::FindMostSignificantOnePosition().0.num2\), 32)) <= to_signed(1, 32);
+                        \BitMask::FindMostSignificantOnePosition().0.binaryOperationResult.0\ := signed(SmartResize((\BitMask::FindMostSignificantOnePosition().0.num2\), 32)) <= signed(SmartResize((\BitMask::FindMostSignificantOnePosition().0.this\.\SegmentCount\), 32));
                         if (\BitMask::FindMostSignificantOnePosition().0.binaryOperationResult.0\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	uint num3;
-                            -- 	num3 = @this.Segments [(int)(1 - (int)(num2))];
+                            -- 	num3 = @this.Segments [(int)((int)(@this.SegmentCount) - (int)(num2))];
                             -- 	while ((long)(num3) != 0L) {
                             -- 		num3 = num3 >> 1;
                             -- 		num = (ushort)((int)(num) + 1);
                             -- 		if ((long)(num3) == 0L) {
-                            -- 			return (ushort)((int)((1 - (int)(num2)) * 32) + (int)(num));
+                            -- 			return (ushort)((int)(((int)(@this.SegmentCount) - (int)(num2)) * 32) + (int)(num));
                             -- 		}
                             -- 	}
                             -- 	num2 = (ushort)((int)(num2) + 1);
@@ -7074,16 +7077,16 @@ begin
                             -- uint num3;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- num3 = @this.Segments [(int)(1 - (int)(num2))];
+                            -- num3 = @this.Segments [(int)((int)(@this.SegmentCount) - (int)(num2))];
                             -- 
-                            \BitMask::FindMostSignificantOnePosition().0.binaryOperationResult.1\ := to_signed(1, 32) - signed(SmartResize((\BitMask::FindMostSignificantOnePosition().0.num2\), 32));
+                            \BitMask::FindMostSignificantOnePosition().0.binaryOperationResult.1\ := signed(SmartResize((\BitMask::FindMostSignificantOnePosition().0.this\.\SegmentCount\), 32)) - signed(SmartResize((\BitMask::FindMostSignificantOnePosition().0.num2\), 32));
                             \BitMask::FindMostSignificantOnePosition().0.num3\ := \BitMask::FindMostSignificantOnePosition().0.this\.\Segments\(to_integer((\BitMask::FindMostSignificantOnePosition().0.binaryOperationResult.1\)));
                             -- The following section was transformed from the .NET statement below:
                             -- while ((long)(num3) != 0L) {
                             -- 	num3 = num3 >> 1;
                             -- 	num = (ushort)((int)(num) + 1);
                             -- 	if ((long)(num3) == 0L) {
-                            -- 		return (ushort)((int)((1 - (int)(num2)) * 32) + (int)(num));
+                            -- 		return (ushort)((int)(((int)(@this.SegmentCount) - (int)(num2)) * 32) + (int)(num));
                             -- 	}
                             -- }
                             -- 
@@ -7111,7 +7114,7 @@ begin
                             -- 	num3 = num3 >> 1;
                             -- 	num = (ushort)((int)(num) + 1);
                             -- 	if ((long)(num3) == 0L) {
-                            -- 		return (ushort)((int)((1 - (int)(num2)) * 32) + (int)(num));
+                            -- 		return (ushort)((int)(((int)(@this.SegmentCount) - (int)(num2)) * 32) + (int)(num));
                             -- 	}
                             -- }
                             -- 
@@ -7146,7 +7149,7 @@ begin
                         \BitMask::FindMostSignificantOnePosition().0.num\ := (\BitMask::FindMostSignificantOnePosition().0.binaryOperationResult.4\);
                         -- The following section was transformed from the .NET statement below:
                         -- if ((long)(num3) == 0L) {
-                        -- 	return (ushort)((int)((1 - (int)(num2)) * 32) + (int)(num));
+                        -- 	return (ushort)((int)(((int)(@this.SegmentCount) - (int)(num2)) * 32) + (int)(num));
                         -- }
                         -- 
                         \BitMask::FindMostSignificantOnePosition().0.binaryOperationResult.5\ := signed(SmartResize((\BitMask::FindMostSignificantOnePosition().0.num3\), 64)) = to_signed(0, 64);
@@ -7173,13 +7176,13 @@ begin
                         -- True branch of the if-else started in state \BitMask::FindMostSignificantOnePosition().0._State_7\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	return (ushort)((int)((1 - (int)(num2)) * 32) + (int)(num));
+                        -- 	return (ushort)((int)(((int)(@this.SegmentCount) - (int)(num2)) * 32) + (int)(num));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- return (ushort)((int)((1 - (int)(num2)) * 32) + (int)(num));
+                        -- return (ushort)((int)(((int)(@this.SegmentCount) - (int)(num2)) * 32) + (int)(num));
                         -- 
-                        \BitMask::FindMostSignificantOnePosition().0.binaryOperationResult.6\ := to_signed(1, 32) - signed(SmartResize((\BitMask::FindMostSignificantOnePosition().0.num2\), 32));
+                        \BitMask::FindMostSignificantOnePosition().0.binaryOperationResult.6\ := signed(SmartResize((\BitMask::FindMostSignificantOnePosition().0.this\.\SegmentCount\), 32)) - signed(SmartResize((\BitMask::FindMostSignificantOnePosition().0.num2\), 32));
                         \BitMask::FindMostSignificantOnePosition().0.binaryOperationResult.7\ := SmartResize((\BitMask::FindMostSignificantOnePosition().0.binaryOperationResult.6\) * to_signed(32, 32), 32);
                         \BitMask::FindMostSignificantOnePosition().0.binaryOperationResult.8\ := SmartResize(unsigned((\BitMask::FindMostSignificantOnePosition().0.binaryOperationResult.7\) + signed(SmartResize((\BitMask::FindMostSignificantOnePosition().0.num\), 32))), 16);
                         \BitMask::FindMostSignificantOnePosition().0.return\ <= (\BitMask::FindMostSignificantOnePosition().0.binaryOperationResult.8\);
