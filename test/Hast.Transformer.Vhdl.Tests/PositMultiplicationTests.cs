@@ -39,13 +39,20 @@ public class PositMultiplicationTests
                 memory.WriteUInt32(2, ~expected);
                 calculate(memory);
 
-                var actual = memory.ReadUInt32(2);
-                var operandsPreserved = memory.ReadUInt32(0) == left && memory.ReadUInt32(1) == right;
-                if ((actual == expected && operandsPreserved) || failures.Count >= MaximumReportedMismatches) continue;
+                CheckCell(0, "left operand", left);
+                CheckCell(1, "right operand", right);
+                CheckCell(2, "product", expected);
 
-                failures.Add(string.Create(
-                    CultureInfo.InvariantCulture,
-                    $"Posit{size}: 0x{left:X8} * 0x{right:X8} expected 0x{expected:X8}, got 0x{actual:X8}."));
+                void CheckCell(int cell, string content, uint expectedValue)
+                {
+                    var actualValue = memory.ReadUInt32(cell);
+                    if (actualValue == expectedValue || failures.Count >= MaximumReportedMismatches) return;
+
+                    failures.Add(string.Create(
+                        CultureInfo.InvariantCulture,
+                        $"{calculate.Method.Name} memory cell {cell} ({content}), posit{size} 0x{left:X8} * 0x{right:X8}: " +
+                        $"expected 0x{expectedValue:X8}, got 0x{actualValue:X8}."));
+                }
             }
         }
 
@@ -66,7 +73,7 @@ public class PositMultiplicationTests
         foreach (var (left, right, _) in PositMultiplicationReference.TiePairs(size, 20))
         {
             yield return (left, right);
-            yield return (PositMultiplicationReference.Negate(left, size), right);
+            yield return (PositAdditionReference.NegateBits(left, size), right);
         }
     }
 }
