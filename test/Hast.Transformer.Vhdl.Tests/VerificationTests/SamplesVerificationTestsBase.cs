@@ -176,6 +176,12 @@ public abstract class SamplesVerificationTestsBase : VerificationTestFixtureBase
             [typeof(PositComparisonCalculator).Assembly, typeof(Posit32).Assembly],
             configuration => configuration.AddHardwareEntryPointType<PositComparisonCalculator>()));
 
+    protected Task<VhdlHardwareDescription> CreateVhdlForPositMultiplicationSampleAsync() =>
+        Host.RunGetAsync(provider => TransformAssembliesToVhdlAsync(
+            provider.GetService<ITransformer>(),
+            [typeof(PositMultiplicationCalculator).Assembly, typeof(Posit32).Assembly],
+            configuration => configuration.AddHardwareEntryPointType<PositMultiplicationCalculator>()));
+
     protected Task<VhdlHardwareDescription> CreateVhdlForPositPrecisionConversionSampleAsync() =>
         Host.RunGetAsync(provider => TransformAssembliesToVhdlAsync(
             provider.GetService<ITransformer>(),

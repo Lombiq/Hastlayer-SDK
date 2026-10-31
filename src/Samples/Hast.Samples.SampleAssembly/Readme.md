@@ -17,3 +17,11 @@ the low 8/16 bits. CPU tests check all 65,536 posit8 pairs and hard/seeded 16/32
 independent exact-sum oracle, including triples whose explicitly fused sum differs; the Catapult VHDL regression covers
 transformation. Vendor synthesis, simulation, and device execution remain deferred.
 This source-only sample is excluded from the NuGet test solution until its APIs exist in the published package.
+
+`PositMultiplicationCalculator` provides bounded raw-memory entry points for `Posit8E2`, `Posit16E2`, `Posit32E2`, and
+`Posit32`. Allocate three 32-bit cells: cells 0 and 1 hold the operand encodings, and cell 2 receives their product,
+rounded once from the exact value as the Posit Standard (2022) defines in sections 4.1 and 5.4. Narrow encodings
+occupy the low 8/16 bits. NaR is decided before zero, so zero times NaR is NaR. CPU tests check all 65,536 posit8
+pairs and independent exact hard/seeded 16/32-bit vectors; the Catapult VHDL regression covers transformation. Vendor
+synthesis, simulation, and device execution remain deferred.
+This source-only sample is excluded from the NuGet test solution until its APIs exist in the published package.
