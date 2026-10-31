@@ -34,6 +34,10 @@ public class CatapultSamplesVerificationTests : SamplesVerificationTestsBase
         (await CreateVhdlForPosit32SampleAsync()).ShouldMatchApprovedWithVhdlConfiguration();
 
     [Fact]
+    public async Task PositComparisonSampleMatchesApproved() =>
+        (await CreateVhdlForPositComparisonSampleAsync()).ShouldMatchApprovedWithVhdlConfiguration();
+
+    [Fact]
     public async Task Posit32AdvancedSampleMatchesApproved() =>
         (await CreateSourceForAdvancedPosit32SampleAsync()).ShouldMatchApprovedWithVhdlConfiguration();
 

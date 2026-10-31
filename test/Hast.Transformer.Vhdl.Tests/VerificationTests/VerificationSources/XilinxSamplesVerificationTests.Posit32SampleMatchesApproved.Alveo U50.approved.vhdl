@@ -1316,48 +1316,6 @@ architecture Imp of Hast_IP is
     -- System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().4 declarations end
 
 
-    -- System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().5 declarations start
-    -- State machine states:
-    type \Posit32::IsPositive().5._States\ is (
-        \Posit32::IsPositive().5._State_0\, 
-        \Posit32::IsPositive().5._State_1\, 
-        \Posit32::IsPositive().5._State_2\);
-    -- Signals:
-    Signal \Posit32::IsPositive().5._Finished\: boolean := false;
-    Signal \Posit32::IsPositive().5.return\: boolean := false;
-    Signal \Posit32::IsPositive().5._Started\: boolean := false;
-    Signal \Posit32::IsPositive().5.this.parameter.In\: \Lombiq.Arithmetics.Posit32\;
-    -- System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().5 declarations end
-
-
-    -- System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().6 declarations start
-    -- State machine states:
-    type \Posit32::IsPositive().6._States\ is (
-        \Posit32::IsPositive().6._State_0\, 
-        \Posit32::IsPositive().6._State_1\, 
-        \Posit32::IsPositive().6._State_2\);
-    -- Signals:
-    Signal \Posit32::IsPositive().6._Finished\: boolean := false;
-    Signal \Posit32::IsPositive().6.return\: boolean := false;
-    Signal \Posit32::IsPositive().6._Started\: boolean := false;
-    Signal \Posit32::IsPositive().6.this.parameter.In\: \Lombiq.Arithmetics.Posit32\;
-    -- System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().6 declarations end
-
-
-    -- System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().7 declarations start
-    -- State machine states:
-    type \Posit32::IsPositive().7._States\ is (
-        \Posit32::IsPositive().7._State_0\, 
-        \Posit32::IsPositive().7._State_1\, 
-        \Posit32::IsPositive().7._State_2\);
-    -- Signals:
-    Signal \Posit32::IsPositive().7._Finished\: boolean := false;
-    Signal \Posit32::IsPositive().7.return\: boolean := false;
-    Signal \Posit32::IsPositive().7._Started\: boolean := false;
-    Signal \Posit32::IsPositive().7.this.parameter.In\: \Lombiq.Arithmetics.Posit32\;
-    -- System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().7 declarations end
-
-
     -- System.Boolean Lombiq.Arithmetics.Posit32::IsNaN().0 declarations start
     -- State machine states:
     type \Posit32::IsNaN().0._States\ is (
@@ -6187,28 +6145,18 @@ architecture Imp of Hast_IP is
         \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_0\, 
         \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_1\, 
         \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_2\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_3\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_4\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_5\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_6\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_7\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_8\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_9\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_10\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_11\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_12\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_13\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_14\);
+        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_3\);
     -- Signals:
     Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._Finished\: boolean := false;
     Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.return\: boolean := false;
-    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive().this.parameter.Out.0\: \Lombiq.Arithmetics.Posit32\;
-    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive()._Started.0\: boolean := false;
+    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::CompareTo(Posit32).this.parameter.Out.0\: \Lombiq.Arithmetics.Posit32\;
+    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::CompareTo(Posit32).obj.parameter.Out.0\: \Lombiq.Arithmetics.Posit32\;
+    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::CompareTo(Posit32)._Started.0\: boolean := false;
     Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._Started\: boolean := false;
     Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.left.parameter.In\: \Lombiq.Arithmetics.Posit32\;
     Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.right.parameter.In\: \Lombiq.Arithmetics.Posit32\;
-    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive()._Finished.0\: boolean := false;
-    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive().return.0\: boolean := false;
+    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::CompareTo(Posit32)._Finished.0\: boolean := false;
+    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::CompareTo(Posit32).return.0\: signed(31 downto 0) := to_signed(0, 32);
     -- System.Boolean Lombiq.Arithmetics.Posit32::op_GreaterThan(Lombiq.Arithmetics.Posit32,Lombiq.Arithmetics.Posit32).0 declarations end
 
 
@@ -6218,28 +6166,18 @@ architecture Imp of Hast_IP is
         \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_0\, 
         \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_1\, 
         \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_2\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_3\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_4\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_5\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_6\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_7\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_8\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_9\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_10\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_11\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_12\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_13\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_14\);
+        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_3\);
     -- Signals:
     Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._Finished\: boolean := false;
     Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.return\: boolean := false;
-    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive().this.parameter.Out.0\: \Lombiq.Arithmetics.Posit32\;
-    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive()._Started.0\: boolean := false;
+    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::CompareTo(Posit32).this.parameter.Out.0\: \Lombiq.Arithmetics.Posit32\;
+    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::CompareTo(Posit32).obj.parameter.Out.0\: \Lombiq.Arithmetics.Posit32\;
+    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::CompareTo(Posit32)._Started.0\: boolean := false;
     Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._Started\: boolean := false;
     Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.left.parameter.In\: \Lombiq.Arithmetics.Posit32\;
     Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.right.parameter.In\: \Lombiq.Arithmetics.Posit32\;
-    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive()._Finished.0\: boolean := false;
-    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive().return.0\: boolean := false;
+    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::CompareTo(Posit32)._Finished.0\: boolean := false;
+    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::CompareTo(Posit32).return.0\: signed(31 downto 0) := to_signed(0, 32);
     -- System.Boolean Lombiq.Arithmetics.Posit32::op_GreaterThan(Lombiq.Arithmetics.Posit32,Lombiq.Arithmetics.Posit32).1 declarations end
 
 
@@ -6249,28 +6187,18 @@ architecture Imp of Hast_IP is
         \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_0\, 
         \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_1\, 
         \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_2\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_3\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_4\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_5\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_6\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_7\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_8\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_9\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_10\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_11\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_12\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_13\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_14\);
+        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_3\);
     -- Signals:
     Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._Finished\: boolean := false;
     Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.return\: boolean := false;
-    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive().this.parameter.Out.0\: \Lombiq.Arithmetics.Posit32\;
-    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive()._Started.0\: boolean := false;
+    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::CompareTo(Posit32).this.parameter.Out.0\: \Lombiq.Arithmetics.Posit32\;
+    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::CompareTo(Posit32).obj.parameter.Out.0\: \Lombiq.Arithmetics.Posit32\;
+    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::CompareTo(Posit32)._Started.0\: boolean := false;
     Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._Started\: boolean := false;
     Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.left.parameter.In\: \Lombiq.Arithmetics.Posit32\;
     Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.right.parameter.In\: \Lombiq.Arithmetics.Posit32\;
-    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive()._Finished.0\: boolean := false;
-    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive().return.0\: boolean := false;
+    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::CompareTo(Posit32)._Finished.0\: boolean := false;
+    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::CompareTo(Posit32).return.0\: signed(31 downto 0) := to_signed(0, 32);
     -- System.Boolean Lombiq.Arithmetics.Posit32::op_GreaterThan(Lombiq.Arithmetics.Posit32,Lombiq.Arithmetics.Posit32).2 declarations end
 
 
@@ -6280,28 +6208,18 @@ architecture Imp of Hast_IP is
         \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_0\, 
         \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_1\, 
         \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_2\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_3\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_4\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_5\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_6\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_7\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_8\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_9\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_10\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_11\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_12\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_13\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_14\);
+        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_3\);
     -- Signals:
     Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._Finished\: boolean := false;
     Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.return\: boolean := false;
-    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive().this.parameter.Out.0\: \Lombiq.Arithmetics.Posit32\;
-    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive()._Started.0\: boolean := false;
+    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::CompareTo(Posit32).this.parameter.Out.0\: \Lombiq.Arithmetics.Posit32\;
+    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::CompareTo(Posit32).obj.parameter.Out.0\: \Lombiq.Arithmetics.Posit32\;
+    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::CompareTo(Posit32)._Started.0\: boolean := false;
     Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._Started\: boolean := false;
     Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.left.parameter.In\: \Lombiq.Arithmetics.Posit32\;
     Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.right.parameter.In\: \Lombiq.Arithmetics.Posit32\;
-    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive()._Finished.0\: boolean := false;
-    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive().return.0\: boolean := false;
+    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::CompareTo(Posit32)._Finished.0\: boolean := false;
+    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::CompareTo(Posit32).return.0\: signed(31 downto 0) := to_signed(0, 32);
     -- System.Boolean Lombiq.Arithmetics.Posit32::op_GreaterThan(Lombiq.Arithmetics.Posit32,Lombiq.Arithmetics.Posit32).3 declarations end
 
 
@@ -6311,28 +6229,18 @@ architecture Imp of Hast_IP is
         \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_0\, 
         \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_1\, 
         \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_2\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_3\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_4\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_5\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_6\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_7\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_8\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_9\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_10\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_11\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_12\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_13\, 
-        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_14\);
+        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_3\);
     -- Signals:
     Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._Finished\: boolean := false;
     Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.return\: boolean := false;
-    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive().this.parameter.Out.0\: \Lombiq.Arithmetics.Posit32\;
-    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive()._Started.0\: boolean := false;
+    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::CompareTo(Posit32).this.parameter.Out.0\: \Lombiq.Arithmetics.Posit32\;
+    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::CompareTo(Posit32).obj.parameter.Out.0\: \Lombiq.Arithmetics.Posit32\;
+    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::CompareTo(Posit32)._Started.0\: boolean := false;
     Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._Started\: boolean := false;
     Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.left.parameter.In\: \Lombiq.Arithmetics.Posit32\;
     Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.right.parameter.In\: \Lombiq.Arithmetics.Posit32\;
-    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive()._Finished.0\: boolean := false;
-    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive().return.0\: boolean := false;
+    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::CompareTo(Posit32)._Finished.0\: boolean := false;
+    Signal \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::CompareTo(Posit32).return.0\: signed(31 downto 0) := to_signed(0, 32);
     -- System.Boolean Lombiq.Arithmetics.Posit32::op_GreaterThan(Lombiq.Arithmetics.Posit32,Lombiq.Arithmetics.Posit32).4 declarations end
 
 
@@ -6686,6 +6594,101 @@ architecture Imp of Hast_IP is
     Signal \Int32 Posit32::op_Explicit(Posit32).3.Posit32::IsPositive()._Finished.0\: boolean := false;
     Signal \Int32 Posit32::op_Explicit(Posit32).3.Posit32::IsPositive().return.0\: boolean := false;
     -- System.Int32 Lombiq.Arithmetics.Posit32::op_Explicit(Lombiq.Arithmetics.Posit32).3 declarations end
+
+
+    -- System.Int32 Lombiq.Arithmetics.Posit32::CompareTo(Lombiq.Arithmetics.Posit32).0 declarations start
+    -- State machine states:
+    type \Posit32::CompareTo(Posit32).0._States\ is (
+        \Posit32::CompareTo(Posit32).0._State_0\, 
+        \Posit32::CompareTo(Posit32).0._State_1\, 
+        \Posit32::CompareTo(Posit32).0._State_2\, 
+        \Posit32::CompareTo(Posit32).0._State_3\, 
+        \Posit32::CompareTo(Posit32).0._State_4\, 
+        \Posit32::CompareTo(Posit32).0._State_5\, 
+        \Posit32::CompareTo(Posit32).0._State_6\);
+    -- Signals:
+    Signal \Posit32::CompareTo(Posit32).0._Finished\: boolean := false;
+    Signal \Posit32::CompareTo(Posit32).0.return\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \Posit32::CompareTo(Posit32).0._Started\: boolean := false;
+    Signal \Posit32::CompareTo(Posit32).0.this.parameter.In\: \Lombiq.Arithmetics.Posit32\;
+    Signal \Posit32::CompareTo(Posit32).0.obj.parameter.In\: \Lombiq.Arithmetics.Posit32\;
+    -- System.Int32 Lombiq.Arithmetics.Posit32::CompareTo(Lombiq.Arithmetics.Posit32).0 declarations end
+
+
+    -- System.Int32 Lombiq.Arithmetics.Posit32::CompareTo(Lombiq.Arithmetics.Posit32).1 declarations start
+    -- State machine states:
+    type \Posit32::CompareTo(Posit32).1._States\ is (
+        \Posit32::CompareTo(Posit32).1._State_0\, 
+        \Posit32::CompareTo(Posit32).1._State_1\, 
+        \Posit32::CompareTo(Posit32).1._State_2\, 
+        \Posit32::CompareTo(Posit32).1._State_3\, 
+        \Posit32::CompareTo(Posit32).1._State_4\, 
+        \Posit32::CompareTo(Posit32).1._State_5\, 
+        \Posit32::CompareTo(Posit32).1._State_6\);
+    -- Signals:
+    Signal \Posit32::CompareTo(Posit32).1._Finished\: boolean := false;
+    Signal \Posit32::CompareTo(Posit32).1.return\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \Posit32::CompareTo(Posit32).1._Started\: boolean := false;
+    Signal \Posit32::CompareTo(Posit32).1.this.parameter.In\: \Lombiq.Arithmetics.Posit32\;
+    Signal \Posit32::CompareTo(Posit32).1.obj.parameter.In\: \Lombiq.Arithmetics.Posit32\;
+    -- System.Int32 Lombiq.Arithmetics.Posit32::CompareTo(Lombiq.Arithmetics.Posit32).1 declarations end
+
+
+    -- System.Int32 Lombiq.Arithmetics.Posit32::CompareTo(Lombiq.Arithmetics.Posit32).2 declarations start
+    -- State machine states:
+    type \Posit32::CompareTo(Posit32).2._States\ is (
+        \Posit32::CompareTo(Posit32).2._State_0\, 
+        \Posit32::CompareTo(Posit32).2._State_1\, 
+        \Posit32::CompareTo(Posit32).2._State_2\, 
+        \Posit32::CompareTo(Posit32).2._State_3\, 
+        \Posit32::CompareTo(Posit32).2._State_4\, 
+        \Posit32::CompareTo(Posit32).2._State_5\, 
+        \Posit32::CompareTo(Posit32).2._State_6\);
+    -- Signals:
+    Signal \Posit32::CompareTo(Posit32).2._Finished\: boolean := false;
+    Signal \Posit32::CompareTo(Posit32).2.return\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \Posit32::CompareTo(Posit32).2._Started\: boolean := false;
+    Signal \Posit32::CompareTo(Posit32).2.this.parameter.In\: \Lombiq.Arithmetics.Posit32\;
+    Signal \Posit32::CompareTo(Posit32).2.obj.parameter.In\: \Lombiq.Arithmetics.Posit32\;
+    -- System.Int32 Lombiq.Arithmetics.Posit32::CompareTo(Lombiq.Arithmetics.Posit32).2 declarations end
+
+
+    -- System.Int32 Lombiq.Arithmetics.Posit32::CompareTo(Lombiq.Arithmetics.Posit32).3 declarations start
+    -- State machine states:
+    type \Posit32::CompareTo(Posit32).3._States\ is (
+        \Posit32::CompareTo(Posit32).3._State_0\, 
+        \Posit32::CompareTo(Posit32).3._State_1\, 
+        \Posit32::CompareTo(Posit32).3._State_2\, 
+        \Posit32::CompareTo(Posit32).3._State_3\, 
+        \Posit32::CompareTo(Posit32).3._State_4\, 
+        \Posit32::CompareTo(Posit32).3._State_5\, 
+        \Posit32::CompareTo(Posit32).3._State_6\);
+    -- Signals:
+    Signal \Posit32::CompareTo(Posit32).3._Finished\: boolean := false;
+    Signal \Posit32::CompareTo(Posit32).3.return\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \Posit32::CompareTo(Posit32).3._Started\: boolean := false;
+    Signal \Posit32::CompareTo(Posit32).3.this.parameter.In\: \Lombiq.Arithmetics.Posit32\;
+    Signal \Posit32::CompareTo(Posit32).3.obj.parameter.In\: \Lombiq.Arithmetics.Posit32\;
+    -- System.Int32 Lombiq.Arithmetics.Posit32::CompareTo(Lombiq.Arithmetics.Posit32).3 declarations end
+
+
+    -- System.Int32 Lombiq.Arithmetics.Posit32::CompareTo(Lombiq.Arithmetics.Posit32).4 declarations start
+    -- State machine states:
+    type \Posit32::CompareTo(Posit32).4._States\ is (
+        \Posit32::CompareTo(Posit32).4._State_0\, 
+        \Posit32::CompareTo(Posit32).4._State_1\, 
+        \Posit32::CompareTo(Posit32).4._State_2\, 
+        \Posit32::CompareTo(Posit32).4._State_3\, 
+        \Posit32::CompareTo(Posit32).4._State_4\, 
+        \Posit32::CompareTo(Posit32).4._State_5\, 
+        \Posit32::CompareTo(Posit32).4._State_6\);
+    -- Signals:
+    Signal \Posit32::CompareTo(Posit32).4._Finished\: boolean := false;
+    Signal \Posit32::CompareTo(Posit32).4.return\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \Posit32::CompareTo(Posit32).4._Started\: boolean := false;
+    Signal \Posit32::CompareTo(Posit32).4.this.parameter.In\: \Lombiq.Arithmetics.Posit32\;
+    Signal \Posit32::CompareTo(Posit32).4.obj.parameter.In\: \Lombiq.Arithmetics.Posit32\;
+    -- System.Int32 Lombiq.Arithmetics.Posit32::CompareTo(Lombiq.Arithmetics.Posit32).4 declarations end
 
 
     -- System.Void Hast::ExternalInvocationProxy() declarations start
@@ -7855,7 +7858,7 @@ begin
         Variable \Posit32Calculator::AddPositsInArray(SimpleMemory).0.dataIn.1\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \Posit32Calculator::AddPositsInArray(SimpleMemory).0.num2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32Calculator::AddPositsInArray(SimpleMemory).0.binaryOperationResult.0\: boolean := false;
-        Variable \Posit32Calculator::AddPositsInArray(SimpleMemory).0.object39\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Posit32Calculator::AddPositsInArray(SimpleMemory).0.object38\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32Calculator::AddPositsInArray(SimpleMemory).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32Calculator::AddPositsInArray(SimpleMemory).0.dataIn.2\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \Posit32Calculator::AddPositsInArray(SimpleMemory).0.return.0\: \Lombiq.Arithmetics.Posit32\;
@@ -7968,9 +7971,9 @@ begin
                             \Posit32Calculator::AddPositsInArray(SimpleMemory).0.num2\ := to_signed(1, 32);
                             -- The following section was transformed from the .NET statement below:
                             -- while ((long)(num2) < (long)(num)) {
-                            -- 	Posit32 object39;
-                            -- 	object39 = new Posit32 (memory.ReadUInt32 (1 + num2), true);
-                            -- 	posit = Posit32.op_Addition (posit, object39);
+                            -- 	Posit32 object38;
+                            -- 	object38 = new Posit32 (memory.ReadUInt32 (1 + num2), true);
+                            -- 	posit = Posit32.op_Addition (posit, object38);
                             -- 	num2 = num2 + 1;
                             -- }
                             -- 
@@ -7985,21 +7988,21 @@ begin
                         if (\Posit32Calculator::AddPositsInArray(SimpleMemory).0.binaryOperationResult.0\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	Posit32 object39;
-                            -- 	object39 = new Posit32 (memory.ReadUInt32 (1 + num2), true);
-                            -- 	posit = Posit32.op_Addition (posit, object39);
+                            -- 	Posit32 object38;
+                            -- 	object38 = new Posit32 (memory.ReadUInt32 (1 + num2), true);
+                            -- 	posit = Posit32.op_Addition (posit, object38);
                             -- 	num2 = num2 + 1;
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- Posit32 object39;
+                            -- Posit32 object38;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- object39 = new Posit32 (memory.ReadUInt32 (1 + num2), true);
+                            -- object38 = new Posit32 (memory.ReadUInt32 (1 + num2), true);
                             -- 
                             -- Initializing record fields to their defaults.
-                            \Posit32Calculator::AddPositsInArray(SimpleMemory).0.object39\.\IsNull\ := false;
-                            \Posit32Calculator::AddPositsInArray(SimpleMemory).0.object39\.\PositBits\ := to_unsigned(0, 32);
+                            \Posit32Calculator::AddPositsInArray(SimpleMemory).0.object38\.\IsNull\ := false;
+                            \Posit32Calculator::AddPositsInArray(SimpleMemory).0.object38\.\PositBits\ := to_unsigned(0, 32);
                             -- Invoking the target's constructor.
                             \Posit32Calculator::AddPositsInArray(SimpleMemory).0.binaryOperationResult.1\ := to_signed(1, 32) + \Posit32Calculator::AddPositsInArray(SimpleMemory).0.num2\;
                             -- Begin SimpleMemory read.
@@ -8028,7 +8031,7 @@ begin
                             \Posit32Calculator::AddPositsInArray(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \Posit32Calculator::AddPositsInArray(SimpleMemory).0.dataIn.2\ := \DataIn\;
                             -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
-                            \Posit32Calculator::AddPositsInArray(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32Calculator::AddPositsInArray(SimpleMemory).0.object39\;
+                            \Posit32Calculator::AddPositsInArray(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32Calculator::AddPositsInArray(SimpleMemory).0.object38\;
                             \Posit32Calculator::AddPositsInArray(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).bits.parameter.Out.0\ <= ConvertStdLogicVectorToUInt32(\Posit32Calculator::AddPositsInArray(SimpleMemory).0.dataIn.2\);
                             \Posit32Calculator::AddPositsInArray(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= true;
                             \Posit32Calculator::AddPositsInArray(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= true;
@@ -8039,13 +8042,13 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
                         if (\Posit32Calculator::AddPositsInArray(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ = \Posit32Calculator::AddPositsInArray(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Finished.0\) then 
                             \Posit32Calculator::AddPositsInArray(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= false;
-                            \Posit32Calculator::AddPositsInArray(SimpleMemory).0.object39\ := \Posit32Calculator::AddPositsInArray(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
+                            \Posit32Calculator::AddPositsInArray(SimpleMemory).0.object38\ := \Posit32Calculator::AddPositsInArray(SimpleMemory).0.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- posit = Posit32.op_Addition (posit, object39);
+                            -- posit = Posit32.op_Addition (posit, object38);
                             -- 
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.Posit32 Lombiq.Arithmetics.Posit32::op_Addition(Lombiq.Arithmetics.Posit32,Lombiq.Arithmetics.Posit32)
                             \Posit32Calculator::AddPositsInArray(SimpleMemory).0.Posit32 Posit32::op_Addition(Posit32,Posit32).left.parameter.Out.0\ <= \Posit32Calculator::AddPositsInArray(SimpleMemory).0.posit\;
-                            \Posit32Calculator::AddPositsInArray(SimpleMemory).0.Posit32 Posit32::op_Addition(Posit32,Posit32).right.parameter.Out.0\ <= \Posit32Calculator::AddPositsInArray(SimpleMemory).0.object39\;
+                            \Posit32Calculator::AddPositsInArray(SimpleMemory).0.Posit32 Posit32::op_Addition(Posit32,Posit32).right.parameter.Out.0\ <= \Posit32Calculator::AddPositsInArray(SimpleMemory).0.object38\;
                             \Posit32Calculator::AddPositsInArray(SimpleMemory).0.Posit32 Posit32::op_Addition(Posit32,Posit32)._Started.0\ <= true;
                             \Posit32Calculator::AddPositsInArray(SimpleMemory).0._State\ := \Posit32Calculator::AddPositsInArray(SimpleMemory).0._State_11\;
                         end if;
@@ -10859,8 +10862,8 @@ begin
         Variable \Posit32::.ctor(Int32).0.value\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::.ctor(Int32).0.conditional2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::.ctor(Int32).0.binaryOperationResult.0\: boolean := false;
+        Variable \Posit32::.ctor(Int32).0.object40\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::.ctor(Int32).0.object41\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Posit32::.ctor(Int32).0.object42\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::.ctor(Int32).0.unaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::.ctor(Int32).0.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
@@ -10907,13 +10910,13 @@ begin
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if ((value >= 0)) {
-                        -- 	Posit32 object41;
-                        -- 	object41 = new Posit32 ((uint)value);
-                        -- 	conditional2 = object41.PositBits;
+                        -- 	Posit32 object40;
+                        -- 	object40 = new Posit32 ((uint)value);
+                        -- 	conditional2 = object40.PositBits;
                         -- } else {
-                        -- 	Posit32 object42;
-                        -- 	object42 = new Posit32 ((uint)(-value));
-                        -- 	conditional2 = Posit32.GetTwosComplement (object42.PositBits);
+                        -- 	Posit32 object41;
+                        -- 	object41 = new Posit32 ((uint)(-value));
+                        -- 	conditional2 = Posit32.GetTwosComplement (object41.PositBits);
                         -- }
                         -- 
                         \Posit32::.ctor(Int32).0.binaryOperationResult.0\ := \Posit32::.ctor(Int32).0.value\ >= to_signed(0, 32);
@@ -10941,23 +10944,23 @@ begin
                         -- True branch of the if-else started in state \Posit32::.ctor(Int32).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	Posit32 object41;
-                        -- 	object41 = new Posit32 ((uint)value);
-                        -- 	conditional2 = object41.PositBits;
+                        -- 	Posit32 object40;
+                        -- 	object40 = new Posit32 ((uint)value);
+                        -- 	conditional2 = object40.PositBits;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- Posit32 object41;
+                        -- Posit32 object40;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object41 = new Posit32 ((uint)value);
+                        -- object40 = new Posit32 ((uint)value);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32::.ctor(Int32).0.object41\.\IsNull\ := false;
-                        \Posit32::.ctor(Int32).0.object41\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32::.ctor(Int32).0.object40\.\IsNull\ := false;
+                        \Posit32::.ctor(Int32).0.object40\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
-                        \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).0.object41\;
+                        \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).0.object40\;
                         \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32).value.parameter.Out.0\ <= unsigned(\Posit32::.ctor(Int32).0.value\);
                         \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32)._Started.0\ <= true;
                         \Posit32::.ctor(Int32).0._State\ := \Posit32::.ctor(Int32).0._State_5\;
@@ -10966,11 +10969,11 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
                         if (\Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32)._Started.0\ = \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32)._Finished.0\) then 
                             \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32)._Started.0\ <= false;
-                            \Posit32::.ctor(Int32).0.object41\ := \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32).this.parameter.In.0\;
+                            \Posit32::.ctor(Int32).0.object40\ := \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- conditional2 = object41.PositBits;
+                            -- conditional2 = object40.PositBits;
                             -- 
-                            \Posit32::.ctor(Int32).0.conditional2\ := \Posit32::.ctor(Int32).0.object41\.\PositBits\;
+                            \Posit32::.ctor(Int32).0.conditional2\ := \Posit32::.ctor(Int32).0.object40\.\PositBits\;
                             -- Going to the state after the if-else which was started in state \Posit32::.ctor(Int32).0._State_2\.
                             if (\Posit32::.ctor(Int32).0._State\ = \Posit32::.ctor(Int32).0._State_5\) then 
                                 \Posit32::.ctor(Int32).0._State\ := \Posit32::.ctor(Int32).0._State_3\;
@@ -10981,20 +10984,20 @@ begin
                         -- False branch of the if-else started in state \Posit32::.ctor(Int32).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	Posit32 object42;
-                        -- 	object42 = new Posit32 ((uint)(-value));
-                        -- 	conditional2 = Posit32.GetTwosComplement (object42.PositBits);
+                        -- 	Posit32 object41;
+                        -- 	object41 = new Posit32 ((uint)(-value));
+                        -- 	conditional2 = Posit32.GetTwosComplement (object41.PositBits);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- Posit32 object42;
+                        -- Posit32 object41;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object42 = new Posit32 ((uint)(-value));
+                        -- object41 = new Posit32 ((uint)(-value));
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32::.ctor(Int32).0.object42\.\IsNull\ := false;
-                        \Posit32::.ctor(Int32).0.object42\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32::.ctor(Int32).0.object41\.\IsNull\ := false;
+                        \Posit32::.ctor(Int32).0.object41\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         \Posit32::.ctor(Int32).0.unaryOperationResult.0\ := -\Posit32::.ctor(Int32).0.value\;
                         -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
@@ -11002,7 +11005,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3119
                     when \Posit32::.ctor(Int32).0._State_7\ => 
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
-                        \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).0.object42\;
+                        \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).0.object41\;
                         \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32).value.parameter.Out.0\ <= unsigned((\Posit32::.ctor(Int32).0.unaryOperationResult.0\));
                         \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32)._Started.0\ <= true;
                         \Posit32::.ctor(Int32).0._State\ := \Posit32::.ctor(Int32).0._State_8\;
@@ -11011,12 +11014,12 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
                         if (\Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32)._Started.0\ = \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32)._Finished.0\) then 
                             \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32)._Started.0\ <= false;
-                            \Posit32::.ctor(Int32).0.object42\ := \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32).this.parameter.In.0\;
+                            \Posit32::.ctor(Int32).0.object41\ := \Posit32::.ctor(Int32).0.Posit32::.ctor(UInt32).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- conditional2 = Posit32.GetTwosComplement (object42.PositBits);
+                            -- conditional2 = Posit32.GetTwosComplement (object41.PositBits);
                             -- 
                             -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32)
-                            \Posit32::.ctor(Int32).0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\ <= \Posit32::.ctor(Int32).0.object42\.\PositBits\;
+                            \Posit32::.ctor(Int32).0.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\ <= \Posit32::.ctor(Int32).0.object41\.\PositBits\;
                             \Posit32::.ctor(Int32).0.Posit32::GetTwosComplement(UInt32)._Started.0\ <= true;
                             \Posit32::.ctor(Int32).0._State\ := \Posit32::.ctor(Int32).0._State_9\;
                         end if;
@@ -11047,8 +11050,8 @@ begin
         Variable \Posit32::.ctor(Int32).1.value\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::.ctor(Int32).1.conditional2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::.ctor(Int32).1.binaryOperationResult.0\: boolean := false;
+        Variable \Posit32::.ctor(Int32).1.object40\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::.ctor(Int32).1.object41\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Posit32::.ctor(Int32).1.object42\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::.ctor(Int32).1.unaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::.ctor(Int32).1.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
@@ -11095,13 +11098,13 @@ begin
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if ((value >= 0)) {
-                        -- 	Posit32 object41;
-                        -- 	object41 = new Posit32 ((uint)value);
-                        -- 	conditional2 = object41.PositBits;
+                        -- 	Posit32 object40;
+                        -- 	object40 = new Posit32 ((uint)value);
+                        -- 	conditional2 = object40.PositBits;
                         -- } else {
-                        -- 	Posit32 object42;
-                        -- 	object42 = new Posit32 ((uint)(-value));
-                        -- 	conditional2 = Posit32.GetTwosComplement (object42.PositBits);
+                        -- 	Posit32 object41;
+                        -- 	object41 = new Posit32 ((uint)(-value));
+                        -- 	conditional2 = Posit32.GetTwosComplement (object41.PositBits);
                         -- }
                         -- 
                         \Posit32::.ctor(Int32).1.binaryOperationResult.0\ := \Posit32::.ctor(Int32).1.value\ >= to_signed(0, 32);
@@ -11129,23 +11132,23 @@ begin
                         -- True branch of the if-else started in state \Posit32::.ctor(Int32).1._State_2\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	Posit32 object41;
-                        -- 	object41 = new Posit32 ((uint)value);
-                        -- 	conditional2 = object41.PositBits;
+                        -- 	Posit32 object40;
+                        -- 	object40 = new Posit32 ((uint)value);
+                        -- 	conditional2 = object40.PositBits;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- Posit32 object41;
+                        -- Posit32 object40;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object41 = new Posit32 ((uint)value);
+                        -- object40 = new Posit32 ((uint)value);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32::.ctor(Int32).1.object41\.\IsNull\ := false;
-                        \Posit32::.ctor(Int32).1.object41\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32::.ctor(Int32).1.object40\.\IsNull\ := false;
+                        \Posit32::.ctor(Int32).1.object40\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
-                        \Posit32::.ctor(Int32).1.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).1.object41\;
+                        \Posit32::.ctor(Int32).1.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).1.object40\;
                         \Posit32::.ctor(Int32).1.Posit32::.ctor(UInt32).value.parameter.Out.0\ <= unsigned(\Posit32::.ctor(Int32).1.value\);
                         \Posit32::.ctor(Int32).1.Posit32::.ctor(UInt32)._Started.0\ <= true;
                         \Posit32::.ctor(Int32).1._State\ := \Posit32::.ctor(Int32).1._State_5\;
@@ -11154,11 +11157,11 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
                         if (\Posit32::.ctor(Int32).1.Posit32::.ctor(UInt32)._Started.0\ = \Posit32::.ctor(Int32).1.Posit32::.ctor(UInt32)._Finished.0\) then 
                             \Posit32::.ctor(Int32).1.Posit32::.ctor(UInt32)._Started.0\ <= false;
-                            \Posit32::.ctor(Int32).1.object41\ := \Posit32::.ctor(Int32).1.Posit32::.ctor(UInt32).this.parameter.In.0\;
+                            \Posit32::.ctor(Int32).1.object40\ := \Posit32::.ctor(Int32).1.Posit32::.ctor(UInt32).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- conditional2 = object41.PositBits;
+                            -- conditional2 = object40.PositBits;
                             -- 
-                            \Posit32::.ctor(Int32).1.conditional2\ := \Posit32::.ctor(Int32).1.object41\.\PositBits\;
+                            \Posit32::.ctor(Int32).1.conditional2\ := \Posit32::.ctor(Int32).1.object40\.\PositBits\;
                             -- Going to the state after the if-else which was started in state \Posit32::.ctor(Int32).1._State_2\.
                             if (\Posit32::.ctor(Int32).1._State\ = \Posit32::.ctor(Int32).1._State_5\) then 
                                 \Posit32::.ctor(Int32).1._State\ := \Posit32::.ctor(Int32).1._State_3\;
@@ -11169,20 +11172,20 @@ begin
                         -- False branch of the if-else started in state \Posit32::.ctor(Int32).1._State_2\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	Posit32 object42;
-                        -- 	object42 = new Posit32 ((uint)(-value));
-                        -- 	conditional2 = Posit32.GetTwosComplement (object42.PositBits);
+                        -- 	Posit32 object41;
+                        -- 	object41 = new Posit32 ((uint)(-value));
+                        -- 	conditional2 = Posit32.GetTwosComplement (object41.PositBits);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- Posit32 object42;
+                        -- Posit32 object41;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object42 = new Posit32 ((uint)(-value));
+                        -- object41 = new Posit32 ((uint)(-value));
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32::.ctor(Int32).1.object42\.\IsNull\ := false;
-                        \Posit32::.ctor(Int32).1.object42\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32::.ctor(Int32).1.object41\.\IsNull\ := false;
+                        \Posit32::.ctor(Int32).1.object41\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         \Posit32::.ctor(Int32).1.unaryOperationResult.0\ := -\Posit32::.ctor(Int32).1.value\;
                         -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
@@ -11190,7 +11193,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3119
                     when \Posit32::.ctor(Int32).1._State_7\ => 
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
-                        \Posit32::.ctor(Int32).1.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).1.object42\;
+                        \Posit32::.ctor(Int32).1.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).1.object41\;
                         \Posit32::.ctor(Int32).1.Posit32::.ctor(UInt32).value.parameter.Out.0\ <= unsigned((\Posit32::.ctor(Int32).1.unaryOperationResult.0\));
                         \Posit32::.ctor(Int32).1.Posit32::.ctor(UInt32)._Started.0\ <= true;
                         \Posit32::.ctor(Int32).1._State\ := \Posit32::.ctor(Int32).1._State_8\;
@@ -11199,12 +11202,12 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
                         if (\Posit32::.ctor(Int32).1.Posit32::.ctor(UInt32)._Started.0\ = \Posit32::.ctor(Int32).1.Posit32::.ctor(UInt32)._Finished.0\) then 
                             \Posit32::.ctor(Int32).1.Posit32::.ctor(UInt32)._Started.0\ <= false;
-                            \Posit32::.ctor(Int32).1.object42\ := \Posit32::.ctor(Int32).1.Posit32::.ctor(UInt32).this.parameter.In.0\;
+                            \Posit32::.ctor(Int32).1.object41\ := \Posit32::.ctor(Int32).1.Posit32::.ctor(UInt32).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- conditional2 = Posit32.GetTwosComplement (object42.PositBits);
+                            -- conditional2 = Posit32.GetTwosComplement (object41.PositBits);
                             -- 
                             -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32)
-                            \Posit32::.ctor(Int32).1.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\ <= \Posit32::.ctor(Int32).1.object42\.\PositBits\;
+                            \Posit32::.ctor(Int32).1.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\ <= \Posit32::.ctor(Int32).1.object41\.\PositBits\;
                             \Posit32::.ctor(Int32).1.Posit32::GetTwosComplement(UInt32)._Started.0\ <= true;
                             \Posit32::.ctor(Int32).1._State\ := \Posit32::.ctor(Int32).1._State_9\;
                         end if;
@@ -11235,8 +11238,8 @@ begin
         Variable \Posit32::.ctor(Int32).2.value\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::.ctor(Int32).2.conditional2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::.ctor(Int32).2.binaryOperationResult.0\: boolean := false;
+        Variable \Posit32::.ctor(Int32).2.object40\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::.ctor(Int32).2.object41\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Posit32::.ctor(Int32).2.object42\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::.ctor(Int32).2.unaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::.ctor(Int32).2.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
@@ -11283,13 +11286,13 @@ begin
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if ((value >= 0)) {
-                        -- 	Posit32 object41;
-                        -- 	object41 = new Posit32 ((uint)value);
-                        -- 	conditional2 = object41.PositBits;
+                        -- 	Posit32 object40;
+                        -- 	object40 = new Posit32 ((uint)value);
+                        -- 	conditional2 = object40.PositBits;
                         -- } else {
-                        -- 	Posit32 object42;
-                        -- 	object42 = new Posit32 ((uint)(-value));
-                        -- 	conditional2 = Posit32.GetTwosComplement (object42.PositBits);
+                        -- 	Posit32 object41;
+                        -- 	object41 = new Posit32 ((uint)(-value));
+                        -- 	conditional2 = Posit32.GetTwosComplement (object41.PositBits);
                         -- }
                         -- 
                         \Posit32::.ctor(Int32).2.binaryOperationResult.0\ := \Posit32::.ctor(Int32).2.value\ >= to_signed(0, 32);
@@ -11317,23 +11320,23 @@ begin
                         -- True branch of the if-else started in state \Posit32::.ctor(Int32).2._State_2\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	Posit32 object41;
-                        -- 	object41 = new Posit32 ((uint)value);
-                        -- 	conditional2 = object41.PositBits;
+                        -- 	Posit32 object40;
+                        -- 	object40 = new Posit32 ((uint)value);
+                        -- 	conditional2 = object40.PositBits;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- Posit32 object41;
+                        -- Posit32 object40;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object41 = new Posit32 ((uint)value);
+                        -- object40 = new Posit32 ((uint)value);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32::.ctor(Int32).2.object41\.\IsNull\ := false;
-                        \Posit32::.ctor(Int32).2.object41\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32::.ctor(Int32).2.object40\.\IsNull\ := false;
+                        \Posit32::.ctor(Int32).2.object40\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
-                        \Posit32::.ctor(Int32).2.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).2.object41\;
+                        \Posit32::.ctor(Int32).2.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).2.object40\;
                         \Posit32::.ctor(Int32).2.Posit32::.ctor(UInt32).value.parameter.Out.0\ <= unsigned(\Posit32::.ctor(Int32).2.value\);
                         \Posit32::.ctor(Int32).2.Posit32::.ctor(UInt32)._Started.0\ <= true;
                         \Posit32::.ctor(Int32).2._State\ := \Posit32::.ctor(Int32).2._State_5\;
@@ -11342,11 +11345,11 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
                         if (\Posit32::.ctor(Int32).2.Posit32::.ctor(UInt32)._Started.0\ = \Posit32::.ctor(Int32).2.Posit32::.ctor(UInt32)._Finished.0\) then 
                             \Posit32::.ctor(Int32).2.Posit32::.ctor(UInt32)._Started.0\ <= false;
-                            \Posit32::.ctor(Int32).2.object41\ := \Posit32::.ctor(Int32).2.Posit32::.ctor(UInt32).this.parameter.In.0\;
+                            \Posit32::.ctor(Int32).2.object40\ := \Posit32::.ctor(Int32).2.Posit32::.ctor(UInt32).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- conditional2 = object41.PositBits;
+                            -- conditional2 = object40.PositBits;
                             -- 
-                            \Posit32::.ctor(Int32).2.conditional2\ := \Posit32::.ctor(Int32).2.object41\.\PositBits\;
+                            \Posit32::.ctor(Int32).2.conditional2\ := \Posit32::.ctor(Int32).2.object40\.\PositBits\;
                             -- Going to the state after the if-else which was started in state \Posit32::.ctor(Int32).2._State_2\.
                             if (\Posit32::.ctor(Int32).2._State\ = \Posit32::.ctor(Int32).2._State_5\) then 
                                 \Posit32::.ctor(Int32).2._State\ := \Posit32::.ctor(Int32).2._State_3\;
@@ -11357,20 +11360,20 @@ begin
                         -- False branch of the if-else started in state \Posit32::.ctor(Int32).2._State_2\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	Posit32 object42;
-                        -- 	object42 = new Posit32 ((uint)(-value));
-                        -- 	conditional2 = Posit32.GetTwosComplement (object42.PositBits);
+                        -- 	Posit32 object41;
+                        -- 	object41 = new Posit32 ((uint)(-value));
+                        -- 	conditional2 = Posit32.GetTwosComplement (object41.PositBits);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- Posit32 object42;
+                        -- Posit32 object41;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object42 = new Posit32 ((uint)(-value));
+                        -- object41 = new Posit32 ((uint)(-value));
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32::.ctor(Int32).2.object42\.\IsNull\ := false;
-                        \Posit32::.ctor(Int32).2.object42\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32::.ctor(Int32).2.object41\.\IsNull\ := false;
+                        \Posit32::.ctor(Int32).2.object41\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         \Posit32::.ctor(Int32).2.unaryOperationResult.0\ := -\Posit32::.ctor(Int32).2.value\;
                         -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
@@ -11378,7 +11381,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3119
                     when \Posit32::.ctor(Int32).2._State_7\ => 
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
-                        \Posit32::.ctor(Int32).2.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).2.object42\;
+                        \Posit32::.ctor(Int32).2.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).2.object41\;
                         \Posit32::.ctor(Int32).2.Posit32::.ctor(UInt32).value.parameter.Out.0\ <= unsigned((\Posit32::.ctor(Int32).2.unaryOperationResult.0\));
                         \Posit32::.ctor(Int32).2.Posit32::.ctor(UInt32)._Started.0\ <= true;
                         \Posit32::.ctor(Int32).2._State\ := \Posit32::.ctor(Int32).2._State_8\;
@@ -11387,12 +11390,12 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
                         if (\Posit32::.ctor(Int32).2.Posit32::.ctor(UInt32)._Started.0\ = \Posit32::.ctor(Int32).2.Posit32::.ctor(UInt32)._Finished.0\) then 
                             \Posit32::.ctor(Int32).2.Posit32::.ctor(UInt32)._Started.0\ <= false;
-                            \Posit32::.ctor(Int32).2.object42\ := \Posit32::.ctor(Int32).2.Posit32::.ctor(UInt32).this.parameter.In.0\;
+                            \Posit32::.ctor(Int32).2.object41\ := \Posit32::.ctor(Int32).2.Posit32::.ctor(UInt32).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- conditional2 = Posit32.GetTwosComplement (object42.PositBits);
+                            -- conditional2 = Posit32.GetTwosComplement (object41.PositBits);
                             -- 
                             -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32)
-                            \Posit32::.ctor(Int32).2.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\ <= \Posit32::.ctor(Int32).2.object42\.\PositBits\;
+                            \Posit32::.ctor(Int32).2.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\ <= \Posit32::.ctor(Int32).2.object41\.\PositBits\;
                             \Posit32::.ctor(Int32).2.Posit32::GetTwosComplement(UInt32)._Started.0\ <= true;
                             \Posit32::.ctor(Int32).2._State\ := \Posit32::.ctor(Int32).2._State_9\;
                         end if;
@@ -11423,8 +11426,8 @@ begin
         Variable \Posit32::.ctor(Int32).3.value\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::.ctor(Int32).3.conditional2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::.ctor(Int32).3.binaryOperationResult.0\: boolean := false;
+        Variable \Posit32::.ctor(Int32).3.object40\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::.ctor(Int32).3.object41\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Posit32::.ctor(Int32).3.object42\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::.ctor(Int32).3.unaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::.ctor(Int32).3.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
@@ -11471,13 +11474,13 @@ begin
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if ((value >= 0)) {
-                        -- 	Posit32 object41;
-                        -- 	object41 = new Posit32 ((uint)value);
-                        -- 	conditional2 = object41.PositBits;
+                        -- 	Posit32 object40;
+                        -- 	object40 = new Posit32 ((uint)value);
+                        -- 	conditional2 = object40.PositBits;
                         -- } else {
-                        -- 	Posit32 object42;
-                        -- 	object42 = new Posit32 ((uint)(-value));
-                        -- 	conditional2 = Posit32.GetTwosComplement (object42.PositBits);
+                        -- 	Posit32 object41;
+                        -- 	object41 = new Posit32 ((uint)(-value));
+                        -- 	conditional2 = Posit32.GetTwosComplement (object41.PositBits);
                         -- }
                         -- 
                         \Posit32::.ctor(Int32).3.binaryOperationResult.0\ := \Posit32::.ctor(Int32).3.value\ >= to_signed(0, 32);
@@ -11505,23 +11508,23 @@ begin
                         -- True branch of the if-else started in state \Posit32::.ctor(Int32).3._State_2\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	Posit32 object41;
-                        -- 	object41 = new Posit32 ((uint)value);
-                        -- 	conditional2 = object41.PositBits;
+                        -- 	Posit32 object40;
+                        -- 	object40 = new Posit32 ((uint)value);
+                        -- 	conditional2 = object40.PositBits;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- Posit32 object41;
+                        -- Posit32 object40;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object41 = new Posit32 ((uint)value);
+                        -- object40 = new Posit32 ((uint)value);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32::.ctor(Int32).3.object41\.\IsNull\ := false;
-                        \Posit32::.ctor(Int32).3.object41\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32::.ctor(Int32).3.object40\.\IsNull\ := false;
+                        \Posit32::.ctor(Int32).3.object40\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
-                        \Posit32::.ctor(Int32).3.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).3.object41\;
+                        \Posit32::.ctor(Int32).3.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).3.object40\;
                         \Posit32::.ctor(Int32).3.Posit32::.ctor(UInt32).value.parameter.Out.0\ <= unsigned(\Posit32::.ctor(Int32).3.value\);
                         \Posit32::.ctor(Int32).3.Posit32::.ctor(UInt32)._Started.0\ <= true;
                         \Posit32::.ctor(Int32).3._State\ := \Posit32::.ctor(Int32).3._State_5\;
@@ -11530,11 +11533,11 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
                         if (\Posit32::.ctor(Int32).3.Posit32::.ctor(UInt32)._Started.0\ = \Posit32::.ctor(Int32).3.Posit32::.ctor(UInt32)._Finished.0\) then 
                             \Posit32::.ctor(Int32).3.Posit32::.ctor(UInt32)._Started.0\ <= false;
-                            \Posit32::.ctor(Int32).3.object41\ := \Posit32::.ctor(Int32).3.Posit32::.ctor(UInt32).this.parameter.In.0\;
+                            \Posit32::.ctor(Int32).3.object40\ := \Posit32::.ctor(Int32).3.Posit32::.ctor(UInt32).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- conditional2 = object41.PositBits;
+                            -- conditional2 = object40.PositBits;
                             -- 
-                            \Posit32::.ctor(Int32).3.conditional2\ := \Posit32::.ctor(Int32).3.object41\.\PositBits\;
+                            \Posit32::.ctor(Int32).3.conditional2\ := \Posit32::.ctor(Int32).3.object40\.\PositBits\;
                             -- Going to the state after the if-else which was started in state \Posit32::.ctor(Int32).3._State_2\.
                             if (\Posit32::.ctor(Int32).3._State\ = \Posit32::.ctor(Int32).3._State_5\) then 
                                 \Posit32::.ctor(Int32).3._State\ := \Posit32::.ctor(Int32).3._State_3\;
@@ -11545,20 +11548,20 @@ begin
                         -- False branch of the if-else started in state \Posit32::.ctor(Int32).3._State_2\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	Posit32 object42;
-                        -- 	object42 = new Posit32 ((uint)(-value));
-                        -- 	conditional2 = Posit32.GetTwosComplement (object42.PositBits);
+                        -- 	Posit32 object41;
+                        -- 	object41 = new Posit32 ((uint)(-value));
+                        -- 	conditional2 = Posit32.GetTwosComplement (object41.PositBits);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- Posit32 object42;
+                        -- Posit32 object41;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object42 = new Posit32 ((uint)(-value));
+                        -- object41 = new Posit32 ((uint)(-value));
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32::.ctor(Int32).3.object42\.\IsNull\ := false;
-                        \Posit32::.ctor(Int32).3.object42\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32::.ctor(Int32).3.object41\.\IsNull\ := false;
+                        \Posit32::.ctor(Int32).3.object41\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         \Posit32::.ctor(Int32).3.unaryOperationResult.0\ := -\Posit32::.ctor(Int32).3.value\;
                         -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
@@ -11566,7 +11569,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3119
                     when \Posit32::.ctor(Int32).3._State_7\ => 
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
-                        \Posit32::.ctor(Int32).3.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).3.object42\;
+                        \Posit32::.ctor(Int32).3.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).3.object41\;
                         \Posit32::.ctor(Int32).3.Posit32::.ctor(UInt32).value.parameter.Out.0\ <= unsigned((\Posit32::.ctor(Int32).3.unaryOperationResult.0\));
                         \Posit32::.ctor(Int32).3.Posit32::.ctor(UInt32)._Started.0\ <= true;
                         \Posit32::.ctor(Int32).3._State\ := \Posit32::.ctor(Int32).3._State_8\;
@@ -11575,12 +11578,12 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
                         if (\Posit32::.ctor(Int32).3.Posit32::.ctor(UInt32)._Started.0\ = \Posit32::.ctor(Int32).3.Posit32::.ctor(UInt32)._Finished.0\) then 
                             \Posit32::.ctor(Int32).3.Posit32::.ctor(UInt32)._Started.0\ <= false;
-                            \Posit32::.ctor(Int32).3.object42\ := \Posit32::.ctor(Int32).3.Posit32::.ctor(UInt32).this.parameter.In.0\;
+                            \Posit32::.ctor(Int32).3.object41\ := \Posit32::.ctor(Int32).3.Posit32::.ctor(UInt32).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- conditional2 = Posit32.GetTwosComplement (object42.PositBits);
+                            -- conditional2 = Posit32.GetTwosComplement (object41.PositBits);
                             -- 
                             -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32)
-                            \Posit32::.ctor(Int32).3.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\ <= \Posit32::.ctor(Int32).3.object42\.\PositBits\;
+                            \Posit32::.ctor(Int32).3.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\ <= \Posit32::.ctor(Int32).3.object41\.\PositBits\;
                             \Posit32::.ctor(Int32).3.Posit32::GetTwosComplement(UInt32)._Started.0\ <= true;
                             \Posit32::.ctor(Int32).3._State\ := \Posit32::.ctor(Int32).3._State_9\;
                         end if;
@@ -11611,8 +11614,8 @@ begin
         Variable \Posit32::.ctor(Int32).4.value\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::.ctor(Int32).4.conditional2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::.ctor(Int32).4.binaryOperationResult.0\: boolean := false;
+        Variable \Posit32::.ctor(Int32).4.object40\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::.ctor(Int32).4.object41\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Posit32::.ctor(Int32).4.object42\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::.ctor(Int32).4.unaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::.ctor(Int32).4.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
@@ -11659,13 +11662,13 @@ begin
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if ((value >= 0)) {
-                        -- 	Posit32 object41;
-                        -- 	object41 = new Posit32 ((uint)value);
-                        -- 	conditional2 = object41.PositBits;
+                        -- 	Posit32 object40;
+                        -- 	object40 = new Posit32 ((uint)value);
+                        -- 	conditional2 = object40.PositBits;
                         -- } else {
-                        -- 	Posit32 object42;
-                        -- 	object42 = new Posit32 ((uint)(-value));
-                        -- 	conditional2 = Posit32.GetTwosComplement (object42.PositBits);
+                        -- 	Posit32 object41;
+                        -- 	object41 = new Posit32 ((uint)(-value));
+                        -- 	conditional2 = Posit32.GetTwosComplement (object41.PositBits);
                         -- }
                         -- 
                         \Posit32::.ctor(Int32).4.binaryOperationResult.0\ := \Posit32::.ctor(Int32).4.value\ >= to_signed(0, 32);
@@ -11693,23 +11696,23 @@ begin
                         -- True branch of the if-else started in state \Posit32::.ctor(Int32).4._State_2\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	Posit32 object41;
-                        -- 	object41 = new Posit32 ((uint)value);
-                        -- 	conditional2 = object41.PositBits;
+                        -- 	Posit32 object40;
+                        -- 	object40 = new Posit32 ((uint)value);
+                        -- 	conditional2 = object40.PositBits;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- Posit32 object41;
+                        -- Posit32 object40;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object41 = new Posit32 ((uint)value);
+                        -- object40 = new Posit32 ((uint)value);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32::.ctor(Int32).4.object41\.\IsNull\ := false;
-                        \Posit32::.ctor(Int32).4.object41\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32::.ctor(Int32).4.object40\.\IsNull\ := false;
+                        \Posit32::.ctor(Int32).4.object40\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
-                        \Posit32::.ctor(Int32).4.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).4.object41\;
+                        \Posit32::.ctor(Int32).4.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).4.object40\;
                         \Posit32::.ctor(Int32).4.Posit32::.ctor(UInt32).value.parameter.Out.0\ <= unsigned(\Posit32::.ctor(Int32).4.value\);
                         \Posit32::.ctor(Int32).4.Posit32::.ctor(UInt32)._Started.0\ <= true;
                         \Posit32::.ctor(Int32).4._State\ := \Posit32::.ctor(Int32).4._State_5\;
@@ -11718,11 +11721,11 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
                         if (\Posit32::.ctor(Int32).4.Posit32::.ctor(UInt32)._Started.0\ = \Posit32::.ctor(Int32).4.Posit32::.ctor(UInt32)._Finished.0\) then 
                             \Posit32::.ctor(Int32).4.Posit32::.ctor(UInt32)._Started.0\ <= false;
-                            \Posit32::.ctor(Int32).4.object41\ := \Posit32::.ctor(Int32).4.Posit32::.ctor(UInt32).this.parameter.In.0\;
+                            \Posit32::.ctor(Int32).4.object40\ := \Posit32::.ctor(Int32).4.Posit32::.ctor(UInt32).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- conditional2 = object41.PositBits;
+                            -- conditional2 = object40.PositBits;
                             -- 
-                            \Posit32::.ctor(Int32).4.conditional2\ := \Posit32::.ctor(Int32).4.object41\.\PositBits\;
+                            \Posit32::.ctor(Int32).4.conditional2\ := \Posit32::.ctor(Int32).4.object40\.\PositBits\;
                             -- Going to the state after the if-else which was started in state \Posit32::.ctor(Int32).4._State_2\.
                             if (\Posit32::.ctor(Int32).4._State\ = \Posit32::.ctor(Int32).4._State_5\) then 
                                 \Posit32::.ctor(Int32).4._State\ := \Posit32::.ctor(Int32).4._State_3\;
@@ -11733,20 +11736,20 @@ begin
                         -- False branch of the if-else started in state \Posit32::.ctor(Int32).4._State_2\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	Posit32 object42;
-                        -- 	object42 = new Posit32 ((uint)(-value));
-                        -- 	conditional2 = Posit32.GetTwosComplement (object42.PositBits);
+                        -- 	Posit32 object41;
+                        -- 	object41 = new Posit32 ((uint)(-value));
+                        -- 	conditional2 = Posit32.GetTwosComplement (object41.PositBits);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- Posit32 object42;
+                        -- Posit32 object41;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object42 = new Posit32 ((uint)(-value));
+                        -- object41 = new Posit32 ((uint)(-value));
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32::.ctor(Int32).4.object42\.\IsNull\ := false;
-                        \Posit32::.ctor(Int32).4.object42\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32::.ctor(Int32).4.object41\.\IsNull\ := false;
+                        \Posit32::.ctor(Int32).4.object41\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         \Posit32::.ctor(Int32).4.unaryOperationResult.0\ := -\Posit32::.ctor(Int32).4.value\;
                         -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
@@ -11754,7 +11757,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3119
                     when \Posit32::.ctor(Int32).4._State_7\ => 
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
-                        \Posit32::.ctor(Int32).4.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).4.object42\;
+                        \Posit32::.ctor(Int32).4.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).4.object41\;
                         \Posit32::.ctor(Int32).4.Posit32::.ctor(UInt32).value.parameter.Out.0\ <= unsigned((\Posit32::.ctor(Int32).4.unaryOperationResult.0\));
                         \Posit32::.ctor(Int32).4.Posit32::.ctor(UInt32)._Started.0\ <= true;
                         \Posit32::.ctor(Int32).4._State\ := \Posit32::.ctor(Int32).4._State_8\;
@@ -11763,12 +11766,12 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
                         if (\Posit32::.ctor(Int32).4.Posit32::.ctor(UInt32)._Started.0\ = \Posit32::.ctor(Int32).4.Posit32::.ctor(UInt32)._Finished.0\) then 
                             \Posit32::.ctor(Int32).4.Posit32::.ctor(UInt32)._Started.0\ <= false;
-                            \Posit32::.ctor(Int32).4.object42\ := \Posit32::.ctor(Int32).4.Posit32::.ctor(UInt32).this.parameter.In.0\;
+                            \Posit32::.ctor(Int32).4.object41\ := \Posit32::.ctor(Int32).4.Posit32::.ctor(UInt32).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- conditional2 = Posit32.GetTwosComplement (object42.PositBits);
+                            -- conditional2 = Posit32.GetTwosComplement (object41.PositBits);
                             -- 
                             -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32)
-                            \Posit32::.ctor(Int32).4.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\ <= \Posit32::.ctor(Int32).4.object42\.\PositBits\;
+                            \Posit32::.ctor(Int32).4.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\ <= \Posit32::.ctor(Int32).4.object41\.\PositBits\;
                             \Posit32::.ctor(Int32).4.Posit32::GetTwosComplement(UInt32)._Started.0\ <= true;
                             \Posit32::.ctor(Int32).4._State\ := \Posit32::.ctor(Int32).4._State_9\;
                         end if;
@@ -11799,8 +11802,8 @@ begin
         Variable \Posit32::.ctor(Int32).5.value\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::.ctor(Int32).5.conditional2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::.ctor(Int32).5.binaryOperationResult.0\: boolean := false;
+        Variable \Posit32::.ctor(Int32).5.object40\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::.ctor(Int32).5.object41\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Posit32::.ctor(Int32).5.object42\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::.ctor(Int32).5.unaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::.ctor(Int32).5.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
@@ -11847,13 +11850,13 @@ begin
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if ((value >= 0)) {
-                        -- 	Posit32 object41;
-                        -- 	object41 = new Posit32 ((uint)value);
-                        -- 	conditional2 = object41.PositBits;
+                        -- 	Posit32 object40;
+                        -- 	object40 = new Posit32 ((uint)value);
+                        -- 	conditional2 = object40.PositBits;
                         -- } else {
-                        -- 	Posit32 object42;
-                        -- 	object42 = new Posit32 ((uint)(-value));
-                        -- 	conditional2 = Posit32.GetTwosComplement (object42.PositBits);
+                        -- 	Posit32 object41;
+                        -- 	object41 = new Posit32 ((uint)(-value));
+                        -- 	conditional2 = Posit32.GetTwosComplement (object41.PositBits);
                         -- }
                         -- 
                         \Posit32::.ctor(Int32).5.binaryOperationResult.0\ := \Posit32::.ctor(Int32).5.value\ >= to_signed(0, 32);
@@ -11881,23 +11884,23 @@ begin
                         -- True branch of the if-else started in state \Posit32::.ctor(Int32).5._State_2\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	Posit32 object41;
-                        -- 	object41 = new Posit32 ((uint)value);
-                        -- 	conditional2 = object41.PositBits;
+                        -- 	Posit32 object40;
+                        -- 	object40 = new Posit32 ((uint)value);
+                        -- 	conditional2 = object40.PositBits;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- Posit32 object41;
+                        -- Posit32 object40;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object41 = new Posit32 ((uint)value);
+                        -- object40 = new Posit32 ((uint)value);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32::.ctor(Int32).5.object41\.\IsNull\ := false;
-                        \Posit32::.ctor(Int32).5.object41\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32::.ctor(Int32).5.object40\.\IsNull\ := false;
+                        \Posit32::.ctor(Int32).5.object40\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
-                        \Posit32::.ctor(Int32).5.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).5.object41\;
+                        \Posit32::.ctor(Int32).5.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).5.object40\;
                         \Posit32::.ctor(Int32).5.Posit32::.ctor(UInt32).value.parameter.Out.0\ <= unsigned(\Posit32::.ctor(Int32).5.value\);
                         \Posit32::.ctor(Int32).5.Posit32::.ctor(UInt32)._Started.0\ <= true;
                         \Posit32::.ctor(Int32).5._State\ := \Posit32::.ctor(Int32).5._State_5\;
@@ -11906,11 +11909,11 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
                         if (\Posit32::.ctor(Int32).5.Posit32::.ctor(UInt32)._Started.0\ = \Posit32::.ctor(Int32).5.Posit32::.ctor(UInt32)._Finished.0\) then 
                             \Posit32::.ctor(Int32).5.Posit32::.ctor(UInt32)._Started.0\ <= false;
-                            \Posit32::.ctor(Int32).5.object41\ := \Posit32::.ctor(Int32).5.Posit32::.ctor(UInt32).this.parameter.In.0\;
+                            \Posit32::.ctor(Int32).5.object40\ := \Posit32::.ctor(Int32).5.Posit32::.ctor(UInt32).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- conditional2 = object41.PositBits;
+                            -- conditional2 = object40.PositBits;
                             -- 
-                            \Posit32::.ctor(Int32).5.conditional2\ := \Posit32::.ctor(Int32).5.object41\.\PositBits\;
+                            \Posit32::.ctor(Int32).5.conditional2\ := \Posit32::.ctor(Int32).5.object40\.\PositBits\;
                             -- Going to the state after the if-else which was started in state \Posit32::.ctor(Int32).5._State_2\.
                             if (\Posit32::.ctor(Int32).5._State\ = \Posit32::.ctor(Int32).5._State_5\) then 
                                 \Posit32::.ctor(Int32).5._State\ := \Posit32::.ctor(Int32).5._State_3\;
@@ -11921,20 +11924,20 @@ begin
                         -- False branch of the if-else started in state \Posit32::.ctor(Int32).5._State_2\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	Posit32 object42;
-                        -- 	object42 = new Posit32 ((uint)(-value));
-                        -- 	conditional2 = Posit32.GetTwosComplement (object42.PositBits);
+                        -- 	Posit32 object41;
+                        -- 	object41 = new Posit32 ((uint)(-value));
+                        -- 	conditional2 = Posit32.GetTwosComplement (object41.PositBits);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- Posit32 object42;
+                        -- Posit32 object41;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object42 = new Posit32 ((uint)(-value));
+                        -- object41 = new Posit32 ((uint)(-value));
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32::.ctor(Int32).5.object42\.\IsNull\ := false;
-                        \Posit32::.ctor(Int32).5.object42\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32::.ctor(Int32).5.object41\.\IsNull\ := false;
+                        \Posit32::.ctor(Int32).5.object41\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         \Posit32::.ctor(Int32).5.unaryOperationResult.0\ := -\Posit32::.ctor(Int32).5.value\;
                         -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
@@ -11942,7 +11945,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3119
                     when \Posit32::.ctor(Int32).5._State_7\ => 
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
-                        \Posit32::.ctor(Int32).5.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).5.object42\;
+                        \Posit32::.ctor(Int32).5.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).5.object41\;
                         \Posit32::.ctor(Int32).5.Posit32::.ctor(UInt32).value.parameter.Out.0\ <= unsigned((\Posit32::.ctor(Int32).5.unaryOperationResult.0\));
                         \Posit32::.ctor(Int32).5.Posit32::.ctor(UInt32)._Started.0\ <= true;
                         \Posit32::.ctor(Int32).5._State\ := \Posit32::.ctor(Int32).5._State_8\;
@@ -11951,12 +11954,12 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
                         if (\Posit32::.ctor(Int32).5.Posit32::.ctor(UInt32)._Started.0\ = \Posit32::.ctor(Int32).5.Posit32::.ctor(UInt32)._Finished.0\) then 
                             \Posit32::.ctor(Int32).5.Posit32::.ctor(UInt32)._Started.0\ <= false;
-                            \Posit32::.ctor(Int32).5.object42\ := \Posit32::.ctor(Int32).5.Posit32::.ctor(UInt32).this.parameter.In.0\;
+                            \Posit32::.ctor(Int32).5.object41\ := \Posit32::.ctor(Int32).5.Posit32::.ctor(UInt32).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- conditional2 = Posit32.GetTwosComplement (object42.PositBits);
+                            -- conditional2 = Posit32.GetTwosComplement (object41.PositBits);
                             -- 
                             -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32)
-                            \Posit32::.ctor(Int32).5.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\ <= \Posit32::.ctor(Int32).5.object42\.\PositBits\;
+                            \Posit32::.ctor(Int32).5.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\ <= \Posit32::.ctor(Int32).5.object41\.\PositBits\;
                             \Posit32::.ctor(Int32).5.Posit32::GetTwosComplement(UInt32)._Started.0\ <= true;
                             \Posit32::.ctor(Int32).5._State\ := \Posit32::.ctor(Int32).5._State_9\;
                         end if;
@@ -11987,8 +11990,8 @@ begin
         Variable \Posit32::.ctor(Int32).6.value\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::.ctor(Int32).6.conditional2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::.ctor(Int32).6.binaryOperationResult.0\: boolean := false;
+        Variable \Posit32::.ctor(Int32).6.object40\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::.ctor(Int32).6.object41\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Posit32::.ctor(Int32).6.object42\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::.ctor(Int32).6.unaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::.ctor(Int32).6.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
@@ -12035,13 +12038,13 @@ begin
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if ((value >= 0)) {
-                        -- 	Posit32 object41;
-                        -- 	object41 = new Posit32 ((uint)value);
-                        -- 	conditional2 = object41.PositBits;
+                        -- 	Posit32 object40;
+                        -- 	object40 = new Posit32 ((uint)value);
+                        -- 	conditional2 = object40.PositBits;
                         -- } else {
-                        -- 	Posit32 object42;
-                        -- 	object42 = new Posit32 ((uint)(-value));
-                        -- 	conditional2 = Posit32.GetTwosComplement (object42.PositBits);
+                        -- 	Posit32 object41;
+                        -- 	object41 = new Posit32 ((uint)(-value));
+                        -- 	conditional2 = Posit32.GetTwosComplement (object41.PositBits);
                         -- }
                         -- 
                         \Posit32::.ctor(Int32).6.binaryOperationResult.0\ := \Posit32::.ctor(Int32).6.value\ >= to_signed(0, 32);
@@ -12069,23 +12072,23 @@ begin
                         -- True branch of the if-else started in state \Posit32::.ctor(Int32).6._State_2\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	Posit32 object41;
-                        -- 	object41 = new Posit32 ((uint)value);
-                        -- 	conditional2 = object41.PositBits;
+                        -- 	Posit32 object40;
+                        -- 	object40 = new Posit32 ((uint)value);
+                        -- 	conditional2 = object40.PositBits;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- Posit32 object41;
+                        -- Posit32 object40;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object41 = new Posit32 ((uint)value);
+                        -- object40 = new Posit32 ((uint)value);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32::.ctor(Int32).6.object41\.\IsNull\ := false;
-                        \Posit32::.ctor(Int32).6.object41\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32::.ctor(Int32).6.object40\.\IsNull\ := false;
+                        \Posit32::.ctor(Int32).6.object40\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
-                        \Posit32::.ctor(Int32).6.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).6.object41\;
+                        \Posit32::.ctor(Int32).6.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).6.object40\;
                         \Posit32::.ctor(Int32).6.Posit32::.ctor(UInt32).value.parameter.Out.0\ <= unsigned(\Posit32::.ctor(Int32).6.value\);
                         \Posit32::.ctor(Int32).6.Posit32::.ctor(UInt32)._Started.0\ <= true;
                         \Posit32::.ctor(Int32).6._State\ := \Posit32::.ctor(Int32).6._State_5\;
@@ -12094,11 +12097,11 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
                         if (\Posit32::.ctor(Int32).6.Posit32::.ctor(UInt32)._Started.0\ = \Posit32::.ctor(Int32).6.Posit32::.ctor(UInt32)._Finished.0\) then 
                             \Posit32::.ctor(Int32).6.Posit32::.ctor(UInt32)._Started.0\ <= false;
-                            \Posit32::.ctor(Int32).6.object41\ := \Posit32::.ctor(Int32).6.Posit32::.ctor(UInt32).this.parameter.In.0\;
+                            \Posit32::.ctor(Int32).6.object40\ := \Posit32::.ctor(Int32).6.Posit32::.ctor(UInt32).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- conditional2 = object41.PositBits;
+                            -- conditional2 = object40.PositBits;
                             -- 
-                            \Posit32::.ctor(Int32).6.conditional2\ := \Posit32::.ctor(Int32).6.object41\.\PositBits\;
+                            \Posit32::.ctor(Int32).6.conditional2\ := \Posit32::.ctor(Int32).6.object40\.\PositBits\;
                             -- Going to the state after the if-else which was started in state \Posit32::.ctor(Int32).6._State_2\.
                             if (\Posit32::.ctor(Int32).6._State\ = \Posit32::.ctor(Int32).6._State_5\) then 
                                 \Posit32::.ctor(Int32).6._State\ := \Posit32::.ctor(Int32).6._State_3\;
@@ -12109,20 +12112,20 @@ begin
                         -- False branch of the if-else started in state \Posit32::.ctor(Int32).6._State_2\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	Posit32 object42;
-                        -- 	object42 = new Posit32 ((uint)(-value));
-                        -- 	conditional2 = Posit32.GetTwosComplement (object42.PositBits);
+                        -- 	Posit32 object41;
+                        -- 	object41 = new Posit32 ((uint)(-value));
+                        -- 	conditional2 = Posit32.GetTwosComplement (object41.PositBits);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- Posit32 object42;
+                        -- Posit32 object41;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object42 = new Posit32 ((uint)(-value));
+                        -- object41 = new Posit32 ((uint)(-value));
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32::.ctor(Int32).6.object42\.\IsNull\ := false;
-                        \Posit32::.ctor(Int32).6.object42\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32::.ctor(Int32).6.object41\.\IsNull\ := false;
+                        \Posit32::.ctor(Int32).6.object41\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         \Posit32::.ctor(Int32).6.unaryOperationResult.0\ := -\Posit32::.ctor(Int32).6.value\;
                         -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
@@ -12130,7 +12133,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3119
                     when \Posit32::.ctor(Int32).6._State_7\ => 
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
-                        \Posit32::.ctor(Int32).6.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).6.object42\;
+                        \Posit32::.ctor(Int32).6.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).6.object41\;
                         \Posit32::.ctor(Int32).6.Posit32::.ctor(UInt32).value.parameter.Out.0\ <= unsigned((\Posit32::.ctor(Int32).6.unaryOperationResult.0\));
                         \Posit32::.ctor(Int32).6.Posit32::.ctor(UInt32)._Started.0\ <= true;
                         \Posit32::.ctor(Int32).6._State\ := \Posit32::.ctor(Int32).6._State_8\;
@@ -12139,12 +12142,12 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
                         if (\Posit32::.ctor(Int32).6.Posit32::.ctor(UInt32)._Started.0\ = \Posit32::.ctor(Int32).6.Posit32::.ctor(UInt32)._Finished.0\) then 
                             \Posit32::.ctor(Int32).6.Posit32::.ctor(UInt32)._Started.0\ <= false;
-                            \Posit32::.ctor(Int32).6.object42\ := \Posit32::.ctor(Int32).6.Posit32::.ctor(UInt32).this.parameter.In.0\;
+                            \Posit32::.ctor(Int32).6.object41\ := \Posit32::.ctor(Int32).6.Posit32::.ctor(UInt32).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- conditional2 = Posit32.GetTwosComplement (object42.PositBits);
+                            -- conditional2 = Posit32.GetTwosComplement (object41.PositBits);
                             -- 
                             -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32)
-                            \Posit32::.ctor(Int32).6.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\ <= \Posit32::.ctor(Int32).6.object42\.\PositBits\;
+                            \Posit32::.ctor(Int32).6.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\ <= \Posit32::.ctor(Int32).6.object41\.\PositBits\;
                             \Posit32::.ctor(Int32).6.Posit32::GetTwosComplement(UInt32)._Started.0\ <= true;
                             \Posit32::.ctor(Int32).6._State\ := \Posit32::.ctor(Int32).6._State_9\;
                         end if;
@@ -12175,8 +12178,8 @@ begin
         Variable \Posit32::.ctor(Int32).7.value\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::.ctor(Int32).7.conditional2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::.ctor(Int32).7.binaryOperationResult.0\: boolean := false;
+        Variable \Posit32::.ctor(Int32).7.object40\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::.ctor(Int32).7.object41\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Posit32::.ctor(Int32).7.object42\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::.ctor(Int32).7.unaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::.ctor(Int32).7.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
@@ -12223,13 +12226,13 @@ begin
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if ((value >= 0)) {
-                        -- 	Posit32 object41;
-                        -- 	object41 = new Posit32 ((uint)value);
-                        -- 	conditional2 = object41.PositBits;
+                        -- 	Posit32 object40;
+                        -- 	object40 = new Posit32 ((uint)value);
+                        -- 	conditional2 = object40.PositBits;
                         -- } else {
-                        -- 	Posit32 object42;
-                        -- 	object42 = new Posit32 ((uint)(-value));
-                        -- 	conditional2 = Posit32.GetTwosComplement (object42.PositBits);
+                        -- 	Posit32 object41;
+                        -- 	object41 = new Posit32 ((uint)(-value));
+                        -- 	conditional2 = Posit32.GetTwosComplement (object41.PositBits);
                         -- }
                         -- 
                         \Posit32::.ctor(Int32).7.binaryOperationResult.0\ := \Posit32::.ctor(Int32).7.value\ >= to_signed(0, 32);
@@ -12257,23 +12260,23 @@ begin
                         -- True branch of the if-else started in state \Posit32::.ctor(Int32).7._State_2\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	Posit32 object41;
-                        -- 	object41 = new Posit32 ((uint)value);
-                        -- 	conditional2 = object41.PositBits;
+                        -- 	Posit32 object40;
+                        -- 	object40 = new Posit32 ((uint)value);
+                        -- 	conditional2 = object40.PositBits;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- Posit32 object41;
+                        -- Posit32 object40;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object41 = new Posit32 ((uint)value);
+                        -- object40 = new Posit32 ((uint)value);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32::.ctor(Int32).7.object41\.\IsNull\ := false;
-                        \Posit32::.ctor(Int32).7.object41\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32::.ctor(Int32).7.object40\.\IsNull\ := false;
+                        \Posit32::.ctor(Int32).7.object40\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
-                        \Posit32::.ctor(Int32).7.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).7.object41\;
+                        \Posit32::.ctor(Int32).7.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).7.object40\;
                         \Posit32::.ctor(Int32).7.Posit32::.ctor(UInt32).value.parameter.Out.0\ <= unsigned(\Posit32::.ctor(Int32).7.value\);
                         \Posit32::.ctor(Int32).7.Posit32::.ctor(UInt32)._Started.0\ <= true;
                         \Posit32::.ctor(Int32).7._State\ := \Posit32::.ctor(Int32).7._State_5\;
@@ -12282,11 +12285,11 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
                         if (\Posit32::.ctor(Int32).7.Posit32::.ctor(UInt32)._Started.0\ = \Posit32::.ctor(Int32).7.Posit32::.ctor(UInt32)._Finished.0\) then 
                             \Posit32::.ctor(Int32).7.Posit32::.ctor(UInt32)._Started.0\ <= false;
-                            \Posit32::.ctor(Int32).7.object41\ := \Posit32::.ctor(Int32).7.Posit32::.ctor(UInt32).this.parameter.In.0\;
+                            \Posit32::.ctor(Int32).7.object40\ := \Posit32::.ctor(Int32).7.Posit32::.ctor(UInt32).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- conditional2 = object41.PositBits;
+                            -- conditional2 = object40.PositBits;
                             -- 
-                            \Posit32::.ctor(Int32).7.conditional2\ := \Posit32::.ctor(Int32).7.object41\.\PositBits\;
+                            \Posit32::.ctor(Int32).7.conditional2\ := \Posit32::.ctor(Int32).7.object40\.\PositBits\;
                             -- Going to the state after the if-else which was started in state \Posit32::.ctor(Int32).7._State_2\.
                             if (\Posit32::.ctor(Int32).7._State\ = \Posit32::.ctor(Int32).7._State_5\) then 
                                 \Posit32::.ctor(Int32).7._State\ := \Posit32::.ctor(Int32).7._State_3\;
@@ -12297,20 +12300,20 @@ begin
                         -- False branch of the if-else started in state \Posit32::.ctor(Int32).7._State_2\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	Posit32 object42;
-                        -- 	object42 = new Posit32 ((uint)(-value));
-                        -- 	conditional2 = Posit32.GetTwosComplement (object42.PositBits);
+                        -- 	Posit32 object41;
+                        -- 	object41 = new Posit32 ((uint)(-value));
+                        -- 	conditional2 = Posit32.GetTwosComplement (object41.PositBits);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- Posit32 object42;
+                        -- Posit32 object41;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object42 = new Posit32 ((uint)(-value));
+                        -- object41 = new Posit32 ((uint)(-value));
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32::.ctor(Int32).7.object42\.\IsNull\ := false;
-                        \Posit32::.ctor(Int32).7.object42\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32::.ctor(Int32).7.object41\.\IsNull\ := false;
+                        \Posit32::.ctor(Int32).7.object41\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         \Posit32::.ctor(Int32).7.unaryOperationResult.0\ := -\Posit32::.ctor(Int32).7.value\;
                         -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
@@ -12318,7 +12321,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3119
                     when \Posit32::.ctor(Int32).7._State_7\ => 
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
-                        \Posit32::.ctor(Int32).7.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).7.object42\;
+                        \Posit32::.ctor(Int32).7.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).7.object41\;
                         \Posit32::.ctor(Int32).7.Posit32::.ctor(UInt32).value.parameter.Out.0\ <= unsigned((\Posit32::.ctor(Int32).7.unaryOperationResult.0\));
                         \Posit32::.ctor(Int32).7.Posit32::.ctor(UInt32)._Started.0\ <= true;
                         \Posit32::.ctor(Int32).7._State\ := \Posit32::.ctor(Int32).7._State_8\;
@@ -12327,12 +12330,12 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
                         if (\Posit32::.ctor(Int32).7.Posit32::.ctor(UInt32)._Started.0\ = \Posit32::.ctor(Int32).7.Posit32::.ctor(UInt32)._Finished.0\) then 
                             \Posit32::.ctor(Int32).7.Posit32::.ctor(UInt32)._Started.0\ <= false;
-                            \Posit32::.ctor(Int32).7.object42\ := \Posit32::.ctor(Int32).7.Posit32::.ctor(UInt32).this.parameter.In.0\;
+                            \Posit32::.ctor(Int32).7.object41\ := \Posit32::.ctor(Int32).7.Posit32::.ctor(UInt32).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- conditional2 = Posit32.GetTwosComplement (object42.PositBits);
+                            -- conditional2 = Posit32.GetTwosComplement (object41.PositBits);
                             -- 
                             -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32)
-                            \Posit32::.ctor(Int32).7.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\ <= \Posit32::.ctor(Int32).7.object42\.\PositBits\;
+                            \Posit32::.ctor(Int32).7.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\ <= \Posit32::.ctor(Int32).7.object41\.\PositBits\;
                             \Posit32::.ctor(Int32).7.Posit32::GetTwosComplement(UInt32)._Started.0\ <= true;
                             \Posit32::.ctor(Int32).7._State\ := \Posit32::.ctor(Int32).7._State_9\;
                         end if;
@@ -12363,8 +12366,8 @@ begin
         Variable \Posit32::.ctor(Int32).8.value\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::.ctor(Int32).8.conditional2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::.ctor(Int32).8.binaryOperationResult.0\: boolean := false;
+        Variable \Posit32::.ctor(Int32).8.object40\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::.ctor(Int32).8.object41\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Posit32::.ctor(Int32).8.object42\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::.ctor(Int32).8.unaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::.ctor(Int32).8.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
@@ -12411,13 +12414,13 @@ begin
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if ((value >= 0)) {
-                        -- 	Posit32 object41;
-                        -- 	object41 = new Posit32 ((uint)value);
-                        -- 	conditional2 = object41.PositBits;
+                        -- 	Posit32 object40;
+                        -- 	object40 = new Posit32 ((uint)value);
+                        -- 	conditional2 = object40.PositBits;
                         -- } else {
-                        -- 	Posit32 object42;
-                        -- 	object42 = new Posit32 ((uint)(-value));
-                        -- 	conditional2 = Posit32.GetTwosComplement (object42.PositBits);
+                        -- 	Posit32 object41;
+                        -- 	object41 = new Posit32 ((uint)(-value));
+                        -- 	conditional2 = Posit32.GetTwosComplement (object41.PositBits);
                         -- }
                         -- 
                         \Posit32::.ctor(Int32).8.binaryOperationResult.0\ := \Posit32::.ctor(Int32).8.value\ >= to_signed(0, 32);
@@ -12445,23 +12448,23 @@ begin
                         -- True branch of the if-else started in state \Posit32::.ctor(Int32).8._State_2\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	Posit32 object41;
-                        -- 	object41 = new Posit32 ((uint)value);
-                        -- 	conditional2 = object41.PositBits;
+                        -- 	Posit32 object40;
+                        -- 	object40 = new Posit32 ((uint)value);
+                        -- 	conditional2 = object40.PositBits;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- Posit32 object41;
+                        -- Posit32 object40;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object41 = new Posit32 ((uint)value);
+                        -- object40 = new Posit32 ((uint)value);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32::.ctor(Int32).8.object41\.\IsNull\ := false;
-                        \Posit32::.ctor(Int32).8.object41\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32::.ctor(Int32).8.object40\.\IsNull\ := false;
+                        \Posit32::.ctor(Int32).8.object40\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
-                        \Posit32::.ctor(Int32).8.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).8.object41\;
+                        \Posit32::.ctor(Int32).8.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).8.object40\;
                         \Posit32::.ctor(Int32).8.Posit32::.ctor(UInt32).value.parameter.Out.0\ <= unsigned(\Posit32::.ctor(Int32).8.value\);
                         \Posit32::.ctor(Int32).8.Posit32::.ctor(UInt32)._Started.0\ <= true;
                         \Posit32::.ctor(Int32).8._State\ := \Posit32::.ctor(Int32).8._State_5\;
@@ -12470,11 +12473,11 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
                         if (\Posit32::.ctor(Int32).8.Posit32::.ctor(UInt32)._Started.0\ = \Posit32::.ctor(Int32).8.Posit32::.ctor(UInt32)._Finished.0\) then 
                             \Posit32::.ctor(Int32).8.Posit32::.ctor(UInt32)._Started.0\ <= false;
-                            \Posit32::.ctor(Int32).8.object41\ := \Posit32::.ctor(Int32).8.Posit32::.ctor(UInt32).this.parameter.In.0\;
+                            \Posit32::.ctor(Int32).8.object40\ := \Posit32::.ctor(Int32).8.Posit32::.ctor(UInt32).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- conditional2 = object41.PositBits;
+                            -- conditional2 = object40.PositBits;
                             -- 
-                            \Posit32::.ctor(Int32).8.conditional2\ := \Posit32::.ctor(Int32).8.object41\.\PositBits\;
+                            \Posit32::.ctor(Int32).8.conditional2\ := \Posit32::.ctor(Int32).8.object40\.\PositBits\;
                             -- Going to the state after the if-else which was started in state \Posit32::.ctor(Int32).8._State_2\.
                             if (\Posit32::.ctor(Int32).8._State\ = \Posit32::.ctor(Int32).8._State_5\) then 
                                 \Posit32::.ctor(Int32).8._State\ := \Posit32::.ctor(Int32).8._State_3\;
@@ -12485,20 +12488,20 @@ begin
                         -- False branch of the if-else started in state \Posit32::.ctor(Int32).8._State_2\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	Posit32 object42;
-                        -- 	object42 = new Posit32 ((uint)(-value));
-                        -- 	conditional2 = Posit32.GetTwosComplement (object42.PositBits);
+                        -- 	Posit32 object41;
+                        -- 	object41 = new Posit32 ((uint)(-value));
+                        -- 	conditional2 = Posit32.GetTwosComplement (object41.PositBits);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- Posit32 object42;
+                        -- Posit32 object41;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object42 = new Posit32 ((uint)(-value));
+                        -- object41 = new Posit32 ((uint)(-value));
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32::.ctor(Int32).8.object42\.\IsNull\ := false;
-                        \Posit32::.ctor(Int32).8.object42\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32::.ctor(Int32).8.object41\.\IsNull\ := false;
+                        \Posit32::.ctor(Int32).8.object41\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         \Posit32::.ctor(Int32).8.unaryOperationResult.0\ := -\Posit32::.ctor(Int32).8.value\;
                         -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
@@ -12506,7 +12509,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3119
                     when \Posit32::.ctor(Int32).8._State_7\ => 
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
-                        \Posit32::.ctor(Int32).8.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).8.object42\;
+                        \Posit32::.ctor(Int32).8.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).8.object41\;
                         \Posit32::.ctor(Int32).8.Posit32::.ctor(UInt32).value.parameter.Out.0\ <= unsigned((\Posit32::.ctor(Int32).8.unaryOperationResult.0\));
                         \Posit32::.ctor(Int32).8.Posit32::.ctor(UInt32)._Started.0\ <= true;
                         \Posit32::.ctor(Int32).8._State\ := \Posit32::.ctor(Int32).8._State_8\;
@@ -12515,12 +12518,12 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
                         if (\Posit32::.ctor(Int32).8.Posit32::.ctor(UInt32)._Started.0\ = \Posit32::.ctor(Int32).8.Posit32::.ctor(UInt32)._Finished.0\) then 
                             \Posit32::.ctor(Int32).8.Posit32::.ctor(UInt32)._Started.0\ <= false;
-                            \Posit32::.ctor(Int32).8.object42\ := \Posit32::.ctor(Int32).8.Posit32::.ctor(UInt32).this.parameter.In.0\;
+                            \Posit32::.ctor(Int32).8.object41\ := \Posit32::.ctor(Int32).8.Posit32::.ctor(UInt32).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- conditional2 = Posit32.GetTwosComplement (object42.PositBits);
+                            -- conditional2 = Posit32.GetTwosComplement (object41.PositBits);
                             -- 
                             -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32)
-                            \Posit32::.ctor(Int32).8.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\ <= \Posit32::.ctor(Int32).8.object42\.\PositBits\;
+                            \Posit32::.ctor(Int32).8.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\ <= \Posit32::.ctor(Int32).8.object41\.\PositBits\;
                             \Posit32::.ctor(Int32).8.Posit32::GetTwosComplement(UInt32)._Started.0\ <= true;
                             \Posit32::.ctor(Int32).8._State\ := \Posit32::.ctor(Int32).8._State_9\;
                         end if;
@@ -12551,8 +12554,8 @@ begin
         Variable \Posit32::.ctor(Int32).9.value\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::.ctor(Int32).9.conditional2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::.ctor(Int32).9.binaryOperationResult.0\: boolean := false;
+        Variable \Posit32::.ctor(Int32).9.object40\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::.ctor(Int32).9.object41\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Posit32::.ctor(Int32).9.object42\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::.ctor(Int32).9.unaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::.ctor(Int32).9.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
@@ -12599,13 +12602,13 @@ begin
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if ((value >= 0)) {
-                        -- 	Posit32 object41;
-                        -- 	object41 = new Posit32 ((uint)value);
-                        -- 	conditional2 = object41.PositBits;
+                        -- 	Posit32 object40;
+                        -- 	object40 = new Posit32 ((uint)value);
+                        -- 	conditional2 = object40.PositBits;
                         -- } else {
-                        -- 	Posit32 object42;
-                        -- 	object42 = new Posit32 ((uint)(-value));
-                        -- 	conditional2 = Posit32.GetTwosComplement (object42.PositBits);
+                        -- 	Posit32 object41;
+                        -- 	object41 = new Posit32 ((uint)(-value));
+                        -- 	conditional2 = Posit32.GetTwosComplement (object41.PositBits);
                         -- }
                         -- 
                         \Posit32::.ctor(Int32).9.binaryOperationResult.0\ := \Posit32::.ctor(Int32).9.value\ >= to_signed(0, 32);
@@ -12633,23 +12636,23 @@ begin
                         -- True branch of the if-else started in state \Posit32::.ctor(Int32).9._State_2\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	Posit32 object41;
-                        -- 	object41 = new Posit32 ((uint)value);
-                        -- 	conditional2 = object41.PositBits;
+                        -- 	Posit32 object40;
+                        -- 	object40 = new Posit32 ((uint)value);
+                        -- 	conditional2 = object40.PositBits;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- Posit32 object41;
+                        -- Posit32 object40;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object41 = new Posit32 ((uint)value);
+                        -- object40 = new Posit32 ((uint)value);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32::.ctor(Int32).9.object41\.\IsNull\ := false;
-                        \Posit32::.ctor(Int32).9.object41\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32::.ctor(Int32).9.object40\.\IsNull\ := false;
+                        \Posit32::.ctor(Int32).9.object40\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
-                        \Posit32::.ctor(Int32).9.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).9.object41\;
+                        \Posit32::.ctor(Int32).9.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).9.object40\;
                         \Posit32::.ctor(Int32).9.Posit32::.ctor(UInt32).value.parameter.Out.0\ <= unsigned(\Posit32::.ctor(Int32).9.value\);
                         \Posit32::.ctor(Int32).9.Posit32::.ctor(UInt32)._Started.0\ <= true;
                         \Posit32::.ctor(Int32).9._State\ := \Posit32::.ctor(Int32).9._State_5\;
@@ -12658,11 +12661,11 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
                         if (\Posit32::.ctor(Int32).9.Posit32::.ctor(UInt32)._Started.0\ = \Posit32::.ctor(Int32).9.Posit32::.ctor(UInt32)._Finished.0\) then 
                             \Posit32::.ctor(Int32).9.Posit32::.ctor(UInt32)._Started.0\ <= false;
-                            \Posit32::.ctor(Int32).9.object41\ := \Posit32::.ctor(Int32).9.Posit32::.ctor(UInt32).this.parameter.In.0\;
+                            \Posit32::.ctor(Int32).9.object40\ := \Posit32::.ctor(Int32).9.Posit32::.ctor(UInt32).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- conditional2 = object41.PositBits;
+                            -- conditional2 = object40.PositBits;
                             -- 
-                            \Posit32::.ctor(Int32).9.conditional2\ := \Posit32::.ctor(Int32).9.object41\.\PositBits\;
+                            \Posit32::.ctor(Int32).9.conditional2\ := \Posit32::.ctor(Int32).9.object40\.\PositBits\;
                             -- Going to the state after the if-else which was started in state \Posit32::.ctor(Int32).9._State_2\.
                             if (\Posit32::.ctor(Int32).9._State\ = \Posit32::.ctor(Int32).9._State_5\) then 
                                 \Posit32::.ctor(Int32).9._State\ := \Posit32::.ctor(Int32).9._State_3\;
@@ -12673,20 +12676,20 @@ begin
                         -- False branch of the if-else started in state \Posit32::.ctor(Int32).9._State_2\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	Posit32 object42;
-                        -- 	object42 = new Posit32 ((uint)(-value));
-                        -- 	conditional2 = Posit32.GetTwosComplement (object42.PositBits);
+                        -- 	Posit32 object41;
+                        -- 	object41 = new Posit32 ((uint)(-value));
+                        -- 	conditional2 = Posit32.GetTwosComplement (object41.PositBits);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- Posit32 object42;
+                        -- Posit32 object41;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object42 = new Posit32 ((uint)(-value));
+                        -- object41 = new Posit32 ((uint)(-value));
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32::.ctor(Int32).9.object42\.\IsNull\ := false;
-                        \Posit32::.ctor(Int32).9.object42\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32::.ctor(Int32).9.object41\.\IsNull\ := false;
+                        \Posit32::.ctor(Int32).9.object41\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         \Posit32::.ctor(Int32).9.unaryOperationResult.0\ := -\Posit32::.ctor(Int32).9.value\;
                         -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
@@ -12694,7 +12697,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3119
                     when \Posit32::.ctor(Int32).9._State_7\ => 
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
-                        \Posit32::.ctor(Int32).9.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).9.object42\;
+                        \Posit32::.ctor(Int32).9.Posit32::.ctor(UInt32).this.parameter.Out.0\ <= \Posit32::.ctor(Int32).9.object41\;
                         \Posit32::.ctor(Int32).9.Posit32::.ctor(UInt32).value.parameter.Out.0\ <= unsigned((\Posit32::.ctor(Int32).9.unaryOperationResult.0\));
                         \Posit32::.ctor(Int32).9.Posit32::.ctor(UInt32)._Started.0\ <= true;
                         \Posit32::.ctor(Int32).9._State\ := \Posit32::.ctor(Int32).9._State_8\;
@@ -12703,12 +12706,12 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32)
                         if (\Posit32::.ctor(Int32).9.Posit32::.ctor(UInt32)._Started.0\ = \Posit32::.ctor(Int32).9.Posit32::.ctor(UInt32)._Finished.0\) then 
                             \Posit32::.ctor(Int32).9.Posit32::.ctor(UInt32)._Started.0\ <= false;
-                            \Posit32::.ctor(Int32).9.object42\ := \Posit32::.ctor(Int32).9.Posit32::.ctor(UInt32).this.parameter.In.0\;
+                            \Posit32::.ctor(Int32).9.object41\ := \Posit32::.ctor(Int32).9.Posit32::.ctor(UInt32).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- conditional2 = Posit32.GetTwosComplement (object42.PositBits);
+                            -- conditional2 = Posit32.GetTwosComplement (object41.PositBits);
                             -- 
                             -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32)
-                            \Posit32::.ctor(Int32).9.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\ <= \Posit32::.ctor(Int32).9.object42\.\PositBits\;
+                            \Posit32::.ctor(Int32).9.Posit32::GetTwosComplement(UInt32).bits.parameter.Out.0\ <= \Posit32::.ctor(Int32).9.object41\.\PositBits\;
                             \Posit32::.ctor(Int32).9.Posit32::GetTwosComplement(UInt32)._Started.0\ <= true;
                             \Posit32::.ctor(Int32).9._State\ := \Posit32::.ctor(Int32).9._State_9\;
                         end if;
@@ -12990,162 +12993,6 @@ begin
         end if;
     end process;
     -- System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().4 state machine end
-
-
-    -- System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().5 state machine start
-    \Posit32::IsPositive().5._StateMachine\: process (\Clock\) 
-        Variable \Posit32::IsPositive().5._State\: \Posit32::IsPositive().5._States\ := \Posit32::IsPositive().5._State_0\;
-        Variable \Posit32::IsPositive().5.this\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Posit32::IsPositive().5.binaryOperationResult.0\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \Posit32::IsPositive().5.binaryOperationResult.1\: boolean := false;
-    begin 
-        if (rising_edge(\Clock\)) then 
-            if (\Reset\ = '1') then 
-                -- Synchronous reset
-                \Posit32::IsPositive().5._Finished\ <= false;
-                \Posit32::IsPositive().5.return\ <= false;
-                \Posit32::IsPositive().5._State\ := \Posit32::IsPositive().5._State_0\;
-                \Posit32::IsPositive().5.binaryOperationResult.0\ := to_signed(0, 64);
-                \Posit32::IsPositive().5.binaryOperationResult.1\ := false;
-            else 
-                case \Posit32::IsPositive().5._State\ is 
-                    when \Posit32::IsPositive().5._State_0\ => 
-                        -- Start state
-                        -- Waiting for the start signal.
-                        if (\Posit32::IsPositive().5._Started\ = true) then 
-                            \Posit32::IsPositive().5._State\ := \Posit32::IsPositive().5._State_2\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::IsPositive().5._State_1\ => 
-                        -- Final state
-                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
-                        if (\Posit32::IsPositive().5._Started\ = true) then 
-                            \Posit32::IsPositive().5._Finished\ <= true;
-                        else 
-                            \Posit32::IsPositive().5._Finished\ <= false;
-                            \Posit32::IsPositive().5._State\ := \Posit32::IsPositive().5._State_0\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::IsPositive().5._State_2\ => 
-                        \Posit32::IsPositive().5.this\ := \Posit32::IsPositive().5.this.parameter.In\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return (long)((@this.PositBits & 0x80000000u)) == 0L;
-                        -- 
-                        -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
-                        \Posit32::IsPositive().5.binaryOperationResult.0\ := signed(SmartResize(\Posit32::IsPositive().5.this\.\PositBits\ and "10000000000000000000000000000000", 64));
-                        \Posit32::IsPositive().5.binaryOperationResult.1\ := signed(SmartResize(((\Posit32::IsPositive().5.binaryOperationResult.0\)), 64)) = to_signed(0, 64);
-                        \Posit32::IsPositive().5.return\ <= \Posit32::IsPositive().5.binaryOperationResult.1\;
-                        \Posit32::IsPositive().5._State\ := \Posit32::IsPositive().5._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0.4203
-                end case;
-            end if;
-        end if;
-    end process;
-    -- System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().5 state machine end
-
-
-    -- System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().6 state machine start
-    \Posit32::IsPositive().6._StateMachine\: process (\Clock\) 
-        Variable \Posit32::IsPositive().6._State\: \Posit32::IsPositive().6._States\ := \Posit32::IsPositive().6._State_0\;
-        Variable \Posit32::IsPositive().6.this\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Posit32::IsPositive().6.binaryOperationResult.0\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \Posit32::IsPositive().6.binaryOperationResult.1\: boolean := false;
-    begin 
-        if (rising_edge(\Clock\)) then 
-            if (\Reset\ = '1') then 
-                -- Synchronous reset
-                \Posit32::IsPositive().6._Finished\ <= false;
-                \Posit32::IsPositive().6.return\ <= false;
-                \Posit32::IsPositive().6._State\ := \Posit32::IsPositive().6._State_0\;
-                \Posit32::IsPositive().6.binaryOperationResult.0\ := to_signed(0, 64);
-                \Posit32::IsPositive().6.binaryOperationResult.1\ := false;
-            else 
-                case \Posit32::IsPositive().6._State\ is 
-                    when \Posit32::IsPositive().6._State_0\ => 
-                        -- Start state
-                        -- Waiting for the start signal.
-                        if (\Posit32::IsPositive().6._Started\ = true) then 
-                            \Posit32::IsPositive().6._State\ := \Posit32::IsPositive().6._State_2\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::IsPositive().6._State_1\ => 
-                        -- Final state
-                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
-                        if (\Posit32::IsPositive().6._Started\ = true) then 
-                            \Posit32::IsPositive().6._Finished\ <= true;
-                        else 
-                            \Posit32::IsPositive().6._Finished\ <= false;
-                            \Posit32::IsPositive().6._State\ := \Posit32::IsPositive().6._State_0\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::IsPositive().6._State_2\ => 
-                        \Posit32::IsPositive().6.this\ := \Posit32::IsPositive().6.this.parameter.In\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return (long)((@this.PositBits & 0x80000000u)) == 0L;
-                        -- 
-                        -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
-                        \Posit32::IsPositive().6.binaryOperationResult.0\ := signed(SmartResize(\Posit32::IsPositive().6.this\.\PositBits\ and "10000000000000000000000000000000", 64));
-                        \Posit32::IsPositive().6.binaryOperationResult.1\ := signed(SmartResize(((\Posit32::IsPositive().6.binaryOperationResult.0\)), 64)) = to_signed(0, 64);
-                        \Posit32::IsPositive().6.return\ <= \Posit32::IsPositive().6.binaryOperationResult.1\;
-                        \Posit32::IsPositive().6._State\ := \Posit32::IsPositive().6._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0.4203
-                end case;
-            end if;
-        end if;
-    end process;
-    -- System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().6 state machine end
-
-
-    -- System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().7 state machine start
-    \Posit32::IsPositive().7._StateMachine\: process (\Clock\) 
-        Variable \Posit32::IsPositive().7._State\: \Posit32::IsPositive().7._States\ := \Posit32::IsPositive().7._State_0\;
-        Variable \Posit32::IsPositive().7.this\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Posit32::IsPositive().7.binaryOperationResult.0\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \Posit32::IsPositive().7.binaryOperationResult.1\: boolean := false;
-    begin 
-        if (rising_edge(\Clock\)) then 
-            if (\Reset\ = '1') then 
-                -- Synchronous reset
-                \Posit32::IsPositive().7._Finished\ <= false;
-                \Posit32::IsPositive().7.return\ <= false;
-                \Posit32::IsPositive().7._State\ := \Posit32::IsPositive().7._State_0\;
-                \Posit32::IsPositive().7.binaryOperationResult.0\ := to_signed(0, 64);
-                \Posit32::IsPositive().7.binaryOperationResult.1\ := false;
-            else 
-                case \Posit32::IsPositive().7._State\ is 
-                    when \Posit32::IsPositive().7._State_0\ => 
-                        -- Start state
-                        -- Waiting for the start signal.
-                        if (\Posit32::IsPositive().7._Started\ = true) then 
-                            \Posit32::IsPositive().7._State\ := \Posit32::IsPositive().7._State_2\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::IsPositive().7._State_1\ => 
-                        -- Final state
-                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
-                        if (\Posit32::IsPositive().7._Started\ = true) then 
-                            \Posit32::IsPositive().7._Finished\ <= true;
-                        else 
-                            \Posit32::IsPositive().7._Finished\ <= false;
-                            \Posit32::IsPositive().7._State\ := \Posit32::IsPositive().7._State_0\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Posit32::IsPositive().7._State_2\ => 
-                        \Posit32::IsPositive().7.this\ := \Posit32::IsPositive().7.this.parameter.In\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return (long)((@this.PositBits & 0x80000000u)) == 0L;
-                        -- 
-                        -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
-                        \Posit32::IsPositive().7.binaryOperationResult.0\ := signed(SmartResize(\Posit32::IsPositive().7.this\.\PositBits\ and "10000000000000000000000000000000", 64));
-                        \Posit32::IsPositive().7.binaryOperationResult.1\ := signed(SmartResize(((\Posit32::IsPositive().7.binaryOperationResult.0\)), 64)) = to_signed(0, 64);
-                        \Posit32::IsPositive().7.return\ <= \Posit32::IsPositive().7.binaryOperationResult.1\;
-                        \Posit32::IsPositive().7._State\ := \Posit32::IsPositive().7._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0.4203
-                end case;
-            end if;
-        end if;
-    end process;
-    -- System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().7 state machine end
 
 
     -- System.Boolean Lombiq.Arithmetics.Posit32::IsNaN().0 state machine start
@@ -38020,7 +37867,7 @@ begin
         Variable \Posit32::Abs(Posit32).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::Abs(Posit32).0.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::Abs(Posit32).0.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::Abs(Posit32).0.object43\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Posit32::Abs(Posit32).0.object42\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32::Abs(Posit32).0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::Abs(Posit32).0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
@@ -38076,14 +37923,14 @@ begin
                         \Posit32::Abs(Posit32).0.binaryOperationResult.1\ := SmartResize(unsigned(to_signed(0, 64) - signed(SmartResize((\Posit32::Abs(Posit32).0.num\), 64))), 32);
                         \Posit32::Abs(Posit32).0.num2\ := (\Posit32::Abs(Posit32).0.binaryOperationResult.1\);
                         -- The following section was transformed from the .NET statement below:
-                        -- Posit32 object43;
+                        -- Posit32 object42;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object43 = new Posit32 ((input.PositBits ^ num2) + num, true);
+                        -- object42 = new Posit32 ((input.PositBits ^ num2) + num, true);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32::Abs(Posit32).0.object43\.\IsNull\ := false;
-                        \Posit32::Abs(Posit32).0.object43\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32::Abs(Posit32).0.object42\.\IsNull\ := false;
+                        \Posit32::Abs(Posit32).0.object42\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         \Posit32::Abs(Posit32).0.binaryOperationResult.2\ := \Posit32::Abs(Posit32).0.input\.\PositBits\ xor \Posit32::Abs(Posit32).0.num2\;
                         \Posit32::Abs(Posit32).0._State\ := \Posit32::Abs(Posit32).0._State_3\;
@@ -38092,7 +37939,7 @@ begin
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Posit32::Abs(Posit32).0.binaryOperationResult.3\ := (\Posit32::Abs(Posit32).0.binaryOperationResult.2\) + \Posit32::Abs(Posit32).0.num\;
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
-                        \Posit32::Abs(Posit32).0.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32::Abs(Posit32).0.object43\;
+                        \Posit32::Abs(Posit32).0.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32::Abs(Posit32).0.object42\;
                         \Posit32::Abs(Posit32).0.Posit32::.ctor(UInt32,Boolean).bits.parameter.Out.0\ <= \Posit32::Abs(Posit32).0.binaryOperationResult.3\;
                         \Posit32::Abs(Posit32).0.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= true;
                         \Posit32::Abs(Posit32).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= true;
@@ -38102,11 +37949,11 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
                         if (\Posit32::Abs(Posit32).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ = \Posit32::Abs(Posit32).0.Posit32::.ctor(UInt32,Boolean)._Finished.0\) then 
                             \Posit32::Abs(Posit32).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= false;
-                            \Posit32::Abs(Posit32).0.object43\ := \Posit32::Abs(Posit32).0.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
+                            \Posit32::Abs(Posit32).0.object42\ := \Posit32::Abs(Posit32).0.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return object43;
+                            -- return object42;
                             -- 
-                            \Posit32::Abs(Posit32).0.return\ <= \Posit32::Abs(Posit32).0.object43\;
+                            \Posit32::Abs(Posit32).0.return\ <= \Posit32::Abs(Posit32).0.object42\;
                             \Posit32::Abs(Posit32).0._State\ := \Posit32::Abs(Posit32).0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -41145,18 +40992,18 @@ begin
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.67\: signed(15 downto 0) := to_signed(0, 16);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.68\: signed(15 downto 0) := to_signed(0, 16);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.69\: boolean := false;
-        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).0.object44\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).0.object43\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).0.num19\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.70\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).0.num20\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).0.remainderOperand48\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).0.remainderOperand47\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.71\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.72\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.73\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.74\: boolean := false;
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.75\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.76\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).0.object45\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).0.object44\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).0.return.20\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
@@ -41327,7 +41174,7 @@ begin
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).0.num19\ := to_signed(0, 32);
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.70\ := to_signed(0, 32);
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).0.num20\ := to_signed(0, 32);
-                \Posit32 Posit32::op_Addition(Posit32,Posit32).0.remainderOperand48\ := to_signed(0, 32);
+                \Posit32 Posit32::op_Addition(Posit32,Posit32).0.remainderOperand47\ := to_signed(0, 32);
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.71\ := to_signed(0, 32);
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.72\ := to_signed(0, 32);
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.73\ := to_signed(0, 32);
@@ -42166,9 +42013,9 @@ begin
                         -- State after the if-else which was started in state \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_49\.
                         -- The following section was transformed from the .NET statement below:
                         -- if ((long)(num7) == 0L) {
-                        -- 	Posit32 object44;
-                        -- 	object44 = new Posit32 (0u, true);
-                        -- 	return object44;
+                        -- 	Posit32 object43;
+                        -- 	object43 = new Posit32 (0u, true);
+                        -- 	return object43;
                         -- }
                         -- 
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.69\ := signed(SmartResize((\Posit32 Posit32::op_Addition(Posit32,Posit32).0.num7\), 64)) = to_signed(0, 64);
@@ -43040,14 +42887,14 @@ begin
                         -- int num20;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- int remainderOperand48;
+                        -- int remainderOperand47;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand48 = (int)(num11);
+                        -- remainderOperand47 = (int)(num11);
                         -- 
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).0.remainderOperand48\ := SmartResize((\Posit32 Posit32::op_Addition(Posit32,Posit32).0.num11\), 32);
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).0.remainderOperand47\ := SmartResize((\Posit32 Posit32::op_Addition(Posit32,Posit32).0.num11\), 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- num20 = (int)(remainderOperand48 - remainderOperand48 / 4 * 4);
+                        -- num20 = (int)(remainderOperand47 - remainderOperand47 / 4 * 4);
                         -- 
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_97\;
                         -- Clock cycles needed to complete this state (approximation): 0.7044
@@ -43055,23 +42902,23 @@ begin
                         -- True branch of the if-else started in state \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_50\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	Posit32 object44;
-                        -- 	object44 = new Posit32 (0u, true);
-                        -- 	return object44;
+                        -- 	Posit32 object43;
+                        -- 	object43 = new Posit32 (0u, true);
+                        -- 	return object43;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- Posit32 object44;
+                        -- Posit32 object43;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object44 = new Posit32 (0u, true);
+                        -- object43 = new Posit32 (0u, true);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).0.object44\.\IsNull\ := false;
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).0.object44\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).0.object43\.\IsNull\ := false;
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).0.object43\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).0.object44\;
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).0.object43\;
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean).bits.parameter.Out.0\ <= to_unsigned(0, 32);
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= true;
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= true;
@@ -43081,11 +42928,11 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
                         if (\Posit32 Posit32::op_Addition(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ = \Posit32 Posit32::op_Addition(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean)._Finished.0\) then 
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= false;
-                            \Posit32 Posit32::op_Addition(Posit32,Posit32).0.object44\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
+                            \Posit32 Posit32::op_Addition(Posit32,Posit32).0.object43\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return object44;
+                            -- return object43;
                             -- 
-                            \Posit32 Posit32::op_Addition(Posit32,Posit32).0.return\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).0.object44\;
+                            \Posit32 Posit32::op_Addition(Posit32,Posit32).0.return\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).0.object43\;
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_1\;
                             -- Going to the state after the if-else which was started in state \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_50\.
                             if (\Posit32 Posit32::op_Addition(Posit32,Posit32).0._State\ = \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_96\) then 
@@ -43095,13 +42942,13 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_97\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.71\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).0.remainderOperand48\ / to_signed(4, 32);
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.71\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).0.remainderOperand47\ / to_signed(4, 32);
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.72\ := SmartResize(\Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.71\ * to_signed(4, 32), 32);
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_98\;
                         -- Clock cycles needed to complete this state (approximation): 0.8265
                     when \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_98\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.73\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).0.remainderOperand48\ - \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.72\;
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.73\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).0.remainderOperand47\ - \Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.72\;
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).0.num20\ := (\Posit32 Posit32::op_Addition(Posit32,Posit32).0.binaryOperationResult.73\);
                         -- The following section was transformed from the .NET statement below:
                         -- if (num20 < 0) {
@@ -43125,14 +42972,14 @@ begin
                     when \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_99\ => 
                         -- State after the if-else which was started in state \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_98\.
                         -- The following section was transformed from the .NET statement below:
-                        -- Posit32 object45;
+                        -- Posit32 object44;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object45 = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
+                        -- object44 = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).0.object45\.\IsNull\ := false;
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).0.object45\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).0.object44\.\IsNull\ := false;
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).0.object44\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::AssemblePositBitsWithRounding(System.Boolean,System.Int32,System.UInt32,System.UInt32)
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).0.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).signBit.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).0.signBit\;
@@ -43171,7 +43018,7 @@ begin
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).0.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32)._Started.0\ <= false;
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).0.return.20\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).0.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).return.0\;
                             -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
-                            \Posit32 Posit32::op_Addition(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).0.object45\;
+                            \Posit32 Posit32::op_Addition(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).0.object44\;
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean).bits.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).0.return.20\;
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= true;
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= true;
@@ -43182,11 +43029,11 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
                         if (\Posit32 Posit32::op_Addition(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ = \Posit32 Posit32::op_Addition(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean)._Finished.0\) then 
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= false;
-                            \Posit32 Posit32::op_Addition(Posit32,Posit32).0.object45\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
+                            \Posit32 Posit32::op_Addition(Posit32,Posit32).0.object44\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return object45;
+                            -- return object44;
                             -- 
-                            \Posit32 Posit32::op_Addition(Posit32,Posit32).0.return\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).0.object45\;
+                            \Posit32 Posit32::op_Addition(Posit32,Posit32).0.return\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).0.object44\;
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -43336,18 +43183,18 @@ begin
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.67\: signed(15 downto 0) := to_signed(0, 16);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.68\: signed(15 downto 0) := to_signed(0, 16);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.69\: boolean := false;
-        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).1.object44\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).1.object43\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).1.num19\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.70\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).1.num20\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).1.remainderOperand48\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).1.remainderOperand47\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.71\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.72\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.73\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.74\: boolean := false;
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.75\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.76\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).1.object45\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).1.object44\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).1.return.20\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
@@ -43518,7 +43365,7 @@ begin
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).1.num19\ := to_signed(0, 32);
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.70\ := to_signed(0, 32);
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).1.num20\ := to_signed(0, 32);
-                \Posit32 Posit32::op_Addition(Posit32,Posit32).1.remainderOperand48\ := to_signed(0, 32);
+                \Posit32 Posit32::op_Addition(Posit32,Posit32).1.remainderOperand47\ := to_signed(0, 32);
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.71\ := to_signed(0, 32);
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.72\ := to_signed(0, 32);
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.73\ := to_signed(0, 32);
@@ -44357,9 +44204,9 @@ begin
                         -- State after the if-else which was started in state \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_49\.
                         -- The following section was transformed from the .NET statement below:
                         -- if ((long)(num7) == 0L) {
-                        -- 	Posit32 object44;
-                        -- 	object44 = new Posit32 (0u, true);
-                        -- 	return object44;
+                        -- 	Posit32 object43;
+                        -- 	object43 = new Posit32 (0u, true);
+                        -- 	return object43;
                         -- }
                         -- 
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.69\ := signed(SmartResize((\Posit32 Posit32::op_Addition(Posit32,Posit32).1.num7\), 64)) = to_signed(0, 64);
@@ -45231,14 +45078,14 @@ begin
                         -- int num20;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- int remainderOperand48;
+                        -- int remainderOperand47;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand48 = (int)(num11);
+                        -- remainderOperand47 = (int)(num11);
                         -- 
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).1.remainderOperand48\ := SmartResize((\Posit32 Posit32::op_Addition(Posit32,Posit32).1.num11\), 32);
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).1.remainderOperand47\ := SmartResize((\Posit32 Posit32::op_Addition(Posit32,Posit32).1.num11\), 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- num20 = (int)(remainderOperand48 - remainderOperand48 / 4 * 4);
+                        -- num20 = (int)(remainderOperand47 - remainderOperand47 / 4 * 4);
                         -- 
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_97\;
                         -- Clock cycles needed to complete this state (approximation): 0.7044
@@ -45246,23 +45093,23 @@ begin
                         -- True branch of the if-else started in state \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_50\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	Posit32 object44;
-                        -- 	object44 = new Posit32 (0u, true);
-                        -- 	return object44;
+                        -- 	Posit32 object43;
+                        -- 	object43 = new Posit32 (0u, true);
+                        -- 	return object43;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- Posit32 object44;
+                        -- Posit32 object43;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object44 = new Posit32 (0u, true);
+                        -- object43 = new Posit32 (0u, true);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).1.object44\.\IsNull\ := false;
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).1.object44\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).1.object43\.\IsNull\ := false;
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).1.object43\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).1.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).1.object44\;
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).1.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).1.object43\;
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).1.Posit32::.ctor(UInt32,Boolean).bits.parameter.Out.0\ <= to_unsigned(0, 32);
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).1.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= true;
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).1.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= true;
@@ -45272,11 +45119,11 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
                         if (\Posit32 Posit32::op_Addition(Posit32,Posit32).1.Posit32::.ctor(UInt32,Boolean)._Started.0\ = \Posit32 Posit32::op_Addition(Posit32,Posit32).1.Posit32::.ctor(UInt32,Boolean)._Finished.0\) then 
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).1.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= false;
-                            \Posit32 Posit32::op_Addition(Posit32,Posit32).1.object44\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).1.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
+                            \Posit32 Posit32::op_Addition(Posit32,Posit32).1.object43\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).1.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return object44;
+                            -- return object43;
                             -- 
-                            \Posit32 Posit32::op_Addition(Posit32,Posit32).1.return\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).1.object44\;
+                            \Posit32 Posit32::op_Addition(Posit32,Posit32).1.return\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).1.object43\;
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_1\;
                             -- Going to the state after the if-else which was started in state \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_50\.
                             if (\Posit32 Posit32::op_Addition(Posit32,Posit32).1._State\ = \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_96\) then 
@@ -45286,13 +45133,13 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_97\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.71\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).1.remainderOperand48\ / to_signed(4, 32);
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.71\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).1.remainderOperand47\ / to_signed(4, 32);
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.72\ := SmartResize(\Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.71\ * to_signed(4, 32), 32);
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_98\;
                         -- Clock cycles needed to complete this state (approximation): 0.8265
                     when \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_98\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.73\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).1.remainderOperand48\ - \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.72\;
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.73\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).1.remainderOperand47\ - \Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.72\;
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).1.num20\ := (\Posit32 Posit32::op_Addition(Posit32,Posit32).1.binaryOperationResult.73\);
                         -- The following section was transformed from the .NET statement below:
                         -- if (num20 < 0) {
@@ -45316,14 +45163,14 @@ begin
                     when \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_99\ => 
                         -- State after the if-else which was started in state \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_98\.
                         -- The following section was transformed from the .NET statement below:
-                        -- Posit32 object45;
+                        -- Posit32 object44;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object45 = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
+                        -- object44 = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).1.object45\.\IsNull\ := false;
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).1.object45\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).1.object44\.\IsNull\ := false;
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).1.object44\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::AssemblePositBitsWithRounding(System.Boolean,System.Int32,System.UInt32,System.UInt32)
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).1.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).signBit.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).1.signBit\;
@@ -45362,7 +45209,7 @@ begin
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).1.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32)._Started.0\ <= false;
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).1.return.20\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).1.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).return.0\;
                             -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
-                            \Posit32 Posit32::op_Addition(Posit32,Posit32).1.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).1.object45\;
+                            \Posit32 Posit32::op_Addition(Posit32,Posit32).1.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).1.object44\;
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).1.Posit32::.ctor(UInt32,Boolean).bits.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).1.return.20\;
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).1.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= true;
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).1.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= true;
@@ -45373,11 +45220,11 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
                         if (\Posit32 Posit32::op_Addition(Posit32,Posit32).1.Posit32::.ctor(UInt32,Boolean)._Started.0\ = \Posit32 Posit32::op_Addition(Posit32,Posit32).1.Posit32::.ctor(UInt32,Boolean)._Finished.0\) then 
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).1.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= false;
-                            \Posit32 Posit32::op_Addition(Posit32,Posit32).1.object45\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).1.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
+                            \Posit32 Posit32::op_Addition(Posit32,Posit32).1.object44\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).1.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return object45;
+                            -- return object44;
                             -- 
-                            \Posit32 Posit32::op_Addition(Posit32,Posit32).1.return\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).1.object45\;
+                            \Posit32 Posit32::op_Addition(Posit32,Posit32).1.return\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).1.object44\;
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).1._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -45527,18 +45374,18 @@ begin
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.67\: signed(15 downto 0) := to_signed(0, 16);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.68\: signed(15 downto 0) := to_signed(0, 16);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.69\: boolean := false;
-        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).2.object44\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).2.object43\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).2.num19\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.70\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).2.num20\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).2.remainderOperand48\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).2.remainderOperand47\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.71\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.72\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.73\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.74\: boolean := false;
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.75\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.76\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).2.object45\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).2.object44\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).2.return.20\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
@@ -45709,7 +45556,7 @@ begin
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).2.num19\ := to_signed(0, 32);
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.70\ := to_signed(0, 32);
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).2.num20\ := to_signed(0, 32);
-                \Posit32 Posit32::op_Addition(Posit32,Posit32).2.remainderOperand48\ := to_signed(0, 32);
+                \Posit32 Posit32::op_Addition(Posit32,Posit32).2.remainderOperand47\ := to_signed(0, 32);
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.71\ := to_signed(0, 32);
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.72\ := to_signed(0, 32);
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.73\ := to_signed(0, 32);
@@ -46548,9 +46395,9 @@ begin
                         -- State after the if-else which was started in state \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_49\.
                         -- The following section was transformed from the .NET statement below:
                         -- if ((long)(num7) == 0L) {
-                        -- 	Posit32 object44;
-                        -- 	object44 = new Posit32 (0u, true);
-                        -- 	return object44;
+                        -- 	Posit32 object43;
+                        -- 	object43 = new Posit32 (0u, true);
+                        -- 	return object43;
                         -- }
                         -- 
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.69\ := signed(SmartResize((\Posit32 Posit32::op_Addition(Posit32,Posit32).2.num7\), 64)) = to_signed(0, 64);
@@ -47422,14 +47269,14 @@ begin
                         -- int num20;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- int remainderOperand48;
+                        -- int remainderOperand47;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand48 = (int)(num11);
+                        -- remainderOperand47 = (int)(num11);
                         -- 
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).2.remainderOperand48\ := SmartResize((\Posit32 Posit32::op_Addition(Posit32,Posit32).2.num11\), 32);
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).2.remainderOperand47\ := SmartResize((\Posit32 Posit32::op_Addition(Posit32,Posit32).2.num11\), 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- num20 = (int)(remainderOperand48 - remainderOperand48 / 4 * 4);
+                        -- num20 = (int)(remainderOperand47 - remainderOperand47 / 4 * 4);
                         -- 
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_97\;
                         -- Clock cycles needed to complete this state (approximation): 0.7044
@@ -47437,23 +47284,23 @@ begin
                         -- True branch of the if-else started in state \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_50\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	Posit32 object44;
-                        -- 	object44 = new Posit32 (0u, true);
-                        -- 	return object44;
+                        -- 	Posit32 object43;
+                        -- 	object43 = new Posit32 (0u, true);
+                        -- 	return object43;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- Posit32 object44;
+                        -- Posit32 object43;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object44 = new Posit32 (0u, true);
+                        -- object43 = new Posit32 (0u, true);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).2.object44\.\IsNull\ := false;
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).2.object44\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).2.object43\.\IsNull\ := false;
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).2.object43\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).2.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).2.object44\;
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).2.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).2.object43\;
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).2.Posit32::.ctor(UInt32,Boolean).bits.parameter.Out.0\ <= to_unsigned(0, 32);
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).2.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= true;
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).2.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= true;
@@ -47463,11 +47310,11 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
                         if (\Posit32 Posit32::op_Addition(Posit32,Posit32).2.Posit32::.ctor(UInt32,Boolean)._Started.0\ = \Posit32 Posit32::op_Addition(Posit32,Posit32).2.Posit32::.ctor(UInt32,Boolean)._Finished.0\) then 
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).2.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= false;
-                            \Posit32 Posit32::op_Addition(Posit32,Posit32).2.object44\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).2.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
+                            \Posit32 Posit32::op_Addition(Posit32,Posit32).2.object43\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).2.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return object44;
+                            -- return object43;
                             -- 
-                            \Posit32 Posit32::op_Addition(Posit32,Posit32).2.return\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).2.object44\;
+                            \Posit32 Posit32::op_Addition(Posit32,Posit32).2.return\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).2.object43\;
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_1\;
                             -- Going to the state after the if-else which was started in state \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_50\.
                             if (\Posit32 Posit32::op_Addition(Posit32,Posit32).2._State\ = \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_96\) then 
@@ -47477,13 +47324,13 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_97\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.71\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).2.remainderOperand48\ / to_signed(4, 32);
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.71\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).2.remainderOperand47\ / to_signed(4, 32);
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.72\ := SmartResize(\Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.71\ * to_signed(4, 32), 32);
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_98\;
                         -- Clock cycles needed to complete this state (approximation): 0.8265
                     when \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_98\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.73\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).2.remainderOperand48\ - \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.72\;
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.73\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).2.remainderOperand47\ - \Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.72\;
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).2.num20\ := (\Posit32 Posit32::op_Addition(Posit32,Posit32).2.binaryOperationResult.73\);
                         -- The following section was transformed from the .NET statement below:
                         -- if (num20 < 0) {
@@ -47507,14 +47354,14 @@ begin
                     when \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_99\ => 
                         -- State after the if-else which was started in state \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_98\.
                         -- The following section was transformed from the .NET statement below:
-                        -- Posit32 object45;
+                        -- Posit32 object44;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object45 = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
+                        -- object44 = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).2.object45\.\IsNull\ := false;
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).2.object45\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).2.object44\.\IsNull\ := false;
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).2.object44\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::AssemblePositBitsWithRounding(System.Boolean,System.Int32,System.UInt32,System.UInt32)
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).2.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).signBit.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).2.signBit\;
@@ -47553,7 +47400,7 @@ begin
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).2.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32)._Started.0\ <= false;
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).2.return.20\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).2.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).return.0\;
                             -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
-                            \Posit32 Posit32::op_Addition(Posit32,Posit32).2.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).2.object45\;
+                            \Posit32 Posit32::op_Addition(Posit32,Posit32).2.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).2.object44\;
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).2.Posit32::.ctor(UInt32,Boolean).bits.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).2.return.20\;
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).2.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= true;
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).2.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= true;
@@ -47564,11 +47411,11 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
                         if (\Posit32 Posit32::op_Addition(Posit32,Posit32).2.Posit32::.ctor(UInt32,Boolean)._Started.0\ = \Posit32 Posit32::op_Addition(Posit32,Posit32).2.Posit32::.ctor(UInt32,Boolean)._Finished.0\) then 
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).2.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= false;
-                            \Posit32 Posit32::op_Addition(Posit32,Posit32).2.object45\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).2.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
+                            \Posit32 Posit32::op_Addition(Posit32,Posit32).2.object44\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).2.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return object45;
+                            -- return object44;
                             -- 
-                            \Posit32 Posit32::op_Addition(Posit32,Posit32).2.return\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).2.object45\;
+                            \Posit32 Posit32::op_Addition(Posit32,Posit32).2.return\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).2.object44\;
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).2._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -47718,18 +47565,18 @@ begin
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).3.binaryOperationResult.67\: signed(15 downto 0) := to_signed(0, 16);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).3.binaryOperationResult.68\: signed(15 downto 0) := to_signed(0, 16);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).3.binaryOperationResult.69\: boolean := false;
-        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).3.object44\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).3.object43\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).3.num19\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).3.binaryOperationResult.70\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).3.num20\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).3.remainderOperand48\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).3.remainderOperand47\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).3.binaryOperationResult.71\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).3.binaryOperationResult.72\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).3.binaryOperationResult.73\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).3.binaryOperationResult.74\: boolean := false;
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).3.binaryOperationResult.75\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).3.binaryOperationResult.76\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).3.object45\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).3.object44\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).3.return.20\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
@@ -47900,7 +47747,7 @@ begin
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).3.num19\ := to_signed(0, 32);
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).3.binaryOperationResult.70\ := to_signed(0, 32);
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).3.num20\ := to_signed(0, 32);
-                \Posit32 Posit32::op_Addition(Posit32,Posit32).3.remainderOperand48\ := to_signed(0, 32);
+                \Posit32 Posit32::op_Addition(Posit32,Posit32).3.remainderOperand47\ := to_signed(0, 32);
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).3.binaryOperationResult.71\ := to_signed(0, 32);
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).3.binaryOperationResult.72\ := to_signed(0, 32);
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).3.binaryOperationResult.73\ := to_signed(0, 32);
@@ -48739,9 +48586,9 @@ begin
                         -- State after the if-else which was started in state \Posit32 Posit32::op_Addition(Posit32,Posit32).3._State_49\.
                         -- The following section was transformed from the .NET statement below:
                         -- if ((long)(num7) == 0L) {
-                        -- 	Posit32 object44;
-                        -- 	object44 = new Posit32 (0u, true);
-                        -- 	return object44;
+                        -- 	Posit32 object43;
+                        -- 	object43 = new Posit32 (0u, true);
+                        -- 	return object43;
                         -- }
                         -- 
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).3.binaryOperationResult.69\ := signed(SmartResize((\Posit32 Posit32::op_Addition(Posit32,Posit32).3.num7\), 64)) = to_signed(0, 64);
@@ -49613,14 +49460,14 @@ begin
                         -- int num20;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- int remainderOperand48;
+                        -- int remainderOperand47;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand48 = (int)(num11);
+                        -- remainderOperand47 = (int)(num11);
                         -- 
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).3.remainderOperand48\ := SmartResize((\Posit32 Posit32::op_Addition(Posit32,Posit32).3.num11\), 32);
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).3.remainderOperand47\ := SmartResize((\Posit32 Posit32::op_Addition(Posit32,Posit32).3.num11\), 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- num20 = (int)(remainderOperand48 - remainderOperand48 / 4 * 4);
+                        -- num20 = (int)(remainderOperand47 - remainderOperand47 / 4 * 4);
                         -- 
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).3._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).3._State_97\;
                         -- Clock cycles needed to complete this state (approximation): 0.7044
@@ -49628,23 +49475,23 @@ begin
                         -- True branch of the if-else started in state \Posit32 Posit32::op_Addition(Posit32,Posit32).3._State_50\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	Posit32 object44;
-                        -- 	object44 = new Posit32 (0u, true);
-                        -- 	return object44;
+                        -- 	Posit32 object43;
+                        -- 	object43 = new Posit32 (0u, true);
+                        -- 	return object43;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- Posit32 object44;
+                        -- Posit32 object43;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object44 = new Posit32 (0u, true);
+                        -- object43 = new Posit32 (0u, true);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).3.object44\.\IsNull\ := false;
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).3.object44\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).3.object43\.\IsNull\ := false;
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).3.object43\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).3.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).3.object44\;
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).3.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).3.object43\;
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).3.Posit32::.ctor(UInt32,Boolean).bits.parameter.Out.0\ <= to_unsigned(0, 32);
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).3.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= true;
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).3.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= true;
@@ -49654,11 +49501,11 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
                         if (\Posit32 Posit32::op_Addition(Posit32,Posit32).3.Posit32::.ctor(UInt32,Boolean)._Started.0\ = \Posit32 Posit32::op_Addition(Posit32,Posit32).3.Posit32::.ctor(UInt32,Boolean)._Finished.0\) then 
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).3.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= false;
-                            \Posit32 Posit32::op_Addition(Posit32,Posit32).3.object44\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).3.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
+                            \Posit32 Posit32::op_Addition(Posit32,Posit32).3.object43\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).3.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return object44;
+                            -- return object43;
                             -- 
-                            \Posit32 Posit32::op_Addition(Posit32,Posit32).3.return\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).3.object44\;
+                            \Posit32 Posit32::op_Addition(Posit32,Posit32).3.return\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).3.object43\;
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).3._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).3._State_1\;
                             -- Going to the state after the if-else which was started in state \Posit32 Posit32::op_Addition(Posit32,Posit32).3._State_50\.
                             if (\Posit32 Posit32::op_Addition(Posit32,Posit32).3._State\ = \Posit32 Posit32::op_Addition(Posit32,Posit32).3._State_96\) then 
@@ -49668,13 +49515,13 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32 Posit32::op_Addition(Posit32,Posit32).3._State_97\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).3.binaryOperationResult.71\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).3.remainderOperand48\ / to_signed(4, 32);
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).3.binaryOperationResult.71\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).3.remainderOperand47\ / to_signed(4, 32);
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).3.binaryOperationResult.72\ := SmartResize(\Posit32 Posit32::op_Addition(Posit32,Posit32).3.binaryOperationResult.71\ * to_signed(4, 32), 32);
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).3._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).3._State_98\;
                         -- Clock cycles needed to complete this state (approximation): 0.8265
                     when \Posit32 Posit32::op_Addition(Posit32,Posit32).3._State_98\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).3.binaryOperationResult.73\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).3.remainderOperand48\ - \Posit32 Posit32::op_Addition(Posit32,Posit32).3.binaryOperationResult.72\;
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).3.binaryOperationResult.73\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).3.remainderOperand47\ - \Posit32 Posit32::op_Addition(Posit32,Posit32).3.binaryOperationResult.72\;
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).3.num20\ := (\Posit32 Posit32::op_Addition(Posit32,Posit32).3.binaryOperationResult.73\);
                         -- The following section was transformed from the .NET statement below:
                         -- if (num20 < 0) {
@@ -49698,14 +49545,14 @@ begin
                     when \Posit32 Posit32::op_Addition(Posit32,Posit32).3._State_99\ => 
                         -- State after the if-else which was started in state \Posit32 Posit32::op_Addition(Posit32,Posit32).3._State_98\.
                         -- The following section was transformed from the .NET statement below:
-                        -- Posit32 object45;
+                        -- Posit32 object44;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object45 = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
+                        -- object44 = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).3.object45\.\IsNull\ := false;
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).3.object45\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).3.object44\.\IsNull\ := false;
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).3.object44\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::AssemblePositBitsWithRounding(System.Boolean,System.Int32,System.UInt32,System.UInt32)
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).3.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).signBit.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).3.signBit\;
@@ -49744,7 +49591,7 @@ begin
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).3.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32)._Started.0\ <= false;
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).3.return.20\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).3.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).return.0\;
                             -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
-                            \Posit32 Posit32::op_Addition(Posit32,Posit32).3.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).3.object45\;
+                            \Posit32 Posit32::op_Addition(Posit32,Posit32).3.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).3.object44\;
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).3.Posit32::.ctor(UInt32,Boolean).bits.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).3.return.20\;
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).3.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= true;
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).3.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= true;
@@ -49755,11 +49602,11 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
                         if (\Posit32 Posit32::op_Addition(Posit32,Posit32).3.Posit32::.ctor(UInt32,Boolean)._Started.0\ = \Posit32 Posit32::op_Addition(Posit32,Posit32).3.Posit32::.ctor(UInt32,Boolean)._Finished.0\) then 
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).3.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= false;
-                            \Posit32 Posit32::op_Addition(Posit32,Posit32).3.object45\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).3.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
+                            \Posit32 Posit32::op_Addition(Posit32,Posit32).3.object44\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).3.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return object45;
+                            -- return object44;
                             -- 
-                            \Posit32 Posit32::op_Addition(Posit32,Posit32).3.return\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).3.object45\;
+                            \Posit32 Posit32::op_Addition(Posit32,Posit32).3.return\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).3.object44\;
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).3._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).3._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -49909,18 +49756,18 @@ begin
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).4.binaryOperationResult.67\: signed(15 downto 0) := to_signed(0, 16);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).4.binaryOperationResult.68\: signed(15 downto 0) := to_signed(0, 16);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).4.binaryOperationResult.69\: boolean := false;
-        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).4.object44\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).4.object43\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).4.num19\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).4.binaryOperationResult.70\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).4.num20\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).4.remainderOperand48\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).4.remainderOperand47\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).4.binaryOperationResult.71\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).4.binaryOperationResult.72\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).4.binaryOperationResult.73\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).4.binaryOperationResult.74\: boolean := false;
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).4.binaryOperationResult.75\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).4.binaryOperationResult.76\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).4.object45\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).4.object44\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32 Posit32::op_Addition(Posit32,Posit32).4.return.20\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
@@ -50091,7 +49938,7 @@ begin
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).4.num19\ := to_signed(0, 32);
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).4.binaryOperationResult.70\ := to_signed(0, 32);
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).4.num20\ := to_signed(0, 32);
-                \Posit32 Posit32::op_Addition(Posit32,Posit32).4.remainderOperand48\ := to_signed(0, 32);
+                \Posit32 Posit32::op_Addition(Posit32,Posit32).4.remainderOperand47\ := to_signed(0, 32);
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).4.binaryOperationResult.71\ := to_signed(0, 32);
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).4.binaryOperationResult.72\ := to_signed(0, 32);
                 \Posit32 Posit32::op_Addition(Posit32,Posit32).4.binaryOperationResult.73\ := to_signed(0, 32);
@@ -50930,9 +50777,9 @@ begin
                         -- State after the if-else which was started in state \Posit32 Posit32::op_Addition(Posit32,Posit32).4._State_49\.
                         -- The following section was transformed from the .NET statement below:
                         -- if ((long)(num7) == 0L) {
-                        -- 	Posit32 object44;
-                        -- 	object44 = new Posit32 (0u, true);
-                        -- 	return object44;
+                        -- 	Posit32 object43;
+                        -- 	object43 = new Posit32 (0u, true);
+                        -- 	return object43;
                         -- }
                         -- 
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).4.binaryOperationResult.69\ := signed(SmartResize((\Posit32 Posit32::op_Addition(Posit32,Posit32).4.num7\), 64)) = to_signed(0, 64);
@@ -51804,14 +51651,14 @@ begin
                         -- int num20;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- int remainderOperand48;
+                        -- int remainderOperand47;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand48 = (int)(num11);
+                        -- remainderOperand47 = (int)(num11);
                         -- 
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).4.remainderOperand48\ := SmartResize((\Posit32 Posit32::op_Addition(Posit32,Posit32).4.num11\), 32);
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).4.remainderOperand47\ := SmartResize((\Posit32 Posit32::op_Addition(Posit32,Posit32).4.num11\), 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- num20 = (int)(remainderOperand48 - remainderOperand48 / 4 * 4);
+                        -- num20 = (int)(remainderOperand47 - remainderOperand47 / 4 * 4);
                         -- 
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).4._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).4._State_97\;
                         -- Clock cycles needed to complete this state (approximation): 0.7044
@@ -51819,23 +51666,23 @@ begin
                         -- True branch of the if-else started in state \Posit32 Posit32::op_Addition(Posit32,Posit32).4._State_50\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	Posit32 object44;
-                        -- 	object44 = new Posit32 (0u, true);
-                        -- 	return object44;
+                        -- 	Posit32 object43;
+                        -- 	object43 = new Posit32 (0u, true);
+                        -- 	return object43;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- Posit32 object44;
+                        -- Posit32 object43;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object44 = new Posit32 (0u, true);
+                        -- object43 = new Posit32 (0u, true);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).4.object44\.\IsNull\ := false;
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).4.object44\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).4.object43\.\IsNull\ := false;
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).4.object43\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).4.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).4.object44\;
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).4.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).4.object43\;
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).4.Posit32::.ctor(UInt32,Boolean).bits.parameter.Out.0\ <= to_unsigned(0, 32);
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).4.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= true;
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).4.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= true;
@@ -51845,11 +51692,11 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
                         if (\Posit32 Posit32::op_Addition(Posit32,Posit32).4.Posit32::.ctor(UInt32,Boolean)._Started.0\ = \Posit32 Posit32::op_Addition(Posit32,Posit32).4.Posit32::.ctor(UInt32,Boolean)._Finished.0\) then 
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).4.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= false;
-                            \Posit32 Posit32::op_Addition(Posit32,Posit32).4.object44\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).4.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
+                            \Posit32 Posit32::op_Addition(Posit32,Posit32).4.object43\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).4.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return object44;
+                            -- return object43;
                             -- 
-                            \Posit32 Posit32::op_Addition(Posit32,Posit32).4.return\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).4.object44\;
+                            \Posit32 Posit32::op_Addition(Posit32,Posit32).4.return\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).4.object43\;
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).4._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).4._State_1\;
                             -- Going to the state after the if-else which was started in state \Posit32 Posit32::op_Addition(Posit32,Posit32).4._State_50\.
                             if (\Posit32 Posit32::op_Addition(Posit32,Posit32).4._State\ = \Posit32 Posit32::op_Addition(Posit32,Posit32).4._State_96\) then 
@@ -51859,13 +51706,13 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32 Posit32::op_Addition(Posit32,Posit32).4._State_97\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).4.binaryOperationResult.71\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).4.remainderOperand48\ / to_signed(4, 32);
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).4.binaryOperationResult.71\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).4.remainderOperand47\ / to_signed(4, 32);
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).4.binaryOperationResult.72\ := SmartResize(\Posit32 Posit32::op_Addition(Posit32,Posit32).4.binaryOperationResult.71\ * to_signed(4, 32), 32);
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).4._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).4._State_98\;
                         -- Clock cycles needed to complete this state (approximation): 0.8265
                     when \Posit32 Posit32::op_Addition(Posit32,Posit32).4._State_98\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).4.binaryOperationResult.73\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).4.remainderOperand48\ - \Posit32 Posit32::op_Addition(Posit32,Posit32).4.binaryOperationResult.72\;
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).4.binaryOperationResult.73\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).4.remainderOperand47\ - \Posit32 Posit32::op_Addition(Posit32,Posit32).4.binaryOperationResult.72\;
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).4.num20\ := (\Posit32 Posit32::op_Addition(Posit32,Posit32).4.binaryOperationResult.73\);
                         -- The following section was transformed from the .NET statement below:
                         -- if (num20 < 0) {
@@ -51889,14 +51736,14 @@ begin
                     when \Posit32 Posit32::op_Addition(Posit32,Posit32).4._State_99\ => 
                         -- State after the if-else which was started in state \Posit32 Posit32::op_Addition(Posit32,Posit32).4._State_98\.
                         -- The following section was transformed from the .NET statement below:
-                        -- Posit32 object45;
+                        -- Posit32 object44;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object45 = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
+                        -- object44 = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num19, (uint)num20, num7), true);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).4.object45\.\IsNull\ := false;
-                        \Posit32 Posit32::op_Addition(Posit32,Posit32).4.object45\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).4.object44\.\IsNull\ := false;
+                        \Posit32 Posit32::op_Addition(Posit32,Posit32).4.object44\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::AssemblePositBitsWithRounding(System.Boolean,System.Int32,System.UInt32,System.UInt32)
                         \Posit32 Posit32::op_Addition(Posit32,Posit32).4.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).signBit.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).4.signBit\;
@@ -51935,7 +51782,7 @@ begin
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).4.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32)._Started.0\ <= false;
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).4.return.20\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).4.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).return.0\;
                             -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
-                            \Posit32 Posit32::op_Addition(Posit32,Posit32).4.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).4.object45\;
+                            \Posit32 Posit32::op_Addition(Posit32,Posit32).4.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).4.object44\;
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).4.Posit32::.ctor(UInt32,Boolean).bits.parameter.Out.0\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).4.return.20\;
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).4.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= true;
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).4.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= true;
@@ -51946,11 +51793,11 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
                         if (\Posit32 Posit32::op_Addition(Posit32,Posit32).4.Posit32::.ctor(UInt32,Boolean)._Started.0\ = \Posit32 Posit32::op_Addition(Posit32,Posit32).4.Posit32::.ctor(UInt32,Boolean)._Finished.0\) then 
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).4.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= false;
-                            \Posit32 Posit32::op_Addition(Posit32,Posit32).4.object45\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).4.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
+                            \Posit32 Posit32::op_Addition(Posit32,Posit32).4.object44\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).4.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return object45;
+                            -- return object44;
                             -- 
-                            \Posit32 Posit32::op_Addition(Posit32,Posit32).4.return\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).4.object45\;
+                            \Posit32 Posit32::op_Addition(Posit32,Posit32).4.return\ <= \Posit32 Posit32::op_Addition(Posit32,Posit32).4.object44\;
                             \Posit32 Posit32::op_Addition(Posit32,Posit32).4._State\ := \Posit32 Posit32::op_Addition(Posit32,Posit32).4._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -51966,30 +51813,18 @@ begin
         Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State\: \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._States\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_0\;
         Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.left\: \Lombiq.Arithmetics.Posit32\;
         Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.right\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.return.0\: boolean := false;
-        Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.return.1\: boolean := false;
+        Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.return.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.binaryOperationResult.0\: boolean := false;
-        Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.return.2\: boolean := false;
-        Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.conditional35\: boolean := false;
-        Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.return.3\: boolean := false;
-        Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.binaryOperationResult.1\: boolean := false;
-        Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.binaryOperationResult.2\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
                 \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._Finished\ <= false;
                 \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.return\ <= false;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive()._Started.0\ <= false;
+                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::CompareTo(Posit32)._Started.0\ <= false;
                 \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_0\;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.return.0\ := false;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.return.1\ := false;
+                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.return.0\ := to_signed(0, 32);
                 \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.binaryOperationResult.0\ := false;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.return.2\ := false;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.conditional35\ := false;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.return.3\ := false;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.binaryOperationResult.1\ := false;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.binaryOperationResult.2\ := false;
             else 
                 case \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State\ is 
                     when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_0\ => 
@@ -52013,160 +51848,22 @@ begin
                         \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.left\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.left.parameter.In\;
                         \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.right\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.right.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- if (Lombiq.Arithmetics.Posit32.IsPositive (left) != Lombiq.Arithmetics.Posit32.IsPositive (right)) {
-                        -- 	return Lombiq.Arithmetics.Posit32.IsPositive (left);
-                        -- }
+                        -- return Lombiq.Arithmetics.Posit32.CompareTo (left, right) > 0;
                         -- 
-                        -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive().this.parameter.Out.0\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.left\;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive()._Started.0\ <= true;
+                        -- Starting state machine invocation for the following method: System.Int32 Lombiq.Arithmetics.Posit32::CompareTo(Lombiq.Arithmetics.Posit32)
+                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::CompareTo(Posit32).this.parameter.Out.0\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.left\;
+                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::CompareTo(Posit32).obj.parameter.Out.0\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.right\;
+                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::CompareTo(Posit32)._Started.0\ <= true;
                         \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_3\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
-                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive()._Started.0\ = \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive()._Finished.0\) then 
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive()._Started.0\ <= false;
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.return.0\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive().return.0\;
-                            -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_4\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_4\ => 
-                        -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_5\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_5\ => 
-                        -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive().this.parameter.Out.0\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.right\;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive()._Started.0\ <= true;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_6\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_6\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
-                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive()._Started.0\ = \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive()._Finished.0\) then 
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive()._Started.0\ <= false;
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.return.1\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive().return.0\;
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.binaryOperationResult.0\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.return.0\ /= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.return.1\;
-
-                            -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_8\ and ends in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_9\.
-                            --     * Execution after either branch will continue in the following state: \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_7\.
-
-                            if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.binaryOperationResult.0\) then 
-                                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_8\;
-                            else 
-                                -- There was no false branch, so going directly to the state after the if-else.
-                                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_7\;
-                            end if;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1238
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_7\ => 
-                        -- State after the if-else which was started in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_6\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool conditional35;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (Lombiq.Arithmetics.Posit32.IsPositive (left)) {
-                        -- 	conditional35 = (left.PositBits > right.PositBits);
-                        -- } else {
-                        -- 	conditional35 = (left.PositBits <= right.PositBits);
-                        -- }
-                        -- 
-                        -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_10\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_8\ => 
-                        -- True branch of the if-else started in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_6\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	return Lombiq.Arithmetics.Posit32.IsPositive (left);
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- return Lombiq.Arithmetics.Posit32.IsPositive (left);
-                        -- 
-                        -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive().this.parameter.Out.0\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.left\;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive()._Started.0\ <= true;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_9\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_9\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
-                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive()._Started.0\ = \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive()._Finished.0\) then 
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive()._Started.0\ <= false;
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.return.2\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive().return.0\;
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.return\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.return.2\;
+                        -- Waiting for the state machine invocation of the following method to finish: System.Int32 Lombiq.Arithmetics.Posit32::CompareTo(Lombiq.Arithmetics.Posit32)
+                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::CompareTo(Posit32)._Started.0\ = \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::CompareTo(Posit32)._Finished.0\) then 
+                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::CompareTo(Posit32)._Started.0\ <= false;
+                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.return.0\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::CompareTo(Posit32).return.0\;
+                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.binaryOperationResult.0\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.return.0\ > to_signed(0, 32);
+                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.return\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.binaryOperationResult.0\;
                             \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_1\;
-                            -- Going to the state after the if-else which was started in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_6\.
-                            if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State\ = \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_9\) then 
-                                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_7\;
-                            end if;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_10\ => 
-                        -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive().this.parameter.Out.0\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.left\;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive()._Started.0\ <= true;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_11\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_11\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
-                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive()._Started.0\ = \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive()._Finished.0\) then 
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive()._Started.0\ <= false;
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.return.3\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive().return.0\;
-
-                            -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_13\ and ends in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_13\.
-                            --     * The false branch starts in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_14\ and ends in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_14\.
-                            --     * Execution after either branch will continue in the following state: \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_12\.
-
-                            if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.return.3\) then 
-                                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_13\;
-                            else 
-                                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_14\;
-                            end if;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_12\ => 
-                        -- State after the if-else which was started in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_11\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- return conditional35;
-                        -- 
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.return\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.conditional35\;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_13\ => 
-                        -- True branch of the if-else started in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_11\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional35 = (left.PositBits > right.PositBits);
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional35 = (left.PositBits > right.PositBits);
-                        -- 
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.binaryOperationResult.1\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.left\.\PositBits\ > \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.right\.\PositBits\;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.conditional35\ := (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.binaryOperationResult.1\);
-                        -- Going to the state after the if-else which was started in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_11\.
-                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State\ = \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_13\) then 
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_12\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2753
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_14\ => 
-                        -- False branch of the if-else started in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_11\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional35 = (left.PositBits <= right.PositBits);
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional35 = (left.PositBits <= right.PositBits);
-                        -- 
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.binaryOperationResult.2\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.left\.\PositBits\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.right\.\PositBits\;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.conditional35\ := (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.binaryOperationResult.2\);
-                        -- Going to the state after the if-else which was started in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_11\.
-                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State\ = \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_14\) then 
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.2753
                 end case;
@@ -52181,30 +51878,18 @@ begin
         Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State\: \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._States\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_0\;
         Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.left\: \Lombiq.Arithmetics.Posit32\;
         Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.right\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.return.0\: boolean := false;
-        Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.return.1\: boolean := false;
+        Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.return.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.binaryOperationResult.0\: boolean := false;
-        Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.return.2\: boolean := false;
-        Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.conditional35\: boolean := false;
-        Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.return.3\: boolean := false;
-        Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.binaryOperationResult.1\: boolean := false;
-        Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.binaryOperationResult.2\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
                 \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._Finished\ <= false;
                 \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.return\ <= false;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive()._Started.0\ <= false;
+                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::CompareTo(Posit32)._Started.0\ <= false;
                 \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_0\;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.return.0\ := false;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.return.1\ := false;
+                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.return.0\ := to_signed(0, 32);
                 \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.binaryOperationResult.0\ := false;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.return.2\ := false;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.conditional35\ := false;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.return.3\ := false;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.binaryOperationResult.1\ := false;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.binaryOperationResult.2\ := false;
             else 
                 case \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State\ is 
                     when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_0\ => 
@@ -52228,160 +51913,22 @@ begin
                         \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.left\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.left.parameter.In\;
                         \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.right\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.right.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- if (Lombiq.Arithmetics.Posit32.IsPositive (left) != Lombiq.Arithmetics.Posit32.IsPositive (right)) {
-                        -- 	return Lombiq.Arithmetics.Posit32.IsPositive (left);
-                        -- }
+                        -- return Lombiq.Arithmetics.Posit32.CompareTo (left, right) > 0;
                         -- 
-                        -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive().this.parameter.Out.0\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.left\;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive()._Started.0\ <= true;
+                        -- Starting state machine invocation for the following method: System.Int32 Lombiq.Arithmetics.Posit32::CompareTo(Lombiq.Arithmetics.Posit32)
+                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::CompareTo(Posit32).this.parameter.Out.0\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.left\;
+                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::CompareTo(Posit32).obj.parameter.Out.0\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.right\;
+                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::CompareTo(Posit32)._Started.0\ <= true;
                         \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_3\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
-                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive()._Started.0\ = \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive()._Finished.0\) then 
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive()._Started.0\ <= false;
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.return.0\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive().return.0\;
-                            -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_4\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_4\ => 
-                        -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_5\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_5\ => 
-                        -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive().this.parameter.Out.0\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.right\;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive()._Started.0\ <= true;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_6\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_6\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
-                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive()._Started.0\ = \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive()._Finished.0\) then 
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive()._Started.0\ <= false;
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.return.1\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive().return.0\;
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.binaryOperationResult.0\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.return.0\ /= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.return.1\;
-
-                            -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_8\ and ends in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_9\.
-                            --     * Execution after either branch will continue in the following state: \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_7\.
-
-                            if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.binaryOperationResult.0\) then 
-                                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_8\;
-                            else 
-                                -- There was no false branch, so going directly to the state after the if-else.
-                                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_7\;
-                            end if;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1238
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_7\ => 
-                        -- State after the if-else which was started in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_6\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool conditional35;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (Lombiq.Arithmetics.Posit32.IsPositive (left)) {
-                        -- 	conditional35 = (left.PositBits > right.PositBits);
-                        -- } else {
-                        -- 	conditional35 = (left.PositBits <= right.PositBits);
-                        -- }
-                        -- 
-                        -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_10\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_8\ => 
-                        -- True branch of the if-else started in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_6\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	return Lombiq.Arithmetics.Posit32.IsPositive (left);
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- return Lombiq.Arithmetics.Posit32.IsPositive (left);
-                        -- 
-                        -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive().this.parameter.Out.0\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.left\;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive()._Started.0\ <= true;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_9\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_9\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
-                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive()._Started.0\ = \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive()._Finished.0\) then 
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive()._Started.0\ <= false;
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.return.2\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive().return.0\;
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.return\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.return.2\;
+                        -- Waiting for the state machine invocation of the following method to finish: System.Int32 Lombiq.Arithmetics.Posit32::CompareTo(Lombiq.Arithmetics.Posit32)
+                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::CompareTo(Posit32)._Started.0\ = \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::CompareTo(Posit32)._Finished.0\) then 
+                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::CompareTo(Posit32)._Started.0\ <= false;
+                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.return.0\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::CompareTo(Posit32).return.0\;
+                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.binaryOperationResult.0\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.return.0\ > to_signed(0, 32);
+                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.return\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.binaryOperationResult.0\;
                             \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_1\;
-                            -- Going to the state after the if-else which was started in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_6\.
-                            if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State\ = \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_9\) then 
-                                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_7\;
-                            end if;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_10\ => 
-                        -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive().this.parameter.Out.0\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.left\;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive()._Started.0\ <= true;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_11\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_11\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
-                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive()._Started.0\ = \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive()._Finished.0\) then 
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive()._Started.0\ <= false;
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.return.3\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive().return.0\;
-
-                            -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_13\ and ends in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_13\.
-                            --     * The false branch starts in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_14\ and ends in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_14\.
-                            --     * Execution after either branch will continue in the following state: \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_12\.
-
-                            if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.return.3\) then 
-                                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_13\;
-                            else 
-                                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_14\;
-                            end if;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_12\ => 
-                        -- State after the if-else which was started in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_11\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- return conditional35;
-                        -- 
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.return\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.conditional35\;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_13\ => 
-                        -- True branch of the if-else started in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_11\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional35 = (left.PositBits > right.PositBits);
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional35 = (left.PositBits > right.PositBits);
-                        -- 
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.binaryOperationResult.1\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.left\.\PositBits\ > \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.right\.\PositBits\;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.conditional35\ := (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.binaryOperationResult.1\);
-                        -- Going to the state after the if-else which was started in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_11\.
-                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State\ = \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_13\) then 
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_12\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2753
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_14\ => 
-                        -- False branch of the if-else started in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_11\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional35 = (left.PositBits <= right.PositBits);
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional35 = (left.PositBits <= right.PositBits);
-                        -- 
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.binaryOperationResult.2\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.left\.\PositBits\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.right\.\PositBits\;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.conditional35\ := (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.binaryOperationResult.2\);
-                        -- Going to the state after the if-else which was started in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_11\.
-                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State\ = \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_14\) then 
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.2753
                 end case;
@@ -52396,30 +51943,18 @@ begin
         Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State\: \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._States\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_0\;
         Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.left\: \Lombiq.Arithmetics.Posit32\;
         Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.right\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.return.0\: boolean := false;
-        Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.return.1\: boolean := false;
+        Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.return.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.binaryOperationResult.0\: boolean := false;
-        Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.return.2\: boolean := false;
-        Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.conditional35\: boolean := false;
-        Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.return.3\: boolean := false;
-        Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.binaryOperationResult.1\: boolean := false;
-        Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.binaryOperationResult.2\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
                 \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._Finished\ <= false;
                 \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.return\ <= false;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive()._Started.0\ <= false;
+                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::CompareTo(Posit32)._Started.0\ <= false;
                 \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_0\;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.return.0\ := false;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.return.1\ := false;
+                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.return.0\ := to_signed(0, 32);
                 \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.binaryOperationResult.0\ := false;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.return.2\ := false;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.conditional35\ := false;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.return.3\ := false;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.binaryOperationResult.1\ := false;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.binaryOperationResult.2\ := false;
             else 
                 case \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State\ is 
                     when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_0\ => 
@@ -52443,160 +51978,22 @@ begin
                         \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.left\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.left.parameter.In\;
                         \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.right\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.right.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- if (Lombiq.Arithmetics.Posit32.IsPositive (left) != Lombiq.Arithmetics.Posit32.IsPositive (right)) {
-                        -- 	return Lombiq.Arithmetics.Posit32.IsPositive (left);
-                        -- }
+                        -- return Lombiq.Arithmetics.Posit32.CompareTo (left, right) > 0;
                         -- 
-                        -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive().this.parameter.Out.0\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.left\;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive()._Started.0\ <= true;
+                        -- Starting state machine invocation for the following method: System.Int32 Lombiq.Arithmetics.Posit32::CompareTo(Lombiq.Arithmetics.Posit32)
+                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::CompareTo(Posit32).this.parameter.Out.0\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.left\;
+                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::CompareTo(Posit32).obj.parameter.Out.0\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.right\;
+                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::CompareTo(Posit32)._Started.0\ <= true;
                         \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_3\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
-                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive()._Started.0\ = \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive()._Finished.0\) then 
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive()._Started.0\ <= false;
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.return.0\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive().return.0\;
-                            -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_4\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_4\ => 
-                        -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_5\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_5\ => 
-                        -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive().this.parameter.Out.0\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.right\;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive()._Started.0\ <= true;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_6\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_6\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
-                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive()._Started.0\ = \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive()._Finished.0\) then 
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive()._Started.0\ <= false;
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.return.1\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive().return.0\;
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.binaryOperationResult.0\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.return.0\ /= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.return.1\;
-
-                            -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_8\ and ends in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_9\.
-                            --     * Execution after either branch will continue in the following state: \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_7\.
-
-                            if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.binaryOperationResult.0\) then 
-                                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_8\;
-                            else 
-                                -- There was no false branch, so going directly to the state after the if-else.
-                                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_7\;
-                            end if;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1238
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_7\ => 
-                        -- State after the if-else which was started in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_6\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool conditional35;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (Lombiq.Arithmetics.Posit32.IsPositive (left)) {
-                        -- 	conditional35 = (left.PositBits > right.PositBits);
-                        -- } else {
-                        -- 	conditional35 = (left.PositBits <= right.PositBits);
-                        -- }
-                        -- 
-                        -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_10\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_8\ => 
-                        -- True branch of the if-else started in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_6\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	return Lombiq.Arithmetics.Posit32.IsPositive (left);
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- return Lombiq.Arithmetics.Posit32.IsPositive (left);
-                        -- 
-                        -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive().this.parameter.Out.0\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.left\;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive()._Started.0\ <= true;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_9\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_9\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
-                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive()._Started.0\ = \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive()._Finished.0\) then 
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive()._Started.0\ <= false;
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.return.2\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive().return.0\;
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.return\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.return.2\;
+                        -- Waiting for the state machine invocation of the following method to finish: System.Int32 Lombiq.Arithmetics.Posit32::CompareTo(Lombiq.Arithmetics.Posit32)
+                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::CompareTo(Posit32)._Started.0\ = \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::CompareTo(Posit32)._Finished.0\) then 
+                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::CompareTo(Posit32)._Started.0\ <= false;
+                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.return.0\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::CompareTo(Posit32).return.0\;
+                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.binaryOperationResult.0\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.return.0\ > to_signed(0, 32);
+                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.return\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.binaryOperationResult.0\;
                             \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_1\;
-                            -- Going to the state after the if-else which was started in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_6\.
-                            if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State\ = \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_9\) then 
-                                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_7\;
-                            end if;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_10\ => 
-                        -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive().this.parameter.Out.0\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.left\;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive()._Started.0\ <= true;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_11\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_11\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
-                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive()._Started.0\ = \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive()._Finished.0\) then 
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive()._Started.0\ <= false;
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.return.3\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive().return.0\;
-
-                            -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_13\ and ends in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_13\.
-                            --     * The false branch starts in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_14\ and ends in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_14\.
-                            --     * Execution after either branch will continue in the following state: \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_12\.
-
-                            if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.return.3\) then 
-                                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_13\;
-                            else 
-                                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_14\;
-                            end if;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_12\ => 
-                        -- State after the if-else which was started in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_11\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- return conditional35;
-                        -- 
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.return\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.conditional35\;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_13\ => 
-                        -- True branch of the if-else started in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_11\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional35 = (left.PositBits > right.PositBits);
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional35 = (left.PositBits > right.PositBits);
-                        -- 
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.binaryOperationResult.1\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.left\.\PositBits\ > \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.right\.\PositBits\;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.conditional35\ := (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.binaryOperationResult.1\);
-                        -- Going to the state after the if-else which was started in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_11\.
-                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State\ = \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_13\) then 
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_12\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2753
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_14\ => 
-                        -- False branch of the if-else started in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_11\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional35 = (left.PositBits <= right.PositBits);
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional35 = (left.PositBits <= right.PositBits);
-                        -- 
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.binaryOperationResult.2\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.left\.\PositBits\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.right\.\PositBits\;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.conditional35\ := (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.binaryOperationResult.2\);
-                        -- Going to the state after the if-else which was started in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_11\.
-                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State\ = \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_14\) then 
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.2753
                 end case;
@@ -52611,30 +52008,18 @@ begin
         Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State\: \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._States\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_0\;
         Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.left\: \Lombiq.Arithmetics.Posit32\;
         Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.right\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.return.0\: boolean := false;
-        Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.return.1\: boolean := false;
+        Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.return.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.binaryOperationResult.0\: boolean := false;
-        Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.return.2\: boolean := false;
-        Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.conditional35\: boolean := false;
-        Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.return.3\: boolean := false;
-        Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.binaryOperationResult.1\: boolean := false;
-        Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.binaryOperationResult.2\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
                 \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._Finished\ <= false;
                 \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.return\ <= false;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive()._Started.0\ <= false;
+                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::CompareTo(Posit32)._Started.0\ <= false;
                 \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_0\;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.return.0\ := false;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.return.1\ := false;
+                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.return.0\ := to_signed(0, 32);
                 \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.binaryOperationResult.0\ := false;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.return.2\ := false;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.conditional35\ := false;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.return.3\ := false;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.binaryOperationResult.1\ := false;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.binaryOperationResult.2\ := false;
             else 
                 case \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State\ is 
                     when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_0\ => 
@@ -52658,160 +52043,22 @@ begin
                         \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.left\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.left.parameter.In\;
                         \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.right\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.right.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- if (Lombiq.Arithmetics.Posit32.IsPositive (left) != Lombiq.Arithmetics.Posit32.IsPositive (right)) {
-                        -- 	return Lombiq.Arithmetics.Posit32.IsPositive (left);
-                        -- }
+                        -- return Lombiq.Arithmetics.Posit32.CompareTo (left, right) > 0;
                         -- 
-                        -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive().this.parameter.Out.0\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.left\;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive()._Started.0\ <= true;
+                        -- Starting state machine invocation for the following method: System.Int32 Lombiq.Arithmetics.Posit32::CompareTo(Lombiq.Arithmetics.Posit32)
+                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::CompareTo(Posit32).this.parameter.Out.0\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.left\;
+                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::CompareTo(Posit32).obj.parameter.Out.0\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.right\;
+                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::CompareTo(Posit32)._Started.0\ <= true;
                         \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_3\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
-                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive()._Started.0\ = \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive()._Finished.0\) then 
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive()._Started.0\ <= false;
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.return.0\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive().return.0\;
-                            -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_4\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_4\ => 
-                        -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_5\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_5\ => 
-                        -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive().this.parameter.Out.0\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.right\;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive()._Started.0\ <= true;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_6\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_6\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
-                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive()._Started.0\ = \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive()._Finished.0\) then 
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive()._Started.0\ <= false;
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.return.1\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive().return.0\;
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.binaryOperationResult.0\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.return.0\ /= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.return.1\;
-
-                            -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_8\ and ends in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_9\.
-                            --     * Execution after either branch will continue in the following state: \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_7\.
-
-                            if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.binaryOperationResult.0\) then 
-                                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_8\;
-                            else 
-                                -- There was no false branch, so going directly to the state after the if-else.
-                                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_7\;
-                            end if;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1238
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_7\ => 
-                        -- State after the if-else which was started in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_6\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool conditional35;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (Lombiq.Arithmetics.Posit32.IsPositive (left)) {
-                        -- 	conditional35 = (left.PositBits > right.PositBits);
-                        -- } else {
-                        -- 	conditional35 = (left.PositBits <= right.PositBits);
-                        -- }
-                        -- 
-                        -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_10\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_8\ => 
-                        -- True branch of the if-else started in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_6\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	return Lombiq.Arithmetics.Posit32.IsPositive (left);
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- return Lombiq.Arithmetics.Posit32.IsPositive (left);
-                        -- 
-                        -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive().this.parameter.Out.0\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.left\;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive()._Started.0\ <= true;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_9\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_9\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
-                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive()._Started.0\ = \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive()._Finished.0\) then 
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive()._Started.0\ <= false;
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.return.2\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive().return.0\;
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.return\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.return.2\;
+                        -- Waiting for the state machine invocation of the following method to finish: System.Int32 Lombiq.Arithmetics.Posit32::CompareTo(Lombiq.Arithmetics.Posit32)
+                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::CompareTo(Posit32)._Started.0\ = \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::CompareTo(Posit32)._Finished.0\) then 
+                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::CompareTo(Posit32)._Started.0\ <= false;
+                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.return.0\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::CompareTo(Posit32).return.0\;
+                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.binaryOperationResult.0\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.return.0\ > to_signed(0, 32);
+                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.return\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.binaryOperationResult.0\;
                             \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_1\;
-                            -- Going to the state after the if-else which was started in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_6\.
-                            if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State\ = \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_9\) then 
-                                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_7\;
-                            end if;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_10\ => 
-                        -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive().this.parameter.Out.0\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.left\;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive()._Started.0\ <= true;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_11\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_11\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
-                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive()._Started.0\ = \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive()._Finished.0\) then 
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive()._Started.0\ <= false;
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.return.3\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive().return.0\;
-
-                            -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_13\ and ends in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_13\.
-                            --     * The false branch starts in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_14\ and ends in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_14\.
-                            --     * Execution after either branch will continue in the following state: \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_12\.
-
-                            if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.return.3\) then 
-                                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_13\;
-                            else 
-                                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_14\;
-                            end if;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_12\ => 
-                        -- State after the if-else which was started in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_11\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- return conditional35;
-                        -- 
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.return\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.conditional35\;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_13\ => 
-                        -- True branch of the if-else started in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_11\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional35 = (left.PositBits > right.PositBits);
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional35 = (left.PositBits > right.PositBits);
-                        -- 
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.binaryOperationResult.1\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.left\.\PositBits\ > \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.right\.\PositBits\;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.conditional35\ := (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.binaryOperationResult.1\);
-                        -- Going to the state after the if-else which was started in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_11\.
-                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State\ = \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_13\) then 
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_12\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2753
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_14\ => 
-                        -- False branch of the if-else started in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_11\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional35 = (left.PositBits <= right.PositBits);
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional35 = (left.PositBits <= right.PositBits);
-                        -- 
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.binaryOperationResult.2\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.left\.\PositBits\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.right\.\PositBits\;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.conditional35\ := (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.binaryOperationResult.2\);
-                        -- Going to the state after the if-else which was started in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_11\.
-                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State\ = \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_14\) then 
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.2753
                 end case;
@@ -52826,30 +52073,18 @@ begin
         Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State\: \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._States\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_0\;
         Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.left\: \Lombiq.Arithmetics.Posit32\;
         Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.right\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.return.0\: boolean := false;
-        Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.return.1\: boolean := false;
+        Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.return.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.binaryOperationResult.0\: boolean := false;
-        Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.return.2\: boolean := false;
-        Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.conditional35\: boolean := false;
-        Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.return.3\: boolean := false;
-        Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.binaryOperationResult.1\: boolean := false;
-        Variable \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.binaryOperationResult.2\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
                 \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._Finished\ <= false;
                 \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.return\ <= false;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive()._Started.0\ <= false;
+                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::CompareTo(Posit32)._Started.0\ <= false;
                 \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_0\;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.return.0\ := false;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.return.1\ := false;
+                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.return.0\ := to_signed(0, 32);
                 \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.binaryOperationResult.0\ := false;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.return.2\ := false;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.conditional35\ := false;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.return.3\ := false;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.binaryOperationResult.1\ := false;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.binaryOperationResult.2\ := false;
             else 
                 case \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State\ is 
                     when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_0\ => 
@@ -52873,160 +52108,22 @@ begin
                         \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.left\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.left.parameter.In\;
                         \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.right\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.right.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- if (Lombiq.Arithmetics.Posit32.IsPositive (left) != Lombiq.Arithmetics.Posit32.IsPositive (right)) {
-                        -- 	return Lombiq.Arithmetics.Posit32.IsPositive (left);
-                        -- }
+                        -- return Lombiq.Arithmetics.Posit32.CompareTo (left, right) > 0;
                         -- 
-                        -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive().this.parameter.Out.0\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.left\;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive()._Started.0\ <= true;
+                        -- Starting state machine invocation for the following method: System.Int32 Lombiq.Arithmetics.Posit32::CompareTo(Lombiq.Arithmetics.Posit32)
+                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::CompareTo(Posit32).this.parameter.Out.0\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.left\;
+                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::CompareTo(Posit32).obj.parameter.Out.0\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.right\;
+                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::CompareTo(Posit32)._Started.0\ <= true;
                         \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_3\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
-                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive()._Started.0\ = \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive()._Finished.0\) then 
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive()._Started.0\ <= false;
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.return.0\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive().return.0\;
-                            -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_4\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_4\ => 
-                        -- This state was just added to leave time for the invocation proxy to register that the previous invocation finished.
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_5\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_5\ => 
-                        -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive().this.parameter.Out.0\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.right\;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive()._Started.0\ <= true;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_6\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_6\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
-                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive()._Started.0\ = \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive()._Finished.0\) then 
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive()._Started.0\ <= false;
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.return.1\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive().return.0\;
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.binaryOperationResult.0\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.return.0\ /= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.return.1\;
-
-                            -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_8\ and ends in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_9\.
-                            --     * Execution after either branch will continue in the following state: \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_7\.
-
-                            if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.binaryOperationResult.0\) then 
-                                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_8\;
-                            else 
-                                -- There was no false branch, so going directly to the state after the if-else.
-                                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_7\;
-                            end if;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.1238
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_7\ => 
-                        -- State after the if-else which was started in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_6\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool conditional35;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (Lombiq.Arithmetics.Posit32.IsPositive (left)) {
-                        -- 	conditional35 = (left.PositBits > right.PositBits);
-                        -- } else {
-                        -- 	conditional35 = (left.PositBits <= right.PositBits);
-                        -- }
-                        -- 
-                        -- The last invocation for the target state machine finished in the previous state, so need to start the next one in the next state.
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_10\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_8\ => 
-                        -- True branch of the if-else started in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_6\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	return Lombiq.Arithmetics.Posit32.IsPositive (left);
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- return Lombiq.Arithmetics.Posit32.IsPositive (left);
-                        -- 
-                        -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive().this.parameter.Out.0\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.left\;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive()._Started.0\ <= true;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_9\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_9\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
-                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive()._Started.0\ = \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive()._Finished.0\) then 
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive()._Started.0\ <= false;
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.return.2\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive().return.0\;
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.return\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.return.2\;
+                        -- Waiting for the state machine invocation of the following method to finish: System.Int32 Lombiq.Arithmetics.Posit32::CompareTo(Lombiq.Arithmetics.Posit32)
+                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::CompareTo(Posit32)._Started.0\ = \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::CompareTo(Posit32)._Finished.0\) then 
+                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::CompareTo(Posit32)._Started.0\ <= false;
+                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.return.0\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::CompareTo(Posit32).return.0\;
+                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.binaryOperationResult.0\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.return.0\ > to_signed(0, 32);
+                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.return\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.binaryOperationResult.0\;
                             \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_1\;
-                            -- Going to the state after the if-else which was started in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_6\.
-                            if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State\ = \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_9\) then 
-                                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_7\;
-                            end if;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_10\ => 
-                        -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive().this.parameter.Out.0\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.left\;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive()._Started.0\ <= true;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_11\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_11\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
-                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive()._Started.0\ = \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive()._Finished.0\) then 
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive()._Started.0\ <= false;
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.return.3\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive().return.0\;
-
-                            -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_13\ and ends in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_13\.
-                            --     * The false branch starts in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_14\ and ends in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_14\.
-                            --     * Execution after either branch will continue in the following state: \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_12\.
-
-                            if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.return.3\) then 
-                                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_13\;
-                            else 
-                                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_14\;
-                            end if;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_12\ => 
-                        -- State after the if-else which was started in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_11\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- return conditional35;
-                        -- 
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.return\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.conditional35\;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_1\;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_13\ => 
-                        -- True branch of the if-else started in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_11\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional35 = (left.PositBits > right.PositBits);
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional35 = (left.PositBits > right.PositBits);
-                        -- 
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.binaryOperationResult.1\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.left\.\PositBits\ > \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.right\.\PositBits\;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.conditional35\ := (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.binaryOperationResult.1\);
-                        -- Going to the state after the if-else which was started in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_11\.
-                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State\ = \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_13\) then 
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_12\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.2753
-                    when \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_14\ => 
-                        -- False branch of the if-else started in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_11\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional35 = (left.PositBits <= right.PositBits);
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional35 = (left.PositBits <= right.PositBits);
-                        -- 
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.binaryOperationResult.2\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.left\.\PositBits\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.right\.\PositBits\;
-                        \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.conditional35\ := (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.binaryOperationResult.2\);
-                        -- Going to the state after the if-else which was started in state \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_11\.
-                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State\ = \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_14\) then 
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State\ := \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4._State_12\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.2753
                 end case;
@@ -53044,7 +52141,7 @@ begin
         Variable \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.return.0\: boolean := false;
         Variable \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.return.1\: boolean := false;
         Variable \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.binaryOperationResult.0\: boolean := false;
-        Variable \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.object46\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.object45\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.flag\: boolean := false;
         Variable \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.return.2\: boolean := false;
         Variable \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.flag2\: boolean := false;
@@ -53090,7 +52187,7 @@ begin
         Variable \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.binaryOperationResult.17\: boolean := false;
         Variable \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.binaryOperationResult.18\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.binaryOperationResult.19\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.object47\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.object46\: \Lombiq.Arithmetics.Posit32\;
         Variable \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.return.17\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
@@ -53192,9 +52289,9 @@ begin
                         \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.right\ := \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.right.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
                         -- if (Lombiq.Arithmetics.Posit32.IsZero (left) || Lombiq.Arithmetics.Posit32.IsZero (right)) {
-                        -- 	Posit32 object46;
-                        -- 	object46 = new Posit32 (0);
-                        -- 	return object46;
+                        -- 	Posit32 object45;
+                        -- 	object45 = new Posit32 (0);
+                        -- 	return object45;
                         -- }
                         -- 
                         -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit32::IsZero()
@@ -53257,23 +52354,23 @@ begin
                         -- True branch of the if-else started in state \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_6\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	Posit32 object46;
-                        -- 	object46 = new Posit32 (0);
-                        -- 	return object46;
+                        -- 	Posit32 object45;
+                        -- 	object45 = new Posit32 (0);
+                        -- 	return object45;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- Posit32 object46;
+                        -- Posit32 object45;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object46 = new Posit32 (0);
+                        -- object45 = new Posit32 (0);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.object46\.\IsNull\ := false;
-                        \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.object46\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.object45\.\IsNull\ := false;
+                        \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.object45\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.Int32)
-                        \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::.ctor(Int32).this.parameter.Out.0\ <= \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.object46\;
+                        \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::.ctor(Int32).this.parameter.Out.0\ <= \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.object45\;
                         \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::.ctor(Int32).value.parameter.Out.0\ <= to_signed(0, 32);
                         \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::.ctor(Int32)._Started.0\ <= true;
                         \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State\ := \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_9\;
@@ -53282,11 +52379,11 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.Int32)
                         if (\Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::.ctor(Int32)._Started.0\ = \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::.ctor(Int32)._Finished.0\) then 
                             \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::.ctor(Int32)._Started.0\ <= false;
-                            \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.object46\ := \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::.ctor(Int32).this.parameter.In.0\;
+                            \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.object45\ := \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::.ctor(Int32).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return object46;
+                            -- return object45;
                             -- 
-                            \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.return\ <= \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.object46\;
+                            \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.return\ <= \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.object45\;
                             \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State\ := \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_1\;
                             -- Going to the state after the if-else which was started in state \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_6\.
                             if (\Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State\ = \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_9\) then 
@@ -53639,14 +52736,14 @@ begin
                     when \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_40\ => 
                         -- State after the if-else which was started in state \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_39\.
                         -- The following section was transformed from the .NET statement below:
-                        -- Posit32 object47;
+                        -- Posit32 object46;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object47 = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num6, (uint)num7, fractionBits), true);
+                        -- object46 = new Posit32 (Posit32.AssemblePositBitsWithRounding (signBit, num6, (uint)num7, fractionBits), true);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.object47\.\IsNull\ := false;
-                        \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.object47\.\PositBits\ := to_unsigned(0, 32);
+                        \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.object46\.\IsNull\ := false;
+                        \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.object46\.\PositBits\ := to_unsigned(0, 32);
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::AssemblePositBitsWithRounding(System.Boolean,System.Int32,System.UInt32,System.UInt32)
                         \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).signBit.parameter.Out.0\ <= \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.signBit\;
@@ -53685,7 +52782,7 @@ begin
                             \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32)._Started.0\ <= false;
                             \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.return.17\ := \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).return.0\;
                             -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
-                            \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.object47\;
+                            \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean).this.parameter.Out.0\ <= \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.object46\;
                             \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean).bits.parameter.Out.0\ <= \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.return.17\;
                             \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean).fromBitMask.parameter.Out.0\ <= true;
                             \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= true;
@@ -53696,11 +52793,11 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Posit32::.ctor(System.UInt32,System.Boolean)
                         if (\Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ = \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean)._Finished.0\) then 
                             \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean)._Started.0\ <= false;
-                            \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.object47\ := \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
+                            \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.object46\ := \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::.ctor(UInt32,Boolean).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return object47;
+                            -- return object46;
                             -- 
-                            \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.return\ <= \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.object47\;
+                            \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.return\ <= \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.object46\;
                             \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State\ := \Posit32 Posit32::op_Multiply(Posit32,Posit32).0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -53727,7 +52824,7 @@ begin
         Variable \Int32 Posit32::op_Explicit(Posit32).0.return.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Int32 Posit32::op_Explicit(Posit32).0.return.3\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Int32 Posit32::op_Explicit(Posit32).0.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Int32 Posit32::op_Explicit(Posit32).0.conditional36\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Int32 Posit32::op_Explicit(Posit32).0.conditional35\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.5\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.6\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.7\: boolean := false;
@@ -53740,10 +52837,10 @@ begin
         Variable \Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.12\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Int32 Posit32::op_Explicit(Posit32).0.unaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.13\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Int32 Posit32::op_Explicit(Posit32).0.conditional37\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Int32 Posit32::op_Explicit(Posit32).0.conditional36\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Int32 Posit32::op_Explicit(Posit32).0.return.6\: boolean := false;
         Variable \Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.14\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \Int32 Posit32::op_Explicit(Posit32).0.conditional38\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Int32 Posit32::op_Explicit(Posit32).0.conditional37\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Int32 Posit32::op_Explicit(Posit32).0.return.7\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
@@ -53770,7 +52867,7 @@ begin
                 \Int32 Posit32::op_Explicit(Posit32).0.return.2\ := to_unsigned(0, 32);
                 \Int32 Posit32::op_Explicit(Posit32).0.return.3\ := to_unsigned(0, 8);
                 \Int32 Posit32::op_Explicit(Posit32).0.num2\ := to_unsigned(0, 32);
-                \Int32 Posit32::op_Explicit(Posit32).0.conditional36\ := to_unsigned(0, 32);
+                \Int32 Posit32::op_Explicit(Posit32).0.conditional35\ := to_unsigned(0, 32);
                 \Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.5\ := to_signed(0, 64);
                 \Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.6\ := to_signed(0, 64);
                 \Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.7\ := false;
@@ -53783,10 +52880,10 @@ begin
                 \Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.12\ := to_signed(0, 32);
                 \Int32 Posit32::op_Explicit(Posit32).0.unaryOperationResult.0\ := to_signed(0, 32);
                 \Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.13\ := to_unsigned(0, 32);
-                \Int32 Posit32::op_Explicit(Posit32).0.conditional37\ := to_signed(0, 64);
+                \Int32 Posit32::op_Explicit(Posit32).0.conditional36\ := to_signed(0, 64);
                 \Int32 Posit32::op_Explicit(Posit32).0.return.6\ := false;
                 \Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.14\ := to_signed(0, 64);
-                \Int32 Posit32::op_Explicit(Posit32).0.conditional38\ := to_signed(0, 32);
+                \Int32 Posit32::op_Explicit(Posit32).0.conditional37\ := to_signed(0, 32);
                 \Int32 Posit32::op_Explicit(Posit32).0.return.7\ := false;
             else 
                 case \Int32 Posit32::op_Explicit(Posit32).0._State\ is 
@@ -53881,20 +52978,20 @@ begin
                             -- 	byte mostSignificantOnePosition;
                             -- 	mostSignificantOnePosition = Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x));
                             -- 	uint num2;
-                            -- 	uint conditional36;
+                            -- 	uint conditional35;
                             -- 	if ((num - (long)(mostSignificantOnePosition) + 1L >= 0L)) {
-                            -- 		conditional36 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
+                            -- 		conditional35 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
                             -- 	} else {
-                            -- 		conditional36 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
+                            -- 		conditional35 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
                             -- 	}
-                            -- 	num2 = (conditional36);
-                            -- 	long conditional37;
+                            -- 	num2 = (conditional35);
+                            -- 	long conditional36;
                             -- 	if (Lombiq.Arithmetics.Posit32.IsPositive (x)) {
-                            -- 		conditional37 = num2;
+                            -- 		conditional36 = num2;
                             -- 	} else {
-                            -- 		conditional37 = (0L - (long)num2);
+                            -- 		conditional36 = (0L - (long)num2);
                             -- 	}
-                            -- 	return (int)(conditional37);
+                            -- 	return (int)(conditional36);
                             -- }
                             -- 
                             \Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.3\ := \Int32 Posit32::op_Explicit(Posit32).0.num\ + to_signed(1, 64);
@@ -53919,13 +53016,13 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).0._State_8\ => 
                         -- State after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).0._State_7\.
                         -- The following section was transformed from the .NET statement below:
-                        -- int conditional38;
+                        -- int conditional37;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if (Lombiq.Arithmetics.Posit32.IsPositive (x)) {
-                        -- 	conditional38 = 2147483647;
+                        -- 	conditional37 = 2147483647;
                         -- } else {
-                        -- 	conditional38 = -2147483648;
+                        -- 	conditional37 = -2147483648;
                         -- }
                         -- 
                         -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
@@ -53940,20 +53037,20 @@ begin
                         -- 	byte mostSignificantOnePosition;
                         -- 	mostSignificantOnePosition = Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x));
                         -- 	uint num2;
-                        -- 	uint conditional36;
+                        -- 	uint conditional35;
                         -- 	if ((num - (long)(mostSignificantOnePosition) + 1L >= 0L)) {
-                        -- 		conditional36 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- 		conditional35 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- 	} else {
-                        -- 		conditional36 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- 		conditional35 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- 	}
-                        -- 	num2 = (conditional36);
-                        -- 	long conditional37;
+                        -- 	num2 = (conditional35);
+                        -- 	long conditional36;
                         -- 	if (Lombiq.Arithmetics.Posit32.IsPositive (x)) {
-                        -- 		conditional37 = num2;
+                        -- 		conditional36 = num2;
                         -- 	} else {
-                        -- 		conditional37 = (0L - (long)num2);
+                        -- 		conditional36 = (0L - (long)num2);
                         -- 	}
-                        -- 	return (int)(conditional37);
+                        -- 	return (int)(conditional36);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -53988,13 +53085,13 @@ begin
                             -- uint num2;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- uint conditional36;
+                            -- uint conditional35;
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- if ((num - (long)(mostSignificantOnePosition) + 1L >= 0L)) {
-                            -- 	conditional36 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
+                            -- 	conditional35 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
                             -- } else {
-                            -- 	conditional36 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
+                            -- 	conditional35 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
                             -- }
                             -- 
                             \Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.5\ := \Int32 Posit32::op_Explicit(Posit32).0.num\ - signed(SmartResize((\Int32 Posit32::op_Explicit(Posit32).0.mostSignificantOnePosition\), 64));
@@ -54020,17 +53117,17 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).0._State_13\ => 
                         -- State after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).0._State_12\.
                         -- The following section was transformed from the .NET statement below:
-                        -- num2 = (conditional36);
+                        -- num2 = (conditional35);
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).0.num2\ := (\Int32 Posit32::op_Explicit(Posit32).0.conditional36\);
+                        \Int32 Posit32::op_Explicit(Posit32).0.num2\ := (\Int32 Posit32::op_Explicit(Posit32).0.conditional35\);
                         -- The following section was transformed from the .NET statement below:
-                        -- long conditional37;
+                        -- long conditional36;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if (Lombiq.Arithmetics.Posit32.IsPositive (x)) {
-                        -- 	conditional37 = num2;
+                        -- 	conditional36 = num2;
                         -- } else {
-                        -- 	conditional37 = (0L - (long)num2);
+                        -- 	conditional36 = (0L - (long)num2);
                         -- }
                         -- 
                         -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
@@ -54042,11 +53139,11 @@ begin
                         -- True branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).0._State_12\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional36 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- 	conditional35 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional36 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- conditional35 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::FractionWithHiddenBit()
                         \Int32 Posit32::op_Explicit(Posit32).0.Posit32::FractionWithHiddenBit().this.parameter.Out.0\ <= \Int32 Posit32::op_Explicit(Posit32).0.x\;
@@ -54066,7 +53163,7 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).0._State_16\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.10\ := shift_left(\Int32 Posit32::op_Explicit(Posit32).0.return.4\, to_integer(unsigned(SmartResize((\Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.9\), 5))));
-                        \Int32 Posit32::op_Explicit(Posit32).0.conditional36\ := (\Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.10\);
+                        \Int32 Posit32::op_Explicit(Posit32).0.conditional35\ := (\Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.10\);
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).0._State_12\.
                         if (\Int32 Posit32::op_Explicit(Posit32).0._State\ = \Int32 Posit32::op_Explicit(Posit32).0._State_16\) then 
                             \Int32 Posit32::op_Explicit(Posit32).0._State\ := \Int32 Posit32::op_Explicit(Posit32).0._State_13\;
@@ -54076,11 +53173,11 @@ begin
                         -- False branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).0._State_12\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional36 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- 	conditional35 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional36 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- conditional35 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::FractionWithHiddenBit()
                         \Int32 Posit32::op_Explicit(Posit32).0.Posit32::FractionWithHiddenBit().this.parameter.Out.0\ <= \Int32 Posit32::op_Explicit(Posit32).0.x\;
@@ -54105,7 +53202,7 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).0._State_20\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.13\ := shift_right(\Int32 Posit32::op_Explicit(Posit32).0.return.5\, to_integer(unsigned(SmartResize(\Int32 Posit32::op_Explicit(Posit32).0.unaryOperationResult.0\, 5) and "11111")));
-                        \Int32 Posit32::op_Explicit(Posit32).0.conditional36\ := (\Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.13\);
+                        \Int32 Posit32::op_Explicit(Posit32).0.conditional35\ := (\Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.13\);
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).0._State_12\.
                         if (\Int32 Posit32::op_Explicit(Posit32).0._State\ = \Int32 Posit32::op_Explicit(Posit32).0._State_20\) then 
                             \Int32 Posit32::op_Explicit(Posit32).0._State\ := \Int32 Posit32::op_Explicit(Posit32).0._State_13\;
@@ -54132,9 +53229,9 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).0._State_22\ => 
                         -- State after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).0._State_21\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return (int)(conditional37);
+                        -- return (int)(conditional36);
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).0.return\ <= SmartResize((\Int32 Posit32::op_Explicit(Posit32).0.conditional37\), 32);
+                        \Int32 Posit32::op_Explicit(Posit32).0.return\ <= SmartResize((\Int32 Posit32::op_Explicit(Posit32).0.conditional36\), 32);
                         \Int32 Posit32::op_Explicit(Posit32).0._State\ := \Int32 Posit32::op_Explicit(Posit32).0._State_1\;
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).0._State_7\.
                         if (\Int32 Posit32::op_Explicit(Posit32).0._State\ = \Int32 Posit32::op_Explicit(Posit32).0._State_22\) then 
@@ -54145,13 +53242,13 @@ begin
                         -- True branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).0._State_21\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional37 = num2;
+                        -- 	conditional36 = num2;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional37 = num2;
+                        -- conditional36 = num2;
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).0.conditional37\ := signed(SmartResize(\Int32 Posit32::op_Explicit(Posit32).0.num2\, 64));
+                        \Int32 Posit32::op_Explicit(Posit32).0.conditional36\ := signed(SmartResize(\Int32 Posit32::op_Explicit(Posit32).0.num2\, 64));
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).0._State_21\.
                         if (\Int32 Posit32::op_Explicit(Posit32).0._State\ = \Int32 Posit32::op_Explicit(Posit32).0._State_23\) then 
                             \Int32 Posit32::op_Explicit(Posit32).0._State\ := \Int32 Posit32::op_Explicit(Posit32).0._State_22\;
@@ -54161,14 +53258,14 @@ begin
                         -- False branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).0._State_21\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional37 = (0L - (long)num2);
+                        -- 	conditional36 = (0L - (long)num2);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional37 = (0L - (long)num2);
+                        -- conditional36 = (0L - (long)num2);
                         -- 
                         \Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.14\ := to_signed(0, 64) - signed(SmartResize(\Int32 Posit32::op_Explicit(Posit32).0.num2\, 64));
-                        \Int32 Posit32::op_Explicit(Posit32).0.conditional37\ := (\Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.14\);
+                        \Int32 Posit32::op_Explicit(Posit32).0.conditional36\ := (\Int32 Posit32::op_Explicit(Posit32).0.binaryOperationResult.14\);
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).0._State_21\.
                         if (\Int32 Posit32::op_Explicit(Posit32).0._State\ = \Int32 Posit32::op_Explicit(Posit32).0._State_24\) then 
                             \Int32 Posit32::op_Explicit(Posit32).0._State\ := \Int32 Posit32::op_Explicit(Posit32).0._State_22\;
@@ -54195,22 +53292,22 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).0._State_26\ => 
                         -- State after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).0._State_25\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return conditional38;
+                        -- return conditional37;
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).0.return\ <= \Int32 Posit32::op_Explicit(Posit32).0.conditional38\;
+                        \Int32 Posit32::op_Explicit(Posit32).0.return\ <= \Int32 Posit32::op_Explicit(Posit32).0.conditional37\;
                         \Int32 Posit32::op_Explicit(Posit32).0._State\ := \Int32 Posit32::op_Explicit(Posit32).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Int32 Posit32::op_Explicit(Posit32).0._State_27\ => 
                         -- True branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).0._State_25\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional38 = 2147483647;
+                        -- 	conditional37 = 2147483647;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional38 = 2147483647;
+                        -- conditional37 = 2147483647;
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).0.conditional38\ := to_signed(2147483647, 32);
+                        \Int32 Posit32::op_Explicit(Posit32).0.conditional37\ := to_signed(2147483647, 32);
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).0._State_25\.
                         if (\Int32 Posit32::op_Explicit(Posit32).0._State\ = \Int32 Posit32::op_Explicit(Posit32).0._State_27\) then 
                             \Int32 Posit32::op_Explicit(Posit32).0._State\ := \Int32 Posit32::op_Explicit(Posit32).0._State_26\;
@@ -54220,13 +53317,13 @@ begin
                         -- False branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).0._State_25\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional38 = -2147483648;
+                        -- 	conditional37 = -2147483648;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional38 = -2147483648;
+                        -- conditional37 = -2147483648;
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).0.conditional38\ := to_signed(-2147483648, 32);
+                        \Int32 Posit32::op_Explicit(Posit32).0.conditional37\ := to_signed(-2147483648, 32);
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).0._State_25\.
                         if (\Int32 Posit32::op_Explicit(Posit32).0._State\ = \Int32 Posit32::op_Explicit(Posit32).0._State_28\) then 
                             \Int32 Posit32::op_Explicit(Posit32).0._State\ := \Int32 Posit32::op_Explicit(Posit32).0._State_26\;
@@ -54255,7 +53352,7 @@ begin
         Variable \Int32 Posit32::op_Explicit(Posit32).1.return.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Int32 Posit32::op_Explicit(Posit32).1.return.3\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Int32 Posit32::op_Explicit(Posit32).1.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Int32 Posit32::op_Explicit(Posit32).1.conditional36\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Int32 Posit32::op_Explicit(Posit32).1.conditional35\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.5\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.6\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.7\: boolean := false;
@@ -54268,10 +53365,10 @@ begin
         Variable \Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.12\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Int32 Posit32::op_Explicit(Posit32).1.unaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.13\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Int32 Posit32::op_Explicit(Posit32).1.conditional37\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Int32 Posit32::op_Explicit(Posit32).1.conditional36\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Int32 Posit32::op_Explicit(Posit32).1.return.6\: boolean := false;
         Variable \Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.14\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \Int32 Posit32::op_Explicit(Posit32).1.conditional38\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Int32 Posit32::op_Explicit(Posit32).1.conditional37\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Int32 Posit32::op_Explicit(Posit32).1.return.7\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
@@ -54298,7 +53395,7 @@ begin
                 \Int32 Posit32::op_Explicit(Posit32).1.return.2\ := to_unsigned(0, 32);
                 \Int32 Posit32::op_Explicit(Posit32).1.return.3\ := to_unsigned(0, 8);
                 \Int32 Posit32::op_Explicit(Posit32).1.num2\ := to_unsigned(0, 32);
-                \Int32 Posit32::op_Explicit(Posit32).1.conditional36\ := to_unsigned(0, 32);
+                \Int32 Posit32::op_Explicit(Posit32).1.conditional35\ := to_unsigned(0, 32);
                 \Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.5\ := to_signed(0, 64);
                 \Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.6\ := to_signed(0, 64);
                 \Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.7\ := false;
@@ -54311,10 +53408,10 @@ begin
                 \Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.12\ := to_signed(0, 32);
                 \Int32 Posit32::op_Explicit(Posit32).1.unaryOperationResult.0\ := to_signed(0, 32);
                 \Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.13\ := to_unsigned(0, 32);
-                \Int32 Posit32::op_Explicit(Posit32).1.conditional37\ := to_signed(0, 64);
+                \Int32 Posit32::op_Explicit(Posit32).1.conditional36\ := to_signed(0, 64);
                 \Int32 Posit32::op_Explicit(Posit32).1.return.6\ := false;
                 \Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.14\ := to_signed(0, 64);
-                \Int32 Posit32::op_Explicit(Posit32).1.conditional38\ := to_signed(0, 32);
+                \Int32 Posit32::op_Explicit(Posit32).1.conditional37\ := to_signed(0, 32);
                 \Int32 Posit32::op_Explicit(Posit32).1.return.7\ := false;
             else 
                 case \Int32 Posit32::op_Explicit(Posit32).1._State\ is 
@@ -54409,20 +53506,20 @@ begin
                             -- 	byte mostSignificantOnePosition;
                             -- 	mostSignificantOnePosition = Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x));
                             -- 	uint num2;
-                            -- 	uint conditional36;
+                            -- 	uint conditional35;
                             -- 	if ((num - (long)(mostSignificantOnePosition) + 1L >= 0L)) {
-                            -- 		conditional36 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
+                            -- 		conditional35 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
                             -- 	} else {
-                            -- 		conditional36 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
+                            -- 		conditional35 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
                             -- 	}
-                            -- 	num2 = (conditional36);
-                            -- 	long conditional37;
+                            -- 	num2 = (conditional35);
+                            -- 	long conditional36;
                             -- 	if (Lombiq.Arithmetics.Posit32.IsPositive (x)) {
-                            -- 		conditional37 = num2;
+                            -- 		conditional36 = num2;
                             -- 	} else {
-                            -- 		conditional37 = (0L - (long)num2);
+                            -- 		conditional36 = (0L - (long)num2);
                             -- 	}
-                            -- 	return (int)(conditional37);
+                            -- 	return (int)(conditional36);
                             -- }
                             -- 
                             \Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.3\ := \Int32 Posit32::op_Explicit(Posit32).1.num\ + to_signed(1, 64);
@@ -54447,13 +53544,13 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).1._State_8\ => 
                         -- State after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).1._State_7\.
                         -- The following section was transformed from the .NET statement below:
-                        -- int conditional38;
+                        -- int conditional37;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if (Lombiq.Arithmetics.Posit32.IsPositive (x)) {
-                        -- 	conditional38 = 2147483647;
+                        -- 	conditional37 = 2147483647;
                         -- } else {
-                        -- 	conditional38 = -2147483648;
+                        -- 	conditional37 = -2147483648;
                         -- }
                         -- 
                         -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
@@ -54468,20 +53565,20 @@ begin
                         -- 	byte mostSignificantOnePosition;
                         -- 	mostSignificantOnePosition = Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x));
                         -- 	uint num2;
-                        -- 	uint conditional36;
+                        -- 	uint conditional35;
                         -- 	if ((num - (long)(mostSignificantOnePosition) + 1L >= 0L)) {
-                        -- 		conditional36 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- 		conditional35 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- 	} else {
-                        -- 		conditional36 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- 		conditional35 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- 	}
-                        -- 	num2 = (conditional36);
-                        -- 	long conditional37;
+                        -- 	num2 = (conditional35);
+                        -- 	long conditional36;
                         -- 	if (Lombiq.Arithmetics.Posit32.IsPositive (x)) {
-                        -- 		conditional37 = num2;
+                        -- 		conditional36 = num2;
                         -- 	} else {
-                        -- 		conditional37 = (0L - (long)num2);
+                        -- 		conditional36 = (0L - (long)num2);
                         -- 	}
-                        -- 	return (int)(conditional37);
+                        -- 	return (int)(conditional36);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -54516,13 +53613,13 @@ begin
                             -- uint num2;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- uint conditional36;
+                            -- uint conditional35;
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- if ((num - (long)(mostSignificantOnePosition) + 1L >= 0L)) {
-                            -- 	conditional36 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
+                            -- 	conditional35 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
                             -- } else {
-                            -- 	conditional36 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
+                            -- 	conditional35 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
                             -- }
                             -- 
                             \Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.5\ := \Int32 Posit32::op_Explicit(Posit32).1.num\ - signed(SmartResize((\Int32 Posit32::op_Explicit(Posit32).1.mostSignificantOnePosition\), 64));
@@ -54548,17 +53645,17 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).1._State_13\ => 
                         -- State after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).1._State_12\.
                         -- The following section was transformed from the .NET statement below:
-                        -- num2 = (conditional36);
+                        -- num2 = (conditional35);
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).1.num2\ := (\Int32 Posit32::op_Explicit(Posit32).1.conditional36\);
+                        \Int32 Posit32::op_Explicit(Posit32).1.num2\ := (\Int32 Posit32::op_Explicit(Posit32).1.conditional35\);
                         -- The following section was transformed from the .NET statement below:
-                        -- long conditional37;
+                        -- long conditional36;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if (Lombiq.Arithmetics.Posit32.IsPositive (x)) {
-                        -- 	conditional37 = num2;
+                        -- 	conditional36 = num2;
                         -- } else {
-                        -- 	conditional37 = (0L - (long)num2);
+                        -- 	conditional36 = (0L - (long)num2);
                         -- }
                         -- 
                         -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
@@ -54570,11 +53667,11 @@ begin
                         -- True branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).1._State_12\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional36 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- 	conditional35 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional36 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- conditional35 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::FractionWithHiddenBit()
                         \Int32 Posit32::op_Explicit(Posit32).1.Posit32::FractionWithHiddenBit().this.parameter.Out.0\ <= \Int32 Posit32::op_Explicit(Posit32).1.x\;
@@ -54594,7 +53691,7 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).1._State_16\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.10\ := shift_left(\Int32 Posit32::op_Explicit(Posit32).1.return.4\, to_integer(unsigned(SmartResize((\Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.9\), 5))));
-                        \Int32 Posit32::op_Explicit(Posit32).1.conditional36\ := (\Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.10\);
+                        \Int32 Posit32::op_Explicit(Posit32).1.conditional35\ := (\Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.10\);
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).1._State_12\.
                         if (\Int32 Posit32::op_Explicit(Posit32).1._State\ = \Int32 Posit32::op_Explicit(Posit32).1._State_16\) then 
                             \Int32 Posit32::op_Explicit(Posit32).1._State\ := \Int32 Posit32::op_Explicit(Posit32).1._State_13\;
@@ -54604,11 +53701,11 @@ begin
                         -- False branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).1._State_12\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional36 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- 	conditional35 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional36 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- conditional35 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::FractionWithHiddenBit()
                         \Int32 Posit32::op_Explicit(Posit32).1.Posit32::FractionWithHiddenBit().this.parameter.Out.0\ <= \Int32 Posit32::op_Explicit(Posit32).1.x\;
@@ -54633,7 +53730,7 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).1._State_20\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.13\ := shift_right(\Int32 Posit32::op_Explicit(Posit32).1.return.5\, to_integer(unsigned(SmartResize(\Int32 Posit32::op_Explicit(Posit32).1.unaryOperationResult.0\, 5) and "11111")));
-                        \Int32 Posit32::op_Explicit(Posit32).1.conditional36\ := (\Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.13\);
+                        \Int32 Posit32::op_Explicit(Posit32).1.conditional35\ := (\Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.13\);
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).1._State_12\.
                         if (\Int32 Posit32::op_Explicit(Posit32).1._State\ = \Int32 Posit32::op_Explicit(Posit32).1._State_20\) then 
                             \Int32 Posit32::op_Explicit(Posit32).1._State\ := \Int32 Posit32::op_Explicit(Posit32).1._State_13\;
@@ -54660,9 +53757,9 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).1._State_22\ => 
                         -- State after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).1._State_21\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return (int)(conditional37);
+                        -- return (int)(conditional36);
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).1.return\ <= SmartResize((\Int32 Posit32::op_Explicit(Posit32).1.conditional37\), 32);
+                        \Int32 Posit32::op_Explicit(Posit32).1.return\ <= SmartResize((\Int32 Posit32::op_Explicit(Posit32).1.conditional36\), 32);
                         \Int32 Posit32::op_Explicit(Posit32).1._State\ := \Int32 Posit32::op_Explicit(Posit32).1._State_1\;
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).1._State_7\.
                         if (\Int32 Posit32::op_Explicit(Posit32).1._State\ = \Int32 Posit32::op_Explicit(Posit32).1._State_22\) then 
@@ -54673,13 +53770,13 @@ begin
                         -- True branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).1._State_21\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional37 = num2;
+                        -- 	conditional36 = num2;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional37 = num2;
+                        -- conditional36 = num2;
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).1.conditional37\ := signed(SmartResize(\Int32 Posit32::op_Explicit(Posit32).1.num2\, 64));
+                        \Int32 Posit32::op_Explicit(Posit32).1.conditional36\ := signed(SmartResize(\Int32 Posit32::op_Explicit(Posit32).1.num2\, 64));
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).1._State_21\.
                         if (\Int32 Posit32::op_Explicit(Posit32).1._State\ = \Int32 Posit32::op_Explicit(Posit32).1._State_23\) then 
                             \Int32 Posit32::op_Explicit(Posit32).1._State\ := \Int32 Posit32::op_Explicit(Posit32).1._State_22\;
@@ -54689,14 +53786,14 @@ begin
                         -- False branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).1._State_21\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional37 = (0L - (long)num2);
+                        -- 	conditional36 = (0L - (long)num2);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional37 = (0L - (long)num2);
+                        -- conditional36 = (0L - (long)num2);
                         -- 
                         \Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.14\ := to_signed(0, 64) - signed(SmartResize(\Int32 Posit32::op_Explicit(Posit32).1.num2\, 64));
-                        \Int32 Posit32::op_Explicit(Posit32).1.conditional37\ := (\Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.14\);
+                        \Int32 Posit32::op_Explicit(Posit32).1.conditional36\ := (\Int32 Posit32::op_Explicit(Posit32).1.binaryOperationResult.14\);
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).1._State_21\.
                         if (\Int32 Posit32::op_Explicit(Posit32).1._State\ = \Int32 Posit32::op_Explicit(Posit32).1._State_24\) then 
                             \Int32 Posit32::op_Explicit(Posit32).1._State\ := \Int32 Posit32::op_Explicit(Posit32).1._State_22\;
@@ -54723,22 +53820,22 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).1._State_26\ => 
                         -- State after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).1._State_25\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return conditional38;
+                        -- return conditional37;
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).1.return\ <= \Int32 Posit32::op_Explicit(Posit32).1.conditional38\;
+                        \Int32 Posit32::op_Explicit(Posit32).1.return\ <= \Int32 Posit32::op_Explicit(Posit32).1.conditional37\;
                         \Int32 Posit32::op_Explicit(Posit32).1._State\ := \Int32 Posit32::op_Explicit(Posit32).1._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Int32 Posit32::op_Explicit(Posit32).1._State_27\ => 
                         -- True branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).1._State_25\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional38 = 2147483647;
+                        -- 	conditional37 = 2147483647;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional38 = 2147483647;
+                        -- conditional37 = 2147483647;
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).1.conditional38\ := to_signed(2147483647, 32);
+                        \Int32 Posit32::op_Explicit(Posit32).1.conditional37\ := to_signed(2147483647, 32);
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).1._State_25\.
                         if (\Int32 Posit32::op_Explicit(Posit32).1._State\ = \Int32 Posit32::op_Explicit(Posit32).1._State_27\) then 
                             \Int32 Posit32::op_Explicit(Posit32).1._State\ := \Int32 Posit32::op_Explicit(Posit32).1._State_26\;
@@ -54748,13 +53845,13 @@ begin
                         -- False branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).1._State_25\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional38 = -2147483648;
+                        -- 	conditional37 = -2147483648;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional38 = -2147483648;
+                        -- conditional37 = -2147483648;
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).1.conditional38\ := to_signed(-2147483648, 32);
+                        \Int32 Posit32::op_Explicit(Posit32).1.conditional37\ := to_signed(-2147483648, 32);
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).1._State_25\.
                         if (\Int32 Posit32::op_Explicit(Posit32).1._State\ = \Int32 Posit32::op_Explicit(Posit32).1._State_28\) then 
                             \Int32 Posit32::op_Explicit(Posit32).1._State\ := \Int32 Posit32::op_Explicit(Posit32).1._State_26\;
@@ -54783,7 +53880,7 @@ begin
         Variable \Int32 Posit32::op_Explicit(Posit32).2.return.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Int32 Posit32::op_Explicit(Posit32).2.return.3\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Int32 Posit32::op_Explicit(Posit32).2.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Int32 Posit32::op_Explicit(Posit32).2.conditional36\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Int32 Posit32::op_Explicit(Posit32).2.conditional35\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.5\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.6\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.7\: boolean := false;
@@ -54796,10 +53893,10 @@ begin
         Variable \Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.12\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Int32 Posit32::op_Explicit(Posit32).2.unaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.13\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Int32 Posit32::op_Explicit(Posit32).2.conditional37\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Int32 Posit32::op_Explicit(Posit32).2.conditional36\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Int32 Posit32::op_Explicit(Posit32).2.return.6\: boolean := false;
         Variable \Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.14\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \Int32 Posit32::op_Explicit(Posit32).2.conditional38\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Int32 Posit32::op_Explicit(Posit32).2.conditional37\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Int32 Posit32::op_Explicit(Posit32).2.return.7\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
@@ -54826,7 +53923,7 @@ begin
                 \Int32 Posit32::op_Explicit(Posit32).2.return.2\ := to_unsigned(0, 32);
                 \Int32 Posit32::op_Explicit(Posit32).2.return.3\ := to_unsigned(0, 8);
                 \Int32 Posit32::op_Explicit(Posit32).2.num2\ := to_unsigned(0, 32);
-                \Int32 Posit32::op_Explicit(Posit32).2.conditional36\ := to_unsigned(0, 32);
+                \Int32 Posit32::op_Explicit(Posit32).2.conditional35\ := to_unsigned(0, 32);
                 \Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.5\ := to_signed(0, 64);
                 \Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.6\ := to_signed(0, 64);
                 \Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.7\ := false;
@@ -54839,10 +53936,10 @@ begin
                 \Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.12\ := to_signed(0, 32);
                 \Int32 Posit32::op_Explicit(Posit32).2.unaryOperationResult.0\ := to_signed(0, 32);
                 \Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.13\ := to_unsigned(0, 32);
-                \Int32 Posit32::op_Explicit(Posit32).2.conditional37\ := to_signed(0, 64);
+                \Int32 Posit32::op_Explicit(Posit32).2.conditional36\ := to_signed(0, 64);
                 \Int32 Posit32::op_Explicit(Posit32).2.return.6\ := false;
                 \Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.14\ := to_signed(0, 64);
-                \Int32 Posit32::op_Explicit(Posit32).2.conditional38\ := to_signed(0, 32);
+                \Int32 Posit32::op_Explicit(Posit32).2.conditional37\ := to_signed(0, 32);
                 \Int32 Posit32::op_Explicit(Posit32).2.return.7\ := false;
             else 
                 case \Int32 Posit32::op_Explicit(Posit32).2._State\ is 
@@ -54937,20 +54034,20 @@ begin
                             -- 	byte mostSignificantOnePosition;
                             -- 	mostSignificantOnePosition = Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x));
                             -- 	uint num2;
-                            -- 	uint conditional36;
+                            -- 	uint conditional35;
                             -- 	if ((num - (long)(mostSignificantOnePosition) + 1L >= 0L)) {
-                            -- 		conditional36 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
+                            -- 		conditional35 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
                             -- 	} else {
-                            -- 		conditional36 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
+                            -- 		conditional35 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
                             -- 	}
-                            -- 	num2 = (conditional36);
-                            -- 	long conditional37;
+                            -- 	num2 = (conditional35);
+                            -- 	long conditional36;
                             -- 	if (Lombiq.Arithmetics.Posit32.IsPositive (x)) {
-                            -- 		conditional37 = num2;
+                            -- 		conditional36 = num2;
                             -- 	} else {
-                            -- 		conditional37 = (0L - (long)num2);
+                            -- 		conditional36 = (0L - (long)num2);
                             -- 	}
-                            -- 	return (int)(conditional37);
+                            -- 	return (int)(conditional36);
                             -- }
                             -- 
                             \Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.3\ := \Int32 Posit32::op_Explicit(Posit32).2.num\ + to_signed(1, 64);
@@ -54975,13 +54072,13 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).2._State_8\ => 
                         -- State after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).2._State_7\.
                         -- The following section was transformed from the .NET statement below:
-                        -- int conditional38;
+                        -- int conditional37;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if (Lombiq.Arithmetics.Posit32.IsPositive (x)) {
-                        -- 	conditional38 = 2147483647;
+                        -- 	conditional37 = 2147483647;
                         -- } else {
-                        -- 	conditional38 = -2147483648;
+                        -- 	conditional37 = -2147483648;
                         -- }
                         -- 
                         -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
@@ -54996,20 +54093,20 @@ begin
                         -- 	byte mostSignificantOnePosition;
                         -- 	mostSignificantOnePosition = Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x));
                         -- 	uint num2;
-                        -- 	uint conditional36;
+                        -- 	uint conditional35;
                         -- 	if ((num - (long)(mostSignificantOnePosition) + 1L >= 0L)) {
-                        -- 		conditional36 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- 		conditional35 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- 	} else {
-                        -- 		conditional36 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- 		conditional35 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- 	}
-                        -- 	num2 = (conditional36);
-                        -- 	long conditional37;
+                        -- 	num2 = (conditional35);
+                        -- 	long conditional36;
                         -- 	if (Lombiq.Arithmetics.Posit32.IsPositive (x)) {
-                        -- 		conditional37 = num2;
+                        -- 		conditional36 = num2;
                         -- 	} else {
-                        -- 		conditional37 = (0L - (long)num2);
+                        -- 		conditional36 = (0L - (long)num2);
                         -- 	}
-                        -- 	return (int)(conditional37);
+                        -- 	return (int)(conditional36);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -55044,13 +54141,13 @@ begin
                             -- uint num2;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- uint conditional36;
+                            -- uint conditional35;
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- if ((num - (long)(mostSignificantOnePosition) + 1L >= 0L)) {
-                            -- 	conditional36 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
+                            -- 	conditional35 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
                             -- } else {
-                            -- 	conditional36 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
+                            -- 	conditional35 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
                             -- }
                             -- 
                             \Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.5\ := \Int32 Posit32::op_Explicit(Posit32).2.num\ - signed(SmartResize((\Int32 Posit32::op_Explicit(Posit32).2.mostSignificantOnePosition\), 64));
@@ -55076,17 +54173,17 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).2._State_13\ => 
                         -- State after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).2._State_12\.
                         -- The following section was transformed from the .NET statement below:
-                        -- num2 = (conditional36);
+                        -- num2 = (conditional35);
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).2.num2\ := (\Int32 Posit32::op_Explicit(Posit32).2.conditional36\);
+                        \Int32 Posit32::op_Explicit(Posit32).2.num2\ := (\Int32 Posit32::op_Explicit(Posit32).2.conditional35\);
                         -- The following section was transformed from the .NET statement below:
-                        -- long conditional37;
+                        -- long conditional36;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if (Lombiq.Arithmetics.Posit32.IsPositive (x)) {
-                        -- 	conditional37 = num2;
+                        -- 	conditional36 = num2;
                         -- } else {
-                        -- 	conditional37 = (0L - (long)num2);
+                        -- 	conditional36 = (0L - (long)num2);
                         -- }
                         -- 
                         -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
@@ -55098,11 +54195,11 @@ begin
                         -- True branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).2._State_12\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional36 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- 	conditional35 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional36 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- conditional35 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::FractionWithHiddenBit()
                         \Int32 Posit32::op_Explicit(Posit32).2.Posit32::FractionWithHiddenBit().this.parameter.Out.0\ <= \Int32 Posit32::op_Explicit(Posit32).2.x\;
@@ -55122,7 +54219,7 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).2._State_16\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.10\ := shift_left(\Int32 Posit32::op_Explicit(Posit32).2.return.4\, to_integer(unsigned(SmartResize((\Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.9\), 5))));
-                        \Int32 Posit32::op_Explicit(Posit32).2.conditional36\ := (\Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.10\);
+                        \Int32 Posit32::op_Explicit(Posit32).2.conditional35\ := (\Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.10\);
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).2._State_12\.
                         if (\Int32 Posit32::op_Explicit(Posit32).2._State\ = \Int32 Posit32::op_Explicit(Posit32).2._State_16\) then 
                             \Int32 Posit32::op_Explicit(Posit32).2._State\ := \Int32 Posit32::op_Explicit(Posit32).2._State_13\;
@@ -55132,11 +54229,11 @@ begin
                         -- False branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).2._State_12\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional36 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- 	conditional35 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional36 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- conditional35 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::FractionWithHiddenBit()
                         \Int32 Posit32::op_Explicit(Posit32).2.Posit32::FractionWithHiddenBit().this.parameter.Out.0\ <= \Int32 Posit32::op_Explicit(Posit32).2.x\;
@@ -55161,7 +54258,7 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).2._State_20\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.13\ := shift_right(\Int32 Posit32::op_Explicit(Posit32).2.return.5\, to_integer(unsigned(SmartResize(\Int32 Posit32::op_Explicit(Posit32).2.unaryOperationResult.0\, 5) and "11111")));
-                        \Int32 Posit32::op_Explicit(Posit32).2.conditional36\ := (\Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.13\);
+                        \Int32 Posit32::op_Explicit(Posit32).2.conditional35\ := (\Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.13\);
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).2._State_12\.
                         if (\Int32 Posit32::op_Explicit(Posit32).2._State\ = \Int32 Posit32::op_Explicit(Posit32).2._State_20\) then 
                             \Int32 Posit32::op_Explicit(Posit32).2._State\ := \Int32 Posit32::op_Explicit(Posit32).2._State_13\;
@@ -55188,9 +54285,9 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).2._State_22\ => 
                         -- State after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).2._State_21\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return (int)(conditional37);
+                        -- return (int)(conditional36);
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).2.return\ <= SmartResize((\Int32 Posit32::op_Explicit(Posit32).2.conditional37\), 32);
+                        \Int32 Posit32::op_Explicit(Posit32).2.return\ <= SmartResize((\Int32 Posit32::op_Explicit(Posit32).2.conditional36\), 32);
                         \Int32 Posit32::op_Explicit(Posit32).2._State\ := \Int32 Posit32::op_Explicit(Posit32).2._State_1\;
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).2._State_7\.
                         if (\Int32 Posit32::op_Explicit(Posit32).2._State\ = \Int32 Posit32::op_Explicit(Posit32).2._State_22\) then 
@@ -55201,13 +54298,13 @@ begin
                         -- True branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).2._State_21\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional37 = num2;
+                        -- 	conditional36 = num2;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional37 = num2;
+                        -- conditional36 = num2;
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).2.conditional37\ := signed(SmartResize(\Int32 Posit32::op_Explicit(Posit32).2.num2\, 64));
+                        \Int32 Posit32::op_Explicit(Posit32).2.conditional36\ := signed(SmartResize(\Int32 Posit32::op_Explicit(Posit32).2.num2\, 64));
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).2._State_21\.
                         if (\Int32 Posit32::op_Explicit(Posit32).2._State\ = \Int32 Posit32::op_Explicit(Posit32).2._State_23\) then 
                             \Int32 Posit32::op_Explicit(Posit32).2._State\ := \Int32 Posit32::op_Explicit(Posit32).2._State_22\;
@@ -55217,14 +54314,14 @@ begin
                         -- False branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).2._State_21\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional37 = (0L - (long)num2);
+                        -- 	conditional36 = (0L - (long)num2);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional37 = (0L - (long)num2);
+                        -- conditional36 = (0L - (long)num2);
                         -- 
                         \Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.14\ := to_signed(0, 64) - signed(SmartResize(\Int32 Posit32::op_Explicit(Posit32).2.num2\, 64));
-                        \Int32 Posit32::op_Explicit(Posit32).2.conditional37\ := (\Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.14\);
+                        \Int32 Posit32::op_Explicit(Posit32).2.conditional36\ := (\Int32 Posit32::op_Explicit(Posit32).2.binaryOperationResult.14\);
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).2._State_21\.
                         if (\Int32 Posit32::op_Explicit(Posit32).2._State\ = \Int32 Posit32::op_Explicit(Posit32).2._State_24\) then 
                             \Int32 Posit32::op_Explicit(Posit32).2._State\ := \Int32 Posit32::op_Explicit(Posit32).2._State_22\;
@@ -55251,22 +54348,22 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).2._State_26\ => 
                         -- State after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).2._State_25\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return conditional38;
+                        -- return conditional37;
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).2.return\ <= \Int32 Posit32::op_Explicit(Posit32).2.conditional38\;
+                        \Int32 Posit32::op_Explicit(Posit32).2.return\ <= \Int32 Posit32::op_Explicit(Posit32).2.conditional37\;
                         \Int32 Posit32::op_Explicit(Posit32).2._State\ := \Int32 Posit32::op_Explicit(Posit32).2._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Int32 Posit32::op_Explicit(Posit32).2._State_27\ => 
                         -- True branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).2._State_25\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional38 = 2147483647;
+                        -- 	conditional37 = 2147483647;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional38 = 2147483647;
+                        -- conditional37 = 2147483647;
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).2.conditional38\ := to_signed(2147483647, 32);
+                        \Int32 Posit32::op_Explicit(Posit32).2.conditional37\ := to_signed(2147483647, 32);
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).2._State_25\.
                         if (\Int32 Posit32::op_Explicit(Posit32).2._State\ = \Int32 Posit32::op_Explicit(Posit32).2._State_27\) then 
                             \Int32 Posit32::op_Explicit(Posit32).2._State\ := \Int32 Posit32::op_Explicit(Posit32).2._State_26\;
@@ -55276,13 +54373,13 @@ begin
                         -- False branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).2._State_25\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional38 = -2147483648;
+                        -- 	conditional37 = -2147483648;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional38 = -2147483648;
+                        -- conditional37 = -2147483648;
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).2.conditional38\ := to_signed(-2147483648, 32);
+                        \Int32 Posit32::op_Explicit(Posit32).2.conditional37\ := to_signed(-2147483648, 32);
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).2._State_25\.
                         if (\Int32 Posit32::op_Explicit(Posit32).2._State\ = \Int32 Posit32::op_Explicit(Posit32).2._State_28\) then 
                             \Int32 Posit32::op_Explicit(Posit32).2._State\ := \Int32 Posit32::op_Explicit(Posit32).2._State_26\;
@@ -55311,7 +54408,7 @@ begin
         Variable \Int32 Posit32::op_Explicit(Posit32).3.return.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Int32 Posit32::op_Explicit(Posit32).3.return.3\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Int32 Posit32::op_Explicit(Posit32).3.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Int32 Posit32::op_Explicit(Posit32).3.conditional36\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Int32 Posit32::op_Explicit(Posit32).3.conditional35\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.5\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.6\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.7\: boolean := false;
@@ -55324,10 +54421,10 @@ begin
         Variable \Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.12\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Int32 Posit32::op_Explicit(Posit32).3.unaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.13\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Int32 Posit32::op_Explicit(Posit32).3.conditional37\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Int32 Posit32::op_Explicit(Posit32).3.conditional36\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Int32 Posit32::op_Explicit(Posit32).3.return.6\: boolean := false;
         Variable \Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.14\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \Int32 Posit32::op_Explicit(Posit32).3.conditional38\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Int32 Posit32::op_Explicit(Posit32).3.conditional37\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Int32 Posit32::op_Explicit(Posit32).3.return.7\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
@@ -55354,7 +54451,7 @@ begin
                 \Int32 Posit32::op_Explicit(Posit32).3.return.2\ := to_unsigned(0, 32);
                 \Int32 Posit32::op_Explicit(Posit32).3.return.3\ := to_unsigned(0, 8);
                 \Int32 Posit32::op_Explicit(Posit32).3.num2\ := to_unsigned(0, 32);
-                \Int32 Posit32::op_Explicit(Posit32).3.conditional36\ := to_unsigned(0, 32);
+                \Int32 Posit32::op_Explicit(Posit32).3.conditional35\ := to_unsigned(0, 32);
                 \Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.5\ := to_signed(0, 64);
                 \Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.6\ := to_signed(0, 64);
                 \Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.7\ := false;
@@ -55367,10 +54464,10 @@ begin
                 \Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.12\ := to_signed(0, 32);
                 \Int32 Posit32::op_Explicit(Posit32).3.unaryOperationResult.0\ := to_signed(0, 32);
                 \Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.13\ := to_unsigned(0, 32);
-                \Int32 Posit32::op_Explicit(Posit32).3.conditional37\ := to_signed(0, 64);
+                \Int32 Posit32::op_Explicit(Posit32).3.conditional36\ := to_signed(0, 64);
                 \Int32 Posit32::op_Explicit(Posit32).3.return.6\ := false;
                 \Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.14\ := to_signed(0, 64);
-                \Int32 Posit32::op_Explicit(Posit32).3.conditional38\ := to_signed(0, 32);
+                \Int32 Posit32::op_Explicit(Posit32).3.conditional37\ := to_signed(0, 32);
                 \Int32 Posit32::op_Explicit(Posit32).3.return.7\ := false;
             else 
                 case \Int32 Posit32::op_Explicit(Posit32).3._State\ is 
@@ -55465,20 +54562,20 @@ begin
                             -- 	byte mostSignificantOnePosition;
                             -- 	mostSignificantOnePosition = Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x));
                             -- 	uint num2;
-                            -- 	uint conditional36;
+                            -- 	uint conditional35;
                             -- 	if ((num - (long)(mostSignificantOnePosition) + 1L >= 0L)) {
-                            -- 		conditional36 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
+                            -- 		conditional35 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
                             -- 	} else {
-                            -- 		conditional36 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
+                            -- 		conditional35 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
                             -- 	}
-                            -- 	num2 = (conditional36);
-                            -- 	long conditional37;
+                            -- 	num2 = (conditional35);
+                            -- 	long conditional36;
                             -- 	if (Lombiq.Arithmetics.Posit32.IsPositive (x)) {
-                            -- 		conditional37 = num2;
+                            -- 		conditional36 = num2;
                             -- 	} else {
-                            -- 		conditional37 = (0L - (long)num2);
+                            -- 		conditional36 = (0L - (long)num2);
                             -- 	}
-                            -- 	return (int)(conditional37);
+                            -- 	return (int)(conditional36);
                             -- }
                             -- 
                             \Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.3\ := \Int32 Posit32::op_Explicit(Posit32).3.num\ + to_signed(1, 64);
@@ -55503,13 +54600,13 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).3._State_8\ => 
                         -- State after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).3._State_7\.
                         -- The following section was transformed from the .NET statement below:
-                        -- int conditional38;
+                        -- int conditional37;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if (Lombiq.Arithmetics.Posit32.IsPositive (x)) {
-                        -- 	conditional38 = 2147483647;
+                        -- 	conditional37 = 2147483647;
                         -- } else {
-                        -- 	conditional38 = -2147483648;
+                        -- 	conditional37 = -2147483648;
                         -- }
                         -- 
                         -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
@@ -55524,20 +54621,20 @@ begin
                         -- 	byte mostSignificantOnePosition;
                         -- 	mostSignificantOnePosition = Posit32.GetMostSignificantOnePosition (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x));
                         -- 	uint num2;
-                        -- 	uint conditional36;
+                        -- 	uint conditional35;
                         -- 	if ((num - (long)(mostSignificantOnePosition) + 1L >= 0L)) {
-                        -- 		conditional36 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- 		conditional35 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- 	} else {
-                        -- 		conditional36 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- 		conditional35 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- 	}
-                        -- 	num2 = (conditional36);
-                        -- 	long conditional37;
+                        -- 	num2 = (conditional35);
+                        -- 	long conditional36;
                         -- 	if (Lombiq.Arithmetics.Posit32.IsPositive (x)) {
-                        -- 		conditional37 = num2;
+                        -- 		conditional36 = num2;
                         -- 	} else {
-                        -- 		conditional37 = (0L - (long)num2);
+                        -- 		conditional36 = (0L - (long)num2);
                         -- 	}
-                        -- 	return (int)(conditional37);
+                        -- 	return (int)(conditional36);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -55572,13 +54669,13 @@ begin
                             -- uint num2;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- uint conditional36;
+                            -- uint conditional35;
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- if ((num - (long)(mostSignificantOnePosition) + 1L >= 0L)) {
-                            -- 	conditional36 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
+                            -- 	conditional35 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
                             -- } else {
-                            -- 	conditional36 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
+                            -- 	conditional35 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
                             -- }
                             -- 
                             \Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.5\ := \Int32 Posit32::op_Explicit(Posit32).3.num\ - signed(SmartResize((\Int32 Posit32::op_Explicit(Posit32).3.mostSignificantOnePosition\), 64));
@@ -55604,17 +54701,17 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).3._State_13\ => 
                         -- State after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).3._State_12\.
                         -- The following section was transformed from the .NET statement below:
-                        -- num2 = (conditional36);
+                        -- num2 = (conditional35);
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).3.num2\ := (\Int32 Posit32::op_Explicit(Posit32).3.conditional36\);
+                        \Int32 Posit32::op_Explicit(Posit32).3.num2\ := (\Int32 Posit32::op_Explicit(Posit32).3.conditional35\);
                         -- The following section was transformed from the .NET statement below:
-                        -- long conditional37;
+                        -- long conditional36;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if (Lombiq.Arithmetics.Posit32.IsPositive (x)) {
-                        -- 	conditional37 = num2;
+                        -- 	conditional36 = num2;
                         -- } else {
-                        -- 	conditional37 = (0L - (long)num2);
+                        -- 	conditional36 = (0L - (long)num2);
                         -- }
                         -- 
                         -- Starting state machine invocation for the following method: System.Boolean Lombiq.Arithmetics.Posit32::IsPositive()
@@ -55626,11 +54723,11 @@ begin
                         -- True branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).3._State_12\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional36 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- 	conditional35 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional36 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- conditional35 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) << (int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::FractionWithHiddenBit()
                         \Int32 Posit32::op_Explicit(Posit32).3.Posit32::FractionWithHiddenBit().this.parameter.Out.0\ <= \Int32 Posit32::op_Explicit(Posit32).3.x\;
@@ -55650,7 +54747,7 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).3._State_16\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.10\ := shift_left(\Int32 Posit32::op_Explicit(Posit32).3.return.4\, to_integer(unsigned(SmartResize((\Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.9\), 5))));
-                        \Int32 Posit32::op_Explicit(Posit32).3.conditional36\ := (\Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.10\);
+                        \Int32 Posit32::op_Explicit(Posit32).3.conditional35\ := (\Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.10\);
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).3._State_12\.
                         if (\Int32 Posit32::op_Explicit(Posit32).3._State\ = \Int32 Posit32::op_Explicit(Posit32).3._State_16\) then 
                             \Int32 Posit32::op_Explicit(Posit32).3._State\ := \Int32 Posit32::op_Explicit(Posit32).3._State_13\;
@@ -55660,11 +54757,11 @@ begin
                         -- False branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).3._State_12\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional36 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- 	conditional35 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional36 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
+                        -- conditional35 = (Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x) >> -(int)(num - (long)(mostSignificantOnePosition) + 1L));
                         -- 
                         -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::FractionWithHiddenBit()
                         \Int32 Posit32::op_Explicit(Posit32).3.Posit32::FractionWithHiddenBit().this.parameter.Out.0\ <= \Int32 Posit32::op_Explicit(Posit32).3.x\;
@@ -55689,7 +54786,7 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).3._State_20\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.13\ := shift_right(\Int32 Posit32::op_Explicit(Posit32).3.return.5\, to_integer(unsigned(SmartResize(\Int32 Posit32::op_Explicit(Posit32).3.unaryOperationResult.0\, 5) and "11111")));
-                        \Int32 Posit32::op_Explicit(Posit32).3.conditional36\ := (\Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.13\);
+                        \Int32 Posit32::op_Explicit(Posit32).3.conditional35\ := (\Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.13\);
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).3._State_12\.
                         if (\Int32 Posit32::op_Explicit(Posit32).3._State\ = \Int32 Posit32::op_Explicit(Posit32).3._State_20\) then 
                             \Int32 Posit32::op_Explicit(Posit32).3._State\ := \Int32 Posit32::op_Explicit(Posit32).3._State_13\;
@@ -55716,9 +54813,9 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).3._State_22\ => 
                         -- State after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).3._State_21\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return (int)(conditional37);
+                        -- return (int)(conditional36);
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).3.return\ <= SmartResize((\Int32 Posit32::op_Explicit(Posit32).3.conditional37\), 32);
+                        \Int32 Posit32::op_Explicit(Posit32).3.return\ <= SmartResize((\Int32 Posit32::op_Explicit(Posit32).3.conditional36\), 32);
                         \Int32 Posit32::op_Explicit(Posit32).3._State\ := \Int32 Posit32::op_Explicit(Posit32).3._State_1\;
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).3._State_7\.
                         if (\Int32 Posit32::op_Explicit(Posit32).3._State\ = \Int32 Posit32::op_Explicit(Posit32).3._State_22\) then 
@@ -55729,13 +54826,13 @@ begin
                         -- True branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).3._State_21\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional37 = num2;
+                        -- 	conditional36 = num2;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional37 = num2;
+                        -- conditional36 = num2;
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).3.conditional37\ := signed(SmartResize(\Int32 Posit32::op_Explicit(Posit32).3.num2\, 64));
+                        \Int32 Posit32::op_Explicit(Posit32).3.conditional36\ := signed(SmartResize(\Int32 Posit32::op_Explicit(Posit32).3.num2\, 64));
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).3._State_21\.
                         if (\Int32 Posit32::op_Explicit(Posit32).3._State\ = \Int32 Posit32::op_Explicit(Posit32).3._State_23\) then 
                             \Int32 Posit32::op_Explicit(Posit32).3._State\ := \Int32 Posit32::op_Explicit(Posit32).3._State_22\;
@@ -55745,14 +54842,14 @@ begin
                         -- False branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).3._State_21\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional37 = (0L - (long)num2);
+                        -- 	conditional36 = (0L - (long)num2);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional37 = (0L - (long)num2);
+                        -- conditional36 = (0L - (long)num2);
                         -- 
                         \Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.14\ := to_signed(0, 64) - signed(SmartResize(\Int32 Posit32::op_Explicit(Posit32).3.num2\, 64));
-                        \Int32 Posit32::op_Explicit(Posit32).3.conditional37\ := (\Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.14\);
+                        \Int32 Posit32::op_Explicit(Posit32).3.conditional36\ := (\Int32 Posit32::op_Explicit(Posit32).3.binaryOperationResult.14\);
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).3._State_21\.
                         if (\Int32 Posit32::op_Explicit(Posit32).3._State\ = \Int32 Posit32::op_Explicit(Posit32).3._State_24\) then 
                             \Int32 Posit32::op_Explicit(Posit32).3._State\ := \Int32 Posit32::op_Explicit(Posit32).3._State_22\;
@@ -55779,22 +54876,22 @@ begin
                     when \Int32 Posit32::op_Explicit(Posit32).3._State_26\ => 
                         -- State after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).3._State_25\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return conditional38;
+                        -- return conditional37;
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).3.return\ <= \Int32 Posit32::op_Explicit(Posit32).3.conditional38\;
+                        \Int32 Posit32::op_Explicit(Posit32).3.return\ <= \Int32 Posit32::op_Explicit(Posit32).3.conditional37\;
                         \Int32 Posit32::op_Explicit(Posit32).3._State\ := \Int32 Posit32::op_Explicit(Posit32).3._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Int32 Posit32::op_Explicit(Posit32).3._State_27\ => 
                         -- True branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).3._State_25\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional38 = 2147483647;
+                        -- 	conditional37 = 2147483647;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional38 = 2147483647;
+                        -- conditional37 = 2147483647;
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).3.conditional38\ := to_signed(2147483647, 32);
+                        \Int32 Posit32::op_Explicit(Posit32).3.conditional37\ := to_signed(2147483647, 32);
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).3._State_25\.
                         if (\Int32 Posit32::op_Explicit(Posit32).3._State\ = \Int32 Posit32::op_Explicit(Posit32).3._State_27\) then 
                             \Int32 Posit32::op_Explicit(Posit32).3._State\ := \Int32 Posit32::op_Explicit(Posit32).3._State_26\;
@@ -55804,13 +54901,13 @@ begin
                         -- False branch of the if-else started in state \Int32 Posit32::op_Explicit(Posit32).3._State_25\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional38 = -2147483648;
+                        -- 	conditional37 = -2147483648;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional38 = -2147483648;
+                        -- conditional37 = -2147483648;
                         -- 
-                        \Int32 Posit32::op_Explicit(Posit32).3.conditional38\ := to_signed(-2147483648, 32);
+                        \Int32 Posit32::op_Explicit(Posit32).3.conditional37\ := to_signed(-2147483648, 32);
                         -- Going to the state after the if-else which was started in state \Int32 Posit32::op_Explicit(Posit32).3._State_25\.
                         if (\Int32 Posit32::op_Explicit(Posit32).3._State\ = \Int32 Posit32::op_Explicit(Posit32).3._State_28\) then 
                             \Int32 Posit32::op_Explicit(Posit32).3._State\ := \Int32 Posit32::op_Explicit(Posit32).3._State_26\;
@@ -55821,6 +54918,721 @@ begin
         end if;
     end process;
     -- System.Int32 Lombiq.Arithmetics.Posit32::op_Explicit(Lombiq.Arithmetics.Posit32).3 state machine end
+
+
+    -- System.Int32 Lombiq.Arithmetics.Posit32::CompareTo(Lombiq.Arithmetics.Posit32).0 state machine start
+    \Posit32::CompareTo(Posit32).0._StateMachine\: process (\Clock\) 
+        Variable \Posit32::CompareTo(Posit32).0._State\: \Posit32::CompareTo(Posit32).0._States\ := \Posit32::CompareTo(Posit32).0._State_0\;
+        Variable \Posit32::CompareTo(Posit32).0.this\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Posit32::CompareTo(Posit32).0.obj\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Posit32::CompareTo(Posit32).0.positBits\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::CompareTo(Posit32).0.positBits2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::CompareTo(Posit32).0.binaryOperationResult.0\: boolean := false;
+        Variable \Posit32::CompareTo(Posit32).0.binaryOperationResult.1\: boolean := false;
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \Posit32::CompareTo(Posit32).0._Finished\ <= false;
+                \Posit32::CompareTo(Posit32).0.return\ <= to_signed(0, 32);
+                \Posit32::CompareTo(Posit32).0._State\ := \Posit32::CompareTo(Posit32).0._State_0\;
+                \Posit32::CompareTo(Posit32).0.positBits\ := to_signed(0, 32);
+                \Posit32::CompareTo(Posit32).0.positBits2\ := to_signed(0, 32);
+                \Posit32::CompareTo(Posit32).0.binaryOperationResult.0\ := false;
+                \Posit32::CompareTo(Posit32).0.binaryOperationResult.1\ := false;
+            else 
+                case \Posit32::CompareTo(Posit32).0._State\ is 
+                    when \Posit32::CompareTo(Posit32).0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\Posit32::CompareTo(Posit32).0._Started\ = true) then 
+                            \Posit32::CompareTo(Posit32).0._State\ := \Posit32::CompareTo(Posit32).0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::CompareTo(Posit32).0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\Posit32::CompareTo(Posit32).0._Started\ = true) then 
+                            \Posit32::CompareTo(Posit32).0._Finished\ <= true;
+                        else 
+                            \Posit32::CompareTo(Posit32).0._Finished\ <= false;
+                            \Posit32::CompareTo(Posit32).0._State\ := \Posit32::CompareTo(Posit32).0._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::CompareTo(Posit32).0._State_2\ => 
+                        \Posit32::CompareTo(Posit32).0.this\ := \Posit32::CompareTo(Posit32).0.this.parameter.In\;
+                        \Posit32::CompareTo(Posit32).0.obj\ := \Posit32::CompareTo(Posit32).0.obj.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- int positBits;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- positBits = (int)@this.PositBits;
+                        -- 
+                        \Posit32::CompareTo(Posit32).0.positBits\ := signed(\Posit32::CompareTo(Posit32).0.this\.\PositBits\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- int positBits2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- positBits2 = (int)obj.PositBits;
+                        -- 
+                        \Posit32::CompareTo(Posit32).0.positBits2\ := signed(\Posit32::CompareTo(Posit32).0.obj\.\PositBits\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (positBits < positBits2) {
+                        -- 	return -1;
+                        -- }
+                        -- 
+                        \Posit32::CompareTo(Posit32).0.binaryOperationResult.0\ := \Posit32::CompareTo(Posit32).0.positBits\ < \Posit32::CompareTo(Posit32).0.positBits2\;
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32::CompareTo(Posit32).0._State_4\ and ends in state \Posit32::CompareTo(Posit32).0._State_4\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::CompareTo(Posit32).0._State_3\.
+
+                        if (\Posit32::CompareTo(Posit32).0.binaryOperationResult.0\) then 
+                            \Posit32::CompareTo(Posit32).0._State\ := \Posit32::CompareTo(Posit32).0._State_4\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \Posit32::CompareTo(Posit32).0._State\ := \Posit32::CompareTo(Posit32).0._State_3\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.2753
+                    when \Posit32::CompareTo(Posit32).0._State_3\ => 
+                        -- State after the if-else which was started in state \Posit32::CompareTo(Posit32).0._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (positBits > positBits2) {
+                        -- 	return 1;
+                        -- }
+                        -- 
+                        \Posit32::CompareTo(Posit32).0.binaryOperationResult.1\ := \Posit32::CompareTo(Posit32).0.positBits\ > \Posit32::CompareTo(Posit32).0.positBits2\;
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32::CompareTo(Posit32).0._State_6\ and ends in state \Posit32::CompareTo(Posit32).0._State_6\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::CompareTo(Posit32).0._State_5\.
+
+                        if (\Posit32::CompareTo(Posit32).0.binaryOperationResult.1\) then 
+                            \Posit32::CompareTo(Posit32).0._State\ := \Posit32::CompareTo(Posit32).0._State_6\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \Posit32::CompareTo(Posit32).0._State\ := \Posit32::CompareTo(Posit32).0._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.2753
+                    when \Posit32::CompareTo(Posit32).0._State_4\ => 
+                        -- True branch of the if-else started in state \Posit32::CompareTo(Posit32).0._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	return -1;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- return -1;
+                        -- 
+                        \Posit32::CompareTo(Posit32).0.return\ <= to_signed(-1, 32);
+                        \Posit32::CompareTo(Posit32).0._State\ := \Posit32::CompareTo(Posit32).0._State_1\;
+                        -- Going to the state after the if-else which was started in state \Posit32::CompareTo(Posit32).0._State_2\.
+                        if (\Posit32::CompareTo(Posit32).0._State\ = \Posit32::CompareTo(Posit32).0._State_4\) then 
+                            \Posit32::CompareTo(Posit32).0._State\ := \Posit32::CompareTo(Posit32).0._State_3\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::CompareTo(Posit32).0._State_5\ => 
+                        -- State after the if-else which was started in state \Posit32::CompareTo(Posit32).0._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return 0;
+                        -- 
+                        \Posit32::CompareTo(Posit32).0.return\ <= to_signed(0, 32);
+                        \Posit32::CompareTo(Posit32).0._State\ := \Posit32::CompareTo(Posit32).0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::CompareTo(Posit32).0._State_6\ => 
+                        -- True branch of the if-else started in state \Posit32::CompareTo(Posit32).0._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	return 1;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- return 1;
+                        -- 
+                        \Posit32::CompareTo(Posit32).0.return\ <= to_signed(1, 32);
+                        \Posit32::CompareTo(Posit32).0._State\ := \Posit32::CompareTo(Posit32).0._State_1\;
+                        -- Going to the state after the if-else which was started in state \Posit32::CompareTo(Posit32).0._State_3\.
+                        if (\Posit32::CompareTo(Posit32).0._State\ = \Posit32::CompareTo(Posit32).0._State_6\) then 
+                            \Posit32::CompareTo(Posit32).0._State\ := \Posit32::CompareTo(Posit32).0._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Int32 Lombiq.Arithmetics.Posit32::CompareTo(Lombiq.Arithmetics.Posit32).0 state machine end
+
+
+    -- System.Int32 Lombiq.Arithmetics.Posit32::CompareTo(Lombiq.Arithmetics.Posit32).1 state machine start
+    \Posit32::CompareTo(Posit32).1._StateMachine\: process (\Clock\) 
+        Variable \Posit32::CompareTo(Posit32).1._State\: \Posit32::CompareTo(Posit32).1._States\ := \Posit32::CompareTo(Posit32).1._State_0\;
+        Variable \Posit32::CompareTo(Posit32).1.this\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Posit32::CompareTo(Posit32).1.obj\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Posit32::CompareTo(Posit32).1.positBits\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::CompareTo(Posit32).1.positBits2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::CompareTo(Posit32).1.binaryOperationResult.0\: boolean := false;
+        Variable \Posit32::CompareTo(Posit32).1.binaryOperationResult.1\: boolean := false;
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \Posit32::CompareTo(Posit32).1._Finished\ <= false;
+                \Posit32::CompareTo(Posit32).1.return\ <= to_signed(0, 32);
+                \Posit32::CompareTo(Posit32).1._State\ := \Posit32::CompareTo(Posit32).1._State_0\;
+                \Posit32::CompareTo(Posit32).1.positBits\ := to_signed(0, 32);
+                \Posit32::CompareTo(Posit32).1.positBits2\ := to_signed(0, 32);
+                \Posit32::CompareTo(Posit32).1.binaryOperationResult.0\ := false;
+                \Posit32::CompareTo(Posit32).1.binaryOperationResult.1\ := false;
+            else 
+                case \Posit32::CompareTo(Posit32).1._State\ is 
+                    when \Posit32::CompareTo(Posit32).1._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\Posit32::CompareTo(Posit32).1._Started\ = true) then 
+                            \Posit32::CompareTo(Posit32).1._State\ := \Posit32::CompareTo(Posit32).1._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::CompareTo(Posit32).1._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\Posit32::CompareTo(Posit32).1._Started\ = true) then 
+                            \Posit32::CompareTo(Posit32).1._Finished\ <= true;
+                        else 
+                            \Posit32::CompareTo(Posit32).1._Finished\ <= false;
+                            \Posit32::CompareTo(Posit32).1._State\ := \Posit32::CompareTo(Posit32).1._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::CompareTo(Posit32).1._State_2\ => 
+                        \Posit32::CompareTo(Posit32).1.this\ := \Posit32::CompareTo(Posit32).1.this.parameter.In\;
+                        \Posit32::CompareTo(Posit32).1.obj\ := \Posit32::CompareTo(Posit32).1.obj.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- int positBits;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- positBits = (int)@this.PositBits;
+                        -- 
+                        \Posit32::CompareTo(Posit32).1.positBits\ := signed(\Posit32::CompareTo(Posit32).1.this\.\PositBits\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- int positBits2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- positBits2 = (int)obj.PositBits;
+                        -- 
+                        \Posit32::CompareTo(Posit32).1.positBits2\ := signed(\Posit32::CompareTo(Posit32).1.obj\.\PositBits\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (positBits < positBits2) {
+                        -- 	return -1;
+                        -- }
+                        -- 
+                        \Posit32::CompareTo(Posit32).1.binaryOperationResult.0\ := \Posit32::CompareTo(Posit32).1.positBits\ < \Posit32::CompareTo(Posit32).1.positBits2\;
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32::CompareTo(Posit32).1._State_4\ and ends in state \Posit32::CompareTo(Posit32).1._State_4\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::CompareTo(Posit32).1._State_3\.
+
+                        if (\Posit32::CompareTo(Posit32).1.binaryOperationResult.0\) then 
+                            \Posit32::CompareTo(Posit32).1._State\ := \Posit32::CompareTo(Posit32).1._State_4\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \Posit32::CompareTo(Posit32).1._State\ := \Posit32::CompareTo(Posit32).1._State_3\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.2753
+                    when \Posit32::CompareTo(Posit32).1._State_3\ => 
+                        -- State after the if-else which was started in state \Posit32::CompareTo(Posit32).1._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (positBits > positBits2) {
+                        -- 	return 1;
+                        -- }
+                        -- 
+                        \Posit32::CompareTo(Posit32).1.binaryOperationResult.1\ := \Posit32::CompareTo(Posit32).1.positBits\ > \Posit32::CompareTo(Posit32).1.positBits2\;
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32::CompareTo(Posit32).1._State_6\ and ends in state \Posit32::CompareTo(Posit32).1._State_6\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::CompareTo(Posit32).1._State_5\.
+
+                        if (\Posit32::CompareTo(Posit32).1.binaryOperationResult.1\) then 
+                            \Posit32::CompareTo(Posit32).1._State\ := \Posit32::CompareTo(Posit32).1._State_6\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \Posit32::CompareTo(Posit32).1._State\ := \Posit32::CompareTo(Posit32).1._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.2753
+                    when \Posit32::CompareTo(Posit32).1._State_4\ => 
+                        -- True branch of the if-else started in state \Posit32::CompareTo(Posit32).1._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	return -1;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- return -1;
+                        -- 
+                        \Posit32::CompareTo(Posit32).1.return\ <= to_signed(-1, 32);
+                        \Posit32::CompareTo(Posit32).1._State\ := \Posit32::CompareTo(Posit32).1._State_1\;
+                        -- Going to the state after the if-else which was started in state \Posit32::CompareTo(Posit32).1._State_2\.
+                        if (\Posit32::CompareTo(Posit32).1._State\ = \Posit32::CompareTo(Posit32).1._State_4\) then 
+                            \Posit32::CompareTo(Posit32).1._State\ := \Posit32::CompareTo(Posit32).1._State_3\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::CompareTo(Posit32).1._State_5\ => 
+                        -- State after the if-else which was started in state \Posit32::CompareTo(Posit32).1._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return 0;
+                        -- 
+                        \Posit32::CompareTo(Posit32).1.return\ <= to_signed(0, 32);
+                        \Posit32::CompareTo(Posit32).1._State\ := \Posit32::CompareTo(Posit32).1._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::CompareTo(Posit32).1._State_6\ => 
+                        -- True branch of the if-else started in state \Posit32::CompareTo(Posit32).1._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	return 1;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- return 1;
+                        -- 
+                        \Posit32::CompareTo(Posit32).1.return\ <= to_signed(1, 32);
+                        \Posit32::CompareTo(Posit32).1._State\ := \Posit32::CompareTo(Posit32).1._State_1\;
+                        -- Going to the state after the if-else which was started in state \Posit32::CompareTo(Posit32).1._State_3\.
+                        if (\Posit32::CompareTo(Posit32).1._State\ = \Posit32::CompareTo(Posit32).1._State_6\) then 
+                            \Posit32::CompareTo(Posit32).1._State\ := \Posit32::CompareTo(Posit32).1._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Int32 Lombiq.Arithmetics.Posit32::CompareTo(Lombiq.Arithmetics.Posit32).1 state machine end
+
+
+    -- System.Int32 Lombiq.Arithmetics.Posit32::CompareTo(Lombiq.Arithmetics.Posit32).2 state machine start
+    \Posit32::CompareTo(Posit32).2._StateMachine\: process (\Clock\) 
+        Variable \Posit32::CompareTo(Posit32).2._State\: \Posit32::CompareTo(Posit32).2._States\ := \Posit32::CompareTo(Posit32).2._State_0\;
+        Variable \Posit32::CompareTo(Posit32).2.this\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Posit32::CompareTo(Posit32).2.obj\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Posit32::CompareTo(Posit32).2.positBits\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::CompareTo(Posit32).2.positBits2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::CompareTo(Posit32).2.binaryOperationResult.0\: boolean := false;
+        Variable \Posit32::CompareTo(Posit32).2.binaryOperationResult.1\: boolean := false;
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \Posit32::CompareTo(Posit32).2._Finished\ <= false;
+                \Posit32::CompareTo(Posit32).2.return\ <= to_signed(0, 32);
+                \Posit32::CompareTo(Posit32).2._State\ := \Posit32::CompareTo(Posit32).2._State_0\;
+                \Posit32::CompareTo(Posit32).2.positBits\ := to_signed(0, 32);
+                \Posit32::CompareTo(Posit32).2.positBits2\ := to_signed(0, 32);
+                \Posit32::CompareTo(Posit32).2.binaryOperationResult.0\ := false;
+                \Posit32::CompareTo(Posit32).2.binaryOperationResult.1\ := false;
+            else 
+                case \Posit32::CompareTo(Posit32).2._State\ is 
+                    when \Posit32::CompareTo(Posit32).2._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\Posit32::CompareTo(Posit32).2._Started\ = true) then 
+                            \Posit32::CompareTo(Posit32).2._State\ := \Posit32::CompareTo(Posit32).2._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::CompareTo(Posit32).2._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\Posit32::CompareTo(Posit32).2._Started\ = true) then 
+                            \Posit32::CompareTo(Posit32).2._Finished\ <= true;
+                        else 
+                            \Posit32::CompareTo(Posit32).2._Finished\ <= false;
+                            \Posit32::CompareTo(Posit32).2._State\ := \Posit32::CompareTo(Posit32).2._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::CompareTo(Posit32).2._State_2\ => 
+                        \Posit32::CompareTo(Posit32).2.this\ := \Posit32::CompareTo(Posit32).2.this.parameter.In\;
+                        \Posit32::CompareTo(Posit32).2.obj\ := \Posit32::CompareTo(Posit32).2.obj.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- int positBits;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- positBits = (int)@this.PositBits;
+                        -- 
+                        \Posit32::CompareTo(Posit32).2.positBits\ := signed(\Posit32::CompareTo(Posit32).2.this\.\PositBits\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- int positBits2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- positBits2 = (int)obj.PositBits;
+                        -- 
+                        \Posit32::CompareTo(Posit32).2.positBits2\ := signed(\Posit32::CompareTo(Posit32).2.obj\.\PositBits\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (positBits < positBits2) {
+                        -- 	return -1;
+                        -- }
+                        -- 
+                        \Posit32::CompareTo(Posit32).2.binaryOperationResult.0\ := \Posit32::CompareTo(Posit32).2.positBits\ < \Posit32::CompareTo(Posit32).2.positBits2\;
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32::CompareTo(Posit32).2._State_4\ and ends in state \Posit32::CompareTo(Posit32).2._State_4\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::CompareTo(Posit32).2._State_3\.
+
+                        if (\Posit32::CompareTo(Posit32).2.binaryOperationResult.0\) then 
+                            \Posit32::CompareTo(Posit32).2._State\ := \Posit32::CompareTo(Posit32).2._State_4\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \Posit32::CompareTo(Posit32).2._State\ := \Posit32::CompareTo(Posit32).2._State_3\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.2753
+                    when \Posit32::CompareTo(Posit32).2._State_3\ => 
+                        -- State after the if-else which was started in state \Posit32::CompareTo(Posit32).2._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (positBits > positBits2) {
+                        -- 	return 1;
+                        -- }
+                        -- 
+                        \Posit32::CompareTo(Posit32).2.binaryOperationResult.1\ := \Posit32::CompareTo(Posit32).2.positBits\ > \Posit32::CompareTo(Posit32).2.positBits2\;
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32::CompareTo(Posit32).2._State_6\ and ends in state \Posit32::CompareTo(Posit32).2._State_6\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::CompareTo(Posit32).2._State_5\.
+
+                        if (\Posit32::CompareTo(Posit32).2.binaryOperationResult.1\) then 
+                            \Posit32::CompareTo(Posit32).2._State\ := \Posit32::CompareTo(Posit32).2._State_6\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \Posit32::CompareTo(Posit32).2._State\ := \Posit32::CompareTo(Posit32).2._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.2753
+                    when \Posit32::CompareTo(Posit32).2._State_4\ => 
+                        -- True branch of the if-else started in state \Posit32::CompareTo(Posit32).2._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	return -1;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- return -1;
+                        -- 
+                        \Posit32::CompareTo(Posit32).2.return\ <= to_signed(-1, 32);
+                        \Posit32::CompareTo(Posit32).2._State\ := \Posit32::CompareTo(Posit32).2._State_1\;
+                        -- Going to the state after the if-else which was started in state \Posit32::CompareTo(Posit32).2._State_2\.
+                        if (\Posit32::CompareTo(Posit32).2._State\ = \Posit32::CompareTo(Posit32).2._State_4\) then 
+                            \Posit32::CompareTo(Posit32).2._State\ := \Posit32::CompareTo(Posit32).2._State_3\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::CompareTo(Posit32).2._State_5\ => 
+                        -- State after the if-else which was started in state \Posit32::CompareTo(Posit32).2._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return 0;
+                        -- 
+                        \Posit32::CompareTo(Posit32).2.return\ <= to_signed(0, 32);
+                        \Posit32::CompareTo(Posit32).2._State\ := \Posit32::CompareTo(Posit32).2._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::CompareTo(Posit32).2._State_6\ => 
+                        -- True branch of the if-else started in state \Posit32::CompareTo(Posit32).2._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	return 1;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- return 1;
+                        -- 
+                        \Posit32::CompareTo(Posit32).2.return\ <= to_signed(1, 32);
+                        \Posit32::CompareTo(Posit32).2._State\ := \Posit32::CompareTo(Posit32).2._State_1\;
+                        -- Going to the state after the if-else which was started in state \Posit32::CompareTo(Posit32).2._State_3\.
+                        if (\Posit32::CompareTo(Posit32).2._State\ = \Posit32::CompareTo(Posit32).2._State_6\) then 
+                            \Posit32::CompareTo(Posit32).2._State\ := \Posit32::CompareTo(Posit32).2._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Int32 Lombiq.Arithmetics.Posit32::CompareTo(Lombiq.Arithmetics.Posit32).2 state machine end
+
+
+    -- System.Int32 Lombiq.Arithmetics.Posit32::CompareTo(Lombiq.Arithmetics.Posit32).3 state machine start
+    \Posit32::CompareTo(Posit32).3._StateMachine\: process (\Clock\) 
+        Variable \Posit32::CompareTo(Posit32).3._State\: \Posit32::CompareTo(Posit32).3._States\ := \Posit32::CompareTo(Posit32).3._State_0\;
+        Variable \Posit32::CompareTo(Posit32).3.this\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Posit32::CompareTo(Posit32).3.obj\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Posit32::CompareTo(Posit32).3.positBits\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::CompareTo(Posit32).3.positBits2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::CompareTo(Posit32).3.binaryOperationResult.0\: boolean := false;
+        Variable \Posit32::CompareTo(Posit32).3.binaryOperationResult.1\: boolean := false;
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \Posit32::CompareTo(Posit32).3._Finished\ <= false;
+                \Posit32::CompareTo(Posit32).3.return\ <= to_signed(0, 32);
+                \Posit32::CompareTo(Posit32).3._State\ := \Posit32::CompareTo(Posit32).3._State_0\;
+                \Posit32::CompareTo(Posit32).3.positBits\ := to_signed(0, 32);
+                \Posit32::CompareTo(Posit32).3.positBits2\ := to_signed(0, 32);
+                \Posit32::CompareTo(Posit32).3.binaryOperationResult.0\ := false;
+                \Posit32::CompareTo(Posit32).3.binaryOperationResult.1\ := false;
+            else 
+                case \Posit32::CompareTo(Posit32).3._State\ is 
+                    when \Posit32::CompareTo(Posit32).3._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\Posit32::CompareTo(Posit32).3._Started\ = true) then 
+                            \Posit32::CompareTo(Posit32).3._State\ := \Posit32::CompareTo(Posit32).3._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::CompareTo(Posit32).3._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\Posit32::CompareTo(Posit32).3._Started\ = true) then 
+                            \Posit32::CompareTo(Posit32).3._Finished\ <= true;
+                        else 
+                            \Posit32::CompareTo(Posit32).3._Finished\ <= false;
+                            \Posit32::CompareTo(Posit32).3._State\ := \Posit32::CompareTo(Posit32).3._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::CompareTo(Posit32).3._State_2\ => 
+                        \Posit32::CompareTo(Posit32).3.this\ := \Posit32::CompareTo(Posit32).3.this.parameter.In\;
+                        \Posit32::CompareTo(Posit32).3.obj\ := \Posit32::CompareTo(Posit32).3.obj.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- int positBits;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- positBits = (int)@this.PositBits;
+                        -- 
+                        \Posit32::CompareTo(Posit32).3.positBits\ := signed(\Posit32::CompareTo(Posit32).3.this\.\PositBits\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- int positBits2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- positBits2 = (int)obj.PositBits;
+                        -- 
+                        \Posit32::CompareTo(Posit32).3.positBits2\ := signed(\Posit32::CompareTo(Posit32).3.obj\.\PositBits\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (positBits < positBits2) {
+                        -- 	return -1;
+                        -- }
+                        -- 
+                        \Posit32::CompareTo(Posit32).3.binaryOperationResult.0\ := \Posit32::CompareTo(Posit32).3.positBits\ < \Posit32::CompareTo(Posit32).3.positBits2\;
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32::CompareTo(Posit32).3._State_4\ and ends in state \Posit32::CompareTo(Posit32).3._State_4\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::CompareTo(Posit32).3._State_3\.
+
+                        if (\Posit32::CompareTo(Posit32).3.binaryOperationResult.0\) then 
+                            \Posit32::CompareTo(Posit32).3._State\ := \Posit32::CompareTo(Posit32).3._State_4\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \Posit32::CompareTo(Posit32).3._State\ := \Posit32::CompareTo(Posit32).3._State_3\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.2753
+                    when \Posit32::CompareTo(Posit32).3._State_3\ => 
+                        -- State after the if-else which was started in state \Posit32::CompareTo(Posit32).3._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (positBits > positBits2) {
+                        -- 	return 1;
+                        -- }
+                        -- 
+                        \Posit32::CompareTo(Posit32).3.binaryOperationResult.1\ := \Posit32::CompareTo(Posit32).3.positBits\ > \Posit32::CompareTo(Posit32).3.positBits2\;
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32::CompareTo(Posit32).3._State_6\ and ends in state \Posit32::CompareTo(Posit32).3._State_6\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::CompareTo(Posit32).3._State_5\.
+
+                        if (\Posit32::CompareTo(Posit32).3.binaryOperationResult.1\) then 
+                            \Posit32::CompareTo(Posit32).3._State\ := \Posit32::CompareTo(Posit32).3._State_6\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \Posit32::CompareTo(Posit32).3._State\ := \Posit32::CompareTo(Posit32).3._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.2753
+                    when \Posit32::CompareTo(Posit32).3._State_4\ => 
+                        -- True branch of the if-else started in state \Posit32::CompareTo(Posit32).3._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	return -1;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- return -1;
+                        -- 
+                        \Posit32::CompareTo(Posit32).3.return\ <= to_signed(-1, 32);
+                        \Posit32::CompareTo(Posit32).3._State\ := \Posit32::CompareTo(Posit32).3._State_1\;
+                        -- Going to the state after the if-else which was started in state \Posit32::CompareTo(Posit32).3._State_2\.
+                        if (\Posit32::CompareTo(Posit32).3._State\ = \Posit32::CompareTo(Posit32).3._State_4\) then 
+                            \Posit32::CompareTo(Posit32).3._State\ := \Posit32::CompareTo(Posit32).3._State_3\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::CompareTo(Posit32).3._State_5\ => 
+                        -- State after the if-else which was started in state \Posit32::CompareTo(Posit32).3._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return 0;
+                        -- 
+                        \Posit32::CompareTo(Posit32).3.return\ <= to_signed(0, 32);
+                        \Posit32::CompareTo(Posit32).3._State\ := \Posit32::CompareTo(Posit32).3._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::CompareTo(Posit32).3._State_6\ => 
+                        -- True branch of the if-else started in state \Posit32::CompareTo(Posit32).3._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	return 1;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- return 1;
+                        -- 
+                        \Posit32::CompareTo(Posit32).3.return\ <= to_signed(1, 32);
+                        \Posit32::CompareTo(Posit32).3._State\ := \Posit32::CompareTo(Posit32).3._State_1\;
+                        -- Going to the state after the if-else which was started in state \Posit32::CompareTo(Posit32).3._State_3\.
+                        if (\Posit32::CompareTo(Posit32).3._State\ = \Posit32::CompareTo(Posit32).3._State_6\) then 
+                            \Posit32::CompareTo(Posit32).3._State\ := \Posit32::CompareTo(Posit32).3._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Int32 Lombiq.Arithmetics.Posit32::CompareTo(Lombiq.Arithmetics.Posit32).3 state machine end
+
+
+    -- System.Int32 Lombiq.Arithmetics.Posit32::CompareTo(Lombiq.Arithmetics.Posit32).4 state machine start
+    \Posit32::CompareTo(Posit32).4._StateMachine\: process (\Clock\) 
+        Variable \Posit32::CompareTo(Posit32).4._State\: \Posit32::CompareTo(Posit32).4._States\ := \Posit32::CompareTo(Posit32).4._State_0\;
+        Variable \Posit32::CompareTo(Posit32).4.this\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Posit32::CompareTo(Posit32).4.obj\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Posit32::CompareTo(Posit32).4.positBits\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::CompareTo(Posit32).4.positBits2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::CompareTo(Posit32).4.binaryOperationResult.0\: boolean := false;
+        Variable \Posit32::CompareTo(Posit32).4.binaryOperationResult.1\: boolean := false;
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \Posit32::CompareTo(Posit32).4._Finished\ <= false;
+                \Posit32::CompareTo(Posit32).4.return\ <= to_signed(0, 32);
+                \Posit32::CompareTo(Posit32).4._State\ := \Posit32::CompareTo(Posit32).4._State_0\;
+                \Posit32::CompareTo(Posit32).4.positBits\ := to_signed(0, 32);
+                \Posit32::CompareTo(Posit32).4.positBits2\ := to_signed(0, 32);
+                \Posit32::CompareTo(Posit32).4.binaryOperationResult.0\ := false;
+                \Posit32::CompareTo(Posit32).4.binaryOperationResult.1\ := false;
+            else 
+                case \Posit32::CompareTo(Posit32).4._State\ is 
+                    when \Posit32::CompareTo(Posit32).4._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\Posit32::CompareTo(Posit32).4._Started\ = true) then 
+                            \Posit32::CompareTo(Posit32).4._State\ := \Posit32::CompareTo(Posit32).4._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::CompareTo(Posit32).4._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\Posit32::CompareTo(Posit32).4._Started\ = true) then 
+                            \Posit32::CompareTo(Posit32).4._Finished\ <= true;
+                        else 
+                            \Posit32::CompareTo(Posit32).4._Finished\ <= false;
+                            \Posit32::CompareTo(Posit32).4._State\ := \Posit32::CompareTo(Posit32).4._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::CompareTo(Posit32).4._State_2\ => 
+                        \Posit32::CompareTo(Posit32).4.this\ := \Posit32::CompareTo(Posit32).4.this.parameter.In\;
+                        \Posit32::CompareTo(Posit32).4.obj\ := \Posit32::CompareTo(Posit32).4.obj.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- int positBits;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- positBits = (int)@this.PositBits;
+                        -- 
+                        \Posit32::CompareTo(Posit32).4.positBits\ := signed(\Posit32::CompareTo(Posit32).4.this\.\PositBits\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- int positBits2;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- positBits2 = (int)obj.PositBits;
+                        -- 
+                        \Posit32::CompareTo(Posit32).4.positBits2\ := signed(\Posit32::CompareTo(Posit32).4.obj\.\PositBits\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (positBits < positBits2) {
+                        -- 	return -1;
+                        -- }
+                        -- 
+                        \Posit32::CompareTo(Posit32).4.binaryOperationResult.0\ := \Posit32::CompareTo(Posit32).4.positBits\ < \Posit32::CompareTo(Posit32).4.positBits2\;
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32::CompareTo(Posit32).4._State_4\ and ends in state \Posit32::CompareTo(Posit32).4._State_4\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::CompareTo(Posit32).4._State_3\.
+
+                        if (\Posit32::CompareTo(Posit32).4.binaryOperationResult.0\) then 
+                            \Posit32::CompareTo(Posit32).4._State\ := \Posit32::CompareTo(Posit32).4._State_4\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \Posit32::CompareTo(Posit32).4._State\ := \Posit32::CompareTo(Posit32).4._State_3\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.2753
+                    when \Posit32::CompareTo(Posit32).4._State_3\ => 
+                        -- State after the if-else which was started in state \Posit32::CompareTo(Posit32).4._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (positBits > positBits2) {
+                        -- 	return 1;
+                        -- }
+                        -- 
+                        \Posit32::CompareTo(Posit32).4.binaryOperationResult.1\ := \Posit32::CompareTo(Posit32).4.positBits\ > \Posit32::CompareTo(Posit32).4.positBits2\;
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32::CompareTo(Posit32).4._State_6\ and ends in state \Posit32::CompareTo(Posit32).4._State_6\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::CompareTo(Posit32).4._State_5\.
+
+                        if (\Posit32::CompareTo(Posit32).4.binaryOperationResult.1\) then 
+                            \Posit32::CompareTo(Posit32).4._State\ := \Posit32::CompareTo(Posit32).4._State_6\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \Posit32::CompareTo(Posit32).4._State\ := \Posit32::CompareTo(Posit32).4._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.2753
+                    when \Posit32::CompareTo(Posit32).4._State_4\ => 
+                        -- True branch of the if-else started in state \Posit32::CompareTo(Posit32).4._State_2\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	return -1;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- return -1;
+                        -- 
+                        \Posit32::CompareTo(Posit32).4.return\ <= to_signed(-1, 32);
+                        \Posit32::CompareTo(Posit32).4._State\ := \Posit32::CompareTo(Posit32).4._State_1\;
+                        -- Going to the state after the if-else which was started in state \Posit32::CompareTo(Posit32).4._State_2\.
+                        if (\Posit32::CompareTo(Posit32).4._State\ = \Posit32::CompareTo(Posit32).4._State_4\) then 
+                            \Posit32::CompareTo(Posit32).4._State\ := \Posit32::CompareTo(Posit32).4._State_3\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::CompareTo(Posit32).4._State_5\ => 
+                        -- State after the if-else which was started in state \Posit32::CompareTo(Posit32).4._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return 0;
+                        -- 
+                        \Posit32::CompareTo(Posit32).4.return\ <= to_signed(0, 32);
+                        \Posit32::CompareTo(Posit32).4._State\ := \Posit32::CompareTo(Posit32).4._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::CompareTo(Posit32).4._State_6\ => 
+                        -- True branch of the if-else started in state \Posit32::CompareTo(Posit32).4._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	return 1;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- return 1;
+                        -- 
+                        \Posit32::CompareTo(Posit32).4.return\ <= to_signed(1, 32);
+                        \Posit32::CompareTo(Posit32).4._State\ := \Posit32::CompareTo(Posit32).4._State_1\;
+                        -- Going to the state after the if-else which was started in state \Posit32::CompareTo(Posit32).4._State_3\.
+                        if (\Posit32::CompareTo(Posit32).4._State\ = \Posit32::CompareTo(Posit32).4._State_6\) then 
+                            \Posit32::CompareTo(Posit32).4._State\ := \Posit32::CompareTo(Posit32).4._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Int32 Lombiq.Arithmetics.Posit32::CompareTo(Lombiq.Arithmetics.Posit32).4 state machine end
 
 
     -- System.Void Hast::ExternalInvocationProxy() start
@@ -80542,84 +80354,74 @@ begin
 
     -- System.Void Hast::InternalInvocationProxy().System.Boolean Lombiq.Arithmetics.Posit32::IsPositive() start
     \Hast::InternalInvocationProxy().Posit32::IsPositive()\: process (\Clock\) 
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\: \InternalInvocationProxy_boolean_Array\(7 downto 0) := (others => false);
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().0.runningIndex.0\: integer range 0 to 7 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\: \InternalInvocationProxy_boolean_Array\(4 downto 0) := (others => false);
+        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().0.runningIndex.0\: integer range 0 to 4 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().1.runningIndex.0\: integer range 0 to 7 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().1.runningIndex.0\: integer range 0 to 4 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().1.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().2.runningIndex.0\: integer range 0 to 7 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().2.runningIndex.0\: integer range 0 to 4 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().2.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().3.runningIndex.0\: integer range 0 to 7 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().3.runningIndex.0\: integer range 0 to 4 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().3.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().4.runningIndex.0\: integer range 0 to 7 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().4.runningIndex.0\: integer range 0 to 4 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().4.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().5.runningIndex.0\: integer range 0 to 7 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().5.runningIndex.0\: integer range 0 to 4 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().5.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().6.runningIndex.0\: integer range 0 to 7 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().6.runningIndex.0\: integer range 0 to 4 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().6.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::ExponentSize().0.runningIndex.0\: integer range 0 to 7 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::ExponentSize().0.runningIndex.0\: integer range 0 to 4 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::ExponentSize().0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().0.runningIndex.0\: integer range 0 to 7 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().0.runningIndex.0\: integer range 0 to 4 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().1.runningIndex.0\: integer range 0 to 7 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().1.runningIndex.0\: integer range 0 to 4 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().1.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().2.runningIndex.0\: integer range 0 to 7 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().2.runningIndex.0\: integer range 0 to 4 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().2.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().3.runningIndex.0\: integer range 0 to 7 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().3.runningIndex.0\: integer range 0 to 4 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().3.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().4.runningIndex.0\: integer range 0 to 7 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().4.runningIndex.0\: integer range 0 to 4 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().4.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().5.runningIndex.0\: integer range 0 to 7 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().5.runningIndex.0\: integer range 0 to 4 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().5.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().6.runningIndex.0\: integer range 0 to 7 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().6.runningIndex.0\: integer range 0 to 4 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().6.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().0.runningIndex.0\: integer range 0 to 7 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().0.runningIndex.0\: integer range 0 to 4 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().1.runningIndex.0\: integer range 0 to 7 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().1.runningIndex.0\: integer range 0 to 4 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().1.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().2.runningIndex.0\: integer range 0 to 7 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().2.runningIndex.0\: integer range 0 to 4 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().2.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().3.runningIndex.0\: integer range 0 to 7 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().3.runningIndex.0\: integer range 0 to 4 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().3.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().4.runningIndex.0\: integer range 0 to 7 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().4.runningIndex.0\: integer range 0 to 4 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().4.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().5.runningIndex.0\: integer range 0 to 7 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().5.runningIndex.0\: integer range 0 to 4 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().5.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().6.runningIndex.0\: integer range 0 to 7 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().6.runningIndex.0\: integer range 0 to 4 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().6.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().0.runningIndex.0\: integer range 0 to 7 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().0.runningIndex.0\: integer range 0 to 4 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().1.runningIndex.0\: integer range 0 to 7 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().1.runningIndex.0\: integer range 0 to 4 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().1.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().2.runningIndex.0\: integer range 0 to 7 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().2.runningIndex.0\: integer range 0 to 4 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().2.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().3.runningIndex.0\: integer range 0 to 7 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().3.runningIndex.0\: integer range 0 to 4 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().3.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().4.runningIndex.0\: integer range 0 to 7 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().4.runningIndex.0\: integer range 0 to 4 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().4.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().5.runningIndex.0\: integer range 0 to 7 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().5.runningIndex.0\: integer range 0 to 4 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().5.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().6.runningIndex.0\: integer range 0 to 7 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().6.runningIndex.0\: integer range 0 to 4 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().6.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.runningIndex.0\: integer range 0 to 7 := 0;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.runningIndex.0\: integer range 0 to 7 := 0;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.runningIndex.0\: integer range 0 to 7 := 0;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.runningIndex.0\: integer range 0 to 7 := 0;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.runningIndex.0\: integer range 0 to 7 := 0;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32 Posit32::op_Multiply(Posit32,Posit32).0.runningIndex.0\: integer range 0 to 7 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32 Posit32::op_Multiply(Posit32,Posit32).0.runningIndex.0\: integer range 0 to 4 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32 Posit32::op_Multiply(Posit32,Posit32).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).0.runningIndex.0\: integer range 0 to 7 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).0.runningIndex.0\: integer range 0 to 4 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).1.runningIndex.0\: integer range 0 to 7 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).1.runningIndex.0\: integer range 0 to 4 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).1.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).2.runningIndex.0\: integer range 0 to 7 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).2.runningIndex.0\: integer range 0 to 4 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).2.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).3.runningIndex.0\: integer range 0 to 7 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).3.runningIndex.0\: integer range 0 to 4 := 0;
         Variable \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).3.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
     begin 
         if (rising_edge(\Clock\)) then 
@@ -80684,16 +80486,6 @@ begin
                 \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().5.runningState.0\ := WaitingForStarted;
                 \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().6.runningIndex.0\ := 0;
                 \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().6.runningState.0\ := WaitingForStarted;
-                \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.runningState.0\ := WaitingForStarted;
-                \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.runningState.0\ := WaitingForStarted;
-                \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.runningState.0\ := WaitingForStarted;
-                \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.runningState.0\ := WaitingForStarted;
-                \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.runningState.0\ := WaitingForStarted;
                 \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32 Posit32::op_Multiply(Posit32,Posit32).0.runningIndex.0\ := 0;
                 \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32 Posit32::op_Multiply(Posit32,Posit32).0.runningState.0\ := WaitingForStarted;
                 \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).0.runningIndex.0\ := 0;
@@ -80733,11 +80525,6 @@ begin
                 \Posit32::FractionWithHiddenBit().4.Posit32::IsPositive()._Finished.0\ <= false;
                 \Posit32::FractionWithHiddenBit().5.Posit32::IsPositive()._Finished.0\ <= false;
                 \Posit32::FractionWithHiddenBit().6.Posit32::IsPositive()._Finished.0\ <= false;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive()._Finished.0\ <= false;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive()._Finished.0\ <= false;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive()._Finished.0\ <= false;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive()._Finished.0\ <= false;
-                \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive()._Finished.0\ <= false;
                 \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::IsPositive()._Finished.0\ <= false;
                 \Int32 Posit32::op_Explicit(Posit32).0.Posit32::IsPositive()._Finished.0\ <= false;
                 \Int32 Posit32::op_Explicit(Posit32).1.Posit32::IsPositive()._Finished.0\ <= false;
@@ -80745,14 +80532,11 @@ begin
                 \Int32 Posit32::op_Explicit(Posit32).3.Posit32::IsPositive()._Finished.0\ <= false;
             else 
                 -- Building a boolean array where each of the elements will indicate whether the component with the given index should be started next.
-                \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(0) := \Posit32::IsPositive().1._Started\ = true and \Posit32::IsPositive().2._Started\ = true and \Posit32::IsPositive().3._Started\ = true and \Posit32::IsPositive().4._Started\ = true and \Posit32::IsPositive().5._Started\ = true and \Posit32::IsPositive().6._Started\ = true and \Posit32::IsPositive().7._Started\ = true and \Posit32::IsPositive().0._Started\ = false;
-                \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(1) := \Posit32::IsPositive().2._Started\ = true and \Posit32::IsPositive().3._Started\ = true and \Posit32::IsPositive().4._Started\ = true and \Posit32::IsPositive().5._Started\ = true and \Posit32::IsPositive().6._Started\ = true and \Posit32::IsPositive().7._Started\ = true and \Posit32::IsPositive().1._Started\ = false;
-                \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(2) := \Posit32::IsPositive().3._Started\ = true and \Posit32::IsPositive().4._Started\ = true and \Posit32::IsPositive().5._Started\ = true and \Posit32::IsPositive().6._Started\ = true and \Posit32::IsPositive().7._Started\ = true and \Posit32::IsPositive().2._Started\ = false;
-                \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(3) := \Posit32::IsPositive().4._Started\ = true and \Posit32::IsPositive().5._Started\ = true and \Posit32::IsPositive().6._Started\ = true and \Posit32::IsPositive().7._Started\ = true and \Posit32::IsPositive().3._Started\ = false;
-                \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(4) := \Posit32::IsPositive().5._Started\ = true and \Posit32::IsPositive().6._Started\ = true and \Posit32::IsPositive().7._Started\ = true and \Posit32::IsPositive().4._Started\ = false;
-                \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(5) := \Posit32::IsPositive().6._Started\ = true and \Posit32::IsPositive().7._Started\ = true and \Posit32::IsPositive().5._Started\ = false;
-                \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(6) := \Posit32::IsPositive().7._Started\ = true and \Posit32::IsPositive().6._Started\ = false;
-                \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(7) := \Posit32::IsPositive().7._Started\ = false;
+                \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(0) := \Posit32::IsPositive().1._Started\ = true and \Posit32::IsPositive().2._Started\ = true and \Posit32::IsPositive().3._Started\ = true and \Posit32::IsPositive().4._Started\ = true and \Posit32::IsPositive().0._Started\ = false;
+                \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(1) := \Posit32::IsPositive().2._Started\ = true and \Posit32::IsPositive().3._Started\ = true and \Posit32::IsPositive().4._Started\ = true and \Posit32::IsPositive().1._Started\ = false;
+                \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(2) := \Posit32::IsPositive().3._Started\ = true and \Posit32::IsPositive().4._Started\ = true and \Posit32::IsPositive().2._Started\ = false;
+                \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(3) := \Posit32::IsPositive().4._Started\ = true and \Posit32::IsPositive().3._Started\ = false;
+                \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(4) := \Posit32::IsPositive().4._Started\ = false;
 
                 -- Invocation handler #0 out of 1 corresponding to System.SByte Lombiq.Arithmetics.Posit32::GetRegimeKValue().0
                 case \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().0.runningState.0\ is 
@@ -80760,54 +80544,36 @@ begin
                         if (\Posit32::GetRegimeKValue().0.Posit32::IsPositive()._Started.0\) then 
                             \Posit32::GetRegimeKValue().0.Posit32::IsPositive()._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, false, false, true) => 
+                                when (false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().0.runningIndex.0\ := 0;
                                     \Posit32::IsPositive().0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(0) := false;
                                     \Posit32::IsPositive().0.this.parameter.In\ <= \Posit32::GetRegimeKValue().0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, false, true, false) => 
+                                when (false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().0.runningIndex.0\ := 1;
                                     \Posit32::IsPositive().1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(1) := false;
                                     \Posit32::IsPositive().1.this.parameter.In\ <= \Posit32::GetRegimeKValue().0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, true, false, false) => 
+                                when (false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().0.runningIndex.0\ := 2;
                                     \Posit32::IsPositive().2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(2) := false;
                                     \Posit32::IsPositive().2.this.parameter.In\ <= \Posit32::GetRegimeKValue().0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, true, false, false, false) => 
+                                when (false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().0.runningIndex.0\ := 3;
                                     \Posit32::IsPositive().3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(3) := false;
                                     \Posit32::IsPositive().3.this.parameter.In\ <= \Posit32::GetRegimeKValue().0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, true, false, false, false, false) => 
+                                when (true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().0.runningIndex.0\ := 4;
                                     \Posit32::IsPositive().4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(4) := false;
                                     \Posit32::IsPositive().4.this.parameter.In\ <= \Posit32::GetRegimeKValue().0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, true, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().0.runningIndex.0\ := 5;
-                                    \Posit32::IsPositive().5._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(5) := false;
-                                    \Posit32::IsPositive().5.this.parameter.In\ <= \Posit32::GetRegimeKValue().0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, true, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().0.runningIndex.0\ := 6;
-                                    \Posit32::IsPositive().6._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(6) := false;
-                                    \Posit32::IsPositive().6.this.parameter.In\ <= \Posit32::GetRegimeKValue().0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (true, false, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().0.runningIndex.0\ := 7;
-                                    \Posit32::IsPositive().7._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(7) := false;
-                                    \Posit32::IsPositive().7.this.parameter.In\ <= \Posit32::GetRegimeKValue().0.Posit32::IsPositive().this.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -80849,27 +80615,6 @@ begin
                                     \Posit32::IsPositive().4._Started\ <= false;
                                     \Posit32::GetRegimeKValue().0.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().4.return\;
                                 end if;
-                            when 5 => 
-                                if (\Posit32::IsPositive().5._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().0.runningState.0\ := AfterFinished;
-                                    \Posit32::GetRegimeKValue().0.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().5._Started\ <= false;
-                                    \Posit32::GetRegimeKValue().0.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().5.return\;
-                                end if;
-                            when 6 => 
-                                if (\Posit32::IsPositive().6._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().0.runningState.0\ := AfterFinished;
-                                    \Posit32::GetRegimeKValue().0.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().6._Started\ <= false;
-                                    \Posit32::GetRegimeKValue().0.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().6.return\;
-                                end if;
-                            when 7 => 
-                                if (\Posit32::IsPositive().7._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().0.runningState.0\ := AfterFinished;
-                                    \Posit32::GetRegimeKValue().0.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().7._Started\ <= false;
-                                    \Posit32::GetRegimeKValue().0.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().7.return\;
-                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -80886,54 +80631,36 @@ begin
                         if (\Posit32::GetRegimeKValue().1.Posit32::IsPositive()._Started.0\) then 
                             \Posit32::GetRegimeKValue().1.Posit32::IsPositive()._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, false, false, true) => 
+                                when (false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().1.runningIndex.0\ := 0;
                                     \Posit32::IsPositive().0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(0) := false;
                                     \Posit32::IsPositive().0.this.parameter.In\ <= \Posit32::GetRegimeKValue().1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, false, true, false) => 
+                                when (false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().1.runningIndex.0\ := 1;
                                     \Posit32::IsPositive().1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(1) := false;
                                     \Posit32::IsPositive().1.this.parameter.In\ <= \Posit32::GetRegimeKValue().1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, true, false, false) => 
+                                when (false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().1.runningIndex.0\ := 2;
                                     \Posit32::IsPositive().2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(2) := false;
                                     \Posit32::IsPositive().2.this.parameter.In\ <= \Posit32::GetRegimeKValue().1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, true, false, false, false) => 
+                                when (false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().1.runningIndex.0\ := 3;
                                     \Posit32::IsPositive().3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(3) := false;
                                     \Posit32::IsPositive().3.this.parameter.In\ <= \Posit32::GetRegimeKValue().1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, true, false, false, false, false) => 
+                                when (true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().1.runningIndex.0\ := 4;
                                     \Posit32::IsPositive().4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(4) := false;
                                     \Posit32::IsPositive().4.this.parameter.In\ <= \Posit32::GetRegimeKValue().1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, true, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().1.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().1.runningIndex.0\ := 5;
-                                    \Posit32::IsPositive().5._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(5) := false;
-                                    \Posit32::IsPositive().5.this.parameter.In\ <= \Posit32::GetRegimeKValue().1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, true, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().1.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().1.runningIndex.0\ := 6;
-                                    \Posit32::IsPositive().6._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(6) := false;
-                                    \Posit32::IsPositive().6.this.parameter.In\ <= \Posit32::GetRegimeKValue().1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (true, false, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().1.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().1.runningIndex.0\ := 7;
-                                    \Posit32::IsPositive().7._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(7) := false;
-                                    \Posit32::IsPositive().7.this.parameter.In\ <= \Posit32::GetRegimeKValue().1.Posit32::IsPositive().this.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -80975,27 +80702,6 @@ begin
                                     \Posit32::IsPositive().4._Started\ <= false;
                                     \Posit32::GetRegimeKValue().1.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().4.return\;
                                 end if;
-                            when 5 => 
-                                if (\Posit32::IsPositive().5._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().1.runningState.0\ := AfterFinished;
-                                    \Posit32::GetRegimeKValue().1.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().5._Started\ <= false;
-                                    \Posit32::GetRegimeKValue().1.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().5.return\;
-                                end if;
-                            when 6 => 
-                                if (\Posit32::IsPositive().6._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().1.runningState.0\ := AfterFinished;
-                                    \Posit32::GetRegimeKValue().1.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().6._Started\ <= false;
-                                    \Posit32::GetRegimeKValue().1.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().6.return\;
-                                end if;
-                            when 7 => 
-                                if (\Posit32::IsPositive().7._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().1.runningState.0\ := AfterFinished;
-                                    \Posit32::GetRegimeKValue().1.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().7._Started\ <= false;
-                                    \Posit32::GetRegimeKValue().1.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().7.return\;
-                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -81012,54 +80718,36 @@ begin
                         if (\Posit32::GetRegimeKValue().2.Posit32::IsPositive()._Started.0\) then 
                             \Posit32::GetRegimeKValue().2.Posit32::IsPositive()._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, false, false, true) => 
+                                when (false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().2.runningIndex.0\ := 0;
                                     \Posit32::IsPositive().0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(0) := false;
                                     \Posit32::IsPositive().0.this.parameter.In\ <= \Posit32::GetRegimeKValue().2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, false, true, false) => 
+                                when (false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().2.runningIndex.0\ := 1;
                                     \Posit32::IsPositive().1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(1) := false;
                                     \Posit32::IsPositive().1.this.parameter.In\ <= \Posit32::GetRegimeKValue().2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, true, false, false) => 
+                                when (false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().2.runningIndex.0\ := 2;
                                     \Posit32::IsPositive().2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(2) := false;
                                     \Posit32::IsPositive().2.this.parameter.In\ <= \Posit32::GetRegimeKValue().2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, true, false, false, false) => 
+                                when (false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().2.runningIndex.0\ := 3;
                                     \Posit32::IsPositive().3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(3) := false;
                                     \Posit32::IsPositive().3.this.parameter.In\ <= \Posit32::GetRegimeKValue().2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, true, false, false, false, false) => 
+                                when (true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().2.runningIndex.0\ := 4;
                                     \Posit32::IsPositive().4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(4) := false;
                                     \Posit32::IsPositive().4.this.parameter.In\ <= \Posit32::GetRegimeKValue().2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, true, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().2.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().2.runningIndex.0\ := 5;
-                                    \Posit32::IsPositive().5._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(5) := false;
-                                    \Posit32::IsPositive().5.this.parameter.In\ <= \Posit32::GetRegimeKValue().2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, true, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().2.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().2.runningIndex.0\ := 6;
-                                    \Posit32::IsPositive().6._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(6) := false;
-                                    \Posit32::IsPositive().6.this.parameter.In\ <= \Posit32::GetRegimeKValue().2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (true, false, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().2.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().2.runningIndex.0\ := 7;
-                                    \Posit32::IsPositive().7._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(7) := false;
-                                    \Posit32::IsPositive().7.this.parameter.In\ <= \Posit32::GetRegimeKValue().2.Posit32::IsPositive().this.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -81101,27 +80789,6 @@ begin
                                     \Posit32::IsPositive().4._Started\ <= false;
                                     \Posit32::GetRegimeKValue().2.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().4.return\;
                                 end if;
-                            when 5 => 
-                                if (\Posit32::IsPositive().5._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().2.runningState.0\ := AfterFinished;
-                                    \Posit32::GetRegimeKValue().2.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().5._Started\ <= false;
-                                    \Posit32::GetRegimeKValue().2.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().5.return\;
-                                end if;
-                            when 6 => 
-                                if (\Posit32::IsPositive().6._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().2.runningState.0\ := AfterFinished;
-                                    \Posit32::GetRegimeKValue().2.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().6._Started\ <= false;
-                                    \Posit32::GetRegimeKValue().2.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().6.return\;
-                                end if;
-                            when 7 => 
-                                if (\Posit32::IsPositive().7._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().2.runningState.0\ := AfterFinished;
-                                    \Posit32::GetRegimeKValue().2.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().7._Started\ <= false;
-                                    \Posit32::GetRegimeKValue().2.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().7.return\;
-                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -81138,54 +80805,36 @@ begin
                         if (\Posit32::GetRegimeKValue().3.Posit32::IsPositive()._Started.0\) then 
                             \Posit32::GetRegimeKValue().3.Posit32::IsPositive()._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, false, false, true) => 
+                                when (false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().3.runningIndex.0\ := 0;
                                     \Posit32::IsPositive().0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(0) := false;
                                     \Posit32::IsPositive().0.this.parameter.In\ <= \Posit32::GetRegimeKValue().3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, false, true, false) => 
+                                when (false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().3.runningIndex.0\ := 1;
                                     \Posit32::IsPositive().1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(1) := false;
                                     \Posit32::IsPositive().1.this.parameter.In\ <= \Posit32::GetRegimeKValue().3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, true, false, false) => 
+                                when (false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().3.runningIndex.0\ := 2;
                                     \Posit32::IsPositive().2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(2) := false;
                                     \Posit32::IsPositive().2.this.parameter.In\ <= \Posit32::GetRegimeKValue().3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, true, false, false, false) => 
+                                when (false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().3.runningIndex.0\ := 3;
                                     \Posit32::IsPositive().3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(3) := false;
                                     \Posit32::IsPositive().3.this.parameter.In\ <= \Posit32::GetRegimeKValue().3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, true, false, false, false, false) => 
+                                when (true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().3.runningIndex.0\ := 4;
                                     \Posit32::IsPositive().4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(4) := false;
                                     \Posit32::IsPositive().4.this.parameter.In\ <= \Posit32::GetRegimeKValue().3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, true, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().3.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().3.runningIndex.0\ := 5;
-                                    \Posit32::IsPositive().5._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(5) := false;
-                                    \Posit32::IsPositive().5.this.parameter.In\ <= \Posit32::GetRegimeKValue().3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, true, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().3.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().3.runningIndex.0\ := 6;
-                                    \Posit32::IsPositive().6._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(6) := false;
-                                    \Posit32::IsPositive().6.this.parameter.In\ <= \Posit32::GetRegimeKValue().3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (true, false, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().3.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().3.runningIndex.0\ := 7;
-                                    \Posit32::IsPositive().7._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(7) := false;
-                                    \Posit32::IsPositive().7.this.parameter.In\ <= \Posit32::GetRegimeKValue().3.Posit32::IsPositive().this.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -81227,27 +80876,6 @@ begin
                                     \Posit32::IsPositive().4._Started\ <= false;
                                     \Posit32::GetRegimeKValue().3.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().4.return\;
                                 end if;
-                            when 5 => 
-                                if (\Posit32::IsPositive().5._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().3.runningState.0\ := AfterFinished;
-                                    \Posit32::GetRegimeKValue().3.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().5._Started\ <= false;
-                                    \Posit32::GetRegimeKValue().3.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().5.return\;
-                                end if;
-                            when 6 => 
-                                if (\Posit32::IsPositive().6._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().3.runningState.0\ := AfterFinished;
-                                    \Posit32::GetRegimeKValue().3.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().6._Started\ <= false;
-                                    \Posit32::GetRegimeKValue().3.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().6.return\;
-                                end if;
-                            when 7 => 
-                                if (\Posit32::IsPositive().7._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().3.runningState.0\ := AfterFinished;
-                                    \Posit32::GetRegimeKValue().3.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().7._Started\ <= false;
-                                    \Posit32::GetRegimeKValue().3.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().7.return\;
-                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -81264,54 +80892,36 @@ begin
                         if (\Posit32::GetRegimeKValue().4.Posit32::IsPositive()._Started.0\) then 
                             \Posit32::GetRegimeKValue().4.Posit32::IsPositive()._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, false, false, true) => 
+                                when (false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().4.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().4.runningIndex.0\ := 0;
                                     \Posit32::IsPositive().0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(0) := false;
                                     \Posit32::IsPositive().0.this.parameter.In\ <= \Posit32::GetRegimeKValue().4.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, false, true, false) => 
+                                when (false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().4.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().4.runningIndex.0\ := 1;
                                     \Posit32::IsPositive().1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(1) := false;
                                     \Posit32::IsPositive().1.this.parameter.In\ <= \Posit32::GetRegimeKValue().4.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, true, false, false) => 
+                                when (false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().4.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().4.runningIndex.0\ := 2;
                                     \Posit32::IsPositive().2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(2) := false;
                                     \Posit32::IsPositive().2.this.parameter.In\ <= \Posit32::GetRegimeKValue().4.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, true, false, false, false) => 
+                                when (false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().4.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().4.runningIndex.0\ := 3;
                                     \Posit32::IsPositive().3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(3) := false;
                                     \Posit32::IsPositive().3.this.parameter.In\ <= \Posit32::GetRegimeKValue().4.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, true, false, false, false, false) => 
+                                when (true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().4.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().4.runningIndex.0\ := 4;
                                     \Posit32::IsPositive().4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(4) := false;
                                     \Posit32::IsPositive().4.this.parameter.In\ <= \Posit32::GetRegimeKValue().4.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, true, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().4.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().4.runningIndex.0\ := 5;
-                                    \Posit32::IsPositive().5._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(5) := false;
-                                    \Posit32::IsPositive().5.this.parameter.In\ <= \Posit32::GetRegimeKValue().4.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, true, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().4.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().4.runningIndex.0\ := 6;
-                                    \Posit32::IsPositive().6._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(6) := false;
-                                    \Posit32::IsPositive().6.this.parameter.In\ <= \Posit32::GetRegimeKValue().4.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (true, false, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().4.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().4.runningIndex.0\ := 7;
-                                    \Posit32::IsPositive().7._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(7) := false;
-                                    \Posit32::IsPositive().7.this.parameter.In\ <= \Posit32::GetRegimeKValue().4.Posit32::IsPositive().this.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -81353,27 +80963,6 @@ begin
                                     \Posit32::IsPositive().4._Started\ <= false;
                                     \Posit32::GetRegimeKValue().4.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().4.return\;
                                 end if;
-                            when 5 => 
-                                if (\Posit32::IsPositive().5._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().4.runningState.0\ := AfterFinished;
-                                    \Posit32::GetRegimeKValue().4.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().5._Started\ <= false;
-                                    \Posit32::GetRegimeKValue().4.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().5.return\;
-                                end if;
-                            when 6 => 
-                                if (\Posit32::IsPositive().6._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().4.runningState.0\ := AfterFinished;
-                                    \Posit32::GetRegimeKValue().4.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().6._Started\ <= false;
-                                    \Posit32::GetRegimeKValue().4.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().6.return\;
-                                end if;
-                            when 7 => 
-                                if (\Posit32::IsPositive().7._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().4.runningState.0\ := AfterFinished;
-                                    \Posit32::GetRegimeKValue().4.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().7._Started\ <= false;
-                                    \Posit32::GetRegimeKValue().4.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().7.return\;
-                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -81390,54 +80979,36 @@ begin
                         if (\Posit32::GetRegimeKValue().5.Posit32::IsPositive()._Started.0\) then 
                             \Posit32::GetRegimeKValue().5.Posit32::IsPositive()._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, false, false, true) => 
+                                when (false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().5.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().5.runningIndex.0\ := 0;
                                     \Posit32::IsPositive().0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(0) := false;
                                     \Posit32::IsPositive().0.this.parameter.In\ <= \Posit32::GetRegimeKValue().5.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, false, true, false) => 
+                                when (false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().5.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().5.runningIndex.0\ := 1;
                                     \Posit32::IsPositive().1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(1) := false;
                                     \Posit32::IsPositive().1.this.parameter.In\ <= \Posit32::GetRegimeKValue().5.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, true, false, false) => 
+                                when (false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().5.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().5.runningIndex.0\ := 2;
                                     \Posit32::IsPositive().2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(2) := false;
                                     \Posit32::IsPositive().2.this.parameter.In\ <= \Posit32::GetRegimeKValue().5.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, true, false, false, false) => 
+                                when (false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().5.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().5.runningIndex.0\ := 3;
                                     \Posit32::IsPositive().3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(3) := false;
                                     \Posit32::IsPositive().3.this.parameter.In\ <= \Posit32::GetRegimeKValue().5.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, true, false, false, false, false) => 
+                                when (true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().5.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().5.runningIndex.0\ := 4;
                                     \Posit32::IsPositive().4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(4) := false;
                                     \Posit32::IsPositive().4.this.parameter.In\ <= \Posit32::GetRegimeKValue().5.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, true, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().5.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().5.runningIndex.0\ := 5;
-                                    \Posit32::IsPositive().5._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(5) := false;
-                                    \Posit32::IsPositive().5.this.parameter.In\ <= \Posit32::GetRegimeKValue().5.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, true, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().5.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().5.runningIndex.0\ := 6;
-                                    \Posit32::IsPositive().6._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(6) := false;
-                                    \Posit32::IsPositive().6.this.parameter.In\ <= \Posit32::GetRegimeKValue().5.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (true, false, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().5.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().5.runningIndex.0\ := 7;
-                                    \Posit32::IsPositive().7._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(7) := false;
-                                    \Posit32::IsPositive().7.this.parameter.In\ <= \Posit32::GetRegimeKValue().5.Posit32::IsPositive().this.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -81479,27 +81050,6 @@ begin
                                     \Posit32::IsPositive().4._Started\ <= false;
                                     \Posit32::GetRegimeKValue().5.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().4.return\;
                                 end if;
-                            when 5 => 
-                                if (\Posit32::IsPositive().5._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().5.runningState.0\ := AfterFinished;
-                                    \Posit32::GetRegimeKValue().5.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().5._Started\ <= false;
-                                    \Posit32::GetRegimeKValue().5.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().5.return\;
-                                end if;
-                            when 6 => 
-                                if (\Posit32::IsPositive().6._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().5.runningState.0\ := AfterFinished;
-                                    \Posit32::GetRegimeKValue().5.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().6._Started\ <= false;
-                                    \Posit32::GetRegimeKValue().5.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().6.return\;
-                                end if;
-                            when 7 => 
-                                if (\Posit32::IsPositive().7._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().5.runningState.0\ := AfterFinished;
-                                    \Posit32::GetRegimeKValue().5.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().7._Started\ <= false;
-                                    \Posit32::GetRegimeKValue().5.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().7.return\;
-                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -81516,54 +81066,36 @@ begin
                         if (\Posit32::GetRegimeKValue().6.Posit32::IsPositive()._Started.0\) then 
                             \Posit32::GetRegimeKValue().6.Posit32::IsPositive()._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, false, false, true) => 
+                                when (false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().6.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().6.runningIndex.0\ := 0;
                                     \Posit32::IsPositive().0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(0) := false;
                                     \Posit32::IsPositive().0.this.parameter.In\ <= \Posit32::GetRegimeKValue().6.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, false, true, false) => 
+                                when (false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().6.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().6.runningIndex.0\ := 1;
                                     \Posit32::IsPositive().1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(1) := false;
                                     \Posit32::IsPositive().1.this.parameter.In\ <= \Posit32::GetRegimeKValue().6.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, true, false, false) => 
+                                when (false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().6.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().6.runningIndex.0\ := 2;
                                     \Posit32::IsPositive().2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(2) := false;
                                     \Posit32::IsPositive().2.this.parameter.In\ <= \Posit32::GetRegimeKValue().6.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, true, false, false, false) => 
+                                when (false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().6.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().6.runningIndex.0\ := 3;
                                     \Posit32::IsPositive().3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(3) := false;
                                     \Posit32::IsPositive().3.this.parameter.In\ <= \Posit32::GetRegimeKValue().6.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, true, false, false, false, false) => 
+                                when (true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().6.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().6.runningIndex.0\ := 4;
                                     \Posit32::IsPositive().4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(4) := false;
                                     \Posit32::IsPositive().4.this.parameter.In\ <= \Posit32::GetRegimeKValue().6.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, true, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().6.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().6.runningIndex.0\ := 5;
-                                    \Posit32::IsPositive().5._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(5) := false;
-                                    \Posit32::IsPositive().5.this.parameter.In\ <= \Posit32::GetRegimeKValue().6.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, true, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().6.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().6.runningIndex.0\ := 6;
-                                    \Posit32::IsPositive().6._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(6) := false;
-                                    \Posit32::IsPositive().6.this.parameter.In\ <= \Posit32::GetRegimeKValue().6.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (true, false, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().6.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().6.runningIndex.0\ := 7;
-                                    \Posit32::IsPositive().7._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(7) := false;
-                                    \Posit32::IsPositive().7.this.parameter.In\ <= \Posit32::GetRegimeKValue().6.Posit32::IsPositive().this.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -81605,27 +81137,6 @@ begin
                                     \Posit32::IsPositive().4._Started\ <= false;
                                     \Posit32::GetRegimeKValue().6.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().4.return\;
                                 end if;
-                            when 5 => 
-                                if (\Posit32::IsPositive().5._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().6.runningState.0\ := AfterFinished;
-                                    \Posit32::GetRegimeKValue().6.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().5._Started\ <= false;
-                                    \Posit32::GetRegimeKValue().6.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().5.return\;
-                                end if;
-                            when 6 => 
-                                if (\Posit32::IsPositive().6._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().6.runningState.0\ := AfterFinished;
-                                    \Posit32::GetRegimeKValue().6.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().6._Started\ <= false;
-                                    \Posit32::GetRegimeKValue().6.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().6.return\;
-                                end if;
-                            when 7 => 
-                                if (\Posit32::IsPositive().7._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetRegimeKValue().6.runningState.0\ := AfterFinished;
-                                    \Posit32::GetRegimeKValue().6.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().7._Started\ <= false;
-                                    \Posit32::GetRegimeKValue().6.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().7.return\;
-                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -81642,54 +81153,36 @@ begin
                         if (\Posit32::ExponentSize().0.Posit32::IsPositive()._Started.0\) then 
                             \Posit32::ExponentSize().0.Posit32::IsPositive()._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, false, false, true) => 
+                                when (false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::ExponentSize().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::ExponentSize().0.runningIndex.0\ := 0;
                                     \Posit32::IsPositive().0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(0) := false;
                                     \Posit32::IsPositive().0.this.parameter.In\ <= \Posit32::ExponentSize().0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, false, true, false) => 
+                                when (false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::ExponentSize().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::ExponentSize().0.runningIndex.0\ := 1;
                                     \Posit32::IsPositive().1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(1) := false;
                                     \Posit32::IsPositive().1.this.parameter.In\ <= \Posit32::ExponentSize().0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, true, false, false) => 
+                                when (false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::ExponentSize().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::ExponentSize().0.runningIndex.0\ := 2;
                                     \Posit32::IsPositive().2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(2) := false;
                                     \Posit32::IsPositive().2.this.parameter.In\ <= \Posit32::ExponentSize().0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, true, false, false, false) => 
+                                when (false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::ExponentSize().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::ExponentSize().0.runningIndex.0\ := 3;
                                     \Posit32::IsPositive().3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(3) := false;
                                     \Posit32::IsPositive().3.this.parameter.In\ <= \Posit32::ExponentSize().0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, true, false, false, false, false) => 
+                                when (true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::ExponentSize().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::ExponentSize().0.runningIndex.0\ := 4;
                                     \Posit32::IsPositive().4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(4) := false;
                                     \Posit32::IsPositive().4.this.parameter.In\ <= \Posit32::ExponentSize().0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, true, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::ExponentSize().0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::ExponentSize().0.runningIndex.0\ := 5;
-                                    \Posit32::IsPositive().5._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(5) := false;
-                                    \Posit32::IsPositive().5.this.parameter.In\ <= \Posit32::ExponentSize().0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, true, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::ExponentSize().0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::ExponentSize().0.runningIndex.0\ := 6;
-                                    \Posit32::IsPositive().6._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(6) := false;
-                                    \Posit32::IsPositive().6.this.parameter.In\ <= \Posit32::ExponentSize().0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (true, false, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::ExponentSize().0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::ExponentSize().0.runningIndex.0\ := 7;
-                                    \Posit32::IsPositive().7._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(7) := false;
-                                    \Posit32::IsPositive().7.this.parameter.In\ <= \Posit32::ExponentSize().0.Posit32::IsPositive().this.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -81731,27 +81224,6 @@ begin
                                     \Posit32::IsPositive().4._Started\ <= false;
                                     \Posit32::ExponentSize().0.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().4.return\;
                                 end if;
-                            when 5 => 
-                                if (\Posit32::IsPositive().5._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::ExponentSize().0.runningState.0\ := AfterFinished;
-                                    \Posit32::ExponentSize().0.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().5._Started\ <= false;
-                                    \Posit32::ExponentSize().0.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().5.return\;
-                                end if;
-                            when 6 => 
-                                if (\Posit32::IsPositive().6._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::ExponentSize().0.runningState.0\ := AfterFinished;
-                                    \Posit32::ExponentSize().0.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().6._Started\ <= false;
-                                    \Posit32::ExponentSize().0.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().6.return\;
-                                end if;
-                            when 7 => 
-                                if (\Posit32::IsPositive().7._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::ExponentSize().0.runningState.0\ := AfterFinished;
-                                    \Posit32::ExponentSize().0.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().7._Started\ <= false;
-                                    \Posit32::ExponentSize().0.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().7.return\;
-                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -81768,54 +81240,36 @@ begin
                         if (\Posit32::GetExponentValue().0.Posit32::IsPositive()._Started.0\) then 
                             \Posit32::GetExponentValue().0.Posit32::IsPositive()._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, false, false, true) => 
+                                when (false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().0.runningIndex.0\ := 0;
                                     \Posit32::IsPositive().0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(0) := false;
                                     \Posit32::IsPositive().0.this.parameter.In\ <= \Posit32::GetExponentValue().0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, false, true, false) => 
+                                when (false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().0.runningIndex.0\ := 1;
                                     \Posit32::IsPositive().1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(1) := false;
                                     \Posit32::IsPositive().1.this.parameter.In\ <= \Posit32::GetExponentValue().0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, true, false, false) => 
+                                when (false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().0.runningIndex.0\ := 2;
                                     \Posit32::IsPositive().2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(2) := false;
                                     \Posit32::IsPositive().2.this.parameter.In\ <= \Posit32::GetExponentValue().0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, true, false, false, false) => 
+                                when (false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().0.runningIndex.0\ := 3;
                                     \Posit32::IsPositive().3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(3) := false;
                                     \Posit32::IsPositive().3.this.parameter.In\ <= \Posit32::GetExponentValue().0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, true, false, false, false, false) => 
+                                when (true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().0.runningIndex.0\ := 4;
                                     \Posit32::IsPositive().4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(4) := false;
                                     \Posit32::IsPositive().4.this.parameter.In\ <= \Posit32::GetExponentValue().0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, true, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().0.runningIndex.0\ := 5;
-                                    \Posit32::IsPositive().5._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(5) := false;
-                                    \Posit32::IsPositive().5.this.parameter.In\ <= \Posit32::GetExponentValue().0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, true, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().0.runningIndex.0\ := 6;
-                                    \Posit32::IsPositive().6._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(6) := false;
-                                    \Posit32::IsPositive().6.this.parameter.In\ <= \Posit32::GetExponentValue().0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (true, false, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().0.runningIndex.0\ := 7;
-                                    \Posit32::IsPositive().7._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(7) := false;
-                                    \Posit32::IsPositive().7.this.parameter.In\ <= \Posit32::GetExponentValue().0.Posit32::IsPositive().this.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -81857,27 +81311,6 @@ begin
                                     \Posit32::IsPositive().4._Started\ <= false;
                                     \Posit32::GetExponentValue().0.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().4.return\;
                                 end if;
-                            when 5 => 
-                                if (\Posit32::IsPositive().5._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().0.runningState.0\ := AfterFinished;
-                                    \Posit32::GetExponentValue().0.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().5._Started\ <= false;
-                                    \Posit32::GetExponentValue().0.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().5.return\;
-                                end if;
-                            when 6 => 
-                                if (\Posit32::IsPositive().6._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().0.runningState.0\ := AfterFinished;
-                                    \Posit32::GetExponentValue().0.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().6._Started\ <= false;
-                                    \Posit32::GetExponentValue().0.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().6.return\;
-                                end if;
-                            when 7 => 
-                                if (\Posit32::IsPositive().7._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().0.runningState.0\ := AfterFinished;
-                                    \Posit32::GetExponentValue().0.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().7._Started\ <= false;
-                                    \Posit32::GetExponentValue().0.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().7.return\;
-                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -81894,54 +81327,36 @@ begin
                         if (\Posit32::GetExponentValue().1.Posit32::IsPositive()._Started.0\) then 
                             \Posit32::GetExponentValue().1.Posit32::IsPositive()._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, false, false, true) => 
+                                when (false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().1.runningIndex.0\ := 0;
                                     \Posit32::IsPositive().0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(0) := false;
                                     \Posit32::IsPositive().0.this.parameter.In\ <= \Posit32::GetExponentValue().1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, false, true, false) => 
+                                when (false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().1.runningIndex.0\ := 1;
                                     \Posit32::IsPositive().1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(1) := false;
                                     \Posit32::IsPositive().1.this.parameter.In\ <= \Posit32::GetExponentValue().1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, true, false, false) => 
+                                when (false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().1.runningIndex.0\ := 2;
                                     \Posit32::IsPositive().2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(2) := false;
                                     \Posit32::IsPositive().2.this.parameter.In\ <= \Posit32::GetExponentValue().1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, true, false, false, false) => 
+                                when (false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().1.runningIndex.0\ := 3;
                                     \Posit32::IsPositive().3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(3) := false;
                                     \Posit32::IsPositive().3.this.parameter.In\ <= \Posit32::GetExponentValue().1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, true, false, false, false, false) => 
+                                when (true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().1.runningIndex.0\ := 4;
                                     \Posit32::IsPositive().4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(4) := false;
                                     \Posit32::IsPositive().4.this.parameter.In\ <= \Posit32::GetExponentValue().1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, true, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().1.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().1.runningIndex.0\ := 5;
-                                    \Posit32::IsPositive().5._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(5) := false;
-                                    \Posit32::IsPositive().5.this.parameter.In\ <= \Posit32::GetExponentValue().1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, true, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().1.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().1.runningIndex.0\ := 6;
-                                    \Posit32::IsPositive().6._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(6) := false;
-                                    \Posit32::IsPositive().6.this.parameter.In\ <= \Posit32::GetExponentValue().1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (true, false, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().1.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().1.runningIndex.0\ := 7;
-                                    \Posit32::IsPositive().7._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(7) := false;
-                                    \Posit32::IsPositive().7.this.parameter.In\ <= \Posit32::GetExponentValue().1.Posit32::IsPositive().this.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -81983,27 +81398,6 @@ begin
                                     \Posit32::IsPositive().4._Started\ <= false;
                                     \Posit32::GetExponentValue().1.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().4.return\;
                                 end if;
-                            when 5 => 
-                                if (\Posit32::IsPositive().5._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().1.runningState.0\ := AfterFinished;
-                                    \Posit32::GetExponentValue().1.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().5._Started\ <= false;
-                                    \Posit32::GetExponentValue().1.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().5.return\;
-                                end if;
-                            when 6 => 
-                                if (\Posit32::IsPositive().6._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().1.runningState.0\ := AfterFinished;
-                                    \Posit32::GetExponentValue().1.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().6._Started\ <= false;
-                                    \Posit32::GetExponentValue().1.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().6.return\;
-                                end if;
-                            when 7 => 
-                                if (\Posit32::IsPositive().7._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().1.runningState.0\ := AfterFinished;
-                                    \Posit32::GetExponentValue().1.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().7._Started\ <= false;
-                                    \Posit32::GetExponentValue().1.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().7.return\;
-                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -82020,54 +81414,36 @@ begin
                         if (\Posit32::GetExponentValue().2.Posit32::IsPositive()._Started.0\) then 
                             \Posit32::GetExponentValue().2.Posit32::IsPositive()._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, false, false, true) => 
+                                when (false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().2.runningIndex.0\ := 0;
                                     \Posit32::IsPositive().0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(0) := false;
                                     \Posit32::IsPositive().0.this.parameter.In\ <= \Posit32::GetExponentValue().2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, false, true, false) => 
+                                when (false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().2.runningIndex.0\ := 1;
                                     \Posit32::IsPositive().1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(1) := false;
                                     \Posit32::IsPositive().1.this.parameter.In\ <= \Posit32::GetExponentValue().2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, true, false, false) => 
+                                when (false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().2.runningIndex.0\ := 2;
                                     \Posit32::IsPositive().2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(2) := false;
                                     \Posit32::IsPositive().2.this.parameter.In\ <= \Posit32::GetExponentValue().2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, true, false, false, false) => 
+                                when (false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().2.runningIndex.0\ := 3;
                                     \Posit32::IsPositive().3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(3) := false;
                                     \Posit32::IsPositive().3.this.parameter.In\ <= \Posit32::GetExponentValue().2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, true, false, false, false, false) => 
+                                when (true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().2.runningIndex.0\ := 4;
                                     \Posit32::IsPositive().4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(4) := false;
                                     \Posit32::IsPositive().4.this.parameter.In\ <= \Posit32::GetExponentValue().2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, true, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().2.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().2.runningIndex.0\ := 5;
-                                    \Posit32::IsPositive().5._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(5) := false;
-                                    \Posit32::IsPositive().5.this.parameter.In\ <= \Posit32::GetExponentValue().2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, true, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().2.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().2.runningIndex.0\ := 6;
-                                    \Posit32::IsPositive().6._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(6) := false;
-                                    \Posit32::IsPositive().6.this.parameter.In\ <= \Posit32::GetExponentValue().2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (true, false, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().2.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().2.runningIndex.0\ := 7;
-                                    \Posit32::IsPositive().7._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(7) := false;
-                                    \Posit32::IsPositive().7.this.parameter.In\ <= \Posit32::GetExponentValue().2.Posit32::IsPositive().this.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -82109,27 +81485,6 @@ begin
                                     \Posit32::IsPositive().4._Started\ <= false;
                                     \Posit32::GetExponentValue().2.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().4.return\;
                                 end if;
-                            when 5 => 
-                                if (\Posit32::IsPositive().5._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().2.runningState.0\ := AfterFinished;
-                                    \Posit32::GetExponentValue().2.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().5._Started\ <= false;
-                                    \Posit32::GetExponentValue().2.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().5.return\;
-                                end if;
-                            when 6 => 
-                                if (\Posit32::IsPositive().6._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().2.runningState.0\ := AfterFinished;
-                                    \Posit32::GetExponentValue().2.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().6._Started\ <= false;
-                                    \Posit32::GetExponentValue().2.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().6.return\;
-                                end if;
-                            when 7 => 
-                                if (\Posit32::IsPositive().7._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().2.runningState.0\ := AfterFinished;
-                                    \Posit32::GetExponentValue().2.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().7._Started\ <= false;
-                                    \Posit32::GetExponentValue().2.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().7.return\;
-                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -82146,54 +81501,36 @@ begin
                         if (\Posit32::GetExponentValue().3.Posit32::IsPositive()._Started.0\) then 
                             \Posit32::GetExponentValue().3.Posit32::IsPositive()._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, false, false, true) => 
+                                when (false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().3.runningIndex.0\ := 0;
                                     \Posit32::IsPositive().0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(0) := false;
                                     \Posit32::IsPositive().0.this.parameter.In\ <= \Posit32::GetExponentValue().3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, false, true, false) => 
+                                when (false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().3.runningIndex.0\ := 1;
                                     \Posit32::IsPositive().1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(1) := false;
                                     \Posit32::IsPositive().1.this.parameter.In\ <= \Posit32::GetExponentValue().3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, true, false, false) => 
+                                when (false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().3.runningIndex.0\ := 2;
                                     \Posit32::IsPositive().2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(2) := false;
                                     \Posit32::IsPositive().2.this.parameter.In\ <= \Posit32::GetExponentValue().3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, true, false, false, false) => 
+                                when (false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().3.runningIndex.0\ := 3;
                                     \Posit32::IsPositive().3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(3) := false;
                                     \Posit32::IsPositive().3.this.parameter.In\ <= \Posit32::GetExponentValue().3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, true, false, false, false, false) => 
+                                when (true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().3.runningIndex.0\ := 4;
                                     \Posit32::IsPositive().4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(4) := false;
                                     \Posit32::IsPositive().4.this.parameter.In\ <= \Posit32::GetExponentValue().3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, true, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().3.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().3.runningIndex.0\ := 5;
-                                    \Posit32::IsPositive().5._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(5) := false;
-                                    \Posit32::IsPositive().5.this.parameter.In\ <= \Posit32::GetExponentValue().3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, true, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().3.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().3.runningIndex.0\ := 6;
-                                    \Posit32::IsPositive().6._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(6) := false;
-                                    \Posit32::IsPositive().6.this.parameter.In\ <= \Posit32::GetExponentValue().3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (true, false, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().3.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().3.runningIndex.0\ := 7;
-                                    \Posit32::IsPositive().7._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(7) := false;
-                                    \Posit32::IsPositive().7.this.parameter.In\ <= \Posit32::GetExponentValue().3.Posit32::IsPositive().this.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -82235,27 +81572,6 @@ begin
                                     \Posit32::IsPositive().4._Started\ <= false;
                                     \Posit32::GetExponentValue().3.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().4.return\;
                                 end if;
-                            when 5 => 
-                                if (\Posit32::IsPositive().5._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().3.runningState.0\ := AfterFinished;
-                                    \Posit32::GetExponentValue().3.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().5._Started\ <= false;
-                                    \Posit32::GetExponentValue().3.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().5.return\;
-                                end if;
-                            when 6 => 
-                                if (\Posit32::IsPositive().6._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().3.runningState.0\ := AfterFinished;
-                                    \Posit32::GetExponentValue().3.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().6._Started\ <= false;
-                                    \Posit32::GetExponentValue().3.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().6.return\;
-                                end if;
-                            when 7 => 
-                                if (\Posit32::IsPositive().7._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().3.runningState.0\ := AfterFinished;
-                                    \Posit32::GetExponentValue().3.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().7._Started\ <= false;
-                                    \Posit32::GetExponentValue().3.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().7.return\;
-                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -82272,54 +81588,36 @@ begin
                         if (\Posit32::GetExponentValue().4.Posit32::IsPositive()._Started.0\) then 
                             \Posit32::GetExponentValue().4.Posit32::IsPositive()._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, false, false, true) => 
+                                when (false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().4.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().4.runningIndex.0\ := 0;
                                     \Posit32::IsPositive().0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(0) := false;
                                     \Posit32::IsPositive().0.this.parameter.In\ <= \Posit32::GetExponentValue().4.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, false, true, false) => 
+                                when (false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().4.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().4.runningIndex.0\ := 1;
                                     \Posit32::IsPositive().1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(1) := false;
                                     \Posit32::IsPositive().1.this.parameter.In\ <= \Posit32::GetExponentValue().4.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, true, false, false) => 
+                                when (false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().4.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().4.runningIndex.0\ := 2;
                                     \Posit32::IsPositive().2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(2) := false;
                                     \Posit32::IsPositive().2.this.parameter.In\ <= \Posit32::GetExponentValue().4.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, true, false, false, false) => 
+                                when (false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().4.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().4.runningIndex.0\ := 3;
                                     \Posit32::IsPositive().3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(3) := false;
                                     \Posit32::IsPositive().3.this.parameter.In\ <= \Posit32::GetExponentValue().4.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, true, false, false, false, false) => 
+                                when (true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().4.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().4.runningIndex.0\ := 4;
                                     \Posit32::IsPositive().4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(4) := false;
                                     \Posit32::IsPositive().4.this.parameter.In\ <= \Posit32::GetExponentValue().4.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, true, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().4.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().4.runningIndex.0\ := 5;
-                                    \Posit32::IsPositive().5._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(5) := false;
-                                    \Posit32::IsPositive().5.this.parameter.In\ <= \Posit32::GetExponentValue().4.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, true, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().4.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().4.runningIndex.0\ := 6;
-                                    \Posit32::IsPositive().6._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(6) := false;
-                                    \Posit32::IsPositive().6.this.parameter.In\ <= \Posit32::GetExponentValue().4.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (true, false, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().4.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().4.runningIndex.0\ := 7;
-                                    \Posit32::IsPositive().7._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(7) := false;
-                                    \Posit32::IsPositive().7.this.parameter.In\ <= \Posit32::GetExponentValue().4.Posit32::IsPositive().this.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -82361,27 +81659,6 @@ begin
                                     \Posit32::IsPositive().4._Started\ <= false;
                                     \Posit32::GetExponentValue().4.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().4.return\;
                                 end if;
-                            when 5 => 
-                                if (\Posit32::IsPositive().5._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().4.runningState.0\ := AfterFinished;
-                                    \Posit32::GetExponentValue().4.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().5._Started\ <= false;
-                                    \Posit32::GetExponentValue().4.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().5.return\;
-                                end if;
-                            when 6 => 
-                                if (\Posit32::IsPositive().6._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().4.runningState.0\ := AfterFinished;
-                                    \Posit32::GetExponentValue().4.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().6._Started\ <= false;
-                                    \Posit32::GetExponentValue().4.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().6.return\;
-                                end if;
-                            when 7 => 
-                                if (\Posit32::IsPositive().7._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().4.runningState.0\ := AfterFinished;
-                                    \Posit32::GetExponentValue().4.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().7._Started\ <= false;
-                                    \Posit32::GetExponentValue().4.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().7.return\;
-                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -82398,54 +81675,36 @@ begin
                         if (\Posit32::GetExponentValue().5.Posit32::IsPositive()._Started.0\) then 
                             \Posit32::GetExponentValue().5.Posit32::IsPositive()._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, false, false, true) => 
+                                when (false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().5.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().5.runningIndex.0\ := 0;
                                     \Posit32::IsPositive().0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(0) := false;
                                     \Posit32::IsPositive().0.this.parameter.In\ <= \Posit32::GetExponentValue().5.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, false, true, false) => 
+                                when (false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().5.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().5.runningIndex.0\ := 1;
                                     \Posit32::IsPositive().1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(1) := false;
                                     \Posit32::IsPositive().1.this.parameter.In\ <= \Posit32::GetExponentValue().5.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, true, false, false) => 
+                                when (false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().5.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().5.runningIndex.0\ := 2;
                                     \Posit32::IsPositive().2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(2) := false;
                                     \Posit32::IsPositive().2.this.parameter.In\ <= \Posit32::GetExponentValue().5.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, true, false, false, false) => 
+                                when (false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().5.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().5.runningIndex.0\ := 3;
                                     \Posit32::IsPositive().3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(3) := false;
                                     \Posit32::IsPositive().3.this.parameter.In\ <= \Posit32::GetExponentValue().5.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, true, false, false, false, false) => 
+                                when (true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().5.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().5.runningIndex.0\ := 4;
                                     \Posit32::IsPositive().4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(4) := false;
                                     \Posit32::IsPositive().4.this.parameter.In\ <= \Posit32::GetExponentValue().5.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, true, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().5.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().5.runningIndex.0\ := 5;
-                                    \Posit32::IsPositive().5._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(5) := false;
-                                    \Posit32::IsPositive().5.this.parameter.In\ <= \Posit32::GetExponentValue().5.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, true, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().5.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().5.runningIndex.0\ := 6;
-                                    \Posit32::IsPositive().6._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(6) := false;
-                                    \Posit32::IsPositive().6.this.parameter.In\ <= \Posit32::GetExponentValue().5.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (true, false, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().5.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().5.runningIndex.0\ := 7;
-                                    \Posit32::IsPositive().7._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(7) := false;
-                                    \Posit32::IsPositive().7.this.parameter.In\ <= \Posit32::GetExponentValue().5.Posit32::IsPositive().this.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -82487,27 +81746,6 @@ begin
                                     \Posit32::IsPositive().4._Started\ <= false;
                                     \Posit32::GetExponentValue().5.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().4.return\;
                                 end if;
-                            when 5 => 
-                                if (\Posit32::IsPositive().5._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().5.runningState.0\ := AfterFinished;
-                                    \Posit32::GetExponentValue().5.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().5._Started\ <= false;
-                                    \Posit32::GetExponentValue().5.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().5.return\;
-                                end if;
-                            when 6 => 
-                                if (\Posit32::IsPositive().6._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().5.runningState.0\ := AfterFinished;
-                                    \Posit32::GetExponentValue().5.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().6._Started\ <= false;
-                                    \Posit32::GetExponentValue().5.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().6.return\;
-                                end if;
-                            when 7 => 
-                                if (\Posit32::IsPositive().7._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().5.runningState.0\ := AfterFinished;
-                                    \Posit32::GetExponentValue().5.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().7._Started\ <= false;
-                                    \Posit32::GetExponentValue().5.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().7.return\;
-                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -82524,54 +81762,36 @@ begin
                         if (\Posit32::GetExponentValue().6.Posit32::IsPositive()._Started.0\) then 
                             \Posit32::GetExponentValue().6.Posit32::IsPositive()._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, false, false, true) => 
+                                when (false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().6.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().6.runningIndex.0\ := 0;
                                     \Posit32::IsPositive().0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(0) := false;
                                     \Posit32::IsPositive().0.this.parameter.In\ <= \Posit32::GetExponentValue().6.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, false, true, false) => 
+                                when (false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().6.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().6.runningIndex.0\ := 1;
                                     \Posit32::IsPositive().1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(1) := false;
                                     \Posit32::IsPositive().1.this.parameter.In\ <= \Posit32::GetExponentValue().6.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, true, false, false) => 
+                                when (false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().6.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().6.runningIndex.0\ := 2;
                                     \Posit32::IsPositive().2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(2) := false;
                                     \Posit32::IsPositive().2.this.parameter.In\ <= \Posit32::GetExponentValue().6.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, true, false, false, false) => 
+                                when (false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().6.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().6.runningIndex.0\ := 3;
                                     \Posit32::IsPositive().3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(3) := false;
                                     \Posit32::IsPositive().3.this.parameter.In\ <= \Posit32::GetExponentValue().6.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, true, false, false, false, false) => 
+                                when (true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().6.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().6.runningIndex.0\ := 4;
                                     \Posit32::IsPositive().4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(4) := false;
                                     \Posit32::IsPositive().4.this.parameter.In\ <= \Posit32::GetExponentValue().6.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, true, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().6.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().6.runningIndex.0\ := 5;
-                                    \Posit32::IsPositive().5._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(5) := false;
-                                    \Posit32::IsPositive().5.this.parameter.In\ <= \Posit32::GetExponentValue().6.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, true, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().6.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().6.runningIndex.0\ := 6;
-                                    \Posit32::IsPositive().6._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(6) := false;
-                                    \Posit32::IsPositive().6.this.parameter.In\ <= \Posit32::GetExponentValue().6.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (true, false, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().6.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().6.runningIndex.0\ := 7;
-                                    \Posit32::IsPositive().7._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(7) := false;
-                                    \Posit32::IsPositive().7.this.parameter.In\ <= \Posit32::GetExponentValue().6.Posit32::IsPositive().this.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -82613,27 +81833,6 @@ begin
                                     \Posit32::IsPositive().4._Started\ <= false;
                                     \Posit32::GetExponentValue().6.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().4.return\;
                                 end if;
-                            when 5 => 
-                                if (\Posit32::IsPositive().5._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().6.runningState.0\ := AfterFinished;
-                                    \Posit32::GetExponentValue().6.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().5._Started\ <= false;
-                                    \Posit32::GetExponentValue().6.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().5.return\;
-                                end if;
-                            when 6 => 
-                                if (\Posit32::IsPositive().6._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().6.runningState.0\ := AfterFinished;
-                                    \Posit32::GetExponentValue().6.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().6._Started\ <= false;
-                                    \Posit32::GetExponentValue().6.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().6.return\;
-                                end if;
-                            when 7 => 
-                                if (\Posit32::IsPositive().7._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::GetExponentValue().6.runningState.0\ := AfterFinished;
-                                    \Posit32::GetExponentValue().6.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().7._Started\ <= false;
-                                    \Posit32::GetExponentValue().6.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().7.return\;
-                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -82650,54 +81849,36 @@ begin
                         if (\Posit32::FractionSize().0.Posit32::IsPositive()._Started.0\) then 
                             \Posit32::FractionSize().0.Posit32::IsPositive()._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, false, false, true) => 
+                                when (false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().0.runningIndex.0\ := 0;
                                     \Posit32::IsPositive().0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(0) := false;
                                     \Posit32::IsPositive().0.this.parameter.In\ <= \Posit32::FractionSize().0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, false, true, false) => 
+                                when (false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().0.runningIndex.0\ := 1;
                                     \Posit32::IsPositive().1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(1) := false;
                                     \Posit32::IsPositive().1.this.parameter.In\ <= \Posit32::FractionSize().0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, true, false, false) => 
+                                when (false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().0.runningIndex.0\ := 2;
                                     \Posit32::IsPositive().2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(2) := false;
                                     \Posit32::IsPositive().2.this.parameter.In\ <= \Posit32::FractionSize().0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, true, false, false, false) => 
+                                when (false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().0.runningIndex.0\ := 3;
                                     \Posit32::IsPositive().3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(3) := false;
                                     \Posit32::IsPositive().3.this.parameter.In\ <= \Posit32::FractionSize().0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, true, false, false, false, false) => 
+                                when (true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().0.runningIndex.0\ := 4;
                                     \Posit32::IsPositive().4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(4) := false;
                                     \Posit32::IsPositive().4.this.parameter.In\ <= \Posit32::FractionSize().0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, true, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().0.runningIndex.0\ := 5;
-                                    \Posit32::IsPositive().5._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(5) := false;
-                                    \Posit32::IsPositive().5.this.parameter.In\ <= \Posit32::FractionSize().0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, true, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().0.runningIndex.0\ := 6;
-                                    \Posit32::IsPositive().6._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(6) := false;
-                                    \Posit32::IsPositive().6.this.parameter.In\ <= \Posit32::FractionSize().0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (true, false, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().0.runningIndex.0\ := 7;
-                                    \Posit32::IsPositive().7._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(7) := false;
-                                    \Posit32::IsPositive().7.this.parameter.In\ <= \Posit32::FractionSize().0.Posit32::IsPositive().this.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -82739,27 +81920,6 @@ begin
                                     \Posit32::IsPositive().4._Started\ <= false;
                                     \Posit32::FractionSize().0.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().4.return\;
                                 end if;
-                            when 5 => 
-                                if (\Posit32::IsPositive().5._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().0.runningState.0\ := AfterFinished;
-                                    \Posit32::FractionSize().0.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().5._Started\ <= false;
-                                    \Posit32::FractionSize().0.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().5.return\;
-                                end if;
-                            when 6 => 
-                                if (\Posit32::IsPositive().6._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().0.runningState.0\ := AfterFinished;
-                                    \Posit32::FractionSize().0.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().6._Started\ <= false;
-                                    \Posit32::FractionSize().0.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().6.return\;
-                                end if;
-                            when 7 => 
-                                if (\Posit32::IsPositive().7._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().0.runningState.0\ := AfterFinished;
-                                    \Posit32::FractionSize().0.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().7._Started\ <= false;
-                                    \Posit32::FractionSize().0.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().7.return\;
-                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -82776,54 +81936,36 @@ begin
                         if (\Posit32::FractionSize().1.Posit32::IsPositive()._Started.0\) then 
                             \Posit32::FractionSize().1.Posit32::IsPositive()._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, false, false, true) => 
+                                when (false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().1.runningIndex.0\ := 0;
                                     \Posit32::IsPositive().0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(0) := false;
                                     \Posit32::IsPositive().0.this.parameter.In\ <= \Posit32::FractionSize().1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, false, true, false) => 
+                                when (false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().1.runningIndex.0\ := 1;
                                     \Posit32::IsPositive().1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(1) := false;
                                     \Posit32::IsPositive().1.this.parameter.In\ <= \Posit32::FractionSize().1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, true, false, false) => 
+                                when (false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().1.runningIndex.0\ := 2;
                                     \Posit32::IsPositive().2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(2) := false;
                                     \Posit32::IsPositive().2.this.parameter.In\ <= \Posit32::FractionSize().1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, true, false, false, false) => 
+                                when (false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().1.runningIndex.0\ := 3;
                                     \Posit32::IsPositive().3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(3) := false;
                                     \Posit32::IsPositive().3.this.parameter.In\ <= \Posit32::FractionSize().1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, true, false, false, false, false) => 
+                                when (true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().1.runningIndex.0\ := 4;
                                     \Posit32::IsPositive().4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(4) := false;
                                     \Posit32::IsPositive().4.this.parameter.In\ <= \Posit32::FractionSize().1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, true, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().1.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().1.runningIndex.0\ := 5;
-                                    \Posit32::IsPositive().5._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(5) := false;
-                                    \Posit32::IsPositive().5.this.parameter.In\ <= \Posit32::FractionSize().1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, true, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().1.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().1.runningIndex.0\ := 6;
-                                    \Posit32::IsPositive().6._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(6) := false;
-                                    \Posit32::IsPositive().6.this.parameter.In\ <= \Posit32::FractionSize().1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (true, false, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().1.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().1.runningIndex.0\ := 7;
-                                    \Posit32::IsPositive().7._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(7) := false;
-                                    \Posit32::IsPositive().7.this.parameter.In\ <= \Posit32::FractionSize().1.Posit32::IsPositive().this.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -82865,27 +82007,6 @@ begin
                                     \Posit32::IsPositive().4._Started\ <= false;
                                     \Posit32::FractionSize().1.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().4.return\;
                                 end if;
-                            when 5 => 
-                                if (\Posit32::IsPositive().5._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().1.runningState.0\ := AfterFinished;
-                                    \Posit32::FractionSize().1.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().5._Started\ <= false;
-                                    \Posit32::FractionSize().1.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().5.return\;
-                                end if;
-                            when 6 => 
-                                if (\Posit32::IsPositive().6._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().1.runningState.0\ := AfterFinished;
-                                    \Posit32::FractionSize().1.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().6._Started\ <= false;
-                                    \Posit32::FractionSize().1.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().6.return\;
-                                end if;
-                            when 7 => 
-                                if (\Posit32::IsPositive().7._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().1.runningState.0\ := AfterFinished;
-                                    \Posit32::FractionSize().1.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().7._Started\ <= false;
-                                    \Posit32::FractionSize().1.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().7.return\;
-                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -82902,54 +82023,36 @@ begin
                         if (\Posit32::FractionSize().2.Posit32::IsPositive()._Started.0\) then 
                             \Posit32::FractionSize().2.Posit32::IsPositive()._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, false, false, true) => 
+                                when (false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().2.runningIndex.0\ := 0;
                                     \Posit32::IsPositive().0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(0) := false;
                                     \Posit32::IsPositive().0.this.parameter.In\ <= \Posit32::FractionSize().2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, false, true, false) => 
+                                when (false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().2.runningIndex.0\ := 1;
                                     \Posit32::IsPositive().1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(1) := false;
                                     \Posit32::IsPositive().1.this.parameter.In\ <= \Posit32::FractionSize().2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, true, false, false) => 
+                                when (false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().2.runningIndex.0\ := 2;
                                     \Posit32::IsPositive().2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(2) := false;
                                     \Posit32::IsPositive().2.this.parameter.In\ <= \Posit32::FractionSize().2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, true, false, false, false) => 
+                                when (false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().2.runningIndex.0\ := 3;
                                     \Posit32::IsPositive().3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(3) := false;
                                     \Posit32::IsPositive().3.this.parameter.In\ <= \Posit32::FractionSize().2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, true, false, false, false, false) => 
+                                when (true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().2.runningIndex.0\ := 4;
                                     \Posit32::IsPositive().4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(4) := false;
                                     \Posit32::IsPositive().4.this.parameter.In\ <= \Posit32::FractionSize().2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, true, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().2.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().2.runningIndex.0\ := 5;
-                                    \Posit32::IsPositive().5._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(5) := false;
-                                    \Posit32::IsPositive().5.this.parameter.In\ <= \Posit32::FractionSize().2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, true, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().2.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().2.runningIndex.0\ := 6;
-                                    \Posit32::IsPositive().6._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(6) := false;
-                                    \Posit32::IsPositive().6.this.parameter.In\ <= \Posit32::FractionSize().2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (true, false, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().2.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().2.runningIndex.0\ := 7;
-                                    \Posit32::IsPositive().7._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(7) := false;
-                                    \Posit32::IsPositive().7.this.parameter.In\ <= \Posit32::FractionSize().2.Posit32::IsPositive().this.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -82991,27 +82094,6 @@ begin
                                     \Posit32::IsPositive().4._Started\ <= false;
                                     \Posit32::FractionSize().2.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().4.return\;
                                 end if;
-                            when 5 => 
-                                if (\Posit32::IsPositive().5._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().2.runningState.0\ := AfterFinished;
-                                    \Posit32::FractionSize().2.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().5._Started\ <= false;
-                                    \Posit32::FractionSize().2.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().5.return\;
-                                end if;
-                            when 6 => 
-                                if (\Posit32::IsPositive().6._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().2.runningState.0\ := AfterFinished;
-                                    \Posit32::FractionSize().2.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().6._Started\ <= false;
-                                    \Posit32::FractionSize().2.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().6.return\;
-                                end if;
-                            when 7 => 
-                                if (\Posit32::IsPositive().7._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().2.runningState.0\ := AfterFinished;
-                                    \Posit32::FractionSize().2.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().7._Started\ <= false;
-                                    \Posit32::FractionSize().2.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().7.return\;
-                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -83028,54 +82110,36 @@ begin
                         if (\Posit32::FractionSize().3.Posit32::IsPositive()._Started.0\) then 
                             \Posit32::FractionSize().3.Posit32::IsPositive()._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, false, false, true) => 
+                                when (false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().3.runningIndex.0\ := 0;
                                     \Posit32::IsPositive().0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(0) := false;
                                     \Posit32::IsPositive().0.this.parameter.In\ <= \Posit32::FractionSize().3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, false, true, false) => 
+                                when (false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().3.runningIndex.0\ := 1;
                                     \Posit32::IsPositive().1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(1) := false;
                                     \Posit32::IsPositive().1.this.parameter.In\ <= \Posit32::FractionSize().3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, true, false, false) => 
+                                when (false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().3.runningIndex.0\ := 2;
                                     \Posit32::IsPositive().2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(2) := false;
                                     \Posit32::IsPositive().2.this.parameter.In\ <= \Posit32::FractionSize().3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, true, false, false, false) => 
+                                when (false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().3.runningIndex.0\ := 3;
                                     \Posit32::IsPositive().3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(3) := false;
                                     \Posit32::IsPositive().3.this.parameter.In\ <= \Posit32::FractionSize().3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, true, false, false, false, false) => 
+                                when (true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().3.runningIndex.0\ := 4;
                                     \Posit32::IsPositive().4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(4) := false;
                                     \Posit32::IsPositive().4.this.parameter.In\ <= \Posit32::FractionSize().3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, true, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().3.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().3.runningIndex.0\ := 5;
-                                    \Posit32::IsPositive().5._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(5) := false;
-                                    \Posit32::IsPositive().5.this.parameter.In\ <= \Posit32::FractionSize().3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, true, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().3.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().3.runningIndex.0\ := 6;
-                                    \Posit32::IsPositive().6._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(6) := false;
-                                    \Posit32::IsPositive().6.this.parameter.In\ <= \Posit32::FractionSize().3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (true, false, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().3.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().3.runningIndex.0\ := 7;
-                                    \Posit32::IsPositive().7._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(7) := false;
-                                    \Posit32::IsPositive().7.this.parameter.In\ <= \Posit32::FractionSize().3.Posit32::IsPositive().this.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -83117,27 +82181,6 @@ begin
                                     \Posit32::IsPositive().4._Started\ <= false;
                                     \Posit32::FractionSize().3.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().4.return\;
                                 end if;
-                            when 5 => 
-                                if (\Posit32::IsPositive().5._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().3.runningState.0\ := AfterFinished;
-                                    \Posit32::FractionSize().3.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().5._Started\ <= false;
-                                    \Posit32::FractionSize().3.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().5.return\;
-                                end if;
-                            when 6 => 
-                                if (\Posit32::IsPositive().6._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().3.runningState.0\ := AfterFinished;
-                                    \Posit32::FractionSize().3.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().6._Started\ <= false;
-                                    \Posit32::FractionSize().3.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().6.return\;
-                                end if;
-                            when 7 => 
-                                if (\Posit32::IsPositive().7._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().3.runningState.0\ := AfterFinished;
-                                    \Posit32::FractionSize().3.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().7._Started\ <= false;
-                                    \Posit32::FractionSize().3.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().7.return\;
-                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -83154,54 +82197,36 @@ begin
                         if (\Posit32::FractionSize().4.Posit32::IsPositive()._Started.0\) then 
                             \Posit32::FractionSize().4.Posit32::IsPositive()._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, false, false, true) => 
+                                when (false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().4.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().4.runningIndex.0\ := 0;
                                     \Posit32::IsPositive().0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(0) := false;
                                     \Posit32::IsPositive().0.this.parameter.In\ <= \Posit32::FractionSize().4.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, false, true, false) => 
+                                when (false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().4.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().4.runningIndex.0\ := 1;
                                     \Posit32::IsPositive().1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(1) := false;
                                     \Posit32::IsPositive().1.this.parameter.In\ <= \Posit32::FractionSize().4.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, true, false, false) => 
+                                when (false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().4.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().4.runningIndex.0\ := 2;
                                     \Posit32::IsPositive().2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(2) := false;
                                     \Posit32::IsPositive().2.this.parameter.In\ <= \Posit32::FractionSize().4.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, true, false, false, false) => 
+                                when (false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().4.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().4.runningIndex.0\ := 3;
                                     \Posit32::IsPositive().3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(3) := false;
                                     \Posit32::IsPositive().3.this.parameter.In\ <= \Posit32::FractionSize().4.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, true, false, false, false, false) => 
+                                when (true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().4.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().4.runningIndex.0\ := 4;
                                     \Posit32::IsPositive().4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(4) := false;
                                     \Posit32::IsPositive().4.this.parameter.In\ <= \Posit32::FractionSize().4.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, true, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().4.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().4.runningIndex.0\ := 5;
-                                    \Posit32::IsPositive().5._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(5) := false;
-                                    \Posit32::IsPositive().5.this.parameter.In\ <= \Posit32::FractionSize().4.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, true, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().4.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().4.runningIndex.0\ := 6;
-                                    \Posit32::IsPositive().6._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(6) := false;
-                                    \Posit32::IsPositive().6.this.parameter.In\ <= \Posit32::FractionSize().4.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (true, false, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().4.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().4.runningIndex.0\ := 7;
-                                    \Posit32::IsPositive().7._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(7) := false;
-                                    \Posit32::IsPositive().7.this.parameter.In\ <= \Posit32::FractionSize().4.Posit32::IsPositive().this.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -83243,27 +82268,6 @@ begin
                                     \Posit32::IsPositive().4._Started\ <= false;
                                     \Posit32::FractionSize().4.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().4.return\;
                                 end if;
-                            when 5 => 
-                                if (\Posit32::IsPositive().5._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().4.runningState.0\ := AfterFinished;
-                                    \Posit32::FractionSize().4.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().5._Started\ <= false;
-                                    \Posit32::FractionSize().4.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().5.return\;
-                                end if;
-                            when 6 => 
-                                if (\Posit32::IsPositive().6._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().4.runningState.0\ := AfterFinished;
-                                    \Posit32::FractionSize().4.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().6._Started\ <= false;
-                                    \Posit32::FractionSize().4.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().6.return\;
-                                end if;
-                            when 7 => 
-                                if (\Posit32::IsPositive().7._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().4.runningState.0\ := AfterFinished;
-                                    \Posit32::FractionSize().4.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().7._Started\ <= false;
-                                    \Posit32::FractionSize().4.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().7.return\;
-                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -83280,54 +82284,36 @@ begin
                         if (\Posit32::FractionSize().5.Posit32::IsPositive()._Started.0\) then 
                             \Posit32::FractionSize().5.Posit32::IsPositive()._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, false, false, true) => 
+                                when (false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().5.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().5.runningIndex.0\ := 0;
                                     \Posit32::IsPositive().0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(0) := false;
                                     \Posit32::IsPositive().0.this.parameter.In\ <= \Posit32::FractionSize().5.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, false, true, false) => 
+                                when (false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().5.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().5.runningIndex.0\ := 1;
                                     \Posit32::IsPositive().1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(1) := false;
                                     \Posit32::IsPositive().1.this.parameter.In\ <= \Posit32::FractionSize().5.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, true, false, false) => 
+                                when (false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().5.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().5.runningIndex.0\ := 2;
                                     \Posit32::IsPositive().2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(2) := false;
                                     \Posit32::IsPositive().2.this.parameter.In\ <= \Posit32::FractionSize().5.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, true, false, false, false) => 
+                                when (false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().5.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().5.runningIndex.0\ := 3;
                                     \Posit32::IsPositive().3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(3) := false;
                                     \Posit32::IsPositive().3.this.parameter.In\ <= \Posit32::FractionSize().5.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, true, false, false, false, false) => 
+                                when (true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().5.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().5.runningIndex.0\ := 4;
                                     \Posit32::IsPositive().4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(4) := false;
                                     \Posit32::IsPositive().4.this.parameter.In\ <= \Posit32::FractionSize().5.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, true, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().5.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().5.runningIndex.0\ := 5;
-                                    \Posit32::IsPositive().5._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(5) := false;
-                                    \Posit32::IsPositive().5.this.parameter.In\ <= \Posit32::FractionSize().5.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, true, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().5.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().5.runningIndex.0\ := 6;
-                                    \Posit32::IsPositive().6._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(6) := false;
-                                    \Posit32::IsPositive().6.this.parameter.In\ <= \Posit32::FractionSize().5.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (true, false, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().5.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().5.runningIndex.0\ := 7;
-                                    \Posit32::IsPositive().7._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(7) := false;
-                                    \Posit32::IsPositive().7.this.parameter.In\ <= \Posit32::FractionSize().5.Posit32::IsPositive().this.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -83369,27 +82355,6 @@ begin
                                     \Posit32::IsPositive().4._Started\ <= false;
                                     \Posit32::FractionSize().5.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().4.return\;
                                 end if;
-                            when 5 => 
-                                if (\Posit32::IsPositive().5._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().5.runningState.0\ := AfterFinished;
-                                    \Posit32::FractionSize().5.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().5._Started\ <= false;
-                                    \Posit32::FractionSize().5.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().5.return\;
-                                end if;
-                            when 6 => 
-                                if (\Posit32::IsPositive().6._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().5.runningState.0\ := AfterFinished;
-                                    \Posit32::FractionSize().5.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().6._Started\ <= false;
-                                    \Posit32::FractionSize().5.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().6.return\;
-                                end if;
-                            when 7 => 
-                                if (\Posit32::IsPositive().7._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().5.runningState.0\ := AfterFinished;
-                                    \Posit32::FractionSize().5.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().7._Started\ <= false;
-                                    \Posit32::FractionSize().5.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().7.return\;
-                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -83406,54 +82371,36 @@ begin
                         if (\Posit32::FractionSize().6.Posit32::IsPositive()._Started.0\) then 
                             \Posit32::FractionSize().6.Posit32::IsPositive()._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, false, false, true) => 
+                                when (false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().6.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().6.runningIndex.0\ := 0;
                                     \Posit32::IsPositive().0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(0) := false;
                                     \Posit32::IsPositive().0.this.parameter.In\ <= \Posit32::FractionSize().6.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, false, true, false) => 
+                                when (false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().6.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().6.runningIndex.0\ := 1;
                                     \Posit32::IsPositive().1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(1) := false;
                                     \Posit32::IsPositive().1.this.parameter.In\ <= \Posit32::FractionSize().6.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, true, false, false) => 
+                                when (false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().6.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().6.runningIndex.0\ := 2;
                                     \Posit32::IsPositive().2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(2) := false;
                                     \Posit32::IsPositive().2.this.parameter.In\ <= \Posit32::FractionSize().6.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, true, false, false, false) => 
+                                when (false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().6.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().6.runningIndex.0\ := 3;
                                     \Posit32::IsPositive().3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(3) := false;
                                     \Posit32::IsPositive().3.this.parameter.In\ <= \Posit32::FractionSize().6.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, true, false, false, false, false) => 
+                                when (true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().6.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().6.runningIndex.0\ := 4;
                                     \Posit32::IsPositive().4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(4) := false;
                                     \Posit32::IsPositive().4.this.parameter.In\ <= \Posit32::FractionSize().6.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, true, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().6.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().6.runningIndex.0\ := 5;
-                                    \Posit32::IsPositive().5._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(5) := false;
-                                    \Posit32::IsPositive().5.this.parameter.In\ <= \Posit32::FractionSize().6.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, true, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().6.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().6.runningIndex.0\ := 6;
-                                    \Posit32::IsPositive().6._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(6) := false;
-                                    \Posit32::IsPositive().6.this.parameter.In\ <= \Posit32::FractionSize().6.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (true, false, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().6.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().6.runningIndex.0\ := 7;
-                                    \Posit32::IsPositive().7._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(7) := false;
-                                    \Posit32::IsPositive().7.this.parameter.In\ <= \Posit32::FractionSize().6.Posit32::IsPositive().this.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -83495,27 +82442,6 @@ begin
                                     \Posit32::IsPositive().4._Started\ <= false;
                                     \Posit32::FractionSize().6.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().4.return\;
                                 end if;
-                            when 5 => 
-                                if (\Posit32::IsPositive().5._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().6.runningState.0\ := AfterFinished;
-                                    \Posit32::FractionSize().6.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().5._Started\ <= false;
-                                    \Posit32::FractionSize().6.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().5.return\;
-                                end if;
-                            when 6 => 
-                                if (\Posit32::IsPositive().6._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().6.runningState.0\ := AfterFinished;
-                                    \Posit32::FractionSize().6.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().6._Started\ <= false;
-                                    \Posit32::FractionSize().6.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().6.return\;
-                                end if;
-                            when 7 => 
-                                if (\Posit32::IsPositive().7._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionSize().6.runningState.0\ := AfterFinished;
-                                    \Posit32::FractionSize().6.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().7._Started\ <= false;
-                                    \Posit32::FractionSize().6.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().7.return\;
-                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -83532,54 +82458,36 @@ begin
                         if (\Posit32::FractionWithHiddenBit().0.Posit32::IsPositive()._Started.0\) then 
                             \Posit32::FractionWithHiddenBit().0.Posit32::IsPositive()._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, false, false, true) => 
+                                when (false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().0.runningIndex.0\ := 0;
                                     \Posit32::IsPositive().0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(0) := false;
                                     \Posit32::IsPositive().0.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, false, true, false) => 
+                                when (false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().0.runningIndex.0\ := 1;
                                     \Posit32::IsPositive().1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(1) := false;
                                     \Posit32::IsPositive().1.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, true, false, false) => 
+                                when (false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().0.runningIndex.0\ := 2;
                                     \Posit32::IsPositive().2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(2) := false;
                                     \Posit32::IsPositive().2.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, true, false, false, false) => 
+                                when (false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().0.runningIndex.0\ := 3;
                                     \Posit32::IsPositive().3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(3) := false;
                                     \Posit32::IsPositive().3.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, true, false, false, false, false) => 
+                                when (true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().0.runningIndex.0\ := 4;
                                     \Posit32::IsPositive().4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(4) := false;
                                     \Posit32::IsPositive().4.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, true, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().0.runningIndex.0\ := 5;
-                                    \Posit32::IsPositive().5._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(5) := false;
-                                    \Posit32::IsPositive().5.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, true, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().0.runningIndex.0\ := 6;
-                                    \Posit32::IsPositive().6._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(6) := false;
-                                    \Posit32::IsPositive().6.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (true, false, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().0.runningIndex.0\ := 7;
-                                    \Posit32::IsPositive().7._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(7) := false;
-                                    \Posit32::IsPositive().7.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().0.Posit32::IsPositive().this.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -83621,27 +82529,6 @@ begin
                                     \Posit32::IsPositive().4._Started\ <= false;
                                     \Posit32::FractionWithHiddenBit().0.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().4.return\;
                                 end if;
-                            when 5 => 
-                                if (\Posit32::IsPositive().5._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().0.runningState.0\ := AfterFinished;
-                                    \Posit32::FractionWithHiddenBit().0.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().5._Started\ <= false;
-                                    \Posit32::FractionWithHiddenBit().0.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().5.return\;
-                                end if;
-                            when 6 => 
-                                if (\Posit32::IsPositive().6._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().0.runningState.0\ := AfterFinished;
-                                    \Posit32::FractionWithHiddenBit().0.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().6._Started\ <= false;
-                                    \Posit32::FractionWithHiddenBit().0.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().6.return\;
-                                end if;
-                            when 7 => 
-                                if (\Posit32::IsPositive().7._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().0.runningState.0\ := AfterFinished;
-                                    \Posit32::FractionWithHiddenBit().0.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().7._Started\ <= false;
-                                    \Posit32::FractionWithHiddenBit().0.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().7.return\;
-                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -83658,54 +82545,36 @@ begin
                         if (\Posit32::FractionWithHiddenBit().1.Posit32::IsPositive()._Started.0\) then 
                             \Posit32::FractionWithHiddenBit().1.Posit32::IsPositive()._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, false, false, true) => 
+                                when (false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().1.runningIndex.0\ := 0;
                                     \Posit32::IsPositive().0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(0) := false;
                                     \Posit32::IsPositive().0.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, false, true, false) => 
+                                when (false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().1.runningIndex.0\ := 1;
                                     \Posit32::IsPositive().1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(1) := false;
                                     \Posit32::IsPositive().1.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, true, false, false) => 
+                                when (false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().1.runningIndex.0\ := 2;
                                     \Posit32::IsPositive().2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(2) := false;
                                     \Posit32::IsPositive().2.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, true, false, false, false) => 
+                                when (false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().1.runningIndex.0\ := 3;
                                     \Posit32::IsPositive().3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(3) := false;
                                     \Posit32::IsPositive().3.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, true, false, false, false, false) => 
+                                when (true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().1.runningIndex.0\ := 4;
                                     \Posit32::IsPositive().4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(4) := false;
                                     \Posit32::IsPositive().4.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, true, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().1.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().1.runningIndex.0\ := 5;
-                                    \Posit32::IsPositive().5._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(5) := false;
-                                    \Posit32::IsPositive().5.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, true, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().1.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().1.runningIndex.0\ := 6;
-                                    \Posit32::IsPositive().6._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(6) := false;
-                                    \Posit32::IsPositive().6.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (true, false, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().1.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().1.runningIndex.0\ := 7;
-                                    \Posit32::IsPositive().7._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(7) := false;
-                                    \Posit32::IsPositive().7.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().1.Posit32::IsPositive().this.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -83747,27 +82616,6 @@ begin
                                     \Posit32::IsPositive().4._Started\ <= false;
                                     \Posit32::FractionWithHiddenBit().1.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().4.return\;
                                 end if;
-                            when 5 => 
-                                if (\Posit32::IsPositive().5._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().1.runningState.0\ := AfterFinished;
-                                    \Posit32::FractionWithHiddenBit().1.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().5._Started\ <= false;
-                                    \Posit32::FractionWithHiddenBit().1.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().5.return\;
-                                end if;
-                            when 6 => 
-                                if (\Posit32::IsPositive().6._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().1.runningState.0\ := AfterFinished;
-                                    \Posit32::FractionWithHiddenBit().1.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().6._Started\ <= false;
-                                    \Posit32::FractionWithHiddenBit().1.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().6.return\;
-                                end if;
-                            when 7 => 
-                                if (\Posit32::IsPositive().7._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().1.runningState.0\ := AfterFinished;
-                                    \Posit32::FractionWithHiddenBit().1.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().7._Started\ <= false;
-                                    \Posit32::FractionWithHiddenBit().1.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().7.return\;
-                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -83784,54 +82632,36 @@ begin
                         if (\Posit32::FractionWithHiddenBit().2.Posit32::IsPositive()._Started.0\) then 
                             \Posit32::FractionWithHiddenBit().2.Posit32::IsPositive()._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, false, false, true) => 
+                                when (false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().2.runningIndex.0\ := 0;
                                     \Posit32::IsPositive().0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(0) := false;
                                     \Posit32::IsPositive().0.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, false, true, false) => 
+                                when (false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().2.runningIndex.0\ := 1;
                                     \Posit32::IsPositive().1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(1) := false;
                                     \Posit32::IsPositive().1.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, true, false, false) => 
+                                when (false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().2.runningIndex.0\ := 2;
                                     \Posit32::IsPositive().2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(2) := false;
                                     \Posit32::IsPositive().2.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, true, false, false, false) => 
+                                when (false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().2.runningIndex.0\ := 3;
                                     \Posit32::IsPositive().3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(3) := false;
                                     \Posit32::IsPositive().3.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, true, false, false, false, false) => 
+                                when (true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().2.runningIndex.0\ := 4;
                                     \Posit32::IsPositive().4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(4) := false;
                                     \Posit32::IsPositive().4.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, true, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().2.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().2.runningIndex.0\ := 5;
-                                    \Posit32::IsPositive().5._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(5) := false;
-                                    \Posit32::IsPositive().5.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, true, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().2.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().2.runningIndex.0\ := 6;
-                                    \Posit32::IsPositive().6._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(6) := false;
-                                    \Posit32::IsPositive().6.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (true, false, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().2.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().2.runningIndex.0\ := 7;
-                                    \Posit32::IsPositive().7._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(7) := false;
-                                    \Posit32::IsPositive().7.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().2.Posit32::IsPositive().this.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -83873,27 +82703,6 @@ begin
                                     \Posit32::IsPositive().4._Started\ <= false;
                                     \Posit32::FractionWithHiddenBit().2.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().4.return\;
                                 end if;
-                            when 5 => 
-                                if (\Posit32::IsPositive().5._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().2.runningState.0\ := AfterFinished;
-                                    \Posit32::FractionWithHiddenBit().2.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().5._Started\ <= false;
-                                    \Posit32::FractionWithHiddenBit().2.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().5.return\;
-                                end if;
-                            when 6 => 
-                                if (\Posit32::IsPositive().6._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().2.runningState.0\ := AfterFinished;
-                                    \Posit32::FractionWithHiddenBit().2.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().6._Started\ <= false;
-                                    \Posit32::FractionWithHiddenBit().2.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().6.return\;
-                                end if;
-                            when 7 => 
-                                if (\Posit32::IsPositive().7._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().2.runningState.0\ := AfterFinished;
-                                    \Posit32::FractionWithHiddenBit().2.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().7._Started\ <= false;
-                                    \Posit32::FractionWithHiddenBit().2.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().7.return\;
-                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -83910,54 +82719,36 @@ begin
                         if (\Posit32::FractionWithHiddenBit().3.Posit32::IsPositive()._Started.0\) then 
                             \Posit32::FractionWithHiddenBit().3.Posit32::IsPositive()._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, false, false, true) => 
+                                when (false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().3.runningIndex.0\ := 0;
                                     \Posit32::IsPositive().0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(0) := false;
                                     \Posit32::IsPositive().0.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, false, true, false) => 
+                                when (false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().3.runningIndex.0\ := 1;
                                     \Posit32::IsPositive().1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(1) := false;
                                     \Posit32::IsPositive().1.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, true, false, false) => 
+                                when (false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().3.runningIndex.0\ := 2;
                                     \Posit32::IsPositive().2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(2) := false;
                                     \Posit32::IsPositive().2.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, true, false, false, false) => 
+                                when (false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().3.runningIndex.0\ := 3;
                                     \Posit32::IsPositive().3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(3) := false;
                                     \Posit32::IsPositive().3.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, true, false, false, false, false) => 
+                                when (true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().3.runningIndex.0\ := 4;
                                     \Posit32::IsPositive().4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(4) := false;
                                     \Posit32::IsPositive().4.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, true, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().3.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().3.runningIndex.0\ := 5;
-                                    \Posit32::IsPositive().5._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(5) := false;
-                                    \Posit32::IsPositive().5.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, true, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().3.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().3.runningIndex.0\ := 6;
-                                    \Posit32::IsPositive().6._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(6) := false;
-                                    \Posit32::IsPositive().6.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (true, false, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().3.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().3.runningIndex.0\ := 7;
-                                    \Posit32::IsPositive().7._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(7) := false;
-                                    \Posit32::IsPositive().7.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().3.Posit32::IsPositive().this.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -83999,27 +82790,6 @@ begin
                                     \Posit32::IsPositive().4._Started\ <= false;
                                     \Posit32::FractionWithHiddenBit().3.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().4.return\;
                                 end if;
-                            when 5 => 
-                                if (\Posit32::IsPositive().5._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().3.runningState.0\ := AfterFinished;
-                                    \Posit32::FractionWithHiddenBit().3.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().5._Started\ <= false;
-                                    \Posit32::FractionWithHiddenBit().3.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().5.return\;
-                                end if;
-                            when 6 => 
-                                if (\Posit32::IsPositive().6._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().3.runningState.0\ := AfterFinished;
-                                    \Posit32::FractionWithHiddenBit().3.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().6._Started\ <= false;
-                                    \Posit32::FractionWithHiddenBit().3.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().6.return\;
-                                end if;
-                            when 7 => 
-                                if (\Posit32::IsPositive().7._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().3.runningState.0\ := AfterFinished;
-                                    \Posit32::FractionWithHiddenBit().3.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().7._Started\ <= false;
-                                    \Posit32::FractionWithHiddenBit().3.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().7.return\;
-                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -84036,54 +82806,36 @@ begin
                         if (\Posit32::FractionWithHiddenBit().4.Posit32::IsPositive()._Started.0\) then 
                             \Posit32::FractionWithHiddenBit().4.Posit32::IsPositive()._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, false, false, true) => 
+                                when (false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().4.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().4.runningIndex.0\ := 0;
                                     \Posit32::IsPositive().0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(0) := false;
                                     \Posit32::IsPositive().0.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().4.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, false, true, false) => 
+                                when (false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().4.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().4.runningIndex.0\ := 1;
                                     \Posit32::IsPositive().1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(1) := false;
                                     \Posit32::IsPositive().1.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().4.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, true, false, false) => 
+                                when (false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().4.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().4.runningIndex.0\ := 2;
                                     \Posit32::IsPositive().2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(2) := false;
                                     \Posit32::IsPositive().2.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().4.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, true, false, false, false) => 
+                                when (false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().4.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().4.runningIndex.0\ := 3;
                                     \Posit32::IsPositive().3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(3) := false;
                                     \Posit32::IsPositive().3.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().4.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, true, false, false, false, false) => 
+                                when (true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().4.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().4.runningIndex.0\ := 4;
                                     \Posit32::IsPositive().4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(4) := false;
                                     \Posit32::IsPositive().4.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().4.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, true, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().4.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().4.runningIndex.0\ := 5;
-                                    \Posit32::IsPositive().5._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(5) := false;
-                                    \Posit32::IsPositive().5.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().4.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, true, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().4.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().4.runningIndex.0\ := 6;
-                                    \Posit32::IsPositive().6._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(6) := false;
-                                    \Posit32::IsPositive().6.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().4.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (true, false, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().4.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().4.runningIndex.0\ := 7;
-                                    \Posit32::IsPositive().7._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(7) := false;
-                                    \Posit32::IsPositive().7.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().4.Posit32::IsPositive().this.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -84125,27 +82877,6 @@ begin
                                     \Posit32::IsPositive().4._Started\ <= false;
                                     \Posit32::FractionWithHiddenBit().4.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().4.return\;
                                 end if;
-                            when 5 => 
-                                if (\Posit32::IsPositive().5._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().4.runningState.0\ := AfterFinished;
-                                    \Posit32::FractionWithHiddenBit().4.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().5._Started\ <= false;
-                                    \Posit32::FractionWithHiddenBit().4.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().5.return\;
-                                end if;
-                            when 6 => 
-                                if (\Posit32::IsPositive().6._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().4.runningState.0\ := AfterFinished;
-                                    \Posit32::FractionWithHiddenBit().4.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().6._Started\ <= false;
-                                    \Posit32::FractionWithHiddenBit().4.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().6.return\;
-                                end if;
-                            when 7 => 
-                                if (\Posit32::IsPositive().7._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().4.runningState.0\ := AfterFinished;
-                                    \Posit32::FractionWithHiddenBit().4.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().7._Started\ <= false;
-                                    \Posit32::FractionWithHiddenBit().4.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().7.return\;
-                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -84162,54 +82893,36 @@ begin
                         if (\Posit32::FractionWithHiddenBit().5.Posit32::IsPositive()._Started.0\) then 
                             \Posit32::FractionWithHiddenBit().5.Posit32::IsPositive()._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, false, false, true) => 
+                                when (false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().5.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().5.runningIndex.0\ := 0;
                                     \Posit32::IsPositive().0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(0) := false;
                                     \Posit32::IsPositive().0.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().5.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, false, true, false) => 
+                                when (false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().5.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().5.runningIndex.0\ := 1;
                                     \Posit32::IsPositive().1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(1) := false;
                                     \Posit32::IsPositive().1.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().5.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, true, false, false) => 
+                                when (false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().5.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().5.runningIndex.0\ := 2;
                                     \Posit32::IsPositive().2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(2) := false;
                                     \Posit32::IsPositive().2.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().5.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, true, false, false, false) => 
+                                when (false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().5.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().5.runningIndex.0\ := 3;
                                     \Posit32::IsPositive().3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(3) := false;
                                     \Posit32::IsPositive().3.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().5.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, true, false, false, false, false) => 
+                                when (true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().5.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().5.runningIndex.0\ := 4;
                                     \Posit32::IsPositive().4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(4) := false;
                                     \Posit32::IsPositive().4.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().5.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, true, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().5.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().5.runningIndex.0\ := 5;
-                                    \Posit32::IsPositive().5._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(5) := false;
-                                    \Posit32::IsPositive().5.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().5.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, true, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().5.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().5.runningIndex.0\ := 6;
-                                    \Posit32::IsPositive().6._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(6) := false;
-                                    \Posit32::IsPositive().6.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().5.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (true, false, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().5.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().5.runningIndex.0\ := 7;
-                                    \Posit32::IsPositive().7._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(7) := false;
-                                    \Posit32::IsPositive().7.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().5.Posit32::IsPositive().this.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -84251,27 +82964,6 @@ begin
                                     \Posit32::IsPositive().4._Started\ <= false;
                                     \Posit32::FractionWithHiddenBit().5.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().4.return\;
                                 end if;
-                            when 5 => 
-                                if (\Posit32::IsPositive().5._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().5.runningState.0\ := AfterFinished;
-                                    \Posit32::FractionWithHiddenBit().5.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().5._Started\ <= false;
-                                    \Posit32::FractionWithHiddenBit().5.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().5.return\;
-                                end if;
-                            when 6 => 
-                                if (\Posit32::IsPositive().6._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().5.runningState.0\ := AfterFinished;
-                                    \Posit32::FractionWithHiddenBit().5.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().6._Started\ <= false;
-                                    \Posit32::FractionWithHiddenBit().5.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().6.return\;
-                                end if;
-                            when 7 => 
-                                if (\Posit32::IsPositive().7._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().5.runningState.0\ := AfterFinished;
-                                    \Posit32::FractionWithHiddenBit().5.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().7._Started\ <= false;
-                                    \Posit32::FractionWithHiddenBit().5.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().7.return\;
-                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -84288,54 +82980,36 @@ begin
                         if (\Posit32::FractionWithHiddenBit().6.Posit32::IsPositive()._Started.0\) then 
                             \Posit32::FractionWithHiddenBit().6.Posit32::IsPositive()._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, false, false, true) => 
+                                when (false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().6.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().6.runningIndex.0\ := 0;
                                     \Posit32::IsPositive().0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(0) := false;
                                     \Posit32::IsPositive().0.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().6.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, false, true, false) => 
+                                when (false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().6.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().6.runningIndex.0\ := 1;
                                     \Posit32::IsPositive().1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(1) := false;
                                     \Posit32::IsPositive().1.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().6.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, true, false, false) => 
+                                when (false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().6.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().6.runningIndex.0\ := 2;
                                     \Posit32::IsPositive().2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(2) := false;
                                     \Posit32::IsPositive().2.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().6.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, true, false, false, false) => 
+                                when (false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().6.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().6.runningIndex.0\ := 3;
                                     \Posit32::IsPositive().3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(3) := false;
                                     \Posit32::IsPositive().3.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().6.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, true, false, false, false, false) => 
+                                when (true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().6.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().6.runningIndex.0\ := 4;
                                     \Posit32::IsPositive().4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(4) := false;
                                     \Posit32::IsPositive().4.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().6.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, true, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().6.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().6.runningIndex.0\ := 5;
-                                    \Posit32::IsPositive().5._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(5) := false;
-                                    \Posit32::IsPositive().5.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().6.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, true, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().6.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().6.runningIndex.0\ := 6;
-                                    \Posit32::IsPositive().6._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(6) := false;
-                                    \Posit32::IsPositive().6.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().6.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (true, false, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().6.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().6.runningIndex.0\ := 7;
-                                    \Posit32::IsPositive().7._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(7) := false;
-                                    \Posit32::IsPositive().7.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().6.Posit32::IsPositive().this.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -84377,27 +83051,6 @@ begin
                                     \Posit32::IsPositive().4._Started\ <= false;
                                     \Posit32::FractionWithHiddenBit().6.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().4.return\;
                                 end if;
-                            when 5 => 
-                                if (\Posit32::IsPositive().5._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().6.runningState.0\ := AfterFinished;
-                                    \Posit32::FractionWithHiddenBit().6.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().5._Started\ <= false;
-                                    \Posit32::FractionWithHiddenBit().6.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().5.return\;
-                                end if;
-                            when 6 => 
-                                if (\Posit32::IsPositive().6._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().6.runningState.0\ := AfterFinished;
-                                    \Posit32::FractionWithHiddenBit().6.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().6._Started\ <= false;
-                                    \Posit32::FractionWithHiddenBit().6.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().6.return\;
-                                end if;
-                            when 7 => 
-                                if (\Posit32::IsPositive().7._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32::FractionWithHiddenBit().6.runningState.0\ := AfterFinished;
-                                    \Posit32::FractionWithHiddenBit().6.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().7._Started\ <= false;
-                                    \Posit32::FractionWithHiddenBit().6.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().7.return\;
-                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -84408,690 +83061,42 @@ begin
                 end case;
 
 
-                -- Invocation handler #0 out of 1 corresponding to System.Boolean Lombiq.Arithmetics.Posit32::op_GreaterThan(Lombiq.Arithmetics.Posit32,Lombiq.Arithmetics.Posit32).0
-                case \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.runningState.0\ is 
-                    when WaitingForStarted => 
-                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive()._Started.0\) then 
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive()._Finished.0\ <= false;
-                            case \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, false, false, true) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.runningIndex.0\ := 0;
-                                    \Posit32::IsPositive().0._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(0) := false;
-                                    \Posit32::IsPositive().0.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, false, true, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.runningIndex.0\ := 1;
-                                    \Posit32::IsPositive().1._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(1) := false;
-                                    \Posit32::IsPositive().1.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, true, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.runningIndex.0\ := 2;
-                                    \Posit32::IsPositive().2._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(2) := false;
-                                    \Posit32::IsPositive().2.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, true, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.runningIndex.0\ := 3;
-                                    \Posit32::IsPositive().3._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(3) := false;
-                                    \Posit32::IsPositive().3.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, true, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.runningIndex.0\ := 4;
-                                    \Posit32::IsPositive().4._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(4) := false;
-                                    \Posit32::IsPositive().4.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, true, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.runningIndex.0\ := 5;
-                                    \Posit32::IsPositive().5._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(5) := false;
-                                    \Posit32::IsPositive().5.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, true, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.runningIndex.0\ := 6;
-                                    \Posit32::IsPositive().6._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(6) := false;
-                                    \Posit32::IsPositive().6.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (true, false, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.runningIndex.0\ := 7;
-                                    \Posit32::IsPositive().7._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(7) := false;
-                                    \Posit32::IsPositive().7.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when others => 
-                                    null;
-                            end case;
-                        end if;
-                    when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.runningIndex.0\ is 
-                            when 0 => 
-                                if (\Posit32::IsPositive().0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.runningState.0\ := AfterFinished;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().0._Started\ <= false;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().0.return\;
-                                end if;
-                            when 1 => 
-                                if (\Posit32::IsPositive().1._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.runningState.0\ := AfterFinished;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().1._Started\ <= false;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().1.return\;
-                                end if;
-                            when 2 => 
-                                if (\Posit32::IsPositive().2._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.runningState.0\ := AfterFinished;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().2._Started\ <= false;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().2.return\;
-                                end if;
-                            when 3 => 
-                                if (\Posit32::IsPositive().3._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.runningState.0\ := AfterFinished;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().3._Started\ <= false;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().3.return\;
-                                end if;
-                            when 4 => 
-                                if (\Posit32::IsPositive().4._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.runningState.0\ := AfterFinished;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().4._Started\ <= false;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().4.return\;
-                                end if;
-                            when 5 => 
-                                if (\Posit32::IsPositive().5._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.runningState.0\ := AfterFinished;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().5._Started\ <= false;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().5.return\;
-                                end if;
-                            when 6 => 
-                                if (\Posit32::IsPositive().6._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.runningState.0\ := AfterFinished;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().6._Started\ <= false;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().6.return\;
-                                end if;
-                            when 7 => 
-                                if (\Posit32::IsPositive().7._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.runningState.0\ := AfterFinished;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().7._Started\ <= false;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().7.return\;
-                                end if;
-                        end case;
-                    when AfterFinished => 
-                        -- Invoking components need to pull down the Started signal to false.
-                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive()._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.runningState.0\ := WaitingForStarted;
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::IsPositive()._Finished.0\ <= false;
-                        end if;
-                end case;
-
-
-                -- Invocation handler #0 out of 1 corresponding to System.Boolean Lombiq.Arithmetics.Posit32::op_GreaterThan(Lombiq.Arithmetics.Posit32,Lombiq.Arithmetics.Posit32).1
-                case \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.runningState.0\ is 
-                    when WaitingForStarted => 
-                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive()._Started.0\) then 
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive()._Finished.0\ <= false;
-                            case \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, false, false, true) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.runningIndex.0\ := 0;
-                                    \Posit32::IsPositive().0._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(0) := false;
-                                    \Posit32::IsPositive().0.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, false, true, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.runningIndex.0\ := 1;
-                                    \Posit32::IsPositive().1._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(1) := false;
-                                    \Posit32::IsPositive().1.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, true, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.runningIndex.0\ := 2;
-                                    \Posit32::IsPositive().2._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(2) := false;
-                                    \Posit32::IsPositive().2.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, true, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.runningIndex.0\ := 3;
-                                    \Posit32::IsPositive().3._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(3) := false;
-                                    \Posit32::IsPositive().3.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, true, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.runningIndex.0\ := 4;
-                                    \Posit32::IsPositive().4._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(4) := false;
-                                    \Posit32::IsPositive().4.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, true, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.runningIndex.0\ := 5;
-                                    \Posit32::IsPositive().5._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(5) := false;
-                                    \Posit32::IsPositive().5.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, true, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.runningIndex.0\ := 6;
-                                    \Posit32::IsPositive().6._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(6) := false;
-                                    \Posit32::IsPositive().6.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (true, false, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.runningIndex.0\ := 7;
-                                    \Posit32::IsPositive().7._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(7) := false;
-                                    \Posit32::IsPositive().7.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when others => 
-                                    null;
-                            end case;
-                        end if;
-                    when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.runningIndex.0\ is 
-                            when 0 => 
-                                if (\Posit32::IsPositive().0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.runningState.0\ := AfterFinished;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().0._Started\ <= false;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().0.return\;
-                                end if;
-                            when 1 => 
-                                if (\Posit32::IsPositive().1._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.runningState.0\ := AfterFinished;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().1._Started\ <= false;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().1.return\;
-                                end if;
-                            when 2 => 
-                                if (\Posit32::IsPositive().2._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.runningState.0\ := AfterFinished;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().2._Started\ <= false;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().2.return\;
-                                end if;
-                            when 3 => 
-                                if (\Posit32::IsPositive().3._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.runningState.0\ := AfterFinished;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().3._Started\ <= false;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().3.return\;
-                                end if;
-                            when 4 => 
-                                if (\Posit32::IsPositive().4._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.runningState.0\ := AfterFinished;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().4._Started\ <= false;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().4.return\;
-                                end if;
-                            when 5 => 
-                                if (\Posit32::IsPositive().5._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.runningState.0\ := AfterFinished;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().5._Started\ <= false;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().5.return\;
-                                end if;
-                            when 6 => 
-                                if (\Posit32::IsPositive().6._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.runningState.0\ := AfterFinished;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().6._Started\ <= false;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().6.return\;
-                                end if;
-                            when 7 => 
-                                if (\Posit32::IsPositive().7._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.runningState.0\ := AfterFinished;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().7._Started\ <= false;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().7.return\;
-                                end if;
-                        end case;
-                    when AfterFinished => 
-                        -- Invoking components need to pull down the Started signal to false.
-                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive()._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.runningState.0\ := WaitingForStarted;
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::IsPositive()._Finished.0\ <= false;
-                        end if;
-                end case;
-
-
-                -- Invocation handler #0 out of 1 corresponding to System.Boolean Lombiq.Arithmetics.Posit32::op_GreaterThan(Lombiq.Arithmetics.Posit32,Lombiq.Arithmetics.Posit32).2
-                case \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.runningState.0\ is 
-                    when WaitingForStarted => 
-                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive()._Started.0\) then 
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive()._Finished.0\ <= false;
-                            case \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, false, false, true) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.runningIndex.0\ := 0;
-                                    \Posit32::IsPositive().0._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(0) := false;
-                                    \Posit32::IsPositive().0.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, false, true, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.runningIndex.0\ := 1;
-                                    \Posit32::IsPositive().1._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(1) := false;
-                                    \Posit32::IsPositive().1.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, true, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.runningIndex.0\ := 2;
-                                    \Posit32::IsPositive().2._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(2) := false;
-                                    \Posit32::IsPositive().2.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, true, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.runningIndex.0\ := 3;
-                                    \Posit32::IsPositive().3._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(3) := false;
-                                    \Posit32::IsPositive().3.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, true, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.runningIndex.0\ := 4;
-                                    \Posit32::IsPositive().4._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(4) := false;
-                                    \Posit32::IsPositive().4.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, true, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.runningIndex.0\ := 5;
-                                    \Posit32::IsPositive().5._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(5) := false;
-                                    \Posit32::IsPositive().5.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, true, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.runningIndex.0\ := 6;
-                                    \Posit32::IsPositive().6._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(6) := false;
-                                    \Posit32::IsPositive().6.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (true, false, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.runningIndex.0\ := 7;
-                                    \Posit32::IsPositive().7._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(7) := false;
-                                    \Posit32::IsPositive().7.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when others => 
-                                    null;
-                            end case;
-                        end if;
-                    when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.runningIndex.0\ is 
-                            when 0 => 
-                                if (\Posit32::IsPositive().0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.runningState.0\ := AfterFinished;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().0._Started\ <= false;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().0.return\;
-                                end if;
-                            when 1 => 
-                                if (\Posit32::IsPositive().1._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.runningState.0\ := AfterFinished;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().1._Started\ <= false;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().1.return\;
-                                end if;
-                            when 2 => 
-                                if (\Posit32::IsPositive().2._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.runningState.0\ := AfterFinished;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().2._Started\ <= false;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().2.return\;
-                                end if;
-                            when 3 => 
-                                if (\Posit32::IsPositive().3._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.runningState.0\ := AfterFinished;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().3._Started\ <= false;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().3.return\;
-                                end if;
-                            when 4 => 
-                                if (\Posit32::IsPositive().4._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.runningState.0\ := AfterFinished;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().4._Started\ <= false;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().4.return\;
-                                end if;
-                            when 5 => 
-                                if (\Posit32::IsPositive().5._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.runningState.0\ := AfterFinished;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().5._Started\ <= false;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().5.return\;
-                                end if;
-                            when 6 => 
-                                if (\Posit32::IsPositive().6._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.runningState.0\ := AfterFinished;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().6._Started\ <= false;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().6.return\;
-                                end if;
-                            when 7 => 
-                                if (\Posit32::IsPositive().7._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.runningState.0\ := AfterFinished;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().7._Started\ <= false;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().7.return\;
-                                end if;
-                        end case;
-                    when AfterFinished => 
-                        -- Invoking components need to pull down the Started signal to false.
-                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive()._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.runningState.0\ := WaitingForStarted;
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::IsPositive()._Finished.0\ <= false;
-                        end if;
-                end case;
-
-
-                -- Invocation handler #0 out of 1 corresponding to System.Boolean Lombiq.Arithmetics.Posit32::op_GreaterThan(Lombiq.Arithmetics.Posit32,Lombiq.Arithmetics.Posit32).3
-                case \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.runningState.0\ is 
-                    when WaitingForStarted => 
-                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive()._Started.0\) then 
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive()._Finished.0\ <= false;
-                            case \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, false, false, true) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.runningIndex.0\ := 0;
-                                    \Posit32::IsPositive().0._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(0) := false;
-                                    \Posit32::IsPositive().0.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, false, true, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.runningIndex.0\ := 1;
-                                    \Posit32::IsPositive().1._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(1) := false;
-                                    \Posit32::IsPositive().1.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, true, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.runningIndex.0\ := 2;
-                                    \Posit32::IsPositive().2._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(2) := false;
-                                    \Posit32::IsPositive().2.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, true, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.runningIndex.0\ := 3;
-                                    \Posit32::IsPositive().3._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(3) := false;
-                                    \Posit32::IsPositive().3.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, true, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.runningIndex.0\ := 4;
-                                    \Posit32::IsPositive().4._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(4) := false;
-                                    \Posit32::IsPositive().4.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, true, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.runningIndex.0\ := 5;
-                                    \Posit32::IsPositive().5._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(5) := false;
-                                    \Posit32::IsPositive().5.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, true, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.runningIndex.0\ := 6;
-                                    \Posit32::IsPositive().6._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(6) := false;
-                                    \Posit32::IsPositive().6.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (true, false, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.runningIndex.0\ := 7;
-                                    \Posit32::IsPositive().7._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(7) := false;
-                                    \Posit32::IsPositive().7.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when others => 
-                                    null;
-                            end case;
-                        end if;
-                    when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.runningIndex.0\ is 
-                            when 0 => 
-                                if (\Posit32::IsPositive().0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.runningState.0\ := AfterFinished;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().0._Started\ <= false;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().0.return\;
-                                end if;
-                            when 1 => 
-                                if (\Posit32::IsPositive().1._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.runningState.0\ := AfterFinished;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().1._Started\ <= false;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().1.return\;
-                                end if;
-                            when 2 => 
-                                if (\Posit32::IsPositive().2._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.runningState.0\ := AfterFinished;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().2._Started\ <= false;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().2.return\;
-                                end if;
-                            when 3 => 
-                                if (\Posit32::IsPositive().3._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.runningState.0\ := AfterFinished;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().3._Started\ <= false;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().3.return\;
-                                end if;
-                            when 4 => 
-                                if (\Posit32::IsPositive().4._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.runningState.0\ := AfterFinished;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().4._Started\ <= false;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().4.return\;
-                                end if;
-                            when 5 => 
-                                if (\Posit32::IsPositive().5._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.runningState.0\ := AfterFinished;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().5._Started\ <= false;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().5.return\;
-                                end if;
-                            when 6 => 
-                                if (\Posit32::IsPositive().6._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.runningState.0\ := AfterFinished;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().6._Started\ <= false;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().6.return\;
-                                end if;
-                            when 7 => 
-                                if (\Posit32::IsPositive().7._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.runningState.0\ := AfterFinished;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().7._Started\ <= false;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().7.return\;
-                                end if;
-                        end case;
-                    when AfterFinished => 
-                        -- Invoking components need to pull down the Started signal to false.
-                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive()._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.runningState.0\ := WaitingForStarted;
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::IsPositive()._Finished.0\ <= false;
-                        end if;
-                end case;
-
-
-                -- Invocation handler #0 out of 1 corresponding to System.Boolean Lombiq.Arithmetics.Posit32::op_GreaterThan(Lombiq.Arithmetics.Posit32,Lombiq.Arithmetics.Posit32).4
-                case \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.runningState.0\ is 
-                    when WaitingForStarted => 
-                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive()._Started.0\) then 
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive()._Finished.0\ <= false;
-                            case \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, false, false, true) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.runningIndex.0\ := 0;
-                                    \Posit32::IsPositive().0._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(0) := false;
-                                    \Posit32::IsPositive().0.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, false, true, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.runningIndex.0\ := 1;
-                                    \Posit32::IsPositive().1._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(1) := false;
-                                    \Posit32::IsPositive().1.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, true, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.runningIndex.0\ := 2;
-                                    \Posit32::IsPositive().2._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(2) := false;
-                                    \Posit32::IsPositive().2.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, true, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.runningIndex.0\ := 3;
-                                    \Posit32::IsPositive().3._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(3) := false;
-                                    \Posit32::IsPositive().3.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, true, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.runningIndex.0\ := 4;
-                                    \Posit32::IsPositive().4._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(4) := false;
-                                    \Posit32::IsPositive().4.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, true, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.runningIndex.0\ := 5;
-                                    \Posit32::IsPositive().5._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(5) := false;
-                                    \Posit32::IsPositive().5.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, true, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.runningIndex.0\ := 6;
-                                    \Posit32::IsPositive().6._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(6) := false;
-                                    \Posit32::IsPositive().6.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (true, false, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.runningIndex.0\ := 7;
-                                    \Posit32::IsPositive().7._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(7) := false;
-                                    \Posit32::IsPositive().7.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive().this.parameter.Out.0\;
-                                when others => 
-                                    null;
-                            end case;
-                        end if;
-                    when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.runningIndex.0\ is 
-                            when 0 => 
-                                if (\Posit32::IsPositive().0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.runningState.0\ := AfterFinished;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().0._Started\ <= false;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().0.return\;
-                                end if;
-                            when 1 => 
-                                if (\Posit32::IsPositive().1._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.runningState.0\ := AfterFinished;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().1._Started\ <= false;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().1.return\;
-                                end if;
-                            when 2 => 
-                                if (\Posit32::IsPositive().2._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.runningState.0\ := AfterFinished;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().2._Started\ <= false;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().2.return\;
-                                end if;
-                            when 3 => 
-                                if (\Posit32::IsPositive().3._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.runningState.0\ := AfterFinished;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().3._Started\ <= false;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().3.return\;
-                                end if;
-                            when 4 => 
-                                if (\Posit32::IsPositive().4._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.runningState.0\ := AfterFinished;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().4._Started\ <= false;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().4.return\;
-                                end if;
-                            when 5 => 
-                                if (\Posit32::IsPositive().5._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.runningState.0\ := AfterFinished;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().5._Started\ <= false;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().5.return\;
-                                end if;
-                            when 6 => 
-                                if (\Posit32::IsPositive().6._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.runningState.0\ := AfterFinished;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().6._Started\ <= false;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().6.return\;
-                                end if;
-                            when 7 => 
-                                if (\Posit32::IsPositive().7._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.runningState.0\ := AfterFinished;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().7._Started\ <= false;
-                                    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().7.return\;
-                                end if;
-                        end case;
-                    when AfterFinished => 
-                        -- Invoking components need to pull down the Started signal to false.
-                        if (\Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive()._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().Posit32::IsPositive().Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.runningState.0\ := WaitingForStarted;
-                            \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::IsPositive()._Finished.0\ <= false;
-                        end if;
-                end case;
-
-
                 -- Invocation handler #0 out of 1 corresponding to Lombiq.Arithmetics.Posit32 Lombiq.Arithmetics.Posit32::op_Multiply(Lombiq.Arithmetics.Posit32,Lombiq.Arithmetics.Posit32).0
                 case \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32 Posit32::op_Multiply(Posit32,Posit32).0.runningState.0\ is 
                     when WaitingForStarted => 
                         if (\Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::IsPositive()._Started.0\) then 
                             \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::IsPositive()._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, false, false, true) => 
+                                when (false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32 Posit32::op_Multiply(Posit32,Posit32).0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32 Posit32::op_Multiply(Posit32,Posit32).0.runningIndex.0\ := 0;
                                     \Posit32::IsPositive().0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(0) := false;
                                     \Posit32::IsPositive().0.this.parameter.In\ <= \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, false, true, false) => 
+                                when (false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32 Posit32::op_Multiply(Posit32,Posit32).0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32 Posit32::op_Multiply(Posit32,Posit32).0.runningIndex.0\ := 1;
                                     \Posit32::IsPositive().1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(1) := false;
                                     \Posit32::IsPositive().1.this.parameter.In\ <= \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, true, false, false) => 
+                                when (false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32 Posit32::op_Multiply(Posit32,Posit32).0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32 Posit32::op_Multiply(Posit32,Posit32).0.runningIndex.0\ := 2;
                                     \Posit32::IsPositive().2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(2) := false;
                                     \Posit32::IsPositive().2.this.parameter.In\ <= \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, true, false, false, false) => 
+                                when (false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32 Posit32::op_Multiply(Posit32,Posit32).0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32 Posit32::op_Multiply(Posit32,Posit32).0.runningIndex.0\ := 3;
                                     \Posit32::IsPositive().3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(3) := false;
                                     \Posit32::IsPositive().3.this.parameter.In\ <= \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, true, false, false, false, false) => 
+                                when (true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32 Posit32::op_Multiply(Posit32,Posit32).0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32 Posit32::op_Multiply(Posit32,Posit32).0.runningIndex.0\ := 4;
                                     \Posit32::IsPositive().4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(4) := false;
                                     \Posit32::IsPositive().4.this.parameter.In\ <= \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, true, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32 Posit32::op_Multiply(Posit32,Posit32).0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32 Posit32::op_Multiply(Posit32,Posit32).0.runningIndex.0\ := 5;
-                                    \Posit32::IsPositive().5._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(5) := false;
-                                    \Posit32::IsPositive().5.this.parameter.In\ <= \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, true, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32 Posit32::op_Multiply(Posit32,Posit32).0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32 Posit32::op_Multiply(Posit32,Posit32).0.runningIndex.0\ := 6;
-                                    \Posit32::IsPositive().6._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(6) := false;
-                                    \Posit32::IsPositive().6.this.parameter.In\ <= \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (true, false, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32 Posit32::op_Multiply(Posit32,Posit32).0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32 Posit32::op_Multiply(Posit32,Posit32).0.runningIndex.0\ := 7;
-                                    \Posit32::IsPositive().7._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(7) := false;
-                                    \Posit32::IsPositive().7.this.parameter.In\ <= \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::IsPositive().this.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -85133,27 +83138,6 @@ begin
                                     \Posit32::IsPositive().4._Started\ <= false;
                                     \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().4.return\;
                                 end if;
-                            when 5 => 
-                                if (\Posit32::IsPositive().5._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32 Posit32::op_Multiply(Posit32,Posit32).0.runningState.0\ := AfterFinished;
-                                    \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().5._Started\ <= false;
-                                    \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().5.return\;
-                                end if;
-                            when 6 => 
-                                if (\Posit32::IsPositive().6._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32 Posit32::op_Multiply(Posit32,Posit32).0.runningState.0\ := AfterFinished;
-                                    \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().6._Started\ <= false;
-                                    \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().6.return\;
-                                end if;
-                            when 7 => 
-                                if (\Posit32::IsPositive().7._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Posit32 Posit32::op_Multiply(Posit32,Posit32).0.runningState.0\ := AfterFinished;
-                                    \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().7._Started\ <= false;
-                                    \Posit32 Posit32::op_Multiply(Posit32,Posit32).0.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().7.return\;
-                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -85170,54 +83154,36 @@ begin
                         if (\Int32 Posit32::op_Explicit(Posit32).0.Posit32::IsPositive()._Started.0\) then 
                             \Int32 Posit32::op_Explicit(Posit32).0.Posit32::IsPositive()._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, false, false, true) => 
+                                when (false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).0.runningIndex.0\ := 0;
                                     \Posit32::IsPositive().0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(0) := false;
                                     \Posit32::IsPositive().0.this.parameter.In\ <= \Int32 Posit32::op_Explicit(Posit32).0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, false, true, false) => 
+                                when (false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).0.runningIndex.0\ := 1;
                                     \Posit32::IsPositive().1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(1) := false;
                                     \Posit32::IsPositive().1.this.parameter.In\ <= \Int32 Posit32::op_Explicit(Posit32).0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, true, false, false) => 
+                                when (false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).0.runningIndex.0\ := 2;
                                     \Posit32::IsPositive().2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(2) := false;
                                     \Posit32::IsPositive().2.this.parameter.In\ <= \Int32 Posit32::op_Explicit(Posit32).0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, true, false, false, false) => 
+                                when (false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).0.runningIndex.0\ := 3;
                                     \Posit32::IsPositive().3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(3) := false;
                                     \Posit32::IsPositive().3.this.parameter.In\ <= \Int32 Posit32::op_Explicit(Posit32).0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, true, false, false, false, false) => 
+                                when (true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).0.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).0.runningIndex.0\ := 4;
                                     \Posit32::IsPositive().4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(4) := false;
                                     \Posit32::IsPositive().4.this.parameter.In\ <= \Int32 Posit32::op_Explicit(Posit32).0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, true, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).0.runningIndex.0\ := 5;
-                                    \Posit32::IsPositive().5._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(5) := false;
-                                    \Posit32::IsPositive().5.this.parameter.In\ <= \Int32 Posit32::op_Explicit(Posit32).0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, true, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).0.runningIndex.0\ := 6;
-                                    \Posit32::IsPositive().6._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(6) := false;
-                                    \Posit32::IsPositive().6.this.parameter.In\ <= \Int32 Posit32::op_Explicit(Posit32).0.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (true, false, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).0.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).0.runningIndex.0\ := 7;
-                                    \Posit32::IsPositive().7._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(7) := false;
-                                    \Posit32::IsPositive().7.this.parameter.In\ <= \Int32 Posit32::op_Explicit(Posit32).0.Posit32::IsPositive().this.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -85259,27 +83225,6 @@ begin
                                     \Posit32::IsPositive().4._Started\ <= false;
                                     \Int32 Posit32::op_Explicit(Posit32).0.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().4.return\;
                                 end if;
-                            when 5 => 
-                                if (\Posit32::IsPositive().5._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).0.runningState.0\ := AfterFinished;
-                                    \Int32 Posit32::op_Explicit(Posit32).0.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().5._Started\ <= false;
-                                    \Int32 Posit32::op_Explicit(Posit32).0.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().5.return\;
-                                end if;
-                            when 6 => 
-                                if (\Posit32::IsPositive().6._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).0.runningState.0\ := AfterFinished;
-                                    \Int32 Posit32::op_Explicit(Posit32).0.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().6._Started\ <= false;
-                                    \Int32 Posit32::op_Explicit(Posit32).0.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().6.return\;
-                                end if;
-                            when 7 => 
-                                if (\Posit32::IsPositive().7._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).0.runningState.0\ := AfterFinished;
-                                    \Int32 Posit32::op_Explicit(Posit32).0.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().7._Started\ <= false;
-                                    \Int32 Posit32::op_Explicit(Posit32).0.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().7.return\;
-                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -85296,54 +83241,36 @@ begin
                         if (\Int32 Posit32::op_Explicit(Posit32).1.Posit32::IsPositive()._Started.0\) then 
                             \Int32 Posit32::op_Explicit(Posit32).1.Posit32::IsPositive()._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, false, false, true) => 
+                                when (false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).1.runningIndex.0\ := 0;
                                     \Posit32::IsPositive().0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(0) := false;
                                     \Posit32::IsPositive().0.this.parameter.In\ <= \Int32 Posit32::op_Explicit(Posit32).1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, false, true, false) => 
+                                when (false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).1.runningIndex.0\ := 1;
                                     \Posit32::IsPositive().1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(1) := false;
                                     \Posit32::IsPositive().1.this.parameter.In\ <= \Int32 Posit32::op_Explicit(Posit32).1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, true, false, false) => 
+                                when (false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).1.runningIndex.0\ := 2;
                                     \Posit32::IsPositive().2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(2) := false;
                                     \Posit32::IsPositive().2.this.parameter.In\ <= \Int32 Posit32::op_Explicit(Posit32).1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, true, false, false, false) => 
+                                when (false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).1.runningIndex.0\ := 3;
                                     \Posit32::IsPositive().3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(3) := false;
                                     \Posit32::IsPositive().3.this.parameter.In\ <= \Int32 Posit32::op_Explicit(Posit32).1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, true, false, false, false, false) => 
+                                when (true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).1.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).1.runningIndex.0\ := 4;
                                     \Posit32::IsPositive().4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(4) := false;
                                     \Posit32::IsPositive().4.this.parameter.In\ <= \Int32 Posit32::op_Explicit(Posit32).1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, true, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).1.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).1.runningIndex.0\ := 5;
-                                    \Posit32::IsPositive().5._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(5) := false;
-                                    \Posit32::IsPositive().5.this.parameter.In\ <= \Int32 Posit32::op_Explicit(Posit32).1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, true, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).1.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).1.runningIndex.0\ := 6;
-                                    \Posit32::IsPositive().6._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(6) := false;
-                                    \Posit32::IsPositive().6.this.parameter.In\ <= \Int32 Posit32::op_Explicit(Posit32).1.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (true, false, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).1.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).1.runningIndex.0\ := 7;
-                                    \Posit32::IsPositive().7._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(7) := false;
-                                    \Posit32::IsPositive().7.this.parameter.In\ <= \Int32 Posit32::op_Explicit(Posit32).1.Posit32::IsPositive().this.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -85385,27 +83312,6 @@ begin
                                     \Posit32::IsPositive().4._Started\ <= false;
                                     \Int32 Posit32::op_Explicit(Posit32).1.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().4.return\;
                                 end if;
-                            when 5 => 
-                                if (\Posit32::IsPositive().5._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).1.runningState.0\ := AfterFinished;
-                                    \Int32 Posit32::op_Explicit(Posit32).1.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().5._Started\ <= false;
-                                    \Int32 Posit32::op_Explicit(Posit32).1.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().5.return\;
-                                end if;
-                            when 6 => 
-                                if (\Posit32::IsPositive().6._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).1.runningState.0\ := AfterFinished;
-                                    \Int32 Posit32::op_Explicit(Posit32).1.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().6._Started\ <= false;
-                                    \Int32 Posit32::op_Explicit(Posit32).1.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().6.return\;
-                                end if;
-                            when 7 => 
-                                if (\Posit32::IsPositive().7._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).1.runningState.0\ := AfterFinished;
-                                    \Int32 Posit32::op_Explicit(Posit32).1.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().7._Started\ <= false;
-                                    \Int32 Posit32::op_Explicit(Posit32).1.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().7.return\;
-                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -85422,54 +83328,36 @@ begin
                         if (\Int32 Posit32::op_Explicit(Posit32).2.Posit32::IsPositive()._Started.0\) then 
                             \Int32 Posit32::op_Explicit(Posit32).2.Posit32::IsPositive()._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, false, false, true) => 
+                                when (false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).2.runningIndex.0\ := 0;
                                     \Posit32::IsPositive().0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(0) := false;
                                     \Posit32::IsPositive().0.this.parameter.In\ <= \Int32 Posit32::op_Explicit(Posit32).2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, false, true, false) => 
+                                when (false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).2.runningIndex.0\ := 1;
                                     \Posit32::IsPositive().1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(1) := false;
                                     \Posit32::IsPositive().1.this.parameter.In\ <= \Int32 Posit32::op_Explicit(Posit32).2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, true, false, false) => 
+                                when (false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).2.runningIndex.0\ := 2;
                                     \Posit32::IsPositive().2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(2) := false;
                                     \Posit32::IsPositive().2.this.parameter.In\ <= \Int32 Posit32::op_Explicit(Posit32).2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, true, false, false, false) => 
+                                when (false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).2.runningIndex.0\ := 3;
                                     \Posit32::IsPositive().3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(3) := false;
                                     \Posit32::IsPositive().3.this.parameter.In\ <= \Int32 Posit32::op_Explicit(Posit32).2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, true, false, false, false, false) => 
+                                when (true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).2.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).2.runningIndex.0\ := 4;
                                     \Posit32::IsPositive().4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(4) := false;
                                     \Posit32::IsPositive().4.this.parameter.In\ <= \Int32 Posit32::op_Explicit(Posit32).2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, true, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).2.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).2.runningIndex.0\ := 5;
-                                    \Posit32::IsPositive().5._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(5) := false;
-                                    \Posit32::IsPositive().5.this.parameter.In\ <= \Int32 Posit32::op_Explicit(Posit32).2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, true, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).2.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).2.runningIndex.0\ := 6;
-                                    \Posit32::IsPositive().6._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(6) := false;
-                                    \Posit32::IsPositive().6.this.parameter.In\ <= \Int32 Posit32::op_Explicit(Posit32).2.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (true, false, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).2.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).2.runningIndex.0\ := 7;
-                                    \Posit32::IsPositive().7._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(7) := false;
-                                    \Posit32::IsPositive().7.this.parameter.In\ <= \Int32 Posit32::op_Explicit(Posit32).2.Posit32::IsPositive().this.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -85511,27 +83399,6 @@ begin
                                     \Posit32::IsPositive().4._Started\ <= false;
                                     \Int32 Posit32::op_Explicit(Posit32).2.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().4.return\;
                                 end if;
-                            when 5 => 
-                                if (\Posit32::IsPositive().5._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).2.runningState.0\ := AfterFinished;
-                                    \Int32 Posit32::op_Explicit(Posit32).2.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().5._Started\ <= false;
-                                    \Int32 Posit32::op_Explicit(Posit32).2.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().5.return\;
-                                end if;
-                            when 6 => 
-                                if (\Posit32::IsPositive().6._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).2.runningState.0\ := AfterFinished;
-                                    \Int32 Posit32::op_Explicit(Posit32).2.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().6._Started\ <= false;
-                                    \Int32 Posit32::op_Explicit(Posit32).2.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().6.return\;
-                                end if;
-                            when 7 => 
-                                if (\Posit32::IsPositive().7._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).2.runningState.0\ := AfterFinished;
-                                    \Int32 Posit32::op_Explicit(Posit32).2.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().7._Started\ <= false;
-                                    \Int32 Posit32::op_Explicit(Posit32).2.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().7.return\;
-                                end if;
                         end case;
                     when AfterFinished => 
                         -- Invoking components need to pull down the Started signal to false.
@@ -85548,54 +83415,36 @@ begin
                         if (\Int32 Posit32::op_Explicit(Posit32).3.Posit32::IsPositive()._Started.0\) then 
                             \Int32 Posit32::op_Explicit(Posit32).3.Posit32::IsPositive()._Finished.0\ <= false;
                             case \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\ is 
-                                when (false, false, false, false, false, false, false, true) => 
+                                when (false, false, false, false, true) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).3.runningIndex.0\ := 0;
                                     \Posit32::IsPositive().0._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(0) := false;
                                     \Posit32::IsPositive().0.this.parameter.In\ <= \Int32 Posit32::op_Explicit(Posit32).3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, false, true, false) => 
+                                when (false, false, false, true, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).3.runningIndex.0\ := 1;
                                     \Posit32::IsPositive().1._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(1) := false;
                                     \Posit32::IsPositive().1.this.parameter.In\ <= \Int32 Posit32::op_Explicit(Posit32).3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, false, true, false, false) => 
+                                when (false, false, true, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).3.runningIndex.0\ := 2;
                                     \Posit32::IsPositive().2._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(2) := false;
                                     \Posit32::IsPositive().2.this.parameter.In\ <= \Int32 Posit32::op_Explicit(Posit32).3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, false, true, false, false, false) => 
+                                when (false, true, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).3.runningIndex.0\ := 3;
                                     \Posit32::IsPositive().3._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(3) := false;
                                     \Posit32::IsPositive().3.this.parameter.In\ <= \Int32 Posit32::op_Explicit(Posit32).3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, false, true, false, false, false, false) => 
+                                when (true, false, false, false, false) => 
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).3.runningState.0\ := WaitingForFinished;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).3.runningIndex.0\ := 4;
                                     \Posit32::IsPositive().4._Started\ <= true;
                                     \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(4) := false;
                                     \Posit32::IsPositive().4.this.parameter.In\ <= \Int32 Posit32::op_Explicit(Posit32).3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, false, true, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).3.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).3.runningIndex.0\ := 5;
-                                    \Posit32::IsPositive().5._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(5) := false;
-                                    \Posit32::IsPositive().5.this.parameter.In\ <= \Int32 Posit32::op_Explicit(Posit32).3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (false, true, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).3.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).3.runningIndex.0\ := 6;
-                                    \Posit32::IsPositive().6._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(6) := false;
-                                    \Posit32::IsPositive().6.this.parameter.In\ <= \Int32 Posit32::op_Explicit(Posit32).3.Posit32::IsPositive().this.parameter.Out.0\;
-                                when (true, false, false, false, false, false, false, false) => 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).3.runningState.0\ := WaitingForFinished;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).3.runningIndex.0\ := 7;
-                                    \Posit32::IsPositive().7._Started\ <= true;
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().targetAvailableIndicator\(7) := false;
-                                    \Posit32::IsPositive().7.this.parameter.In\ <= \Int32 Posit32::op_Explicit(Posit32).3.Posit32::IsPositive().this.parameter.Out.0\;
                                 when others => 
                                     null;
                             end case;
@@ -85636,27 +83485,6 @@ begin
                                     \Int32 Posit32::op_Explicit(Posit32).3.Posit32::IsPositive()._Finished.0\ <= true;
                                     \Posit32::IsPositive().4._Started\ <= false;
                                     \Int32 Posit32::op_Explicit(Posit32).3.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().4.return\;
-                                end if;
-                            when 5 => 
-                                if (\Posit32::IsPositive().5._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).3.runningState.0\ := AfterFinished;
-                                    \Int32 Posit32::op_Explicit(Posit32).3.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().5._Started\ <= false;
-                                    \Int32 Posit32::op_Explicit(Posit32).3.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().5.return\;
-                                end if;
-                            when 6 => 
-                                if (\Posit32::IsPositive().6._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).3.runningState.0\ := AfterFinished;
-                                    \Int32 Posit32::op_Explicit(Posit32).3.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().6._Started\ <= false;
-                                    \Int32 Posit32::op_Explicit(Posit32).3.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().6.return\;
-                                end if;
-                            when 7 => 
-                                if (\Posit32::IsPositive().7._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Posit32::IsPositive().Int32 Posit32::op_Explicit(Posit32).3.runningState.0\ := AfterFinished;
-                                    \Int32 Posit32::op_Explicit(Posit32).3.Posit32::IsPositive()._Finished.0\ <= true;
-                                    \Posit32::IsPositive().7._Started\ <= false;
-                                    \Int32 Posit32::op_Explicit(Posit32).3.Posit32::IsPositive().return.0\ <= \Posit32::IsPositive().7.return\;
                                 end if;
                         end case;
                     when AfterFinished => 
@@ -89824,6 +87652,40 @@ begin
     \Posit32 Posit32::op_Addition(Posit32,Posit32).4.Posit32::FractionWithHiddenBitWithoutSignCheck(UInt32)._Finished.0\ <= \Posit32::FractionWithHiddenBitWithoutSignCheck(UInt32).4._Finished\;
     \Posit32 Posit32::op_Addition(Posit32,Posit32).4.Posit32::FractionWithHiddenBitWithoutSignCheck(UInt32).return.0\ <= \Posit32::FractionWithHiddenBitWithoutSignCheck(UInt32).4.return\;
     -- System.Void Hast::InternalInvocationProxy().System.UInt32 Lombiq.Arithmetics.Posit32::FractionWithHiddenBitWithoutSignCheck(System.UInt32) end
+
+
+    -- System.Void Hast::InternalInvocationProxy().System.Int32 Lombiq.Arithmetics.Posit32::CompareTo(Lombiq.Arithmetics.Posit32) start
+    -- Signal connections for System.Boolean Lombiq.Arithmetics.Posit32::op_GreaterThan(Lombiq.Arithmetics.Posit32,Lombiq.Arithmetics.Posit32).0 (#0):
+    \Posit32::CompareTo(Posit32).0._Started\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::CompareTo(Posit32)._Started.0\;
+    \Posit32::CompareTo(Posit32).0.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::CompareTo(Posit32).this.parameter.Out.0\;
+    \Posit32::CompareTo(Posit32).0.obj.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::CompareTo(Posit32).obj.parameter.Out.0\;
+    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::CompareTo(Posit32)._Finished.0\ <= \Posit32::CompareTo(Posit32).0._Finished\;
+    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).0.Posit32::CompareTo(Posit32).return.0\ <= \Posit32::CompareTo(Posit32).0.return\;
+    -- Signal connections for System.Boolean Lombiq.Arithmetics.Posit32::op_GreaterThan(Lombiq.Arithmetics.Posit32,Lombiq.Arithmetics.Posit32).1 (#1):
+    \Posit32::CompareTo(Posit32).1._Started\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::CompareTo(Posit32)._Started.0\;
+    \Posit32::CompareTo(Posit32).1.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::CompareTo(Posit32).this.parameter.Out.0\;
+    \Posit32::CompareTo(Posit32).1.obj.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::CompareTo(Posit32).obj.parameter.Out.0\;
+    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::CompareTo(Posit32)._Finished.0\ <= \Posit32::CompareTo(Posit32).1._Finished\;
+    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).1.Posit32::CompareTo(Posit32).return.0\ <= \Posit32::CompareTo(Posit32).1.return\;
+    -- Signal connections for System.Boolean Lombiq.Arithmetics.Posit32::op_GreaterThan(Lombiq.Arithmetics.Posit32,Lombiq.Arithmetics.Posit32).2 (#2):
+    \Posit32::CompareTo(Posit32).2._Started\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::CompareTo(Posit32)._Started.0\;
+    \Posit32::CompareTo(Posit32).2.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::CompareTo(Posit32).this.parameter.Out.0\;
+    \Posit32::CompareTo(Posit32).2.obj.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::CompareTo(Posit32).obj.parameter.Out.0\;
+    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::CompareTo(Posit32)._Finished.0\ <= \Posit32::CompareTo(Posit32).2._Finished\;
+    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).2.Posit32::CompareTo(Posit32).return.0\ <= \Posit32::CompareTo(Posit32).2.return\;
+    -- Signal connections for System.Boolean Lombiq.Arithmetics.Posit32::op_GreaterThan(Lombiq.Arithmetics.Posit32,Lombiq.Arithmetics.Posit32).3 (#3):
+    \Posit32::CompareTo(Posit32).3._Started\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::CompareTo(Posit32)._Started.0\;
+    \Posit32::CompareTo(Posit32).3.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::CompareTo(Posit32).this.parameter.Out.0\;
+    \Posit32::CompareTo(Posit32).3.obj.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::CompareTo(Posit32).obj.parameter.Out.0\;
+    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::CompareTo(Posit32)._Finished.0\ <= \Posit32::CompareTo(Posit32).3._Finished\;
+    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).3.Posit32::CompareTo(Posit32).return.0\ <= \Posit32::CompareTo(Posit32).3.return\;
+    -- Signal connections for System.Boolean Lombiq.Arithmetics.Posit32::op_GreaterThan(Lombiq.Arithmetics.Posit32,Lombiq.Arithmetics.Posit32).4 (#4):
+    \Posit32::CompareTo(Posit32).4._Started\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::CompareTo(Posit32)._Started.0\;
+    \Posit32::CompareTo(Posit32).4.this.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::CompareTo(Posit32).this.parameter.Out.0\;
+    \Posit32::CompareTo(Posit32).4.obj.parameter.In\ <= \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::CompareTo(Posit32).obj.parameter.Out.0\;
+    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::CompareTo(Posit32)._Finished.0\ <= \Posit32::CompareTo(Posit32).4._Finished\;
+    \Boolean Posit32::op_GreaterThan(Posit32,Posit32).4.Posit32::CompareTo(Posit32).return.0\ <= \Posit32::CompareTo(Posit32).4.return\;
+    -- System.Void Hast::InternalInvocationProxy().System.Int32 Lombiq.Arithmetics.Posit32::CompareTo(Lombiq.Arithmetics.Posit32) end
 
 
     -- System.Void Hast::InternalInvocationProxy().Lombiq.Arithmetics.Posit32 Lombiq.Arithmetics.Posit32::Abs(Lombiq.Arithmetics.Posit32) start

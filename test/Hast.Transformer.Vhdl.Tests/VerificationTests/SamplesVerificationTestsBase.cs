@@ -170,6 +170,12 @@ public abstract class SamplesVerificationTestsBase : VerificationTestFixtureBase
                     });
             }));
 
+    protected Task<VhdlHardwareDescription> CreateVhdlForPositComparisonSampleAsync() =>
+        Host.RunGetAsync(provider => TransformAssembliesToVhdlAsync(
+            provider.GetService<ITransformer>(),
+            [typeof(PositComparisonCalculator).Assembly, typeof(Posit32).Assembly],
+            configuration => configuration.AddHardwareEntryPointType<PositComparisonCalculator>()));
+
     protected Task<VhdlHardwareDescription> CreateVhdlForPosit32SampleWithInliningAsync() =>
         Host.RunGetAsync(provider => TransformAssembliesToVhdlAsync(
             provider.GetService<ITransformer>(),
